@@ -13,3 +13,20 @@
 -   **`src/components/site/navigation/index.tsx`**: The site's main navigation bar.
 -   **`src/components/global/mode-toggle.tsx`**: A client component that allows users to switch between light, dark, and system themes.
 -   **`src/lib/constants.ts`**: This file exports the `pricingCards` array, which holds the data for the different pricing tiers shown on the home page.
+
+---
+
+## Day 2 Update
+
+### Summary of Changes
+
+-   **Theming Overhaul**: A new, vibrant custom theme was implemented in `src/app/globals.css` using `oklch` for a more modern color palette. The default font has been set to `Oxanium`. The previous theme's variables have been commented out but retained for reference.
+-   **Authentication Refactoring**: The `ClerkProvider` was moved from the root layout (`src/app/layout.tsx`) to the site-specific layout (`src/app/site/layout.tsx`). This modularizes the authentication context to be specific to the public-facing site.
+-   **Advanced Routing and Multi-tenancy**: The middleware in `src/app/proxy.ts` has been significantly enhanced. It now includes logic to handle custom subdomains for multi-tenancy, rewriting requests to the appropriate context. It also contains improved redirect handling for sign-in/sign-up pages and protects new application routes like `/subaccount`.
+
+### Files Modified
+
+-   **`src/app/globals.css`**: Replaced the existing theme with a new custom `oklch`-based theme and new fonts.
+-   **`src/app/layout.tsx`**: Removed the `ClerkProvider` and updated the primary font to align with the new theme.
+-   **`src/app/proxy.ts`**: Updated Clerk middleware to support multi-tenancy via subdomains and refined authentication/redirect logic.
+-   **`src/app/site/layout.tsx`**: Added the `ClerkProvider` to specifically wrap the marketing/public site, now with Clerk's dark theme enabled by default.

@@ -11,8 +11,6 @@ html,body{
 /* ---------- Custom theme start ---------- */
 
 
-
-/* ---------- Custom theme end ---------- */
 :root {
   --background: oklch(0.8452 0 0);
   --foreground: oklch(0.2393 0 0);
@@ -173,6 +171,9 @@ html,body{
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
 }
+
+
+/* ---------- Custom theme end ---------- */
 
 /* ---------- Default theme start ---------- */
 /* 
