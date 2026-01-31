@@ -18,3 +18,21 @@ This file describes the process I follow to manage the project documentation.
 3.  **Confirmation and Questions**:
     *   Before executing file writes or commands, confirm the plan with the user.
     *   After execution, report the outcome and ask for the next steps.
+
+---
+
+## Autonomous Documentation Update Prompt
+
+To trigger the autonomous documentation update process, use the following prompt:
+
+> **Update project documentation.**
+
+### What I Will Do:
+
+When you give me that prompt, I will automatically perform the following steps without any further questions, unless I'm truly stuck:
+
+1.  **Detect Changes**: I'll use `git diff` to see every file you have added or modified since our last update.
+2.  **Analyze Content**: I will read each of those changed files to understand their purpose and logic.
+3.  **Create Daily Log**: I'll create a new, detailed log file (e.g., `project_docs/day/day03.md`) that summarizes your work for the day.
+4.  **Update Main Documentation**: I'll add or update descriptions for the relevant files in `project_docs/documentation.md`.
+5.  **Confirm Completion**: I'll let you know once the documentation is fully updated.
