@@ -79,7 +79,7 @@ const Home = () => {
                 <Link
                   href={`/agency?plan=${card.priceId}`}
                   className={clsx(
-                    "w-full text-center bg-primary text-secondary p-2 rounded-md",
+                    "w-full text-center bg-primary text-primary-foreground p-2 rounded-md",
                     {
                       "bg-muted-foreground!": card.title !== "Unlimited Saas",
                     },
