@@ -10,8 +10,8 @@ const layout = ({children} : {
         <ClerkProvider appearance={
             {theme: dark}
         }>
-            <main className="h-full">
-                <Navigation/> {children}</main>;
+            <main className="h-full pt-18">
+                <Navigation/> {children}</main>
         </ClerkProvider>
     )
 };

@@ -1,3 +1,4 @@
+'use client'
 import {
   Card,
   CardContent,
@@ -9,14 +10,16 @@ import {
 import { pricingCards } from "@/lib/constants";
 import clsx from "clsx";
 import { Check } from "lucide-react";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const Home = () => {
+  const {theme} = useTheme()
   return (
     <>
-      <section className="h-full w-full md:pt-35 relative flex items-center md:justify-center flex-col">
+      <section className="min-h-screen w-full  relative flex items-center md:justify-center flex-col">
         {/* grid */}
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#161616_1px,transparent_1px),linear-gradient(to_bottom,#161616_1px,transparent_1px)] bg-size-[4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
         <p className="text-center mt-24 z-5">Run your agency, in one place</p>
@@ -31,13 +34,13 @@ const Home = () => {
             alt="banner image"
             width={1200}
             height={1200}
-            className="rounded-tl-2xl rounded-tr-2xl border-2 border-muted"
+            className={`rounded-tl-2xl ${theme=='light'?'invert':'invert-0'} rounded-tr-2xl border-2 border-muted`}
           />
           <div className="bottom-0 top-1/2 bg-linear-to-t dark:from-background left-0 right-0 absolute z-10"></div>
         </div>
       </section>
 
-      <section className="flex items-center justify-center flex-col gap-4 md:mt-70! -mt-30">
+      <section className="flex items-center justify-center flex-col gap-4 -mt-10 md:mt-20">
         <h2 className="text-4xl text-center">Choose what fits you right</h2>
         <p className="text-muted-foreground text-center px-1">
           Our straight forward pricing plans are tailored to meet needs. If

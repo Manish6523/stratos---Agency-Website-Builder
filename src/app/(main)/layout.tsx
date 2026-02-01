@@ -1,4 +1,5 @@
 import { ClerkProvider } from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
 import React, { Children } from 'react'
 
 const Layout = ({children} : {
