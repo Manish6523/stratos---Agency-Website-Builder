@@ -1,32 +1,27 @@
-# Day 2 Log
+# Day 2: Marketing Site & Multi-Tenancy Routing
 
-## Summary of Changes
+## Today's Goal
+Build the public-facing landing page to showcase the product and implement advanced routing logic to handle multi-tenancy (subdomains) and authentication contexts.
 
--   **Site Structure**: Created the main public-facing site structure with a new home page (`src/app/site/page.tsx`) and a corresponding layout.
--   **Navigation**: A global navigation component was built, featuring the logo, links, login button, Clerk's `UserButton` (which appears after authentication), and a theme-switching toggle.
--   **Content**: The new home page was populated with a hero section for "Stratos" and a pricing card section. The data for the pricing cards is sourced from `src/lib/constants.ts`.
+## How I Achieved That Goal
+1.  **Public Marketing Site**:
+    -   Designed and built the home page (`src/app/site/page.tsx`) featuring a hero section and dynamic pricing cards sourced from `src/lib/constants.ts`.
+    -   Developed a responsive global navigation bar (`src/components/site/navigation/index.tsx`) that includes authentication status checks (showing a "Login" or "User Profile" button dynamically).
 
-## Key Files Established
+2.  **Theming Overhaul**:
+    -   Refreshed the application's look with a modern `oklch`-based color palette for better vibrancy and contrast in `src/app/globals.css`.
+    -   Switched the default font to `Oxanium` to give the brand a distinct identity.
 
--   **`src/app/site/layout.tsx`**: The layout for the main marketing site, which includes the global `<Navigation />` component.
--   **`src/app/site/page.tsx`**: The new home page for the project. It features a large hero section and a section that dynamically renders pricing cards from the `pricingCards` constant.
--   **`src/components/site/navigation/index.tsx`**: The site's main navigation bar.
--   **`src/components/global/mode-toggle.tsx`**: A client component that allows users to switch between light, dark, and system themes.
--   **`src/lib/constants.ts`**: This file exports the `pricingCards` array, which holds the data for the different pricing tiers shown on the home page.
+3.  **Advanced Middleware & Routing**:
+    -   Significantly enhanced the middleware (originally `src/app/proxy.ts`) to handle **subdomains**. This allows the app to serve different content based on the domain (e.g., `agency.stratos.com` vs. `stratos.com`).
+    -   Refactored the `ClerkProvider` placement, moving it to specific layouts (`src/app/site/layout.tsx`) to optimize context usage for different parts of the app.
 
----
+## Problems Faced
+-   **Subdomain Logic Complexity**: Handling `localhost` subdomains differs from production domains. I had to add logic to parse the `host` header dynamically to ensure it works in both dev and prod environments.
+-   **Z-Index Layering**: The navigation bar initially overlapped with page content or fell behind other elements. Adjusted `z-index` values in Tailwind to ensure the nav bar stays sticky and visible.
 
-## Day 2 Update
-
-### Summary of Changes
-
--   **Theming Overhaul**: A new, vibrant custom theme was implemented in `src/app/globals.css` using `oklch` for a more modern color palette. The default font has been set to `Oxanium`. The previous theme's variables have been commented out but retained for reference.
--   **Authentication Refactoring**: The `ClerkProvider` was moved from the root layout (`src/app/layout.tsx`) to the site-specific layout (`src/app/site/layout.tsx`). This modularizes the authentication context to be specific to the public-facing site.
--   **Advanced Routing and Multi-tenancy**: The middleware in `src/app/proxy.ts` has been significantly enhanced. It now includes logic to handle custom subdomains for multi-tenancy, rewriting requests to the appropriate context. It also contains improved redirect handling for sign-in/sign-up pages and protects new application routes like `/subaccount`.
-
-### Files Modified
-
--   **`src/app/globals.css`**: Replaced the existing theme with a new custom `oklch`-based theme and new fonts.
--   **`src/app/layout.tsx`**: Removed the `ClerkProvider` and updated the primary font to align with the new theme.
--   **`src/app/proxy.ts`**: Updated Clerk middleware to support multi-tenancy via subdomains and refined authentication/redirect logic.
--   **`src/app/site/layout.tsx`**: Added the `ClerkProvider` to specifically wrap the marketing/public site, now with Clerk's dark theme enabled by default.
+## Key Files Modified
+-   **`src/app/site/page.tsx`**: New marketing landing page.
+-   **`src/app/proxy.ts`**: Updated middleware for subdomain rewriting.
+-   **`src/components/site/navigation/index.tsx`**: Responsive navigation component.
+-   **`src/lib/constants.ts`**: configuration for pricing cards.

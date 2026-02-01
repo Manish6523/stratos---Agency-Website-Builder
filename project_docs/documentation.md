@@ -1,94 +1,103 @@
-# Project Documentation
+# Stratos Project Documentation
 
-**Last Updated:** Sunday, February 1, 2026
-
-This document provides a detailed overview of the files within the Stratos project. Its purpose is to serve as a central knowledge base for understanding the codebase.
-
----
+**Project Name:** Stratos
+**Date:** Monday, February 2, 2026
+**Version:** 0.3.0 (Alpha)
 
 ---
 
-## Database Schema (Prisma)
+## 1. Project Overview
 
-This section details the database schema defined using Prisma ORM.
+Stratos is a comprehensive **SaaS (Software as a Service) platform** designed for agencies. It provides a multi-tenant architecture allowing agencies to manage sub-accounts, pipelines, and funnels efficiently. The application is built with a focus on performance, scalability, and a modern user experience.
 
-- **`prisma/schema.prisma`**: Defines the application's database schema using Prisma Schema Language. It includes various models such as `User`, `Agency`, `SubAccount`, `Pipeline`, `Funnel`, and their relationships, as well as enums for roles, icons, and status. The database provider is set to MySQL.
+### Key Features
+-   **Multi-Tenancy**: Built-in subdomain support (e.g., `agency.app.com`) for distinct workspaces.
+-   **Robust Authentication**: Secure user management via Clerk, integrated deeply with the database.
+-   **Agency Dashboard**: Centralized control center for managing team members, permissions, and metrics.
+-   **Visual Page Building**: (Planned) Tools for building funnels and agency pages.
 
 ---
 
-## Project Source Code
+## 2. Technical Architecture
 
-### `src/app/` (App Router)
+### Tech Stack
+-   **Framework**: Next.js 15+ (App Router)
+-   **Language**: TypeScript
+-   **Database**: MariaDB (via Prisma ORM)
+-   **Styling**: Tailwind CSS & Shadcn/UI
+-   **Authentication**: Clerk
 
-The core application logic and UI, structured using the Next.js App Router.
+### Folder Structure Overview
 
-#### `src/app/globals.css`
-- **Description:** Defines the base styles for the application. It imports Tailwind CSS and defines an extensive set of CSS variables for both light and dark themes, used by `shadcn/ui`.
+The project follows a modular structure to separate concerns between the marketing site, the main application logic, and shared utilities.
 
-#### `src/app/layout.tsx`
-- **Description:** The root layout for the entire application. It wraps all pages with the `ClerkProvider` for authentication context and the `ThemeProvider` to manage light/dark modes. It also applies the global `DM_Sans` font.
+```
+src/
+├── app/                  # Next.js App Router Pages & Layouts
+│   ├── (main)/           # Authenticated application routes
+│   │   └── agency/       # Agency dashboard & logic
+│   ├── site/             # Public marketing website
+│   └── [domain]/         # Dynamic route for custom subdomains
+├── components/           # Reusable UI components
+│   ├── global/           # App-wide components (e.g., ModeToggle)
+│   ├── site/             # Components specific to the marketing site
+│   └── ui/               # Shadcn/UI primitives (Button, Card, etc.)
+├── lib/                  # Backend utilities & configurations
+│   ├── db.ts             # Prisma Client singleton
+│   ├── queries.ts        # Server actions & DB queries
+│   └── constants.ts      # Static configuration data
+├── middleware.ts         # (Located at src/proxy.ts) Auth & Routing middleware
+└── prisma/               # Database schema & migrations
+```
 
-#### `src/app/(main)/layout.tsx`
-- **Description:** This layout wraps the main application routes, providing a consistent structure and integrating `ClerkProvider` for authentication with the `dark` theme.
+---
 
-#### `src/app/page.tsx`
-- **Description:** This file serves as the initial landing page or root page of the application, often used for routing to the main site or other entry points.
+## 3. Database Schema
 
-#### `src/app/proxy.ts`
-- **Description:** Implements Clerk middleware. It defines public routes (`/site`, `/api/uploadthing`) and protects all other routes by redirecting unauthenticated users to the sign-in page.
+The database is designed to support a hierarchical structure: **User -> Agency -> SubAccount**.
 
-#### `src/app/site/layout.tsx`
-- **Description:** The main layout for the public-facing site. It integrates `ClerkProvider` for authentication and renders the global `Navigation` component above the page content.
+### Core Models
+-   **User**: Represents a system user. Can belong to an Agency and have permissions for multiple SubAccounts.
+-   **Agency**: The top-level entity. Contains business details, subscription info, and owns SubAccounts.
+-   **SubAccount**: A child entity of an Agency. Used for organizing specific clients or business units.
+-   **Permissions**: Controls user access levels (Access/No Access) for specific SubAccounts.
 
-#### `src/app/site/page.tsx`
-- **Description:** The primary home page for the marketing site. It features a hero section with the 'Stratos' branding, a pricing cards section displaying subscription options from `pricingCards`, and utilizes `next-themes` for theme switching.
+*(See `project_docs/tables.md` for the full field-level breakdown)*
 
-#### `src/app/[domain]/page.tsx`
-- **Description:** This dynamic page handles requests for custom domains, serving as an entry point for domain-specific content or sub-accounts.
+---
 
-#### `src/app/(main)/agency/(auth)/layout.tsx`
-- **Description:** A simple layout component that centers its children on the page. It's used to provide a consistent, centered view for the authentication forms (sign-in and sign-up).
+## 4. Key Components & Logic
 
-#### `src/app/(main)/agency/(auth)/sign-in/[[...sign-in]]/page.tsx`
-- **Description:** This page renders the Clerk sign-in component (`<SignIn />`). The `[[...sign-in]]` folder structure is a catch-all route required by Clerk to handle its authentication flow correctly.
+### Middleware (`src/proxy.ts`)
+The application's "traffic controller". It handles:
+1.  **Public Route Exemption**: Allowing access to the landing page and API endpoints without login.
+2.  **Subdomain Rewriting**: Detecting if a user visits `subdomain.domain.com` and rewriting the request to the dynamic `/[domain]` route.
+3.  **Auth Protection**: Redirecting unauthenticated users trying to access `/agency` or `/subaccount`.
 
-#### `src/app/(main)/agency/(auth)/sign-up/[[...sign-up]]/page.tsx`
-- **Description:** This page renders the Clerk sign-up component (`<SignUp />`). The `[[...sign-up]]` folder structure is a catch-all route required by Clerk to handle its authentication flow correctly.
+### Server Actions (`src/lib/queries.ts`)
+Encapsulated backend logic for security and reusability.
+-   **`getAuthUserDetails()`**: Retrieves the currently logged-in user's profile from the database, expanding their relations (Agency, SidebarOptions).
+-   **`verifyAndAcceptInvitation()`**: Critical logic that runs when a user logs in. It checks if they have a pending invitation to an agency and links them automatically if they do.
 
-#### `src/app/(main)/agency/page.tsx`
-- **Description:** This file defines the main page component for the agency dashboard. It serves as an entry point for agency-specific functionalities.
+### Database Client (`src/lib/db.ts`)
+Initializes the Prisma Client.
+-   **Optimization**: Uses `@prisma/adapter-mariadb` for efficient connection handling.
+-   **Performance**: Configured to use `127.0.0.1` to bypass local DNS resolution delays common with `localhost`.
 
+---
 
-### `src/components/`
+## 5. Development Progress
 
-Reusable UI components used throughout the application.
+The development is tracked in daily logs located in `project_docs/day/`.
 
-#### `src/components/global/mode-toggle.tsx`
-- **Description:** A client component that uses the `next-themes` library to provide a dropdown menu (Sun/Moon icon) for switching between light, dark, and system color schemes.
+-   **Day 1**: Established the foundation, authentication, and design system.
+-   **Day 2**: Built the public marketing site and implemented complex routing.
+-   **Day 3**: Integrated the database, implemented core backend logic, and connected the dashboard.
 
-#### `src/components/site/navigation/index.tsx`
-- **Description:** The main navigation bar for the public site. It features the Stratos logo, navigation links, a login button, the Clerk `UserButton` for user authentication, and the `ModeToggle` component for theme switching.
+---
 
-#### `src/components/ui/` (shadcn/ui)
-- **Description:** Contains UI components from `shadcn/ui`. As per `ignore.md`, I will not be reading or documenting the individual files within this directory.
+## 6. How to Use This Documentation
 
-### `src/hooks/`
-
-#### `src/hooks/use-mobile.ts`
-- **Description:** *No description yet. To add one, please provide details about this file.*
-
-### `src/lib/`
-
-#### `src/lib/constants.ts`
-- **Description:** This file exports the `pricingCards` array, which holds the data for the different pricing tiers shown on the home page.
-
-#### `src/lib/utils.ts`
-- **Description:** Contains the `cn` utility function from `tailwind-merge` and `clsx`, which is used to conditionally merge Tailwind CSS classes.
-
-#### `src/lib/db.ts`
-- **Description:** Initializes and exports a singleton instance of the Prisma Client for database interactions, ensuring efficient connection management throughout the application.
-
-### `src/providers/`
-
-#### `src/providers/theme-provider.tsx`
-- **Description:** A client-side component that wraps the `next-themes` library, enabling theme switching (light, dark, system) for the application.
+-   **For Codebase Navigation**: Refer to the "Technical Architecture" section to understand where specific logic resides.
+-   **For Database Understanding**: Check `prisma/schema.prisma` or `project_docs/tables.md`.
+-   **For Daily Progress**: See the individual logs in `project_docs/day/` for a breakdown of "Goals vs. Achievements".

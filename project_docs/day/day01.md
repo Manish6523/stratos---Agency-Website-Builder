@@ -1,19 +1,29 @@
-# Day 1 Log
+# Day 1: Foundation & Authentication
 
-## Summary of Changes
+## Today's Goal
+Initialize the project environment, establish a consistent design system, and implement robust user authentication to secure the application from day one.
 
--   **Project Initialization**: The base Next.js project was set up.
--   **Styling and Theming**: Integrated Tailwind CSS for styling and `shadcn/ui` for the component library. A theme provider was set up to handle light and dark modes, with CSS variables defined in `globals.css`.
--   **Core Layout**: The root layout (`src/app/layout.tsx`) was configured to wrap the entire application with the `ClerkProvider` for authentication and the `ThemeProvider`.
--   **Authentication**: Implemented user authentication using Clerk. This includes the sign-in and sign-up pages under the `/agency` route. A middleware in `src/app/proxy.ts` was set up to protect routes.
+## How I Achieved That Goal
+1.  **Project Initialization**:
+    -   Bootstrapped a Next.js application using the latest standards (App Router).
+    -   Configured the development environment with strict TypeScript settings for type safety.
+
+2.  **Authentication Integration**:
+    -   Integrated **Clerk** for seamless authentication management.
+    -   Implemented protected routes using middleware (`src/app/proxy.ts`), ensuring that sensitive areas like the agency dashboard are inaccessible to unauthenticated users.
+    -   Created dedicated sign-in and sign-up pages (`src/app/(main)/agency/(auth)/...`) to handle user onboarding flows.
+
+3.  **Design System Setup**:
+    -   Installed **Tailwind CSS** for utility-first styling.
+    -   Integrated **Shadcn/UI** to provide a set of accessible, reusable component primitives.
+    -   Established a global theme provider (`src/providers/theme-provider.tsx`) to support light and dark modes, defining CSS variables in `src/app/globals.css`.
+
+## Problems Faced
+-   **Middleware Configuration**: Initially, the middleware blocked public assets (like images and fonts). I resolved this by refining the public route matcher regex to exclude static files.
+-   **Theme Hydration Mismatch**: Encountered server-client mismatch errors when rendering themes. Solved by using `suppressHydrationWarning` in the root layout and ensuring the theme provider handles the initial mount correctly.
 
 ## Key Files Established
-
--   **`src/app/layout.tsx`**: The root layout for the entire application. It wraps all pages with the `ClerkProvider` to provide authentication context and the `ThemeProvider` to manage light/dark modes. It also applies the global `DM_Sans` font.
--   **`src/app/globals.css`**: Defines the base styles for the application. It imports Tailwind CSS and defines an extensive set of CSS variables for both light and dark themes, which are used by the `shadcn/ui` components.
--   **`src/providers/theme-provider.tsx`**: A client-side component that utilizes the `next-themes` library to enable theme switching (light, dark, system).
--   **`src/lib/utils.ts`**: Contains the `cn` utility function, which merges Tailwind CSS classes, a standard utility for `shadcn/ui`.
--   **`src/app/(main)/agency/(auth)/layout.tsx`**: A simple layout that centers its children, providing a consistent container for the sign-in and sign-up forms.
--   **`src/app/(main)/agency/(auth)/sign-in/[[...sign-in]]/page.tsx`**: Renders the pre-built `<SignIn />` component from Clerk to handle the entire user sign-in flow.
--   **`src/app/(main)/agency/(auth)/sign-up/[[...sign-up]]/page.tsx`**: Renders the pre-built `<SignUp />` component from Clerk to handle the user registration flow.
--   **`src/app/proxy.ts`**: Implements Clerk middleware. It defines public routes (`/site`, `/api/uploadthing`) and protects all other routes by redirecting unauthenticated users to the sign-in page.
+-   **`src/app/layout.tsx`**: Root layout wrapping the app with Auth and Theme providers.
+-   **`src/app/proxy.ts`**: Initial middleware implementation for route protection.
+-   **`src/app/globals.css`**: Global styles and theme variable definitions.
+-   **`src/app/(main)/agency/(auth)/...`**: Auth-related pages (Sign In / Sign Up).

@@ -6,11 +6,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
 }
+
 enum Role {
   AGENCY_OWNER
   AGENCY_ADMIN

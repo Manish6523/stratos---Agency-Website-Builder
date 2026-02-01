@@ -1,57 +1,30 @@
-# Daily Log - 2026-02-01
+# Day 3: Data Layer, Backend Logic & Dashboard
 
-## Summary of Changes:
+## Today's Goal
+Establish the database schema, implement the server-side logic for agency management, and refactor the middleware for final production readiness.
 
-### `package.json`
-- **Dependencies Added:**
-    - `@prisma/client`, `prisma`, `@prisma/adapter-libsql`: For database ORM with Prisma.
-    - `@clerk/nextjs`, `@clerk/themes`: For authentication and user management with Clerk.
-    - UI Components: `@radix-ui/*` packages, `class-variance-authority`, `cmdk`, `date-fns`, `embla-carousel-react`, `input-otp`, `lucide-react`, `next-themes`, `react-day-picker`, `react-hook-form`, `react-resizable-panels`, `recharts`, `sonner`, `tailwind-merge`, `uploadthing`, `vaul`, `zod`. These are used for building the UI and various functionalities.
-- **Dev Dependencies Added:**
-    - `@prisma/adapter-libsql`: Prisma adapter for LibSQL.
-    - `@tailwindcss/postcss`, `tailwindcss`, `tw-animate-css`: For styling with Tailwind CSS.
-    - `eslint`, `eslint-config-next`: For linting.
-    - `typescript`: For TypeScript support.
-- **Dependencies Updated:**
-    - `next`: Updated to version `16.1.6`.
+## How I Achieved That Goal
+1.  **Database & ORM Setup**:
+    -   Designed a comprehensive **Prisma Schema** (`prisma/schema.prisma`) defining core models: `User`, `Agency`, `SubAccount`, `Pipeline`, and their relationships.
+    -   Configured the database client (`src/lib/db.ts`) to use the `@prisma/adapter-mariadb` driver for optimized connection pooling and performance with MariaDB.
 
-### `prisma/schema.prisma`
-- **New Database Schema:** A comprehensive database schema has been defined using Prisma, with `mysql` as the provider.
-- **Models Introduced:**
-    - `User`, `Permissions`, `Agency`, `SubAccount`, `Tag`, `Pipeline`, `Lane`, `Ticket`, `Trigger`, `Automation`, `Action`, `Contact`, `Media`, `Funnel`, `ClassName`, `FunnelPage`, `AgencySidebarOption`, `SubAccountSidebarOption`, `Invitation`, `Notification`, `Subscription`, `AddOns`.
-- **Enums Defined:**
-    - `Role`, `Icon`, `TriggerTypes`, `ActionType`, `InvitationStatus`, `Plan`.
-- **Relationships and Indices:** Defined various relationships between models and added indices for efficient querying.
+2.  **Server-Side Logic Implementation**:
+    -   Created a library of server actions in `src/lib/queries.ts`.
+    -   Implemented `getAuthUserDetails` to securely fetch user data along with their permissions.
+    -   Implemented `verifyAndAcceptInvitation` to handle the complex flow of inviting users to agencies and accepting those invites.
 
-### `src/app/(main)/agency/page.tsx`
-- **New Agency Page:** A new, basic page component for the agency-specific section of the application. Currently displays "Agecny".
+3.  **Middleware Refactor**:
+    -   Moved and finalized the middleware at `src/proxy.ts` (root level), aligning with Next.js 14+ best practices.
+    -   Finalized the logic for rewriting paths based on subdomains (multi-tenancy) and protecting private routes (`/agency`, `/subaccount`).
 
-### `src/app/(main)/layout.tsx`
-- **ClerkProvider Integration:** The main application layout is now wrapped with `ClerkProvider` from `@clerk/nextjs`, enabling authentication for the main routes. It uses the `dark` theme from `@clerk/themes`.
+4.  **Agency Dashboard Integration**:
+    -   Connected the `src/app/(main)/agency/page.tsx` page to the backend. It now verifies the user's identity and invitation status before rendering the dashboard, redirecting unauthorized users automatically.
 
-### `src/app/[domain]/page.tsx`
-- **New Domain Page:** A new, basic page component to handle domain-specific routing. Currently displays "Domain".
+## Problems Faced
+-   **Database Connection Latency**: Initial connections to the database via `localhost` were slow due to IPv6 resolution issues. I forced the connection to use `127.0.0.1` in the `PrismaMariaDb` adapter configuration to resolve this DNS lag.
+-   **Circular Dependencies**: Refactoring the middleware required careful handling of imports to avoid circular dependencies between the auth service and the route matching logic.
 
-### `src/app/site/layout.tsx`
-- **Site Layout Structure:** This layout integrates `ClerkProvider` for authentication and includes a `Navigation` component. The `main` element has styling classes `h-full pt-18`.
-
-### `src/app/site/page.tsx`
-- **Landing Page Implementation:** This file contains the initial landing page of the application, featuring a hero section with the title "Stratos" and a pricing cards section.
-- **Features:**
-    - Theme switching functionality using `next-themes`.
-    - Conditional class names handled by `clsx`.
-    - Icons provided by `lucide-react`.
-    - Image rendering via `next/image`.
-
-### `src/components/site/navigation/index.tsx`
-- **Navigation Component:** Implements the main navigation bar for the site.
-- **Elements:**
-    - Stratos logo and text.
-    - Navigation links: Pricing, About, Documentation, Features.
-    - Login button.
-    - `UserButton` component from Clerk for user authentication UI.
-    - `ModeToggle` component for switching between light/dark themes.
-
-### `src/lib/db.ts`
-- **Prisma Client Initialization:** Sets up and exports a Prisma Client instance for database interactions.
-- **Global Instance:** Implements a global instance in development to prevent multiple instantiations of the Prisma Client, which can cause issues.
+## Key Technical Changes
+-   **New Middleware Location**: `src/proxy.ts` is now the single source of truth for routing logic.
+-   **Server Actions**: `src/lib/queries.ts` abstracts complex DB operations from the UI components.
+-   **Schema Definition**: A robust relational model is now in place to support the SaaS architecture.
