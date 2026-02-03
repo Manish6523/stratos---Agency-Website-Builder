@@ -37,6 +37,10 @@ Create or update `project_docs/day/dayXX.md` with the following structure:
 *   Summarize the update to the user.
 *   Notify of any "Documentation Debt" or files that need further manual explanation.
 
+### 6. also give a git commit message in the end 
+   day-4[feat]: 1 - Agency creation logic, role-based routing & system utilities
+   2 - Implemented `upsertAgency` and `initUser` server actions for robust agency and user management. ....
+
 ---
 
 ## Manual Update Cycle
