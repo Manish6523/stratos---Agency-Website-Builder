@@ -78,6 +78,8 @@ The application's "traffic controller". It handles:
 Encapsulated backend logic for security and reusability.
 -   **`getAuthUserDetails()`**: Retrieves the currently logged-in user's profile from the database, expanding their relations (Agency, SidebarOptions).
 -   **`verifyAndAcceptInvitation()`**: Critical logic that runs when a user logs in. It checks if they have a pending invitation to an agency and links them automatically if they do.
+-   **`upsertAgency()`**: Handles the creation and update of Agency details, automatically generating default sidebar options and linking the owner.
+-   **`initUser()`**: Syncs the Clerk user with the local database and persists roles.
 
 ### Database Client (`src/lib/db.ts`)
 Initializes the Prisma Client.
@@ -93,6 +95,7 @@ The development is tracked in daily logs located in `project_docs/day/`.
 -   **Day 1**: Established the foundation, authentication, and design system.
 -   **Day 2**: Built the public marketing site and implemented complex routing.
 -   **Day 3**: Integrated the database, implemented core backend logic, and connected the dashboard.
+-   **Day 4**: Implemented Agency creation, role-based routing, and default system setup.
 
 ---
 

@@ -3,7 +3,7 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
 import { redirect } from "next/navigation";
-import { User } from "../../generated/prisma/client";
+import { Agency, Plan, User } from "../../generated/prisma/client";
 
 export const getAuthUserDetails = async () => {
   const user = await currentUser();
@@ -156,7 +156,7 @@ export const verifyAndAcceptInvitation = async () => {
 
     if (userDetails) {
       const client = await clerkClient();
-      await client.users.updateUserMetadata (user.id, {
+      await client.users.updateUserMetadata(user.id, {
         privateMetadata: {
           role: userDetails.role || "SUBACCOUNT_USER",
         },
@@ -177,3 +177,220 @@ export const verifyAndAcceptInvitation = async () => {
     return agency ? agency.agencyId : null;
   }
 };
+
+export const updateAgencyDetails = async (
+  agencyId: string,
+  agencyDetails: Partial<Agency>,
+) => {
+  const response = await db.agency.update({
+    where: { id: agencyId },
+    data: { ...agencyDetails },
+  });
+  return response;
+};
+
+export const deleteAgency = async (agencyId: string) => {
+  const response = await db.agency.delete({
+    where: { id: agencyId },
+  });
+  return response;
+};
+
+export const initUser = async (newUser: Partial<User>) => {
+  const user = await currentUser();
+  if (!user) return;
+
+  const userData = await db.user.upsert({
+    where: {
+      email: user.emailAddresses[0].emailAddress,
+    },
+    update: newUser,
+    create: {
+      id: user.id,
+      avatarUrl: user.imageUrl,
+      email: user.emailAddresses[0].emailAddress,
+      name: `${user.firstName} ${user.lastName}`,
+      role: newUser.role || "SUBACCOUNT_USER",
+    },
+  });
+
+  const client = await clerkClient();
+  await client.users.updateUserMetadata(user.id, {
+    privateMetadata: {
+      role: newUser.role || "SUBACCOUNT_USER",
+    },
+  });
+
+  return userData;
+};
+
+type AgencyInput = {
+  id: string;
+  name?: string;
+  customerId?: string;
+  connectAccountId?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  companyEmail: string;
+  agencyLogo?: string;
+  companyPhone?: string;
+  whiteLabel?: boolean;
+  address?: string;
+  city?: string;
+  zipCode?: string;
+  state?: string;
+  country?: string;
+  goal?: number;
+};
+
+export const upsertAgency = async (agency: AgencyInput, price?: Plan) => {
+  if (!agency.companyEmail) return null
+
+  // Debug: Log what we're receiving
+  console.log("upsertAgency - received agency:", {
+    id: agency.id,
+    name: agency.name,
+    companyEmail: agency.companyEmail,
+    hasName: 'name' in agency,
+    nameType: typeof agency.name,
+    allKeys: Object.keys(agency),
+  });
+
+  // Extract all required scalar fields explicitly to ensure they're available
+  const {
+    id,
+    name,
+    customerId,
+    connectAccountId,
+    createdAt,
+    updatedAt,
+    companyEmail,
+    agencyLogo,
+    companyPhone,
+    whiteLabel,
+    address,
+    city,
+    zipCode,
+    state,
+    country,
+    goal,
+  } = agency;
+
+  // Validate required fields and provide defaults
+  const validatedName = name?.trim() || "";
+  const validatedAgencyLogo = agencyLogo?.trim() || "";
+  const validatedCompanyPhone = companyPhone?.trim() || "";
+  const validatedAddress = address?.trim() || "";
+  const validatedCity = city?.trim() || "";
+  const validatedZipCode = zipCode?.trim() || "";
+  const validatedState = state?.trim() || "";
+  const validatedCountry = country?.trim() || "";
+
+  if (!validatedName) {
+    throw new Error("Agency name is required");
+  }
+  if (!validatedAgencyLogo) {
+    throw new Error("Agency logo is required");
+  }
+  if (!validatedCompanyPhone) {
+    throw new Error("Company phone is required");
+  }
+  if (!validatedAddress) {
+    throw new Error("Address is required");
+  }
+  if (!validatedCity) {
+    throw new Error("City is required");
+  }
+  if (!validatedZipCode) {
+    throw new Error("Zip code is required");
+  }
+  if (!validatedState) {
+    throw new Error("State is required");
+  }
+  if (!validatedCountry) {
+    throw new Error("Country is required");
+  }
+
+  try {
+    const agencyDetails = await db.agency.upsert({
+      where: {
+        id: id,
+      },
+      update: {
+        name: validatedName,
+        customerId: customerId || "",
+        connectAccountId: connectAccountId || "",
+        companyEmail,
+        agencyLogo: validatedAgencyLogo,
+        companyPhone: validatedCompanyPhone,
+        whiteLabel: whiteLabel ?? true,
+        address: validatedAddress,
+        city: validatedCity,
+        zipCode: validatedZipCode,
+        state: validatedState,
+        country: validatedCountry,
+        goal: goal ?? 5,
+      },
+      create: {
+        id,
+        name: validatedName,
+        customerId: customerId || "",
+        connectAccountId: connectAccountId || "",
+        createdAt: createdAt || new Date(),
+        updatedAt: updatedAt || new Date(),
+        companyEmail,
+        agencyLogo: validatedAgencyLogo,
+        companyPhone: validatedCompanyPhone,
+        whiteLabel: whiteLabel ?? true,
+        address: validatedAddress,
+        city: validatedCity,
+        zipCode: validatedZipCode,
+        state: validatedState,
+        country: validatedCountry,
+        goal: goal ?? 5,
+        users: {
+          connect: { email: agency.companyEmail },
+        },
+        SidebarOption: {
+          create: [
+            {
+              name: 'Dashboard',
+              icon: 'category',
+              link: `/agency/${agency.id}`,
+            },
+            {
+              name: 'Launchpad',
+              icon: 'clipboardIcon',
+              link: `/agency/${agency.id}/launchpad`,
+            },
+            {
+              name: 'Billing',
+              icon: 'payment',
+              link: `/agency/${agency.id}/billing`,
+            },
+            {
+              name: 'Settings',
+              icon: 'settings',
+              link: `/agency/${agency.id}/settings`,
+            },
+            {
+              name: 'Sub Accounts',
+              icon: 'person',
+              link: `/agency/${agency.id}/all-subaccounts`,
+            },
+            {
+              name: 'Team',
+              icon: 'shield',
+              link: `/agency/${agency.id}/team`,
+            },
+          ],
+        },
+      },
+    })
+    return agencyDetails;
+  } catch (e) {
+    console.error("upsertAgency error:", e);
+    // Re-throw the error so it can be caught by the form
+    throw e;
+  }
+}
