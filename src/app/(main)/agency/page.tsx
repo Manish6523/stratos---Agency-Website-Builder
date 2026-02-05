@@ -8,8 +8,12 @@ import AgencyDetails from "@/components/forms/agency-details";
 const page = async ({
   searchParams,
 }: {
-  searchParams: { plan: Plan; state: string; code: string };
+  searchParams: Promise<{ plan: Plan; state: string; code: string }>; // 1. Set as Promise
 }) => {
+  
+  // 2. THIS IS THE KEY: Extract the data from the Promise
+  const resolvedParams = await searchParams;
+
   const agencyId = await verifyAndAcceptInvitation();
   const user = await getAuthUserDetails();
 
@@ -18,28 +22,30 @@ const page = async ({
       return redirect("/subaccount");
     }
     else if (user?.role === "AGENCY_OWNER" || user?.role === "AGENCY_ADMIN") {
-      if (searchParams.plan) {
-        return redirect(`/agency/${agencyId}/billing?plan=${searchParams.plan}`);
+      
+      // 3. Use the NEW variable 'resolvedParams', NOT 'searchParams'
+      if (resolvedParams.plan) {
+        return redirect(`/agency/${agencyId}/billing?plan=${resolvedParams.plan}`);
       }
-      if (searchParams.state) {
-        const statePath = searchParams.state.split("___")[0];
-        const stateAgencyId = searchParams.state.split("___")[1];
+      if (resolvedParams.state) {
+        const statePath = resolvedParams.state.split("___")[0];
+        const stateAgencyId = resolvedParams.state.split("___")[1];
 
         if (!stateAgencyId) return <div>Not Authorized</div>;
-        return redirect(`/agency/${stateAgencyId}/${statePath}?code=${searchParams.code}`);
+        return redirect(`/agency/${stateAgencyId}/${statePath}?code=${resolvedParams.code}`);
       } 
       
-      // Default dashboard redirect
       return redirect(`/agency/${agencyId}`);
     } 
     return <div>Not Authorized</div>;
   }
+  // ... rest of your code
 
   const authUser = await currentUser();
 
   return (
     <div className="flex justify-center items-center mt-4 p-4">
-      <div className="max-w-[850px] border p-6 rounded-xl shadow-sm">
+      <div className="max-w-212 border p-6 rounded-xl shadow-sm">
         <h1 className="text-4xl font-bold mb-4">Create An Agency</h1>
         <AgencyDetails data={{companyEmail: authUser?.emailAddresses[0].emailAddress}} />
       </div>
