@@ -8,14 +8,14 @@ type Props = {
 };
 
 const Sidebar = async ({ id, type }: Props) => {
-  const user = await getAuthUserDetails();
+  const user : any = await getAuthUserDetails();
   if (!user) return null;
   if (!user.Agency) return;
 
   const details =
     type === "agency"
       ? user?.Agency
-      : user?.Agency?.SubAccount.find((subaccount) => subaccount.id === id);
+      : user?.Agency?.SubAccount.find((subaccount : any) => subaccount.id === id);
 
   const isWhiteLabledAgency = user?.Agency?.whiteLabel;
   if (!details) return;
@@ -25,7 +25,7 @@ const Sidebar = async ({ id, type }: Props) => {
   if (!isWhiteLabledAgency) {
     if (type === "subaccount") {
       sideBarLogo =
-        user.Agency.SubAccount.find((subaccount) => subaccount.id === id)
+        user.Agency.SubAccount.find((subaccount : any) => subaccount.id === id)
           ?.subAccountLogo || user.Agency.agencyLogo;
     }
   }
@@ -33,12 +33,12 @@ const Sidebar = async ({ id, type }: Props) => {
   const sidebarOpt =
     type === "agency"
       ? user.Agency.SidebarOption || []
-      : user.Agency.SubAccount.find((subaccount) => subaccount.id === id)
+      : user.Agency.SubAccount.find((subaccount : any) => subaccount.id === id)
           ?.SidebarOption || [];
 
-  const subaccounts = user.Agency.SubAccount.filter((subaccount) =>
+  const subaccounts = user.Agency.SubAccount.filter((subaccount : any) =>
     user.Permissions.find(
-      (permission) =>
+      (permission : any) =>
         permission.subAccountId === subaccount.id && permission.access,
     ),
   );

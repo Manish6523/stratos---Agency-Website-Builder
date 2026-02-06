@@ -1,11 +1,10 @@
 "use server";
 
 import { db } from "./db";
-import { v4 } from 'uuid'
+import { v4 } from "uuid";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { Agency, Plan, SubAccount, User } from "../../generated/prisma/client";
-
 
 export const getAuthUserDetails = async () => {
   const user = await currentUser();
@@ -417,7 +416,7 @@ export const getNotificationAndUser = async (agencyId: string) => {
 };
 
 export const upsertSubAccount = async (subAccount: SubAccount) => {
-  if (!subAccount.companyEmail) return null
+  if (!subAccount.companyEmail) return null;
 
   // 1. Find the Agency Owner to assign permissions
   const agencyOwner = await db.user.findFirst({
@@ -425,16 +424,16 @@ export const upsertSubAccount = async (subAccount: SubAccount) => {
       Agency: {
         id: subAccount.agencyId,
       },
-      role: 'AGENCY_OWNER',
+      role: "AGENCY_OWNER",
     },
-  })
+  });
 
   if (!agencyOwner) {
-    console.log('ERROR: Could not find an Agency Owner for this ID')
-    return null
+    console.log("ERROR: Could not find an Agency Owner for this ID");
+    return null;
   }
 
-  const permissionId = v4()
+  const permissionId = v4();
 
   try {
     const response = await db.subAccount.upsert({
@@ -448,61 +447,108 @@ export const upsertSubAccount = async (subAccount: SubAccount) => {
             email: agencyOwner.email,
             id: permissionId,
           },
-          // Note: The 'connect' block was removed. 
+          // Note: The 'connect' block was removed.
           // Prisma handles the relationship automatically when using 'create' inside 'upsert'.
         },
         Pipeline: {
-          create: { name: 'Lead Cycle' },
+          create: { name: "Lead Cycle" },
         },
         SidebarOption: {
           create: [
             {
-              name: 'Launchpad',
-              icon: 'clipboardIcon',
+              name: "Launchpad",
+              icon: "clipboardIcon",
               link: `/subaccount/${subAccount.id}/launchpad`,
             },
             {
-              name: 'Settings',
-              icon: 'settings',
+              name: "Settings",
+              icon: "settings",
               link: `/subaccount/${subAccount.id}/settings`,
             },
             {
-              name: 'Funnels',
-              icon: 'pipelines',
+              name: "Funnels",
+              icon: "pipelines",
               link: `/subaccount/${subAccount.id}/funnels`,
             },
             {
-              name: 'Media',
-              icon: 'database',
+              name: "Media",
+              icon: "database",
               link: `/subaccount/${subAccount.id}/media`,
             },
             {
-              name: 'Automations',
-              icon: 'chip',
+              name: "Automations",
+              icon: "chip",
               link: `/subaccount/${subAccount.id}/automations`,
             },
             {
-              name: 'Pipelines',
-              icon: 'flag',
+              name: "Pipelines",
+              icon: "flag",
               link: `/subaccount/${subAccount.id}/pipelines`,
             },
             {
-              name: 'Contacts',
-              icon: 'person',
+              name: "Contacts",
+              icon: "person",
               link: `/subaccount/${subAccount.id}/contacts`,
             },
             {
-              name: 'Dashboard',
-              icon: 'category',
+              name: "Dashboard",
+              icon: "category",
               link: `/subaccount/${subAccount.id}`,
             },
           ],
         },
       },
-    })
-    return response
+    });
+    return response;
   } catch (error) {
-    console.error('ERROR UPSERTING SUBACCOUNT:', error)
-    return null
+    console.error("ERROR UPSERTING SUBACCOUNT:", error);
+    return null;
   }
-}
+};
+
+export const changeUserPermissions = async (
+  permissionId: string | undefined,
+  userEmail: string,
+  subAccountId: string,
+  permission: boolean,
+) => {
+  try {
+    const response = await db.permissions.upsert({
+      where: { id: permissionId },
+      update: { access: permission },
+      create: {
+        access: permission,
+        email: userEmail,
+        subAccountId: subAccountId,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log("ERROR: Could not change persmission", error);
+  }
+};
+
+export const getUserPermissions = async (userId: string) => {
+  const response = await db.user.findUnique({
+    where: { id: userId },
+    select: { Permissions: { include: { SubAccount: true } } },
+  });
+
+  return response;
+};
+
+export const updateUser = async (user: Partial<User>) => {
+  const response = await db.user.update({
+    where: { email: user.email },
+    data: { ...user },
+  });
+
+  const client = await clerkClient();
+  await client.users.updateUserMetadata(response.id, {
+    privateMetadata: {
+      role: user.role || "SUBACCOUNT_USER",
+    },
+  });
+
+  return response;
+};

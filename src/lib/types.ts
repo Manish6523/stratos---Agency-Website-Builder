@@ -16,13 +16,13 @@ export type NotificationWithUser =
   } & Notification)[]
   | undefined
 
-// export type UserWithPermissionsAndSubAccounts = Prisma.PromiseReturnType<
-//   typeof getUserPermissions
-// >
+export type UserWithPermissionsAndSubAccounts = Prisma.PromiseReturnType<
+  typeof getUserPermissions
+>
 
 
-// export type AuthUserWithAgencySigebarOptionsSubAccounts =
-//   Prisma.PromiseReturnType<typeof getAuthUserDetails>
+export type AuthUserWithAgencySigebarOptionsSubAccounts =
+  Prisma.PromiseReturnType<typeof getAuthUserDetails>
 
 const __getUsersWithAgencySubAccountPermissionsSidebarOptions = async (
   agencyId: string
@@ -42,7 +42,7 @@ export type UsersWithAgencySubAccountPermissionsSidebarOptions =
   >
 
 
-export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>
+// export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>
 
 export type CreateMediaType = Prisma.MediaCreateWithoutSubaccountInput
 
@@ -62,9 +62,9 @@ export type LaneDetail = Lane & {
 
 // export type TicketWithTags = Prisma.PromiseReturnType<typeof getTicketsWithTags>
 
-export type TicketDetails = Prisma.PromiseReturnType<
-  typeof _getTicketsWithAllRelations
->
+// export type TicketDetails = Prisma.PromiseReturnType<
+//   typeof __getTicketsWithAllRelations
+// >
 
 export const currencyNumberRegex = /^\d+(\.\d{1,2})?$/
 

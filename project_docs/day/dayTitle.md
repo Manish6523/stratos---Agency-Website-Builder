@@ -2,3 +2,5 @@
 - Day 2: Site Structure & Theming
 - Day 3: Database, Backend, Middleware & Agency Logic
 - Day 4: Agency Creation & Management Logic
+- Day 5: Agency Dashboard, Sidebar & Global Modal System
+- Day 6: Settings, User Management & Notifications

@@ -32,6 +32,7 @@ import { v4 } from "uuid";
 import { toast } from "sonner";
 import FileUpload from "../global/file-upload";
 import { NumberInput } from "@tremor/react";
+import { Switch } from "../ui/switch"; // Import Switch
 
 type AgencyData = {
   id?: string;
@@ -58,7 +59,6 @@ export default function AgencyDetails({ data }: Props) {
   const [isDeletingAgency, startDeletingAgency] = useTransition();
   const [isLoading, setIsLoading] = useState(false);
   
-  // Form state
   const [formData, setFormData] = useState({
     name: data?.name || "",
     companyEmail: data?.companyEmail || "",
@@ -90,10 +90,10 @@ export default function AgencyDetails({ data }: Props) {
   }, [data]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: value
     }));
   };
 
@@ -102,7 +102,6 @@ export default function AgencyDetails({ data }: Props) {
     setIsLoading(true);
 
     try {
-
       // Validate required fields
       if (!formData.name || formData.name.trim().length < 2) {
         toast.error("Agency name must be at least 2 characters");
@@ -114,41 +113,9 @@ export default function AgencyDetails({ data }: Props) {
         setIsLoading(false);
         return;
       }
-      if (!formData.companyPhone || formData.companyPhone.trim() === "") {
-        toast.error("Company phone is required");
-        setIsLoading(false);
-        return;
-      }
-      if (!formData.address || formData.address.trim() === "") {
-        toast.error("Address is required");
-        setIsLoading(false);
-        return;
-      }
-      if (!formData.city || formData.city.trim() === "") {
-        toast.error("City is required");
-        setIsLoading(false);
-        return;
-      }
-      if (!formData.zipCode || formData.zipCode.trim() === "") {
-        toast.error("Zip code is required");
-        setIsLoading(false);
-        return;
-      }
-      if (!formData.state || formData.state.trim() === "") {
-        toast.error("State is required");
-        setIsLoading(false);
-        return;
-      }
-      if (!formData.country || formData.country.trim() === "") {
-        toast.error("Country is required");
-        setIsLoading(false);
-        return;
-      }
 
-      // 1. Always init the user role
       await initUser({ role: "AGENCY_OWNER" });
 
-      // 2. Prepare the agency object as a plain serializable object
       const agencyData = {
         id: data?.id ? data.id : v4(),
         customerId: data?.customerId || "",
@@ -176,21 +143,19 @@ export default function AgencyDetails({ data }: Props) {
       }
     } catch (e) {
       console.log("ERROR: ", e);
-      const errorMessage = e instanceof Error ? e.message : "Could not save your agency";
-      toast.error(errorMessage);
+      toast.error("Could not save your agency");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleDeleteAgency = () => {
-    if (!data?.id) {
+    if (data?.id) {
       startDeletingAgency(async () => {
-        //WIP: discontinue the subscription
-
         try {
-          const response = await deleteAgency(data?.id as string);
+          await deleteAgency(data.id as string);
           toast("Deleted your agency and all subaccounts");
+          router.refresh();
         } catch (e) {
           console.log("ERROR: ", e);
           toast("Could not delete your agency");
@@ -212,9 +177,7 @@ export default function AgencyDetails({ data }: Props) {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="agencyLogo" className="block text-sm font-medium mb-2">
-                Agency Logo
-              </label>
+              <label className="block text-sm font-medium mb-2">Agency Logo</label>
               <FileUpload
                 apiEndpoint="agencyLogo"
                 onChange={(value) => setFormData(prev => ({ ...prev, agencyLogo: value || '' }))}
@@ -222,11 +185,9 @@ export default function AgencyDetails({ data }: Props) {
               />
             </div>
 
-            <div className="flex md:flex-row gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Agency Name
-                </label>
+                <label htmlFor="name" className="block text-sm font-medium mb-2">Agency Name</label>
                 <input
                   id="name"
                   name="name"
@@ -236,74 +197,57 @@ export default function AgencyDetails({ data }: Props) {
                   placeholder="Your agency name"
                   disabled={isLoading}
                   required
-                  minLength={2}
                   className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </div>
               <div className="flex-1">
-                <label htmlFor="companyEmail" className="block text-sm font-medium mb-2">
-                  Agency Email
-                </label>
+                <label htmlFor="companyEmail" className="block text-sm font-medium mb-2">Agency Email</label>
                 <input
                   id="companyEmail"
                   name="companyEmail"
                   type="email"
                   value={formData.companyEmail}
-                  onChange={handleChange}
-                  placeholder="Email"
                   readOnly
-                  disabled={isLoading}
-                  required
-                  className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full px-3 py-2 border border-input bg-muted rounded-md cursor-not-allowed"
                 />
               </div>
             </div>
 
-            <div className="flex md:flex-row gap-4">
-              <div className="flex-1">
-                <label htmlFor="companyPhone" className="block text-sm font-medium mb-2">
-                  Agency Phone Number
-                </label>
-                <input
-                  id="companyPhone"
-                  name="companyPhone"
-                  type="tel"
-                  value={formData.companyPhone}
-                  onChange={handleChange}
-                  placeholder="Phone"
-                  disabled={isLoading}
-                  required
-                  className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                />
-              </div>
+            <div>
+              <label htmlFor="companyPhone" className="block text-sm font-medium mb-2">Agency Phone Number</label>
+              <input
+                id="companyPhone"
+                name="companyPhone"
+                type="tel"
+                value={formData.companyPhone}
+                onChange={handleChange}
+                placeholder="Phone"
+                disabled={isLoading}
+                required
+                className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+              />
             </div>
 
-            <div className="flex flex-row items-center justify-between rounded-lg border gap-4 p-4">
-              <div>
-                <label htmlFor="whiteLabel" className="block text-sm font-medium">
+            {/* WHITELABEL SWITCH SECTION */}
+            <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+              <div className="flex flex-col gap-1">
+                <label htmlFor="whiteLabel" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   Whitelabel Agency
                 </label>
                 <p className="text-sm text-muted-foreground">
-                  Turning on whilelabel mode will show your agency logo
-                  to all sub accounts by default. You can overwrite this
-                  functionality through sub account settings.
+                  Whitelabel mode shows your logo to sub accounts by default.
                 </p>
               </div>
-              <input
+              <Switch
                 id="whiteLabel"
-                name="whiteLabel"
-                type="checkbox"
                 checked={formData.whiteLabel}
-                onChange={handleChange}
+                onCheckedChange={(checked) => setFormData(prev => ({ ...prev, whiteLabel: checked }))}
                 disabled={isLoading}
-                className="w-4 h-4"
               />
             </div>
 
             <div>
-              <label htmlFor="address" className="block text-sm font-medium mb-2">
-                Address
-              </label>
+              <label htmlFor="address" className="block text-sm font-medium mb-2">Address</label>
               <input
                 id="address"
                 name="address"
@@ -313,85 +257,34 @@ export default function AgencyDetails({ data }: Props) {
                 placeholder="123 st..."
                 disabled={isLoading}
                 required
-                className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full px-3 py-2 border border-input bg-background rounded-md"
               />
             </div>
 
-            <div className="flex md:flex-row gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label htmlFor="city" className="block text-sm font-medium mb-2">
-                  City
-                </label>
-                <input
-                  id="city"
-                  name="city"
-                  type="text"
-                  value={formData.city}
-                  onChange={handleChange}
-                  placeholder="City"
-                  disabled={isLoading}
-                  required
-                  className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                />
+                <label htmlFor="city" className="block text-sm font-medium mb-2">City</label>
+                <input id="city" name="city" type="text" value={formData.city} onChange={handleChange} required className="w-full px-3 py-2 border border-input bg-background rounded-md" />
               </div>
               <div className="flex-1">
-                <label htmlFor="state" className="block text-sm font-medium mb-2">
-                  State
-                </label>
-                <input
-                  id="state"
-                  name="state"
-                  type="text"
-                  value={formData.state}
-                  onChange={handleChange}
-                  placeholder="State"
-                  disabled={isLoading}
-                  required
-                  className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                />
+                <label htmlFor="state" className="block text-sm font-medium mb-2">State</label>
+                <input id="state" name="state" type="text" value={formData.state} onChange={handleChange} required className="w-full px-3 py-2 border border-input bg-background rounded-md" />
               </div>
               <div className="flex-1">
-                <label htmlFor="zipCode" className="block text-sm font-medium mb-2">
-                  Zipcode
-                </label>
-                <input
-                  id="zipCode"
-                  name="zipCode"
-                  type="text"
-                  value={formData.zipCode}
-                  onChange={handleChange}
-                  placeholder="Zipcode"
-                  disabled={isLoading}
-                  required
-                  className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                />
+                <label htmlFor="zipCode" className="block text-sm font-medium mb-2">Zipcode</label>
+                <input id="zipCode" name="zipCode" type="text" value={formData.zipCode} onChange={handleChange} required className="w-full px-3 py-2 border border-input bg-background rounded-md" />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="country" className="block text-sm font-medium mb-2">
-                Country
-              </label>
-              <input
-                id="country"
-                name="country"
-                type="text"
-                value={formData.country}
-                onChange={handleChange}
-                placeholder="Country"
-                disabled={isLoading}
-                required
-                className="w-full px-3 py-2 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-              />
+            <div className="flex flex-col gap-2">
+              <label htmlFor="country" className="block text-sm font-medium">Country</label>
+              <input id="country" name="country" type="text" value={formData.country} onChange={handleChange} required className="w-full px-3 py-2 border border-input bg-background rounded-md" />
             </div>
 
             {data?.id && (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 pt-4">
                 <label className="block text-sm font-medium">Create A Goal</label>
-                <p className="text-sm text-muted-foreground">
-                  ✨ Create a goal for your agency. As your business grows
-                  your goals grow too so dont forget to set the bar higher!
-                </p>
+                <p className="text-sm text-muted-foreground">✨ Set your sub-account growth targets.</p>
                 <NumberInput
                   defaultValue={data?.goal}
                   onValueChange={async (val) => {
@@ -406,29 +299,26 @@ export default function AgencyDetails({ data }: Props) {
                   }}
                   min={1}
                   className="bg-background border border-input"
-                  placeholder="Sub Account Goal"
                 />
               </div>
             )}
 
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading} className="w-full md:w-max">
               {isLoading ? <Loading /> : "Save Agency Information"}
             </Button>
           </form>
 
           {data?.id && (
-            <div className="flex flex-row items-center justify-between rounded-lg border border-destructive gap-4 p-4 mt-4">
-              <div>
-                <div>Danger Zone</div>
-              </div>
-              <div className="text-muted-foreground">
-                Deleting your agency cannpt be undone. This will also delete all
-                sub accounts and all data related to your sub accounts. Sub
-                accounts will no longer have access to funnels, contacts etc.
+            <div className="flex flex-col md:flex-row items-center justify-between rounded-lg border border-destructive gap-4 p-4 mt-8">
+              <div className="flex flex-col gap-1">
+                <div className="font-bold text-destructive">Danger Zone</div>
+                <div className="text-muted-foreground text-sm">
+                  Deleting your agency cannot be undone. All subaccount data will be lost.
+                </div>
               </div>
               <AlertDialogTrigger
                 disabled={isLoading || isDeletingAgency}
-                className="text-red-600 p-2 text-center mt-2 rounded-md hove:bg-red-600 hover:text-white whitespace-nowrap"
+                className="text-red-600 p-2 px-4 border border-red-600 rounded-md hover:bg-red-600 hover:text-white transition-all whitespace-nowrap"
               >
                 {isDeletingAgency ? "Deleting..." : "Delete Agency"}
               </AlertDialogTrigger>
@@ -437,16 +327,13 @@ export default function AgencyDetails({ data }: Props) {
 
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle className="text-left">
-                Are you absolutely sure?
-              </AlertDialogTitle>
-              <AlertDialogDescription className="text-left">
-                This action cannot be undone. This will permanently delete the
-                Agency account and all related sub accounts.
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete the Agency and all sub accounts.
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter className="flex items-center">
-              <AlertDialogCancel className="mb-2">Cancel</AlertDialogCancel>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 disabled={isDeletingAgency}
                 className="bg-destructive hover:bg-destructive"

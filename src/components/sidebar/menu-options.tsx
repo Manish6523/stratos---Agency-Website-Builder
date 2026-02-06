@@ -22,7 +22,7 @@ import CustomModal from "../global/custom-modal";
 import SubAccountDetails from "../forms/subaccount-details";
 
 type Props = {
-  defaultOpen: boolean;
+  defaultOpen?: boolean;
   subAccounts: SubAccount[];
   sidebarOpt: AgencySidebarOption[] | SubAccountSidebarOption[];
   sidebarLogo: string;
@@ -76,7 +76,7 @@ const MenuOptions = ({
       >
         <SheetTitle>{""}</SheetTitle>
         <div>
-          <AspectRatio ratio={16 / 5}>
+          <AspectRatio ratio={16 / 9}>
             <Image
               src={sidebarLogo}
               alt="Sidebar Logo"
@@ -88,7 +88,7 @@ const MenuOptions = ({
             <PopoverTrigger asChild>
               <Button
                 variant={"ghost"}
-                className="w-full my-4 flex items-center justify-between py-8"
+                className="w-full my-4 cursor-pointer flex items-center justify-between py-8"
               >
                 <div className="flex items-center text-left gap-2">
                   <Compass />
@@ -102,7 +102,7 @@ const MenuOptions = ({
                 <ChevronsUpDown size={16} className="text-muted-foreground" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="size-80 mt-4 z-200">
+            <PopoverContent className="w-full h-80 md:ml-2 ml-0 mt-4 z-200">
               <Command className="rounded-lg">
                 <CommandInput placeholder="Search Account..." />
                 <CommandList className="pb-16">
@@ -115,7 +115,7 @@ const MenuOptions = ({
                           {defaultOpen ? (
                             <Link
                               href={`/agency/${user?.Agency?.id}`}
-                              className="flex gap-4 w-full h-full"
+                              className="flex gap-4 w-full h-full items-center"
                             >
                               <div className="relative w-16 h-16">
                                 <Image
@@ -245,7 +245,7 @@ const MenuOptions = ({
           <nav className="relative">
             <Command className="rounded-lg overflow-visible bg-transparent">
               <CommandInput placeholder="Search..." />
-              <CommandList className="py-4 pb-16 overflow-visible">
+              <CommandList className="py-4 overflow-visible">
                 <CommandEmpty>No Results Found</CommandEmpty>
                 <CommandGroup className="overflow-visible">
                   {sidebarOpt.map((sidebarOption) => {

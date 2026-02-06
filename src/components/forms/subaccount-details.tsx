@@ -25,15 +25,15 @@ import FileUpload from '../global/file-upload'
 import Loading from '../global/loading'
 
 const formSchema = z.object({
-  name: z.string().min(1),
-  companyEmail: z.string().email(),
-  companyPhone: z.string().min(1),
-  address: z.string().min(1),
-  city: z.string().min(1),
-  subAccountLogo: z.string().min(1),
-  zipCode: z.string().min(1),
-  state: z.string().min(1),
-  country: z.string().min(1),
+  name: z.string().min(1, 'Name is required'),
+  companyEmail: z.string().email('Invalid email address'),
+  companyPhone: z.string().min(1, 'Phone is required'),
+  address: z.string().min(1, 'Address is required'),
+  city: z.string().min(1, 'City is required'),
+  subAccountLogo: z.string().min(1, 'Logo is required'),
+  zipCode: z.string().min(1, 'Zip code is required'),
+  state: z.string().min(1, 'State is required'),
+  country: z.string().min(1, 'Country is required'),
 })
 
 interface SubAccountDetailsProps {
@@ -74,11 +74,9 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
     },
   })
 
-  // Watch logo for FileUpload component
   const subAccountLogo = watch('subAccountLogo')
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-
     try {
       const response = await upsertSubAccount({
         id: details?.id ? details.id : v4(),
@@ -122,14 +120,14 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
   }, [details, reset])
 
   return (
-    <Card className="w-full">
+    <Card className="w-full border-none shadow-none md:border-solid md:shadow-sm px-0 md:px-6">
       <CardHeader>
         <CardTitle>Sub Account Information</CardTitle>
         <CardDescription>Please enter business details</CardDescription>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Custom File Upload */}
+      <CardContent className='px-0 md:px-6'>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+          {/* Logo Section - Full Width */}
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium">Account Logo</label>
             <FileUpload
@@ -137,55 +135,80 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
               value={subAccountLogo}
               onChange={(url) => setValue('subAccountLogo', url || "")}
             />
-            {errors.subAccountLogo && <p className="text-red-500 text-xs">{errors.subAccountLogo.message}</p>}
+            {errors.subAccountLogo && (
+              <p className="text-destructive text-xs">{errors.subAccountLogo.message}</p>
+            )}
           </div>
 
-          <div className="flex md:flex-row gap-4">
+          {/* Responsive Rows: Stack on mobile, side-by-side on md+ */}
+          <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 flex flex-col gap-2">
               <label className="text-sm font-medium">Account Name</label>
-              <Input placeholder="Your agency name" {...register('name')} />
-              {errors.name && <p className="text-red-500 text-xs">{errors.name.message}</p>}
+              <Input 
+                className="border border-secondary" 
+                placeholder="Your subaccount name" 
+                {...register('name')} 
+              />
+              {errors.name && <p className="text-destructive text-xs">{errors.name.message}</p>}
             </div>
             <div className="flex-1 flex flex-col gap-2">
               <label className="text-sm font-medium">Account Email</label>
-              <Input placeholder="Email" {...register('companyEmail')} />
-              {errors.companyEmail && <p className="text-red-500 text-xs">{errors.companyEmail.message}</p>}
+              <Input 
+                className="border border-secondary" 
+                placeholder="Email" 
+                {...register('companyEmail')} 
+              />
+              {errors.companyEmail && <p className="text-destructive text-xs">{errors.companyEmail.message}</p>}
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium">Account Phone Number</label>
-            <Input placeholder="Phone" {...register('companyPhone')} />
-            {errors.companyPhone && <p className="text-red-500 text-xs">{errors.companyPhone.message}</p>}
+          <div className="flex flex-col md:flex-row gap-4">
+             <div className="flex-1 flex flex-col gap-2">
+                <label className="text-sm font-medium">Account Phone Number</label>
+                <Input 
+                  className="border border-secondary" 
+                  placeholder="Phone" 
+                  {...register('companyPhone')} 
+                />
+                {errors.companyPhone && <p className="text-destructive text-xs">{errors.companyPhone.message}</p>}
+             </div>
+             <div className="flex-1 flex flex-col gap-2">
+                <label className="text-sm font-medium">Address</label>
+                <Input 
+                  className="border border-secondary" 
+                  placeholder="123 st..." 
+                  {...register('address')} 
+                />
+                {errors.address && <p className="text-destructive text-xs">{errors.address.message}</p>}
+             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium">Address</label>
-            <Input placeholder="123 st..." {...register('address')} />
-            {errors.address && <p className="text-red-500 text-xs">{errors.address.message}</p>}
-          </div>
-
-          <div className="flex md:flex-row gap-4">
-            <div className="flex-1 flex flex-col gap-2">
+          {/* Three column row for City, State, Zip on larger screens */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-medium">City</label>
-              <Input placeholder="City" {...register('city')} />
+              <Input className="border border-secondary" placeholder="City" {...register('city')} />
             </div>
-            <div className="flex-1 flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-medium">State</label>
-              <Input placeholder="State" {...register('state')} />
+              <Input className="border border-secondary" placeholder="State" {...register('state')} />
             </div>
-            <div className="flex-1 flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-medium">Zipcode</label>
-              <Input placeholder="Zipcode" {...register('zipCode')} />
+              <Input className="border border-secondary" placeholder="Zipcode" {...register('zipCode')} />
             </div>
           </div>
 
           <div className="flex flex-col gap-2">
             <label className="text-sm font-medium">Country</label>
-            <Input placeholder="Country" {...register('country')} />
+            <Input className="border border-secondary" placeholder="Country" {...register('country')} />
           </div>
 
-          <Button type="submit" disabled={isSubmitting} className="mt-4">
+          <Button 
+            type="submit" 
+            disabled={isSubmitting} 
+            className="w-full md:w-max px-8 mt-2"
+          >
             {isSubmitting ? <Loading /> : 'Save Account Information'}
           </Button>
         </form>

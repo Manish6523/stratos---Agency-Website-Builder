@@ -110,6 +110,7 @@ The development is tracked in daily logs located in `project_docs/day/`.
 - **Day 3**: Integrated the database, implemented core backend logic, and connected the dashboard.
 - **Day 4**: Implemented Agency creation, role-based routing, and default system setup.
 - **Day 5**: Established the authenticated Dashboard layout, dynamic Sidebar navigation, and a global Modal system.
+- **Day 6**: Implemented the Agency Settings page, User Details management (including permissions), and the global InfoBar with notifications.
 
 ---
 
