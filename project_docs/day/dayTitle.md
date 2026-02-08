@@ -4,3 +4,4 @@
 - Day 4: Agency Creation & Management Logic
 - Day 5: Agency Dashboard, Sidebar & Global Modal System
 - Day 6: Settings, User Management & Notifications
+- Day 7: Media System & Subaccount Management

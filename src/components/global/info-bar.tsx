@@ -18,6 +18,7 @@ import { ModeToggle } from "./mode-toggle";
 import { Separator } from "../ui/separator";
 import { Role } from "../../../generated/prisma";
 import Userbutton from "./user-button";
+import { Button } from "../ui/button";
 
 type Props = {
   notifications: NotificationWithUser | [];
@@ -60,9 +61,9 @@ export default function InfoBar({
           <Userbutton />
           <Sheet>
             <SheetTrigger asChild>
-              <div className="rounded-full size-8 bg-primary flex items-center justify-center text-white">
-                <Bell size={17} />
-              </div>
+                <Button size={'icon'} variant={'default'} className="rounded-full">
+                  <Bell size={17} />
+                </Button>
             </SheetTrigger>
             <SheetContent
               className="mt-4 mr-4 pr-4 overflow-auto"

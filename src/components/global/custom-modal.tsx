@@ -25,7 +25,7 @@ export default function CustomModal({
 
   return (
     <Dialog open={isOpen || defaultOpen} onOpenChange={setClose}>
-      <DialogContent className="overflow-auto md:max-h-175 md:h-fit h-[95vh] bg-card">
+      <DialogContent className="overflow-auto md:max-h-165 md:h-fit h-[95vh] bg-card">
         <DialogHeader className="pt-8 text-left">
           <DialogTitle className="text-2xl font-bold">{title}</DialogTitle>
           <DialogDescription>{subHeading}</DialogDescription>
