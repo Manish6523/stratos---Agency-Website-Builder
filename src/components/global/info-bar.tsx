@@ -61,12 +61,16 @@ export default function InfoBar({
           <Userbutton />
           <Sheet>
             <SheetTrigger asChild>
-                <Button size={'icon'} variant={'default'} className="rounded-full">
-                  <Bell size={17} />
-                </Button>
+              <Button
+                size={"icon"}
+                variant={"default"}
+                className="rounded-full"
+              >
+                <Bell size={17} />
+              </Button>
             </SheetTrigger>
             <SheetContent
-              className="mt-4 mr-4 pr-4 overflow-auto"
+              className="mt-4 mr-4 pr-4 pb-5 overflow-auto"
               showCloseButton={false}
             >
               <SheetHeader className="text-left">
@@ -82,40 +86,42 @@ export default function InfoBar({
                 </SheetDescription>
               </SheetHeader>
 
-              {allNotifications?.map((notification) => (
-                <div
-                  key={notification.id}
-                  className="flex mt- px-4 overflow-auto text-ellipsis"
-                >
-                  <div className="flex gap-2">
-                    <Avatar>
-                      <AvatarImage
-                        src={notification.User.avatarUrl}
-                        alt="Profile Picture"
-                      />
-                      <AvatarFallback className="bg-primary">
+              {allNotifications?.map((notification) => {
+                const [userName, action, details] =
+                  notification.notification.split("|");
+
+                return (
+                  <div
+                    key={notification.id}
+                    // 1. Reduce 'p-4' to 'py-2' to shrink vertical space
+                    // 2. Use 'px-4' to keep horizontal padding the same
+                    className="flex gap-3 py-2 px-4 transition-colors hover:bg-muted/40 rounded-md"
+                  >
+                    <Avatar className="h-8 w-8 shrink-0">
+                      {" "}
+                      {/* Reduced from h-9 to h-8 */}
+                      <AvatarImage src={notification.User.avatarUrl} />
+                      <AvatarFallback className="text-[10px]">
                         {notification.User.name.slice(0, 2).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
-                    <div className="flex flex-col">
-                      <p>
-                        <span className="font-bold">
-                          {notification.notification.split("|")[0]}
-                        </span>
-                        <span className="text-muted-foreground">
-                          {notification.notification.split("|")[1]}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          {notification.notification.split("|")[2]}
-                        </span>
-                      </p>
-                      <small className="text-xs text-muted-foreground">
+
+                    <div className="flex flex-col overflow-hidden">
+                      <div className="text-sm leading-tight">
+                        {" "}
+                        {/* 'leading-tight' reduces line height */}
+                        <span className="font-medium">{userName}</span>{" "}
+                        <span className="text-muted-foreground">{action}</span>{" "}
+                        <span className="text-foreground">{details}</span>
+                      </div>
+
+                      <time className="text-[10px] text-muted-foreground/60 leading-none mt-0.5">
                         {new Date(notification.createdAt).toLocaleDateString()}
-                      </small>
+                      </time>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
               {allNotifications?.length === 0 && (
                 <div className="flex items-center justify-center mb-4 text-muted-foreground">

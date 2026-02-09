@@ -1,5 +1,6 @@
 import { Contact, Lane, Notification, Prisma, Role, Tag, Ticket, User } from "../../generated/prisma"
 import { db } from "./db"
+import { getAuthUserDetails, getUserPermissions } from "./queries"
 
 export type NotificationWithUser =
   | ({
@@ -21,7 +22,7 @@ export type UserWithPermissionsAndSubAccounts = Prisma.PromiseReturnType<
 >
 
 
-export type AuthUserWithAgencySigebarOptionsSubAccounts =
+export type AuthUserWithAgencySidebarOptionsSubAccounts =
   Prisma.PromiseReturnType<typeof getAuthUserDetails>
 
 const __getUsersWithAgencySubAccountPermissionsSidebarOptions = async (

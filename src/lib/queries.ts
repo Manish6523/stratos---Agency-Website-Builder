@@ -4,7 +4,13 @@ import { db } from "./db";
 import { v4 } from "uuid";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { Agency, Plan, SubAccount, User } from "../../generated/prisma/client";
+import {
+  Agency,
+  Plan,
+  Role,
+  SubAccount,
+  User,
+} from "../../generated/prisma/client";
 
 export const getAuthUserDetails = async () => {
   const user = await currentUser();
@@ -131,6 +137,7 @@ export const createTeamUser = async (agencyId: String, user: User) => {
 
 export const verifyAndAcceptInvitation = async () => {
   const user = await currentUser();
+  console.log("verifyAndAcceptInvitation - currentUser:", user); // Debug log
   if (!user) return redirect("/sign-in");
   const invitationExists = await db.invitation.findUnique({
     where: {
@@ -277,6 +284,7 @@ export const upsertAgency = async (agency: AgencyInput, price?: Plan) => {
     goal,
   } = agency;
 
+  // Validate required fields and provide defaults
   // Validate required fields and provide defaults
   const validatedName = name?.trim() || "";
   const validatedAgencyLogo = agencyLogo?.trim() || "";
@@ -558,15 +566,81 @@ export const getSubaccountDetails = async (subaccountId: string) => {
     where: {
       id: subaccountId,
     },
-  })
-  return response
-}
+  });
+  return response;
+};
 
 export const deleteSubAccount = async (subaccountId: string) => {
   const response = await db.subAccount.delete({
     where: {
       id: subaccountId,
     },
-  })
-  return response
-}
+  });
+  return response;
+};
+
+export const deleteUser = async (userId: string) => {
+  const client = await clerkClient();
+  await client.users.updateUserMetadata(userId, {
+    privateMetadata: {
+      role: undefined,
+    },
+  });
+  const deletedUser = await db.user.delete({ where: { id: userId } });
+
+  return deletedUser;
+};
+
+export const getUser = async (id: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  return user;
+};
+
+export const sendInvitation = async (
+  role: Role,
+  email: string,
+  agencyId: string,
+) => {
+  try {
+    const existingInvitation = await db.invitation.findUnique({
+      where: {
+        email,
+        agencyId,
+        status: "PENDING",
+      },
+    });
+
+    if (existingInvitation) {
+      console.log("An invitation already exists for this email and agency.");
+      return {
+        ...existingInvitation,
+        status: "ALREADY_EXISTS",
+        success: false,
+      };
+    } else {
+      const response = await db.invitation.create({
+        data: { email, agencyId, role },
+      });
+
+      // const client = await clerkClient();
+      // await client.invitations.createInvitation({
+      //   emailAddress: email,
+      //   redirectUrl: `${process.env.NEXT_PUBLIC_URL}/agency/sign-up`,
+      //   ignoreExisting: true, // <--- Add this
+      //   publicMetadata: {
+      //     throughInvitation: true,
+      //     role,
+      //   },
+      // });
+      return { ...response, status: "SENT", success: true };
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

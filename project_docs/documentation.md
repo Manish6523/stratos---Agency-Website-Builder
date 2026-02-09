@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Sunday, February 8, 2026
-**Version:** 0.4.0 (Alpha)
+**Date:** Monday, February 9, 2026
+**Version:** 0.5.0 (Alpha)
 
 ---
 
@@ -16,6 +16,7 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Robust Authentication**: Secure user management via Clerk, integrated deeply with the database.
 - **Agency Dashboard**: Centralized control center for managing team members, permissions, and metrics.
 - **Subaccount Management**: Complete isolation and management for agency clients.
+- **Team & User Management**: Dedicated interface for managing team roles, permissions, and invitations.
 - **Media Management**: Integrated file system for handling assets like logos and project media.
 - **Visual Page Building**: (Planned) Tools for building funnels and agency pages.
 
@@ -29,6 +30,7 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Language**: TypeScript
 - **Database**: MariaDB (via Prisma ORM)
 - **Styling**: Tailwind CSS & Shadcn/UI
+- **Data Table**: TanStack Table (React Table)
 - **Authentication**: Clerk
 - **File Storage**: UploadThing
 
@@ -103,6 +105,7 @@ Encapsulated backend logic for security and reusability.
 
 -   **`getAuthUserDetails()`**: Retrieves the currently logged-in user's profile from the database, expanding their relations (Agency, SidebarOptions).
 -   **`verifyAndAcceptInvitation()`**: Critical logic that runs when a user logs in. It checks if they have a pending invitation to an agency and links them automatically if they do.
+-   **`sendInvitation()`**: Backend logic for creating and tracking user invitations by email.
 -   **`upsertAgency()`**: Handles the creation and update of Agency details, automatically generating default sidebar options and linking the owner.
 -   **`upsertSubAccount()`**: Creates/Updates subaccounts. It intelligently initializes the subaccount with default Sidebar Options, a "Lead Cycle" pipeline, and grants access to the Agency Owner.
 -   **`saveActivityLogsNotification()`**: Centralized logging function that records user actions (e.g., "Updated Subaccount") to the Notification table for audit trails.
@@ -128,6 +131,7 @@ The development is tracked in daily logs located in `project_docs/day/`.
 -   **Day 5**: Established the authenticated Dashboard layout, dynamic Sidebar navigation, and a global Modal system.
 -   **Day 6**: Implemented the Agency Settings page, User Details management (including permissions), and the global InfoBar with notifications.
 -   **Day 7**: Implemented the Media/File Upload infrastructure (UploadThing) and the Subaccount creation/management logic with automated default setup.
+-   **Day 8**: Implemented the Team Management system, Invitation logic, and refined the Notification UI using TanStack Table.
 
 ---
 
