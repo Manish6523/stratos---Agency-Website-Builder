@@ -1,14 +1,17 @@
-'use client'
-import { useParams } from 'next/navigation'
 import React from 'react'
 
-type Props = {}
+type Props = {
+  params: Promise<{
+    subaccountId: string
+  }>
+}
+  
+const SubaccountPageId = async (props: Props) => {
+  const { subaccountId } = await props.params;
 
-const SubAccountMainPage = (props: Props) => {
-    const {subaccountId} = useParams()
   return (
     <div>{subaccountId}</div>
   )
 }
 
-export default SubAccountMainPage
+export default SubaccountPageId
