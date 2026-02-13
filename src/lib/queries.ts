@@ -11,6 +11,7 @@ import {
   SubAccount,
   User,
 } from "../../generated/prisma/client";
+import { CreateMediaType } from "./types";
 
 export const getAuthUserDetails = async () => {
   const user = await currentUser();
@@ -137,7 +138,6 @@ export const createTeamUser = async (agencyId: String, user: User) => {
 
 export const verifyAndAcceptInvitation = async () => {
   const user = await currentUser();
-  console.log("verifyAndAcceptInvitation - currentUser:", user); // Debug log
   if (!user) return redirect("/sign-in");
   const invitationExists = await db.invitation.findUnique({
     where: {
@@ -253,16 +253,6 @@ type AgencyInput = {
 
 export const upsertAgency = async (agency: AgencyInput, price?: Plan) => {
   if (!agency.companyEmail) return null;
-
-  // Debug: Log what we're receiving
-  console.log("upsertAgency - received agency:", {
-    id: agency.id,
-    name: agency.name,
-    companyEmail: agency.companyEmail,
-    hasName: "name" in agency,
-    nameType: typeof agency.name,
-    allKeys: Object.keys(agency),
-  });
 
   // Extract all required scalar fields explicitly to ensure they're available
   const {
@@ -644,3 +634,30 @@ export const sendInvitation = async (
     throw error;
   }
 };
+
+export const getMedia = async (subaccountId: string) => {
+  const mediaFiles = await db.subAccount.findUnique({
+    where: { id: subaccountId },
+    include: { Media: true },
+  });
+  return mediaFiles;
+};
+
+export const createMedia = async (subaccountId: string, mediaFile: CreateMediaType) => {
+  const response = await db.media.create({
+    data: {
+      link: mediaFile.link,
+      name: mediaFile.name,
+      subAccountId: subaccountId,
+    }
+  })
+  return response;
+}
+export const deleteMedia = async (mediaId: string) => {
+  const response = await db.media.delete({
+    where: {
+      id: mediaId,
+    },
+  });
+  return response;
+}

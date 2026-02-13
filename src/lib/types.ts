@@ -1,6 +1,6 @@
 import { Contact, Lane, Notification, Prisma, Role, Tag, Ticket, User } from "../../generated/prisma"
 import { db } from "./db"
-import { getAuthUserDetails, getUserPermissions } from "./queries"
+import { getAuthUserDetails, getMedia, getUserPermissions } from "./queries"
 
 export type NotificationWithUser =
   | ({
@@ -43,7 +43,7 @@ export type UsersWithAgencySubAccountPermissionsSidebarOptions =
   >
 
 
-// export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>
+export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>
 
 export type CreateMediaType = Prisma.MediaCreateWithoutSubaccountInput
 
