@@ -1,3 +1,4 @@
+## Week 01
 - Day 1: Project Setup & Auth
 - Day 2: Site Structure & Theming
 - Day 3: Database, Backend, Middleware & Agency Logic
@@ -6,3 +7,6 @@
 - Day 6: Settings, User Management & Notifications
 - Day 7: Media System & Subaccount Management
 - Day 8: Team Management & Invitation System
+
+## Week 02
+- Day 9: Agency Analytics Dashboard & Media Management System

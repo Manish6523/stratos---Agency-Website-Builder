@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Monday, February 9, 2026
-**Version:** 0.5.0 (Alpha)
+**Date:** Friday, February 14, 2026
+**Version:** 0.6.0 (Alpha)
 
 ---
 
@@ -14,10 +14,11 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 
 - **Multi-Tenancy**: Built-in subdomain support (e.g., `agency.app.com`) for distinct workspaces.
 - **Robust Authentication**: Secure user management via Clerk, integrated deeply with the database.
-- **Agency Dashboard**: Centralized control center for managing team members, permissions, and metrics.
-- **Subaccount Management**: Complete isolation and management for agency clients.
+- **Agency Dashboard**: Comprehensive analytics dashboard with financial metrics, client tracking, and data visualization.
+- **Subaccount Management**: Complete isolation and management for agency clients with dedicated dashboards.
 - **Team & User Management**: Dedicated interface for managing team roles, permissions, and invitations.
-- **Media Management**: Integrated file system for handling assets like logos and project media.
+- **Media Management**: Full CRUD system for file uploads with searchable media bucket, copy-to-clipboard, and visual card interface.
+- **Launchpad**: Onboarding checklist for new subaccounts to complete setup steps.
 - **Visual Page Building**: (Planned) Tools for building funnels and agency pages.
 
 ---
@@ -31,6 +32,7 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Database**: MariaDB (via Prisma ORM)
 - **Styling**: Tailwind CSS & Shadcn/UI
 - **Data Table**: TanStack Table (React Table)
+- **Data Visualization**: Tremor Charts
 - **Authentication**: Clerk
 - **File Storage**: UploadThing
 
@@ -110,6 +112,9 @@ Encapsulated backend logic for security and reusability.
 -   **`upsertSubAccount()`**: Creates/Updates subaccounts. It intelligently initializes the subaccount with default Sidebar Options, a "Lead Cycle" pipeline, and grants access to the Agency Owner.
 -   **`saveActivityLogsNotification()`**: Centralized logging function that records user actions (e.g., "Updated Subaccount") to the Notification table for audit trails.
 -   **`initUser()`**: Syncs the Clerk user with the local database and persists roles.
+-   **`getMedia(subaccountId)`**: Fetches all media files associated with a specific subaccount.
+-   **`createMedia(subaccountId, mediaFile)`**: Creates a new media entry in the database.
+-   **`deleteMedia(mediaId)`**: Permanently removes a media file from the database.
 
 ### Database Client (`src/lib/db.ts`)
 
@@ -122,8 +127,9 @@ Initializes the Prisma Client.
 
 ## 5. Development Progress
 
-The development is tracked in daily logs located in `project_docs/day/`.
+The development is tracked in daily logs located in `project_docs/week-01/` and `project_docs/week-02/`.
 
+### Week 01
 -   **Day 1**: Established the foundation, authentication, and design system.
 -   **Day 2**: Built the public marketing site and implemented complex routing.
 -   **Day 3**: Integrated the database, implemented core backend logic, and connected the dashboard.
@@ -132,6 +138,9 @@ The development is tracked in daily logs located in `project_docs/day/`.
 -   **Day 6**: Implemented the Agency Settings page, User Details management (including permissions), and the global InfoBar with notifications.
 -   **Day 7**: Implemented the Media/File Upload infrastructure (UploadThing) and the Subaccount creation/management logic with automated default setup.
 -   **Day 8**: Implemented the Team Management system, Invitation logic, and refined the Notification UI using TanStack Table.
+
+### Week 02
+-   **Day 9**: Built comprehensive Agency Analytics Dashboard with Tremor Charts and implemented a complete Media Management system with searchable bucket, card UI, and full CRUD operations. Established Subaccount infrastructure with Launchpad onboarding.
 
 ---
 
