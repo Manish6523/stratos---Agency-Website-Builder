@@ -37,7 +37,7 @@ export default function MediaCard({ file }: Props) {
   return (
     <AlertDialog>
       <DropdownMenu>
-        <article className="group relative w-full aspect-square overflow-hidden rounded-xl bg-muted border border-border/50 transition-all hover:shadow-xl">
+        <article className="group relative w-full aspect-video overflow-hidden rounded-xl bg-muted border border-border/50 transition-all hover:shadow-xl">
           {/* Image Container */}
           <Image
             src={file.link}
