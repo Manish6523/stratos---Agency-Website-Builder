@@ -10,3 +10,6 @@
 
 ## Week 02
 - Day 9: Agency Analytics Dashboard & Media Management System
+- Day 10: Pipeline & Kanban Board System
+- Day 11: Ticket & Tag Management System
+- Day 12: Funnel Management System & Code Polish

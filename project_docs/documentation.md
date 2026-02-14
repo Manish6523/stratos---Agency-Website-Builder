@@ -2,7 +2,7 @@
 
 **Project Name:** Stratos
 **Date:** Friday, February 14, 2026
-**Version:** 0.6.0 (Alpha)
+**Version:** 0.9.0 (Beta)
 
 ---
 
@@ -18,8 +18,12 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Subaccount Management**: Complete isolation and management for agency clients with dedicated dashboards.
 - **Team & User Management**: Dedicated interface for managing team roles, permissions, and invitations.
 - **Media Management**: Full CRUD system for file uploads with searchable media bucket, copy-to-clipboard, and visual card interface.
+- **Pipeline & Kanban Boards**: Drag-and-drop pipeline management with customizable lanes and tickets for sales/project tracking.
+- **Ticket System**: Comprehensive task management with customer assignment, team delegation, tag categorization, and value tracking.
+- **Tag Management**: Visual tag system with 5 color options for organizing tickets and content.
+- **Funnel Builder**: Marketing funnel creation with custom subdomains, multi-page support, and Stripe product integration.
 - **Launchpad**: Onboarding checklist for new subaccounts to complete setup steps.
-- **Visual Page Building**: (Planned) Tools for building funnels and agency pages.
+- **Visual Page Building**: (In Progress) JSON-based page content structure prepared for drag-and-drop builder.
 
 ---
 
@@ -33,6 +37,7 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Styling**: Tailwind CSS & Shadcn/UI
 - **Data Table**: TanStack Table (React Table)
 - **Data Visualization**: Tremor Charts
+- **Drag & Drop**: React Beautiful DnD
 - **Authentication**: Clerk
 - **File Storage**: UploadThing
 
@@ -115,6 +120,33 @@ Encapsulated backend logic for security and reusability.
 -   **`getMedia(subaccountId)`**: Fetches all media files associated with a specific subaccount.
 -   **`createMedia(subaccountId, mediaFile)`**: Creates a new media entry in the database.
 -   **`deleteMedia(mediaId)`**: Permanently removes a media file from the database.
+-   **Pipeline Management**:
+    -   **`getPipelineDetails(pipelineId)`**: Fetches a single pipeline by ID.
+    -   **`getPipelines(subaccountId)`**: Retrieves all pipelines for a subaccount with nested lanes and tickets.
+    -   **`upsertPipeline(pipeline)`**: Creates or updates a pipeline.
+    -   **`deletePipeline(pipelineId)`**: Permanently removes a pipeline.
+    -   **`getLanesWithTicketAndTags(pipelineId)`**: Fetches all lanes with nested tickets, tags, and relations.
+    -   **`upsertLane(lane)`**: Creates or updates a lane with auto-calculated order.
+    -   **`updateLanesOrder(lanes)`**: Batch updates lane positions after drag-and-drop.
+    -   **`deleteLane(laneId)`**: Removes a lane.
+-   **Ticket Management**:
+    -   **`getTicketsWithTags(pipelineId)`**: Fetches all tickets for a pipeline with relations.
+    -   **`upsertTicket(ticket, tags)`**: Creates or updates a ticket with tag associations.
+    -   **`updateTicketsOrder(tickets)`**: Batch updates ticket positions and lane assignments.
+    -   **`deleteTicket(ticketId)`**: Permanently removes a ticket.
+    -   **`searchContacts(searchTerms)`**: Searches contacts by name with fuzzy matching.
+    -   **`getSubAccountTeamMembers(subaccountId)`**: Fetches team members with subaccount access.
+-   **Tag System**:
+    -   **`upsertTag(subaccountId, tag)`**: Creates or updates a tag for a subaccount.
+    -   **`deleteTag(tagId)`**: Permanently removes a tag.
+    -   **`getTagsForSubaccount(subaccountId)`**: Fetches all tags for a subaccount.
+-   **Funnel Management**:
+    -   **`getFunnel(funnelId)`**: Fetches a single funnel with ordered pages.
+    -   **`getFunnels(subaccountId)`**: Retrieves all funnels for a subaccount with nested pages.
+    -   **`upsertFunnel(subaccountId, funnel, funnelId)`**: Creates or updates a funnel with Stripe integration.
+    -   **`upsertFunnelPage(subaccountId, funnelPage, funnelId)`**: Creates or updates a funnel page with default content structure.
+    -   **`deleteFunnelPage(funnelPageId)`**: Permanently removes a funnel page.
+    -   **`getDomainContent(subDomainName)`**: Fetches funnel by custom subdomain for public rendering.
 
 ### Database Client (`src/lib/db.ts`)
 
@@ -141,6 +173,9 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 
 ### Week 02
 -   **Day 9**: Built comprehensive Agency Analytics Dashboard with Tremor Charts and implemented a complete Media Management system with searchable bucket, card UI, and full CRUD operations. Established Subaccount infrastructure with Launchpad onboarding.
+-   **Day 10**: Implemented Pipeline & Kanban Board System with react-beautiful-dnd for drag-and-drop functionality. Built PipelineView, PipelineLane, and PipelineTicket components with real-time financial tracking and lane/ticket reordering.
+-   **Day 11**: Built comprehensive Ticket & Tag Management System with customer search, team member assignment, multi-select tag system with inline creation, and 5-color tag categorization. Implemented debounced contact search and tag creator component.
+-   **Day 12**: Implemented complete Funnel Management System with custom subdomain support, multi-page funnels, and Stripe product integration. Added funnel form with favicon upload. Performed code quality improvements: fixed loading page typo, changed media card aspect ratio, and converted to type-only imports.
 
 ---
 
