@@ -14,3 +14,4 @@
 -   Day 11: Ticket & Tag Management System
 -   Day 12: Funnel Management System & Code Polish
 -   Day 13: Subaccount Settings & Data Serialization
+-   Day 14: Contact Management System & UI Polishing

@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Wednesday, February 18, 2026
-**Version:** 0.9.5 (Beta)
+**Date:** Thursday, February 19, 2026
+**Version:** 0.9.6 (Beta)
 
 ---
 
@@ -22,6 +22,7 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Ticket System**: Comprehensive task management with customer assignment, team delegation, tag categorization, and value tracking.
 - **Tag Management**: Visual tag system with 5 color options for organizing tickets and content.
 - **Funnel Builder**: Marketing funnel creation with custom subdomains, multi-page support, and Stripe product integration.
+- **Contact Management**: (New) Centralized customer tracking with total value calculation, status badges, and activity logging.
 - **Launchpad**: Onboarding checklist for new subaccounts to complete setup steps.
 - **Visual Page Building**: (In Progress) JSON-based page content structure prepared for drag-and-drop builder.
 
@@ -177,6 +178,7 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 -   **Day 11**: Built comprehensive Ticket & Tag Management System with customer search, team member assignment, multi-select tag system with inline creation, and 5-color tag categorization. Implemented debounced contact search and tag creator component.
 -   **Day 12**: Implemented complete Funnel Management System with custom subdomain support, multi-page funnels, and Stripe product integration. Added funnel form with favicon upload. Performed code quality improvements: fixed loading page typo, changed media card aspect ratio, and converted to type-only imports.
 -   **Day 13**: Implemented the Subaccount Settings page for localized management of client details and user permissions. Resolved Prisma Decimal serialization issues across the Pipeline and Ticket systems by converting values to native numbers in server actions and frontend state. Added UI interaction improvements to dropdown menus.
+-   **Day 14**: Implemented the Contact Management System for subaccounts, featuring a customer table with total value tracking and status badges. Polished the global InfoBar notification UI and improved the Switch component interactivity.
 
 ---
 

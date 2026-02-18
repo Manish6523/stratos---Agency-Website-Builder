@@ -73,18 +73,19 @@ export default function InfoBar({
               className="mt-4 mr-4 pr-4 pb-5 overflow-auto"
               showCloseButton={false}
             >
-              <SheetHeader className="text-left">
-                <SheetTitle>Notifications</SheetTitle>
-                <Separator />
-                <SheetDescription>
+                <SheetHeader className="text-left">
+                  <SheetTitle className="text-lg font-semibold">Notifications</SheetTitle>
+                  <Separator className="my-2" />
+                  <SheetDescription className="text-sm text-muted-foreground">
+                  Here you can view all your notifications.
+                  </SheetDescription>
                   {(role === "AGENCY_OWNER" || role === "AGENCY_ADMIN") && (
-                    <Card className="flex items-center justify-between p-4">
-                      Current Subaccount
-                      <Switch onCheckedChange={handleClick} />
-                    </Card>
+                  <div className="flex items-center justify-between p-4 bg-muted rounded-md">
+                    <span className="font-medium">Current Subaccount</span>
+                    <Switch onCheckedChange={handleClick} />
+                  </div>
                   )}
-                </SheetDescription>
-              </SheetHeader>
+                </SheetHeader>
 
               {allNotifications?.map((notification) => {
                 const [userName, action, details] =
