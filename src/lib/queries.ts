@@ -853,7 +853,11 @@ export const upsertTicket = async (
     },
   });
 
-  return response;
+  // Convert Decimal value to number for serialization
+  return {
+    ...response,
+    value: response.value ? Number(response.value) : null,
+  };
 };
 
 export const deleteTicket = async (ticketId: string) => {

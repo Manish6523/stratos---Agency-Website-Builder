@@ -45,7 +45,7 @@ import {Draggable} from 'react-beautiful-dnd'
 
 type Props = {
   setAllTickets: Dispatch<SetStateAction<TicketWithTags>>
-  ticket: TicketWithTags[0]
+  ticket: Omit<TicketWithTags[0], 'value'> & { value: number | null }
   subaccountId: string
   allTickets: TicketWithTags
   index: number
@@ -55,18 +55,29 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
   const router = useRouter()
   const { setOpen, data } = useModal()
 
-  const editNewTicket = (ticket: TicketWithTags[0]) => {
+  const editNewTicket = (newTicket: TicketWithTags[0]) => {
+    const sanitizedTicket = {
+      ...newTicket,
+      value: newTicket.value ? Number(newTicket.value) : null,
+    }
     setAllTickets((tickets) =>
       allTickets.map((t) => {
-        if (t.id === ticket.id) {
-          return ticket
+        if (t.id === newTicket.id) {
+          return sanitizedTicket as any
         }
         return t
-      })
+      }) as any
     )
   }
 
   const handleClickEdit = async () => {
+    const plainTicket = {
+      ...ticket,
+      value: ticket.value ? Number(ticket.value) : null,
+      Assigned: ticket.Assigned ? { ...ticket.Assigned } : null,
+      Customer: ticket.Customer ? { ...ticket.Customer } : null,
+      Tags: ticket.Tags ? ticket.Tags.map(tag => ({ ...tag })) : [],
+    }
     setOpen(
       <CustomModal
         title="Update Ticket Details"
@@ -79,7 +90,7 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
         />
       </CustomModal>,
       async () => {
-        return { ticket: ticket }
+        return { ticket: plainTicket }
       }
     )
   }
@@ -138,7 +149,7 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
                     <CardTitle className="flex items-center justify-between">
                       <span className="text-lg w-full">{ticket.name}</span>
                       <DropdownMenuTrigger>
-                        <MoreHorizontalIcon className="text-muted-foreground" />
+                        <MoreHorizontalIcon className="text-muted-foreground cursor-pointer" />
                       </DropdownMenuTrigger>
                     </CardTitle>
                     <span className="text-muted-foreground text-xs">

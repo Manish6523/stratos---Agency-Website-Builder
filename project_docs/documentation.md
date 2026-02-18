@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Friday, February 14, 2026
-**Version:** 0.9.0 (Beta)
+**Date:** Wednesday, February 18, 2026
+**Version:** 0.9.5 (Beta)
 
 ---
 
@@ -131,7 +131,7 @@ Encapsulated backend logic for security and reusability.
     -   **`deleteLane(laneId)`**: Removes a lane.
 -   **Ticket Management**:
     -   **`getTicketsWithTags(pipelineId)`**: Fetches all tickets for a pipeline with relations.
-    -   **`upsertTicket(ticket, tags)`**: Creates or updates a ticket with tag associations.
+    -   **`upsertTicket(ticket, tags)`**: Creates or updates a ticket with tag associations. Automatically converts Decimal values to numbers for seamless frontend serialization.
     -   **`updateTicketsOrder(tickets)`**: Batch updates ticket positions and lane assignments.
     -   **`deleteTicket(ticketId)`**: Permanently removes a ticket.
     -   **`searchContacts(searchTerms)`**: Searches contacts by name with fuzzy matching.
@@ -176,6 +176,7 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 -   **Day 10**: Implemented Pipeline & Kanban Board System with react-beautiful-dnd for drag-and-drop functionality. Built PipelineView, PipelineLane, and PipelineTicket components with real-time financial tracking and lane/ticket reordering.
 -   **Day 11**: Built comprehensive Ticket & Tag Management System with customer search, team member assignment, multi-select tag system with inline creation, and 5-color tag categorization. Implemented debounced contact search and tag creator component.
 -   **Day 12**: Implemented complete Funnel Management System with custom subdomain support, multi-page funnels, and Stripe product integration. Added funnel form with favicon upload. Performed code quality improvements: fixed loading page typo, changed media card aspect ratio, and converted to type-only imports.
+-   **Day 13**: Implemented the Subaccount Settings page for localized management of client details and user permissions. Resolved Prisma Decimal serialization issues across the Pipeline and Ticket systems by converting values to native numbers in server actions and frontend state. Added UI interaction improvements to dropdown menus.
 
 ---
 

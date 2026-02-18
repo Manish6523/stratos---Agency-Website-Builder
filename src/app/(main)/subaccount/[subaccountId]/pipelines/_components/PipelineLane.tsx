@@ -68,8 +68,9 @@ export default function PipelineLane({
 
   const randomColor = `#${Math.random().toString(16).slice(2, 8)}`;
 
-  const addNewTicket = (ticket: TicketWithTags[0]) => {
-    setAllTickets([...allTickets, ticket]);
+  const addNewTicket = (newTicket: TicketWithTags[0]) => {
+    const sanitizedTicket = { ...newTicket, value: newTicket.value ? Number(newTicket.value) : null };
+    setAllTickets([...allTickets, sanitizedTicket] as any);
   };
 
   const handleCreateTicket = () => {
@@ -185,7 +186,10 @@ export default function PipelineLane({
                               allTickets={allTickets}
                               setAllTickets={setAllTickets}
                               subaccountId={subaccountId}
-                              ticket={ticket}
+                              ticket={{
+                                ...ticket,
+                                value: ticket.value ? Number(ticket.value) : null,
+                              } as any}
                               key={ticket.id.toString()}
                               index={index}
                             />
