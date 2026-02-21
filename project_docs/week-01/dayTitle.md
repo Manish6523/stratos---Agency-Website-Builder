@@ -11,7 +11,8 @@
 ## Week 02
 - Day 9: Agency Analytics Dashboard & Media Management System
 - Day 10: Pipeline & Kanban Board System
--   Day 11: Ticket & Tag Management System
--   Day 12: Funnel Management System & Code Polish
--   Day 13: Subaccount Settings & Data Serialization
--   Day 14: Contact Management System & UI Polishing
+- Day 11: Ticket & Tag Management System
+- Day 12: Funnel Management System & Code Polish
+- Day 13: Subaccount Settings & Data Serialization
+- Day 14: Contact Management System & UI Polishing
+- Day 15: Razorpay Integration & Subscription System

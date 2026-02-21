@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Thursday, February 19, 2026
-**Version:** 0.9.6 (Beta)
+**Date:** Sunday, February 22, 2026
+**Version:** 1.0.0 (Beta)
 
 ---
 
@@ -21,8 +21,9 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Pipeline & Kanban Boards**: Drag-and-drop pipeline management with customizable lanes and tickets for sales/project tracking.
 - **Ticket System**: Comprehensive task management with customer assignment, team delegation, tag categorization, and value tracking.
 - **Tag Management**: Visual tag system with 5 color options for organizing tickets and content.
-- **Funnel Builder**: Marketing funnel creation with custom subdomains, multi-page support, and Stripe product integration.
-- **Contact Management**: (New) Centralized customer tracking with total value calculation, status badges, and activity logging.
+- **Funnel Builder**: Marketing funnel creation with custom subdomains, multi-page support, and Stripe/Razorpay integration.
+- **Contact Management**: Centralized customer tracking with total value calculation, status badges, and activity logging.
+- **Payment Infrastructure**: (New) Robust subscription and payment system integrated with **Razorpay**, supporting INR and multi-currency billing.
 - **Launchpad**: Onboarding checklist for new subaccounts to complete setup steps.
 - **Visual Page Building**: (In Progress) JSON-based page content structure prepared for drag-and-drop builder.
 
@@ -41,6 +42,7 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Drag & Drop**: React Beautiful DnD
 - **Authentication**: Clerk
 - **File Storage**: UploadThing
+- **Payment Processing**: Razorpay (Primary) & Stripe
 
 ### Folder Structure Overview
 
@@ -53,7 +55,7 @@ src/
 │   │   ├── agency/       # Agency dashboard & logic
 │   │   └── subaccount/   # Subaccount specific dashboard & logic
 │   ├── site/             # Public marketing website
-│   ├── api/              # API Routes (UploadThing, etc.)
+│   ├── api/              # API Routes (Razorpay, UploadThing, etc.)
 │   └── [domain]/         # Dynamic route for custom subdomains
 ├── components/           # Reusable UI components
 │   ├── global/           # App-wide components (e.g., ModeToggle, InfoBar)
@@ -64,6 +66,7 @@ src/
 ├── lib/                  # Backend utilities & configurations
 │   ├── db.ts             # Prisma Client singleton
 │   ├── queries.ts        # Server actions & DB queries
+│   ├── razorpay/         # Razorpay client & server actions
 │   └── constants.ts      # Static configuration data
 ├── middleware.ts         # (Located at src/proxy.ts) Auth & Routing middleware
 └── prisma/               # Database schema & migrations
@@ -103,9 +106,13 @@ The application uses **UploadThing** for handling file storage.
 -   **Endpoints**: Dedicated endpoints for `agencyLogo`, `subaccountLogo`, `avatar`, and generic `media`.
 -   **Security**: All upload routes are protected by a middleware that authenticates the user before processing files.
 
-### Global State (`src/providers/ModalProvider.tsx`)
+### Payment System (`src/lib/razorpay`)
 
-A React Context provider that manages the application's modal system. It allows any component to trigger a popup (with data fetching capabilities) without complex prop drilling, ensuring a seamless UI experience.
+The application integrates **Razorpay** for subscription management.
+
+-   **`subscriptionCreate()`**: Server action for creating/updating agency subscriptions in the database.
+-   **API Endpoints**: Dedicated routes for creating customers, checkout sessions, and managing subscriptions.
+-   **Pricing Logic**: Centralized configuration in `src/config/pricing.ts` supporting INR and multi-tier plans.
 
 ### Server Actions (`src/lib/queries.ts`)
 
@@ -144,7 +151,7 @@ Encapsulated backend logic for security and reusability.
 -   **Funnel Management**:
     -   **`getFunnel(funnelId)`**: Fetches a single funnel with ordered pages.
     -   **`getFunnels(subaccountId)`**: Retrieves all funnels for a subaccount with nested pages.
-    -   **`upsertFunnel(subaccountId, funnel, funnelId)`**: Creates or updates a funnel with Stripe integration.
+    -   **`upsertFunnel(subaccountId, funnel, funnelId)`**: Creates or updates a funnel with Stripe/Razorpay integration.
     -   **`upsertFunnelPage(subaccountId, funnelPage, funnelId)`**: Creates or updates a funnel page with default content structure.
     -   **`deleteFunnelPage(funnelPageId)`**: Permanently removes a funnel page.
     -   **`getDomainContent(subDomainName)`**: Fetches funnel by custom subdomain for public rendering.
@@ -179,6 +186,7 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 -   **Day 12**: Implemented complete Funnel Management System with custom subdomain support, multi-page funnels, and Stripe product integration. Added funnel form with favicon upload. Performed code quality improvements: fixed loading page typo, changed media card aspect ratio, and converted to type-only imports.
 -   **Day 13**: Implemented the Subaccount Settings page for localized management of client details and user permissions. Resolved Prisma Decimal serialization issues across the Pipeline and Ticket systems by converting values to native numbers in server actions and frontend state. Added UI interaction improvements to dropdown menus.
 -   **Day 14**: Implemented the Contact Management System for subaccounts, featuring a customer table with total value tracking and status badges. Polished the global InfoBar notification UI and improved the Switch component interactivity.
+-   **Day 15**: Implemented the Razorpay Payment & Subscription System, featuring multi-currency support (INR), centralized payment actions, and semantic plan management. Added robust logging and enhanced core utilities.
 
 ---
 

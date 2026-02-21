@@ -60,3 +60,45 @@ export type FunnelsForSubAccount = Prisma.PromiseReturnType<
 >[0]
 
 export type UpsertFunnelPage = Prisma.FunnelPageCreateWithoutFunnelInput
+
+export type ShippingAddress = {
+  city: string;
+  country: string;
+  line1: string;
+  postal_code: string;
+  state: string;
+};
+
+export type ShippingInfo = {
+  address: ShippingAddress;
+  name: string;
+  phone: string;
+};
+
+export type RazorpayCustomer = {
+  email: string;
+  name: string;
+  contact: string; // Required for Razorpay
+  shipping?: ShippingInfo;
+  address?: ShippingAddress;
+};
+
+export type StripeCustomer = RazorpayCustomer; 
+
+export type RazorpayPlanList = {
+  entity: string;
+  count: number;
+  items: any[]; // You can define a more specific 'Plan' type here
+};
+
+export type PriceList = RazorpayPlanList;
+
+// 3. PAYMENT METADATA
+// Useful for your Webhook and upsertSubscription action
+export type RazorpayPaymentMetadata = {
+  orderId: string;
+  paymentId: string;
+  signature: string;
+  agencyId: string;
+  planId: string;
+};
