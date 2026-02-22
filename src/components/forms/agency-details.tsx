@@ -111,48 +111,51 @@ export default function AgencyDetails({ data }: Props) {
         return;
       }
 
-      let customerId = data?.customerId;
+      let customerId = data?.customerId  || `free_${v4().slice(0,8)}`;
 
       // 2. CUSTOMER ID LOGIC (Razorpay Customer Creation)
       // Only create a new customer if this is a brand new agency (no data.id)
-      if (!data?.id) {
-        const bodyData = {
-          email: formData.companyEmail,
-          name: formData.name,
-          contact: formData.companyPhone, // Needed for Razorpay
-          shipping: {
-            address: {
-              city: formData.city,
-              country: formData.country,
-              line1: formData.address,
-              postal_code: formData.zipCode,
-              state: formData.state,
-            },
-            name: formData.name,
-          },
-          address: {
-            city: formData.city,
-            country: formData.country,
-            line1: formData.address,
-            postal_code: formData.zipCode,
-            state: formData.state,
-          },
-        };
+      // if (!data?.id) {
 
-        const customerResponse = await fetch("/api/razorpay/create-customer", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(bodyData),
-        });
+      //   const bodyData = {
+      //     email: formData.companyEmail,
+      //     name: formData.name,
+      //     contact: formData.companyPhone,
+      //     address: {
+      //       line1: formData.address,
+      //       city: formData.city,
+      //       state: formData.state,
+      //       postal_code: formData.zipCode,
+      //       country: formData.country,
+      //     },
+      //     shipping: {
+      //       name: formData.name,
+      //       address: {
+      //         line1: formData.address,
+      //         city: formData.city,
+      //         state: formData.state,
+      //         postal_code: formData.zipCode,
+      //         country: formData.country,
+      //       },
+      //     },
+      //   };
 
-        if (!customerResponse.ok) {
-          throw new Error("Failed to create billing customer");
-        }
+      //   const customerResponse = await fetch("/api/razorpay/create-customer", {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify(bodyData),
+      //   });
 
-        const customerData: { customerId: string } =
-          await customerResponse.json();
-        customerId = customerData.customerId;
-      }
+      //   console.log("Customer Creation Response: ", customerResponse);
+
+      //   if (!customerResponse.ok) {
+      //     throw new Error("Failed to create billing customer");
+      //   }
+
+      //   const customerData: { customerId: string } =
+      //     await customerResponse.json();
+      //   customerId = customerData.customerId;
+      // }
 
       await initUser({ role: "AGENCY_OWNER" });
 
@@ -164,7 +167,8 @@ export default function AgencyDetails({ data }: Props) {
       // 3. UPSERT AGENCY
       const agencyData = {
         id: data?.id ? data.id : v4(),
-        customerId: "COMMUNITY_USER",
+        // customerId: "COMMUNITY_USER",
+        customerId: customerId,
         name: formData.name.trim(),
         address: formData.address.trim(),
         agencyLogo: formData.agencyLogo.trim(),

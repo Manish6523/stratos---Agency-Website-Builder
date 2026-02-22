@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import CustomModal from "@/components/global/custom-modal";
 import CreatePipelineForm from "@/components/forms/CreatePipelineForm";
-import { Pipeline } from "../../../../../../../generated/prisma";
+import { Pipeline } from "../../../../../../../generated/prisma/client";
 
 type Props = {
   pipelineId: string;
