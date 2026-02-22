@@ -421,6 +421,20 @@ export const getNotificationAndUser = async (agencyId: string) => {
   }
 };
 
+export const getAgencySubscription = async (agencyId: string) => {
+  const agencySubscription = await db.agency.findUnique({
+    where: {
+      id: agencyId,
+    },
+    select: {
+      customerId: true,
+      Subscription: true,
+    },
+  });
+
+  return agencySubscription;
+};
+
 export const upsertSubAccount = async (subAccount: SubAccount) => {
   if (!subAccount.companyEmail) return null;
 

@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Sunday, February 22, 2026
-**Version:** 1.0.0 (Beta)
+**Date:** Monday, February 23, 2026
+**Version:** 1.1.0 (Beta)
 
 ---
 
@@ -23,8 +23,9 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Tag Management**: Visual tag system with 5 color options for organizing tickets and content.
 - **Funnel Builder**: Marketing funnel creation with custom subdomains, multi-page support, and Stripe/Razorpay integration.
 - **Contact Management**: Centralized customer tracking with total value calculation, status badges, and activity logging.
-- **Payment Infrastructure**: (New) Robust subscription and payment system integrated with **Razorpay**, supporting INR and multi-currency billing.
+- **Payment Infrastructure**: Robust subscription system with **Razorpay** support and a newly implemented **Open-Access Billing** model for frictionless onboarding.
 - **Launchpad**: Onboarding checklist for new subaccounts to complete setup steps.
+- **Dynamic Navigation**: Context-aware UI headers in the global InfoBar that adapt based on the user's current section.
 - **Visual Page Building**: (In Progress) JSON-based page content structure prepared for drag-and-drop builder.
 
 ---
@@ -187,6 +188,7 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 -   **Day 13**: Implemented the Subaccount Settings page for localized management of client details and user permissions. Resolved Prisma Decimal serialization issues across the Pipeline and Ticket systems by converting values to native numbers in server actions and frontend state. Added UI interaction improvements to dropdown menus.
 -   **Day 14**: Implemented the Contact Management System for subaccounts, featuring a customer table with total value tracking and status badges. Polished the global InfoBar notification UI and improved the Switch component interactivity.
 -   **Day 15**: Implemented the Razorpay Payment & Subscription System, featuring multi-currency support (INR), centralized payment actions, and semantic plan management. Added robust logging and enhanced core utilities.
+-   **Day 16**: Implemented the Open-Access Billing System and dynamic navigation UI. Pivoted to a frictionless onboarding model and enhanced the global InfoBar with context-aware section headers.
 
 ---
 

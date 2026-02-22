@@ -164,7 +164,7 @@ export default function AgencyDetails({ data }: Props) {
       // 3. UPSERT AGENCY
       const agencyData = {
         id: data?.id ? data.id : v4(),
-        customerId: customerId,
+        customerId: "COMMUNITY_USER",
         name: formData.name.trim(),
         address: formData.address.trim(),
         agencyLogo: formData.agencyLogo.trim(),

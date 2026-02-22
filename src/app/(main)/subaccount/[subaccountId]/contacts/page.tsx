@@ -64,7 +64,7 @@ export default async function SubaccountContactsPage({ params }: Props) {
   }
   return (
     <BlurPage>
-      <h1 className="text-4xl p-4">Contacts</h1>
+      <h1 className="text-4xl md:hidden p-4">Contacts</h1>
       <CraeteContactButton subaccountId={subaccountId} />
       <Table>
         <TableHeader>

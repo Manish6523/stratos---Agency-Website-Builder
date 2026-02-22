@@ -19,6 +19,7 @@ import { Separator } from "../ui/separator";
 import { Role } from "../../../generated/prisma";
 import Userbutton from "./user-button";
 import { Button } from "../ui/button";
+import { usePathname } from "next/navigation";
 
 type Props = {
   notifications: NotificationWithUser | [];
@@ -35,6 +36,7 @@ export default function InfoBar({
 }: Props) {
   const [allNotifications, setAllNotifications] = useState(notifications);
   const [showAll, setShowAll] = useState(true);
+  const path = usePathname();
 
   function handleClick() {
     if (!showAll) setAllNotifications(notifications);
@@ -57,6 +59,12 @@ export default function InfoBar({
           className,
         )}
       >
+        <h1 className="text-2xl font-bold hidden md:block">
+          {path.split("/")[3]
+            ? path.split("/")[3].charAt(0).toUpperCase() +
+              path.split("/")[3].slice(1)
+            : "Dashboard"}
+        </h1>
         <div className="flex items-center gap-2 ml-auto">
           <Userbutton />
           <Sheet>
@@ -73,19 +81,21 @@ export default function InfoBar({
               className="mt-4 mr-4 pr-4 pb-5 overflow-auto"
               showCloseButton={false}
             >
-                <SheetHeader className="text-left">
-                  <SheetTitle className="text-lg font-semibold">Notifications</SheetTitle>
-                  <Separator className="my-2" />
-                  <SheetDescription className="text-sm text-muted-foreground">
+              <SheetHeader className="text-left">
+                <SheetTitle className="text-lg font-semibold">
+                  Notifications
+                </SheetTitle>
+                <Separator className="my-2" />
+                <SheetDescription className="text-sm text-muted-foreground">
                   Here you can view all your notifications.
-                  </SheetDescription>
-                  {(role === "AGENCY_OWNER" || role === "AGENCY_ADMIN") && (
+                </SheetDescription>
+                {(role === "AGENCY_OWNER" || role === "AGENCY_ADMIN") && (
                   <div className="flex items-center justify-between p-4 bg-muted rounded-md">
                     <span className="font-medium">Current Subaccount</span>
                     <Switch onCheckedChange={handleClick} />
                   </div>
-                  )}
-                </SheetHeader>
+                )}
+              </SheetHeader>
 
               {allNotifications?.map((notification) => {
                 const [userName, action, details] =
