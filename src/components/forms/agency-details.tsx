@@ -32,7 +32,7 @@ import { v4 } from "uuid";
 import { toast } from "sonner";
 import FileUpload from "../global/file-upload";
 import { NumberInput } from "@tremor/react";
-import { Switch } from "../ui/switch"; // Import Switch
+import { Switch } from "../ui/switch";
 
 type AgencyData = {
   id?: string;
@@ -58,7 +58,7 @@ export default function AgencyDetails({ data }: Props) {
   const router = useRouter();
   const [isDeletingAgency, startDeletingAgency] = useTransition();
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     name: data?.name || "",
     companyEmail: data?.companyEmail || "",
@@ -91,10 +91,7 @@ export default function AgencyDetails({ data }: Props) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -102,23 +99,72 @@ export default function AgencyDetails({ data }: Props) {
     setIsLoading(true);
 
     try {
-      // Validate required fields
+      // 1. Basic Validation
       if (!formData.name || formData.name.trim().length < 2) {
         toast.error("Agency name must be at least 2 characters");
         setIsLoading(false);
         return;
       }
-      if (!formData.agencyLogo || formData.agencyLogo.trim() === "") {
+      if (!formData.agencyLogo) {
         toast.error("Please upload an agency logo");
         setIsLoading(false);
         return;
       }
 
+      let customerId = data?.customerId;
+
+      // 2. CUSTOMER ID LOGIC (Razorpay Customer Creation)
+      // Only create a new customer if this is a brand new agency (no data.id)
+      if (!data?.id) {
+        const bodyData = {
+          email: formData.companyEmail,
+          name: formData.name,
+          contact: formData.companyPhone, // Needed for Razorpay
+          shipping: {
+            address: {
+              city: formData.city,
+              country: formData.country,
+              line1: formData.address,
+              postal_code: formData.zipCode,
+              state: formData.state,
+            },
+            name: formData.name,
+          },
+          address: {
+            city: formData.city,
+            country: formData.country,
+            line1: formData.address,
+            postal_code: formData.zipCode,
+            state: formData.state,
+          },
+        };
+
+        const customerResponse = await fetch("/api/razorpay/create-customer", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bodyData),
+        });
+
+        if (!customerResponse.ok) {
+          throw new Error("Failed to create billing customer");
+        }
+
+        const customerData: { customerId: string } =
+          await customerResponse.json();
+        customerId = customerData.customerId;
+      }
+
       await initUser({ role: "AGENCY_OWNER" });
 
+      // Ensure we have a customerId before proceeding
+      if (!customerId) {
+        throw new Error("No Customer ID found");
+      }
+
+      // 3. UPSERT AGENCY
       const agencyData = {
         id: data?.id ? data.id : v4(),
-        customerId: data?.customerId || "",
+        customerId: customerId,
         name: formData.name.trim(),
         address: formData.address.trim(),
         agencyLogo: formData.agencyLogo.trim(),
@@ -142,8 +188,8 @@ export default function AgencyDetails({ data }: Props) {
         router.refresh();
       }
     } catch (e) {
-      console.log("ERROR: ", e);
-      toast.error("Could not save your agency");
+      console.error("ERROR: ", e);
+      toast.error("Could not save your agency. Please check your details.");
     } finally {
       setIsLoading(false);
     }
@@ -177,17 +223,26 @@ export default function AgencyDetails({ data }: Props) {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Agency Logo</label>
+              <label className="block text-sm font-medium mb-2">
+                Agency Logo
+              </label>
               <FileUpload
                 apiEndpoint="agencyLogo"
-                onChange={(value) => setFormData(prev => ({ ...prev, agencyLogo: value || '' }))}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, agencyLogo: value || "" }))
+                }
                 value={formData.agencyLogo}
               />
             </div>
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label htmlFor="name" className="block text-sm font-medium mb-2">Agency Name</label>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium mb-2"
+                >
+                  Agency Name
+                </label>
                 <input
                   id="name"
                   name="name"
@@ -201,7 +256,12 @@ export default function AgencyDetails({ data }: Props) {
                 />
               </div>
               <div className="flex-1">
-                <label htmlFor="companyEmail" className="block text-sm font-medium mb-2">Agency Email</label>
+                <label
+                  htmlFor="companyEmail"
+                  className="block text-sm font-medium mb-2"
+                >
+                  Agency Email
+                </label>
                 <input
                   id="companyEmail"
                   name="companyEmail"
@@ -214,7 +274,12 @@ export default function AgencyDetails({ data }: Props) {
             </div>
 
             <div>
-              <label htmlFor="companyPhone" className="block text-sm font-medium mb-2">Agency Phone Number</label>
+              <label
+                htmlFor="companyPhone"
+                className="block text-sm font-medium mb-2"
+              >
+                Agency Phone Number
+              </label>
               <input
                 id="companyPhone"
                 name="companyPhone"
@@ -231,7 +296,10 @@ export default function AgencyDetails({ data }: Props) {
             {/* WHITELABEL SWITCH SECTION */}
             <div className="flex flex-row items-center justify-between rounded-lg border p-4">
               <div className="flex flex-col gap-1">
-                <label htmlFor="whiteLabel" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                <label
+                  htmlFor="whiteLabel"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
                   Whitelabel Agency
                 </label>
                 <p className="text-sm text-muted-foreground">
@@ -241,13 +309,20 @@ export default function AgencyDetails({ data }: Props) {
               <Switch
                 id="whiteLabel"
                 checked={formData.whiteLabel}
-                onCheckedChange={(checked) => setFormData(prev => ({ ...prev, whiteLabel: checked }))}
+                onCheckedChange={(checked) =>
+                  setFormData((prev) => ({ ...prev, whiteLabel: checked }))
+                }
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label htmlFor="address" className="block text-sm font-medium mb-2">Address</label>
+              <label
+                htmlFor="address"
+                className="block text-sm font-medium mb-2"
+              >
+                Address
+              </label>
               <input
                 id="address"
                 name="address"
@@ -263,28 +338,81 @@ export default function AgencyDetails({ data }: Props) {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label htmlFor="city" className="block text-sm font-medium mb-2">City</label>
-                <input id="city" name="city" type="text" value={formData.city} onChange={handleChange} required className="w-full px-3 py-2 border border-input bg-background rounded-md" />
+                <label
+                  htmlFor="city"
+                  className="block text-sm font-medium mb-2"
+                >
+                  City
+                </label>
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-input bg-background rounded-md"
+                />
               </div>
               <div className="flex-1">
-                <label htmlFor="state" className="block text-sm font-medium mb-2">State</label>
-                <input id="state" name="state" type="text" value={formData.state} onChange={handleChange} required className="w-full px-3 py-2 border border-input bg-background rounded-md" />
+                <label
+                  htmlFor="state"
+                  className="block text-sm font-medium mb-2"
+                >
+                  State
+                </label>
+                <input
+                  id="state"
+                  name="state"
+                  type="text"
+                  value={formData.state}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-input bg-background rounded-md"
+                />
               </div>
               <div className="flex-1">
-                <label htmlFor="zipCode" className="block text-sm font-medium mb-2">Zipcode</label>
-                <input id="zipCode" name="zipCode" type="text" value={formData.zipCode} onChange={handleChange} required className="w-full px-3 py-2 border border-input bg-background rounded-md" />
+                <label
+                  htmlFor="zipCode"
+                  className="block text-sm font-medium mb-2"
+                >
+                  Zipcode
+                </label>
+                <input
+                  id="zipCode"
+                  name="zipCode"
+                  type="text"
+                  value={formData.zipCode}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-input bg-background rounded-md"
+                />
               </div>
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="country" className="block text-sm font-medium">Country</label>
-              <input id="country" name="country" type="text" value={formData.country} onChange={handleChange} required className="w-full px-3 py-2 border border-input bg-background rounded-md" />
+              <label htmlFor="country" className="block text-sm font-medium">
+                Country
+              </label>
+              <input
+                id="country"
+                name="country"
+                type="text"
+                value={formData.country}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-input bg-background rounded-md"
+              />
             </div>
 
             {data?.id && (
               <div className="flex flex-col gap-2 pt-4">
-                <label className="block text-sm font-medium">Create A Goal</label>
-                <p className="text-sm text-muted-foreground">✨ Set your sub-account growth targets.</p>
+                <label className="block text-sm font-medium">
+                  Create A Goal
+                </label>
+                <p className="text-sm text-muted-foreground">
+                  ✨ Set your sub-account growth targets.
+                </p>
                 <NumberInput
                   defaultValue={data?.goal}
                   onValueChange={async (val) => {
@@ -303,7 +431,11 @@ export default function AgencyDetails({ data }: Props) {
               </div>
             )}
 
-            <Button type="submit" disabled={isLoading} className="w-full md:w-max">
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full md:w-max"
+            >
               {isLoading ? <Loading /> : "Save Agency Information"}
             </Button>
           </form>
@@ -313,7 +445,8 @@ export default function AgencyDetails({ data }: Props) {
               <div className="flex flex-col gap-1">
                 <div className="font-bold text-destructive">Danger Zone</div>
                 <div className="text-muted-foreground text-sm">
-                  Deleting your agency cannot be undone. All subaccount data will be lost.
+                  Deleting your agency cannot be undone. All subaccount data
+                  will be lost.
                 </div>
               </div>
               <AlertDialogTrigger
@@ -329,7 +462,8 @@ export default function AgencyDetails({ data }: Props) {
             <AlertDialogHeader>
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete the Agency and all sub accounts.
+                This action cannot be undone. This will permanently delete the
+                Agency and all sub accounts.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
