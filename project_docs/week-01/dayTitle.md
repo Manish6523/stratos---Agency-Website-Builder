@@ -17,3 +17,7 @@
 - Day 14: Contact Management System & UI Polishing
 - Day 15: Razorpay Integration & Subscription System
 - Day 16: Open-Access Billing & Dynamic Navigation UI
+
+## Week 03
+- Day 17: Infrastructure Fixes & Prisma Optimization
+- Day 18: Funnel Management Expansion & UI Refinement

@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Monday, February 23, 2026
-**Version:** 1.1.0 (Beta)
+**Date:** Tuesday, February 24, 2026
+**Version:** 1.2.0 (Beta)
 
 ---
 
@@ -189,6 +189,10 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 -   **Day 14**: Implemented the Contact Management System for subaccounts, featuring a customer table with total value tracking and status badges. Polished the global InfoBar notification UI and improved the Switch component interactivity.
 -   **Day 15**: Implemented the Razorpay Payment & Subscription System, featuring multi-currency support (INR), centralized payment actions, and semantic plan management. Added robust logging and enhanced core utilities.
 -   **Day 16**: Implemented the Open-Access Billing System and dynamic navigation UI. Pivoted to a frictionless onboarding model and enhanced the global InfoBar with context-aware section headers.
+
+### Week 03
+-   **Day 17**: Performed critical Prisma infrastructure fixes following client regeneration and simplified the agency onboarding logic with fallback mechanisms.
+-   **Day 18**: Expanded the Funnel Management system with dedicated list views and editor routing. Overhauled the Theme Switcher for hydration safety and enhanced the global type system.
 
 ---
 
