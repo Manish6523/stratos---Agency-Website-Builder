@@ -1,5 +1,14 @@
-import type { Contact, Lane, Notification, Prisma, Role, Tag, Ticket, User } from "../../generated/prisma"
+import { z } from "zod";
+import type { Contact, Lane, Notification, Prisma, Role, Tag, Ticket, User } from "../../generated/prisma/client"
 import type { _getTicketsWithAllRelations, getAuthUserDetails, getFunnels, getMedia, getPipelineDetails, getTicketsWithTags, getUserPermissions } from "./queries"
+
+export type PromiseReturnType<T extends (...args: any) => any> = T extends (
+  ...args: any
+) => Promise<infer R>
+  ? R
+  : T extends (...args: any) => infer R
+  ? R
+  : never
 
 export type NotificationWithUser =
   | ({
@@ -16,19 +25,19 @@ export type NotificationWithUser =
   } & Notification)[]
   | undefined
 
-export type UserWithPermissionsAndSubAccounts = Prisma.PromiseReturnType<
+export type UserWithPermissionsAndSubAccounts = PromiseReturnType<
   typeof getUserPermissions
 >
 
 
 export type AuthUserWithAgencySidebarOptionsSubAccounts =
-  Prisma.PromiseReturnType<typeof getAuthUserDetails>
+  PromiseReturnType<typeof getAuthUserDetails>
 
 export type UsersWithAgencySubAccountPermissionsSidebarOptions =
-  Prisma.PromiseReturnType<typeof getUserPermissions>
+  PromiseReturnType<typeof getUserPermissions>
 
 
-export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>
+export type GetMediaFiles = PromiseReturnType<typeof getMedia>
 
 export type CreateMediaType = Prisma.MediaCreateWithoutSubaccountInput
 
@@ -42,20 +51,20 @@ export type LaneDetail = Lane & {
   Tickets: TicketAndTags[]
 }
 
-export type PipelineDetailsWithLanesCardsTagsTickets = Prisma.PromiseReturnType<
+export type PipelineDetailsWithLanesCardsTagsTickets = PromiseReturnType<
   typeof getPipelineDetails
 >
 
-export type TicketWithTags = Prisma.PromiseReturnType<typeof getTicketsWithTags>
+export type TicketWithTags = PromiseReturnType<typeof getTicketsWithTags>
 
-export type TicketDetails = Prisma.PromiseReturnType<
+export type TicketDetails = PromiseReturnType<
   typeof _getTicketsWithAllRelations
 >
 
 export const currencyNumberRegex = /^\d+(\.\d{1,2})?$/
 
 
-export type FunnelsForSubAccount = Prisma.PromiseReturnType<
+export type FunnelsForSubAccount = PromiseReturnType<
   typeof getFunnels
 >[0]
 
@@ -102,3 +111,13 @@ export type RazorpayPaymentMetadata = {
   agencyId: string;
   planId: string;
 };
+
+
+export const FunnelDetailsValidator = z.object({
+  name: z.string().min(1),
+  description: z.string(),
+  subDomainName: z.string().optional(),
+  favicon: z.string().optional(),
+});
+
+export type FunnelDetailsSchema = z.infer<typeof FunnelDetailsValidator>;

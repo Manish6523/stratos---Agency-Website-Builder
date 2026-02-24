@@ -16,7 +16,7 @@ import { Switch } from "../ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ModeToggle } from "./mode-toggle";
 import { Separator } from "../ui/separator";
-import { Role } from "../../../generated/prisma";
+import { Role } from "../../../generated/prisma/client";
 import Userbutton from "./user-button";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
@@ -70,7 +70,7 @@ export default function InfoBar({
           <Sheet>
             <SheetTrigger asChild>
               <Button
-                size={"icon"}
+                size={"icon-sm"}
                 variant={"default"}
                 className="rounded-full"
               >

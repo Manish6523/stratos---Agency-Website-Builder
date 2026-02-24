@@ -4,7 +4,7 @@ import { db } from "./db";
 import { v4 } from "uuid";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { FunnelFormSchema } from "@/components/forms/funnel-form";
+import { FunnelFormSchema } from "@/components/forms/funnel-details";
 
 import {
   Agency,
@@ -17,7 +17,11 @@ import {
   Ticket,
   User,
 } from "../../generated/prisma/client";
-import { CreateMediaType, UpsertFunnelPage } from "./types";
+import {
+  CreateMediaType,
+  FunnelDetailsSchema,
+  UpsertFunnelPage,
+} from "./types";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 
@@ -939,13 +943,7 @@ export const getFunnel = async (funnelId: string) => {
 export const getFunnels = async (subaccountId: string) => {
   const funnels = await db.funnel.findMany({
     where: { subAccountId: subaccountId },
-    include: {
-      FunnelPages: {
-        orderBy: {
-          order: "asc",
-        },
-      },
-    },
+    include: { FunnelPages: true },
   });
 
   return funnels;
@@ -956,16 +954,27 @@ export const upsertFunnel = async (
   funnel: z.infer<typeof FunnelFormSchema> & { liveProducts: string },
   funnelId: string,
 ) => {
+  const { name, description, subDomainName, favicon } = funnel;
+  
   const response = await db.funnel.upsert({
     where: { id: funnelId },
-    update: funnel,
+    update: {
+      name,
+      description,
+      subDomainName,
+      favicon,
+      liveProducts: funnel.liveProducts,
+    },
     create: {
-      ...funnel,
-      id: funnelId || v4(),
+      id: funnelId,
+      name,
+      description,
+      subDomainName,
+      favicon,
       subAccountId: subaccountId,
+      liveProducts: funnel.liveProducts,
     },
   });
-
   return response;
 };
 
