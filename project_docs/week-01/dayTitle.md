@@ -1,4 +1,5 @@
 ## Week 01
+
 - Day 1: Project Setup & Auth
 - Day 2: Site Structure & Theming
 - Day 3: Database, Backend, Middleware & Agency Logic
@@ -9,6 +10,7 @@
 - Day 8: Team Management & Invitation System
 
 ## Week 02
+
 - Day 9: Agency Analytics Dashboard & Media Management System
 - Day 10: Pipeline & Kanban Board System
 - Day 11: Ticket & Tag Management System
@@ -19,5 +21,7 @@
 - Day 16: Open-Access Billing & Dynamic Navigation UI
 
 ## Week 03
+
 - Day 17: Infrastructure Fixes & Prisma Optimization
 - Day 18: Funnel Management Expansion & UI Refinement
+- Day 19: Funnel Page Form Refactor & DnD Fixes

@@ -1007,6 +1007,22 @@ export const upsertFunnelPage = async (
   return response;
 };
 
+export const updateFunnelProducts = async (
+  products: string,
+  funnelId: string
+) => {
+  const response = await db.funnel.update({
+    where: {
+      id: funnelId,
+    },
+    data: {
+      liveProducts: products,
+    },
+  });
+
+  return response;
+};
+
 export const deleteFunnelPage = async (funnelPageId: string) => {
   const response = await db.funnelPage.delete({ where: { id: funnelPageId } });
 

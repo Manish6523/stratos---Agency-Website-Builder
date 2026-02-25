@@ -10,7 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { Bell } from "lucide-react";
+import { Bell, RefreshCcw } from "lucide-react";
 import { Card } from "../ui/card";
 import { Switch } from "../ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -19,7 +19,7 @@ import { Separator } from "../ui/separator";
 import { Role } from "../../../generated/prisma/client";
 import Userbutton from "./user-button";
 import { Button } from "../ui/button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
   notifications: NotificationWithUser | [];
@@ -37,6 +37,7 @@ export default function InfoBar({
   const [allNotifications, setAllNotifications] = useState(notifications);
   const [showAll, setShowAll] = useState(true);
   const path = usePathname();
+  const router = useRouter()
 
   function handleClick() {
     if (!showAll) setAllNotifications(notifications);
@@ -66,6 +67,14 @@ export default function InfoBar({
             : "Dashboard"}
         </h1>
         <div className="flex items-center gap-2 ml-auto">
+          <Button
+                size={"icon-sm"}
+                variant={"default"}
+                className="rounded-full"
+                onClick={()=>{router.refresh()}}
+              >
+                <RefreshCcw size={17} />
+              </Button>
           <Userbutton />
           <Sheet>
             <SheetTrigger asChild>

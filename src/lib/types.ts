@@ -121,3 +121,13 @@ export const FunnelDetailsValidator = z.object({
 });
 
 export type FunnelDetailsSchema = z.infer<typeof FunnelDetailsValidator>;
+
+
+export const FunnelPageDetailsValidator = z.object({
+  name: z.string().min(1),
+  pathName: z.string().optional(),
+});
+
+export type FunnelPageDetailsSchema = z.infer<
+  typeof FunnelPageDetailsValidator
+>;

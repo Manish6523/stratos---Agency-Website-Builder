@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Tuesday, February 24, 2026
-**Version:** 1.2.0 (Beta)
+**Date:** Tuesday, February 25, 2026
+**Version:** 1.2.1 (Beta)
 
 ---
 
@@ -104,65 +104,65 @@ The application's "traffic controller". It handles:
 
 The application uses **UploadThing** for handling file storage.
 
--   **Endpoints**: Dedicated endpoints for `agencyLogo`, `subaccountLogo`, `avatar`, and generic `media`.
--   **Security**: All upload routes are protected by a middleware that authenticates the user before processing files.
+- **Endpoints**: Dedicated endpoints for `agencyLogo`, `subaccountLogo`, `avatar`, and generic `media`.
+- **Security**: All upload routes are protected by a middleware that authenticates the user before processing files.
 
 ### Payment System (`src/lib/razorpay`)
 
 The application integrates **Razorpay** for subscription management.
 
--   **`subscriptionCreate()`**: Server action for creating/updating agency subscriptions in the database.
--   **API Endpoints**: Dedicated routes for creating customers, checkout sessions, and managing subscriptions.
--   **Pricing Logic**: Centralized configuration in `src/config/pricing.ts` supporting INR and multi-tier plans.
+- **`subscriptionCreate()`**: Server action for creating/updating agency subscriptions in the database.
+- **API Endpoints**: Dedicated routes for creating customers, checkout sessions, and managing subscriptions.
+- **Pricing Logic**: Centralized configuration in `src/config/pricing.ts` supporting INR and multi-tier plans.
 
 ### Server Actions (`src/lib/queries.ts`)
 
 Encapsulated backend logic for security and reusability.
 
--   **`getAuthUserDetails()`**: Retrieves the currently logged-in user's profile from the database, expanding their relations (Agency, SidebarOptions).
--   **`verifyAndAcceptInvitation()`**: Critical logic that runs when a user logs in. It checks if they have a pending invitation to an agency and links them automatically if they do.
--   **`sendInvitation()`**: Backend logic for creating and tracking user invitations by email.
--   **`upsertAgency()`**: Handles the creation and update of Agency details, automatically generating default sidebar options and linking the owner.
--   **`upsertSubAccount()`**: Creates/Updates subaccounts. It intelligently initializes the subaccount with default Sidebar Options, a "Lead Cycle" pipeline, and grants access to the Agency Owner.
--   **`saveActivityLogsNotification()`**: Centralized logging function that records user actions (e.g., "Updated Subaccount") to the Notification table for audit trails.
--   **`initUser()`**: Syncs the Clerk user with the local database and persists roles.
--   **`getMedia(subaccountId)`**: Fetches all media files associated with a specific subaccount.
--   **`createMedia(subaccountId, mediaFile)`**: Creates a new media entry in the database.
--   **`deleteMedia(mediaId)`**: Permanently removes a media file from the database.
--   **Pipeline Management**:
-    -   **`getPipelineDetails(pipelineId)`**: Fetches a single pipeline by ID.
-    -   **`getPipelines(subaccountId)`**: Retrieves all pipelines for a subaccount with nested lanes and tickets.
-    -   **`upsertPipeline(pipeline)`**: Creates or updates a pipeline.
-    -   **`deletePipeline(pipelineId)`**: Permanently removes a pipeline.
-    -   **`getLanesWithTicketAndTags(pipelineId)`**: Fetches all lanes with nested tickets, tags, and relations.
-    -   **`upsertLane(lane)`**: Creates or updates a lane with auto-calculated order.
-    -   **`updateLanesOrder(lanes)`**: Batch updates lane positions after drag-and-drop.
-    -   **`deleteLane(laneId)`**: Removes a lane.
--   **Ticket Management**:
-    -   **`getTicketsWithTags(pipelineId)`**: Fetches all tickets for a pipeline with relations.
-    -   **`upsertTicket(ticket, tags)`**: Creates or updates a ticket with tag associations. Automatically converts Decimal values to numbers for seamless frontend serialization.
-    -   **`updateTicketsOrder(tickets)`**: Batch updates ticket positions and lane assignments.
-    -   **`deleteTicket(ticketId)`**: Permanently removes a ticket.
-    -   **`searchContacts(searchTerms)`**: Searches contacts by name with fuzzy matching.
-    -   **`getSubAccountTeamMembers(subaccountId)`**: Fetches team members with subaccount access.
--   **Tag System**:
-    -   **`upsertTag(subaccountId, tag)`**: Creates or updates a tag for a subaccount.
-    -   **`deleteTag(tagId)`**: Permanently removes a tag.
-    -   **`getTagsForSubaccount(subaccountId)`**: Fetches all tags for a subaccount.
--   **Funnel Management**:
-    -   **`getFunnel(funnelId)`**: Fetches a single funnel with ordered pages.
-    -   **`getFunnels(subaccountId)`**: Retrieves all funnels for a subaccount with nested pages.
-    -   **`upsertFunnel(subaccountId, funnel, funnelId)`**: Creates or updates a funnel with Stripe/Razorpay integration.
-    -   **`upsertFunnelPage(subaccountId, funnelPage, funnelId)`**: Creates or updates a funnel page with default content structure.
-    -   **`deleteFunnelPage(funnelPageId)`**: Permanently removes a funnel page.
-    -   **`getDomainContent(subDomainName)`**: Fetches funnel by custom subdomain for public rendering.
+- **`getAuthUserDetails()`**: Retrieves the currently logged-in user's profile from the database, expanding their relations (Agency, SidebarOptions).
+- **`verifyAndAcceptInvitation()`**: Critical logic that runs when a user logs in. It checks if they have a pending invitation to an agency and links them automatically if they do.
+- **`sendInvitation()`**: Backend logic for creating and tracking user invitations by email.
+- **`upsertAgency()`**: Handles the creation and update of Agency details, automatically generating default sidebar options and linking the owner.
+- **`upsertSubAccount()`**: Creates/Updates subaccounts. It intelligently initializes the subaccount with default Sidebar Options, a "Lead Cycle" pipeline, and grants access to the Agency Owner.
+- **`saveActivityLogsNotification()`**: Centralized logging function that records user actions (e.g., "Updated Subaccount") to the Notification table for audit trails.
+- **`initUser()`**: Syncs the Clerk user with the local database and persists roles.
+- **`getMedia(subaccountId)`**: Fetches all media files associated with a specific subaccount.
+- **`createMedia(subaccountId, mediaFile)`**: Creates a new media entry in the database.
+- **`deleteMedia(mediaId)`**: Permanently removes a media file from the database.
+- **Pipeline Management**:
+  - **`getPipelineDetails(pipelineId)`**: Fetches a single pipeline by ID.
+  - **`getPipelines(subaccountId)`**: Retrieves all pipelines for a subaccount with nested lanes and tickets.
+  - **`upsertPipeline(pipeline)`**: Creates or updates a pipeline.
+  - **`deletePipeline(pipelineId)`**: Permanently removes a pipeline.
+  - **`getLanesWithTicketAndTags(pipelineId)`**: Fetches all lanes with nested tickets, tags, and relations.
+  - **`upsertLane(lane)`**: Creates or updates a lane with auto-calculated order.
+  - **`updateLanesOrder(lanes)`**: Batch updates lane positions after drag-and-drop.
+  - **`deleteLane(laneId)`**: Removes a lane.
+- **Ticket Management**:
+  - **`getTicketsWithTags(pipelineId)`**: Fetches all tickets for a pipeline with relations.
+  - **`upsertTicket(ticket, tags)`**: Creates or updates a ticket with tag associations. Automatically converts Decimal values to numbers for seamless frontend serialization.
+  - **`updateTicketsOrder(tickets)`**: Batch updates ticket positions and lane assignments.
+  - **`deleteTicket(ticketId)`**: Permanently removes a ticket.
+  - **`searchContacts(searchTerms)`**: Searches contacts by name with fuzzy matching.
+  - **`getSubAccountTeamMembers(subaccountId)`**: Fetches team members with subaccount access.
+- **Tag System**:
+  - **`upsertTag(subaccountId, tag)`**: Creates or updates a tag for a subaccount.
+  - **`deleteTag(tagId)`**: Permanently removes a tag.
+  - **`getTagsForSubaccount(subaccountId)`**: Fetches all tags for a subaccount.
+- **Funnel Management**:
+  - **`getFunnel(funnelId)`**: Fetches a single funnel with ordered pages.
+  - **`getFunnels(subaccountId)`**: Retrieves all funnels for a subaccount with nested pages.
+  - **`upsertFunnel(subaccountId, funnel, funnelId)`**: Creates or updates a funnel with Stripe/Razorpay integration.
+  - **`upsertFunnelPage(subaccountId, funnelPage, funnelId)`**: Creates or updates a funnel page with default content structure.
+  - **`deleteFunnelPage(funnelPageId)`**: Permanently removes a funnel page.
+  - **`getDomainContent(subDomainName)`**: Fetches funnel by custom subdomain for public rendering.
 
 ### Database Client (`src/lib/db.ts`)
 
 Initializes the Prisma Client.
 
--   **Optimization**: Uses `@prisma/adapter-mariadb` for efficient connection handling.
--   **Performance**: Configured to use `127.0.0.1` to bypass local DNS resolution delays common with `localhost`.
+- **Optimization**: Uses `@prisma/adapter-mariadb` for efficient connection handling.
+- **Performance**: Configured to use `127.0.0.1` to bypass local DNS resolution delays common with `localhost`.
 
 ---
 
@@ -171,33 +171,37 @@ Initializes the Prisma Client.
 The development is tracked in daily logs located in `project_docs/week-01/` and `project_docs/week-02/`.
 
 ### Week 01
--   **Day 1**: Established the foundation, authentication, and design system.
--   **Day 2**: Built the public marketing site and implemented complex routing.
--   **Day 3**: Integrated the database, implemented core backend logic, and connected the dashboard.
--   **Day 4**: Implemented Agency creation, role-based routing, and default system setup.
--   **Day 5**: Established the authenticated Dashboard layout, dynamic Sidebar navigation, and a global Modal system.
--   **Day 6**: Implemented the Agency Settings page, User Details management (including permissions), and the global InfoBar with notifications.
--   **Day 7**: Implemented the Media/File Upload infrastructure (UploadThing) and the Subaccount creation/management logic with automated default setup.
--   **Day 8**: Implemented the Team Management system, Invitation logic, and refined the Notification UI using TanStack Table.
+
+- **Day 1**: Established the foundation, authentication, and design system.
+- **Day 2**: Built the public marketing site and implemented complex routing.
+- **Day 3**: Integrated the database, implemented core backend logic, and connected the dashboard.
+- **Day 4**: Implemented Agency creation, role-based routing, and default system setup.
+- **Day 5**: Established the authenticated Dashboard layout, dynamic Sidebar navigation, and a global Modal system.
+- **Day 6**: Implemented the Agency Settings page, User Details management (including permissions), and the global InfoBar with notifications.
+- **Day 7**: Implemented the Media/File Upload infrastructure (UploadThing) and the Subaccount creation/management logic with automated default setup.
+- **Day 8**: Implemented the Team Management system, Invitation logic, and refined the Notification UI using TanStack Table.
 
 ### Week 02
--   **Day 9**: Built comprehensive Agency Analytics Dashboard with Tremor Charts and implemented a complete Media Management system with searchable bucket, card UI, and full CRUD operations. Established Subaccount infrastructure with Launchpad onboarding.
--   **Day 10**: Implemented Pipeline & Kanban Board System with react-beautiful-dnd for drag-and-drop functionality. Built PipelineView, PipelineLane, and PipelineTicket components with real-time financial tracking and lane/ticket reordering.
--   **Day 11**: Built comprehensive Ticket & Tag Management System with customer search, team member assignment, multi-select tag system with inline creation, and 5-color tag categorization. Implemented debounced contact search and tag creator component.
--   **Day 12**: Implemented complete Funnel Management System with custom subdomain support, multi-page funnels, and Stripe product integration. Added funnel form with favicon upload. Performed code quality improvements: fixed loading page typo, changed media card aspect ratio, and converted to type-only imports.
--   **Day 13**: Implemented the Subaccount Settings page for localized management of client details and user permissions. Resolved Prisma Decimal serialization issues across the Pipeline and Ticket systems by converting values to native numbers in server actions and frontend state. Added UI interaction improvements to dropdown menus.
--   **Day 14**: Implemented the Contact Management System for subaccounts, featuring a customer table with total value tracking and status badges. Polished the global InfoBar notification UI and improved the Switch component interactivity.
--   **Day 15**: Implemented the Razorpay Payment & Subscription System, featuring multi-currency support (INR), centralized payment actions, and semantic plan management. Added robust logging and enhanced core utilities.
--   **Day 16**: Implemented the Open-Access Billing System and dynamic navigation UI. Pivoted to a frictionless onboarding model and enhanced the global InfoBar with context-aware section headers.
+
+- **Day 9**: Built comprehensive Agency Analytics Dashboard with Tremor Charts and implemented a complete Media Management system with searchable bucket, card UI, and full CRUD operations. Established Subaccount infrastructure with Launchpad onboarding.
+- **Day 10**: Implemented Pipeline & Kanban Board System with react-beautiful-dnd for drag-and-drop functionality. Built PipelineView, PipelineLane, and PipelineTicket components with real-time financial tracking and lane/ticket reordering.
+- **Day 11**: Built comprehensive Ticket & Tag Management System with customer search, team member assignment, multi-select tag system with inline creation, and 5-color tag categorization. Implemented debounced contact search and tag creator component.
+- **Day 12**: Implemented complete Funnel Management System with custom subdomain support, multi-page funnels, and Stripe product integration. Added funnel form with favicon upload. Performed code quality improvements: fixed loading page typo, changed media card aspect ratio, and converted to type-only imports.
+- **Day 13**: Implemented the Subaccount Settings page for localized management of client details and user permissions. Resolved Prisma Decimal serialization issues across the Pipeline and Ticket systems by converting values to native numbers in server actions and frontend state. Added UI interaction improvements to dropdown menus.
+- **Day 14**: Implemented the Contact Management System for subaccounts, featuring a customer table with total value tracking and status badges. Polished the global InfoBar notification UI and improved the Switch component interactivity.
+- **Day 15**: Implemented the Razorpay Payment & Subscription System, featuring multi-currency support (INR), centralized payment actions, and semantic plan management. Added robust logging and enhanced core utilities.
+- **Day 16**: Implemented the Open-Access Billing System and dynamic navigation UI. Pivoted to a frictionless onboarding model and enhanced the global InfoBar with context-aware section headers.
 
 ### Week 03
--   **Day 17**: Performed critical Prisma infrastructure fixes following client regeneration and simplified the agency onboarding logic with fallback mechanisms.
--   **Day 18**: Expanded the Funnel Management system with dedicated list views and editor routing. Overhauled the Theme Switcher for hydration safety and enhanced the global type system.
+
+- **Day 17**: Performed critical Prisma infrastructure fixes following client regeneration and simplified the agency onboarding logic with fallback mechanisms.
+- **Day 18**: Expanded the Funnel Management system with dedicated list views and editor routing. Overhauled the Theme Switcher for hydration safety and enhanced the global type system.
+- **Day 19**: Refactored Funnel Page Form to remove shadcn/ui form abstraction in favor of native inputs with `react-hook-form` register. Fixed `router.refresh()` state sync in FunnelSteps with `useEffect`. Resolved drag-and-drop container collapse by adding `provided.placeholder`. Polished funnel step cards, navigation, and SVG attribute casing.
 
 ---
 
 ## 6. How to Use This Documentation
 
--   **For Codebase Navigation**: Refer to the "Technical Architecture" section to understand where specific logic resides.
--   **For Database Understanding**: Check `prisma/schema.prisma` or `project_docs/tables.md`.
--   **For Daily Progress**: See the individual logs in `project_docs/day/` for a breakdown of "Goals vs. Achievements".
+- **For Codebase Navigation**: Refer to the "Technical Architecture" section to understand where specific logic resides.
+- **For Database Understanding**: Check `prisma/schema.prisma` or `project_docs/tables.md`.
+- **For Daily Progress**: See the individual logs in `project_docs/day/` for a breakdown of "Goals vs. Achievements".
