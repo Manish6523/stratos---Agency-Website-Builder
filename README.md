@@ -1,566 +1,385 @@
-# Stratos - Agency SaaS Platform
+<p align="center">
+  <h1 align="center">⚡ Stratos</h1>
+  <p align="center">A multi-tenant SaaS platform for digital agencies to manage clients, teams, pipelines, funnels, and marketing automation — all under one roof.</p>
+</p>
 
-![Next.js](https://img.shields.io/badge/Next.js-16.1-black?style=flat-square&logo=next.js)
-![React](https://img.shields.io/badge/React-19.2-blue?style=flat-square&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat-square&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-06B6D4?style=flat-square&logo=tailwindcss)
-![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange?style=flat-square&logo=mysql)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Alpha%20v0.5-yellow?style=flat-square)
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16.1-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Prisma-7.3-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma" />
+  <img src="https://img.shields.io/badge/Tailwind-4.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind" />
+</p>
 
-A powerful, full-stack SaaS platform for digital agencies to manage clients, teams, and marketing automation. Built with modern web technologies and enterprise-grade architecture.
-
----
-
-## 🎯 Overview
-
-Stratos helps digital agencies:
-- **Manage Multiple Clients** with isolated subaccounts
-- **Collaborate with Teams** using role-based permissions
-- **Build Marketing Funnels** with visual editor
-- **Automate Workflows** with trigger-based automation
-- **Track Deals & Contacts** with built-in CRM
-- **White-label for Brands** with custom domains
+<p align="center">
+  <img src="https://img.shields.io/badge/Version-1.2.1%20Beta-blue?style=flat-square" alt="Version" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License" />
+  <img src="https://img.shields.io/badge/Status-Active%20Development-orange?style=flat-square" alt="Status" />
+</p>
 
 ---
 
-## ✨ Key Features
+## 🎯 What is Stratos?
 
-### 🏢 Agency Management
-- ✅ Multi-tenant architecture with client isolation
-- ✅ Team invitations and role-based access control
-- ✅ White-label customization (logos, colors, domains)
-- ✅ Activity audit trail and notifications
-- ✅ Billing and subscription management
+Stratos is a **full-stack agency management platform** built for teams that juggle multiple clients, projects, and marketing workflows. It provides:
 
-### 👥 Team Collaboration
-- ✅ 4 role types (Owner, Admin, User, Guest)
-- ✅ Email-based team invitations
-- ✅ Permission management per subaccount
-- ✅ Real-time notification center
-- ✅ Team member activity tracking
-
-### 💼 Client Management
-- ✅ Independent subaccount creation
-- ✅ Auto-initialized pipelines and resources
-- ✅ Custom sidebar navigation
-- ✅ Media management (logos, assets)
-- ✅ Contact and communication history
-
-### 🔄 Workflow Automation
-- ✅ Database models ready (Trigger, Automation, Action)
-- ✅ Webhook-based triggers
-- ✅ Action chaining and sequences
-- ✅ Automation instance tracking
-- ⏳ UI builder (planned)
-
-### 📊 CRM Features
-- ✅ Pipeline and lane management
-- ✅ Kanban-style ticket tracking
-- ✅ Contact database
-- ✅ Tag-based organization
-- ⏳ Drag-and-drop UI (planned)
-
-### 📄 Funnel Builder
-- ✅ Multi-page funnel creation
-- ✅ Landing page templates
-- ✅ CSS class management
-- ⏳ Visual editor (planned)
-- ⏳ Analytics dashboard (planned)
+- 🏢 **Multi-Tenant Workspaces** — Complete client isolation with independent resources per subaccount
+- 📊 **Pipeline & Kanban CRM** — Drag-and-drop deal tracking with financial metrics per lane
+- 🎨 **Funnel Builder** — Multi-page marketing funnels with custom subdomains and Stripe/Razorpay integration
+- 👥 **Team Collaboration** — Role-based access control with 4 permission tiers and email invitations
+- 📁 **Media Management** — Searchable media bucket with upload, copy-to-clipboard, and visual card UI
+- 💳 **Open-Access Billing** — Frictionless onboarding with Razorpay subscription management
+- 📈 **Agency Analytics** — Dashboard with revenue tracking, client metrics, and Tremor Charts visualization
 
 ---
 
-## 🛠️ Technology Stack
+## ✨ Features
 
-### Frontend
-| Technology | Purpose |
-|---|---|
-| **Next.js 16** | React framework with Server Components |
-| **React 19** | UI library with latest hooks |
-| **TypeScript 5** | Type-safe development |
-| **Tailwind CSS 4** | Utility-first styling |
-| **Shadcn/UI** | Accessible component library |
-| **React Hook Form** | Efficient form management |
-| **Zod** | Runtime schema validation |
-| **TanStack Table** | Headless table component |
-| **Recharts** | React charting library |
+### Fully Implemented ✅
 
-### Backend & Data
-| Technology | Purpose |
-|---|---|
-| **Prisma 7** | Type-safe ORM |
-| **MySQL 8 / MariaDB** | Relational database |
-| **Clerk** | Authentication & user management |
-| **UploadThing** | File upload & storage |
+| Category                | Features                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------ |
+| **Authentication**      | Clerk OAuth & email/password, session management, middleware route protection              |
+| **Agency Management**   | Create/update agencies, white-label branding, company settings, goal tracking              |
+| **Subaccount System**   | Client isolation, auto-initialized pipelines & sidebar, dedicated dashboards               |
+| **Team Management**     | TanStack Table for team listing, email invitations, permission management                  |
+| **Pipeline & Kanban**   | Drag-and-drop lanes & tickets (react-beautiful-dnd), financial tracking, lane reordering   |
+| **Ticket System**       | Customer assignment, team delegation, tag categorization, value tracking, debounced search |
+| **Tag Management**      | 5-color tag system (Blue, Orange, Rose, Green, Purple), inline creation                    |
+| **Contact Management**  | Customer table with total value tracking, status badges, activity logging                  |
+| **Funnel Builder**      | Multi-page funnels, custom subdomains, favicon upload, Stripe/Razorpay product integration |
+| **Media System**        | UploadThing integration, searchable bucket, card UI, copy-to-clipboard                     |
+| **Analytics Dashboard** | Agency-level metrics with Tremor Charts, revenue visualization                             |
+| **Billing**             | Open-access model with Razorpay, multi-currency (INR), subscription management             |
+| **Notifications**       | Activity logging, audit trail, real-time notification center in InfoBar                    |
+| **Dynamic Navigation**  | Context-aware section headers, dynamic sidebar per agency/subaccount                       |
+| **Launchpad**           | Onboarding checklist for new subaccounts (PWA, Stripe, Business Details)                   |
 
-### Tools & Services
-| Technology | Purpose |
-|---|---|
-| **Sonner** | Toast notifications |
-| **Lucide Icons** | Icon library |
-| **next-themes** | Dark/light mode |
-| **Stripe** | Payment processing (ready) |
+### In Progress ⏳
+
+| Feature              | Status                                                          |
+| -------------------- | --------------------------------------------------------------- |
+| Visual Page Editor   | JSON content structure ready, drag-and-drop builder planned     |
+| Automation Engine    | Database models ready (Trigger, Action, Automation), UI planned |
+| Advanced Analytics   | Per-pipeline and per-funnel analytics                           |
+| Webhook Integrations | External API support                                            |
 
 ---
 
-## 🚀 Quick Start
+## 🛠️ Tech Stack
+
+### Core
+
+| Technology                               | Version | Purpose                                             |
+| ---------------------------------------- | ------- | --------------------------------------------------- |
+| [Next.js](https://nextjs.org)            | 16.1    | React framework with App Router & Server Components |
+| [React](https://react.dev)               | 19.2    | UI library                                          |
+| [TypeScript](https://typescriptlang.org) | 5.x     | Type-safe development                               |
+| [Prisma](https://prisma.io)              | 7.3     | Type-safe ORM with MariaDB adapter                  |
+| [Tailwind CSS](https://tailwindcss.com)  | 4.x     | Utility-first styling                               |
+
+### UI & Data
+
+| Technology                                                              | Purpose                                            |
+| ----------------------------------------------------------------------- | -------------------------------------------------- |
+| [Shadcn/UI](https://ui.shadcn.com)                                      | Accessible component library (Radix UI primitives) |
+| [TanStack Table](https://tanstack.com/table)                            | Headless data tables                               |
+| [Tremor Charts](https://tremor.so)                                      | Dashboard analytics visualization                  |
+| [React Beautiful DnD](https://github.com/atlassian/react-beautiful-dnd) | Drag-and-drop for pipelines & funnels              |
+| [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) | Form management & validation                       |
+| [Lucide Icons](https://lucide.dev)                                      | Icon library                                       |
+| [Sonner](https://sonner.emilkowal.dev)                                  | Toast notifications                                |
+
+### Backend & Services
+
+| Technology                             | Purpose                          |
+| -------------------------------------- | -------------------------------- |
+| [Clerk](https://clerk.com)             | Authentication & user management |
+| [UploadThing](https://uploadthing.com) | File upload & storage            |
+| [Razorpay](https://razorpay.com)       | Payment processing (primary)     |
+| [Stripe](https://stripe.com)           | Payment processing (secondary)   |
+| MariaDB / MySQL                        | Relational database              |
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js** 18+ (LTS recommended)
-- **npm** or yarn
-- **MySQL 8.0+** or **MariaDB 10.11+**
-- **Clerk Account** (free at [clerk.com](https://clerk.com))
-- **UploadThing Account** (free at [uploadthing.com](https://uploadthing.com))
+
+- **Node.js** 18+ or **Bun** runtime
+- **MariaDB 10.11+** or **MySQL 8.0+**
+- [Clerk](https://clerk.com) account (free tier available)
+- [UploadThing](https://uploadthing.com) account (free tier available)
 
 ### Installation
 
-1. **Clone Repository**
 ```bash
+# 1. Clone the repository
 git clone https://github.com/Manish6523/stratos---Agency-Website-Builder.git
-cd stratos
+cd stratos---Agency-Website-Builder
+
+# 2. Install dependencies
+bun install    # or: npm install
+
+# 3. Set up environment variables
+cp .env.example .env
 ```
 
-2. **Install Dependencies**
-```bash
-npm install
-```
+Configure your `.env` file:
 
-3. **Configure Environment**
-```bash
-cp .env.example .env.local
-```
-
-Update `.env.local`:
 ```env
-# Authentication (from Clerk dashboard)
+# Authentication (Clerk)
 CLERK_PUBLISHABLE_KEY=pk_test_xxx
 CLERK_SECRET_KEY=sk_test_xxx
 
 # Database
-DATABASE_URL=mysql://user:password@localhost:3306/stratos
+DATABASE_URL=mysql://root:root@127.0.0.1:3306/stratos
 
-# File Upload (from UploadThing)
+# File Upload (UploadThing)
 UPLOADTHING_TOKEN=sk_live_xxx
 
 # Domain
 NEXT_PUBLIC_DOMAIN=localhost:3000
+NEXT_PUBLIC_SCHEME=http://
+
+# Razorpay (optional)
+RAZORPAY_KEY_ID=rzp_test_xxx
+RAZORPAY_KEY_SECRET=xxx
 ```
 
-4. **Setup Database**
 ```bash
+# 4. Set up database
 npx prisma generate
 npx prisma migrate dev
+
+# 5. Start the dev server
+bun run dev    # or: npm run dev
 ```
 
-5. **Start Development Server**
-```bash
-npm run dev
+Open [http://localhost:3000](http://localhost:3000) to get started.
+
+---
+
+## 🏗️ Architecture
+
+### Multi-Tenancy Model
+
+```
+User (Clerk Auth)
+  └── Agency (Tenant Root)
+        ├── Team Members & Invitations
+        ├── Billing & Subscription
+        ├── White-label Settings
+        └── SubAccounts (Client Isolation)
+              ├── Pipelines → Lanes → Tickets
+              ├── Contacts & Tags
+              ├── Funnels → Pages
+              ├── Media Assets
+              └── Independent Permissions
 ```
 
-Visit **[http://localhost:3000](http://localhost:3000)**
+### RBAC (4 Role Types)
+
+| Role               | Scope          | Access Level                                      |
+| ------------------ | -------------- | ------------------------------------------------- |
+| `AGENCY_OWNER`     | Agency-wide    | Full control — billing, delete agency, manage all |
+| `AGENCY_ADMIN`     | Agency-wide    | Manage team, create subaccounts, view all data    |
+| `SUBACCOUNT_USER`  | Per-subaccount | Full access to assigned subaccounts               |
+| `SUBACCOUNT_GUEST` | Per-subaccount | Read-only or restricted access                    |
+
+### Key Architectural Patterns
+
+1. **Server Actions First** — All DB operations centralized in `src/lib/queries.ts`
+2. **Automatic Defaults** — New subaccounts get a default pipeline (5 lanes), sidebar, and creator permissions
+3. **Activity Logging** — All important actions create audit trail notifications
+4. **Type Safety** — Prisma types + Zod schemas + TypeScript strict mode end-to-end
 
 ---
 
 ## 📁 Project Structure
 
 ```
-stratos/
-├── src/
-│   ├── app/                       # Next.js App Router
-│   │   ├── (main)/               # Protected routes
-│   │   │   ├── agency/           # Agency dashboard
-│   │   │   │   └── [agencyId]/
-│   │   │   │       ├── settings/
-│   │   │   │       ├── team/
-│   │   │   │       └── all-subaccounts/
-│   │   │   └── subaccount/       # Client dashboards
-│   │   │       └── [subaccountId]/
-│   │   ├── site/                 # Public marketing site
-│   │   └── api/                  # API routes
-│   ├── components/
-│   │   ├── global/               # App-wide components
-│   │   ├── forms/                # Form components (Agency, User, etc.)
-│   │   ├── sidebar/              # Navigation components
-│   │   └── ui/                   # Shadcn/UI components
-│   ├── lib/
-│   │   ├── queries.ts            # ⭐ All server actions (646 lines)
-│   │   ├── db.ts                 # Prisma client singleton
-│   │   ├── types.ts              # Extended TypeScript types
-│   │   ├── utils.ts              # Helper functions
-│   │   ├── constants.ts          # App constants
-│   │   └── uploadthing.ts        # File upload config
-│   ├── providers/                # React Context
-│   │   ├── ModalProvider.tsx     # Global modal state
-│   │   └── ThemeProvider.tsx     # Dark/light mode
-│   └── proxy.ts                  # Auth middleware
-├── prisma/
-│   ├── schema.prisma             # Database schema (23 models)
-│   └── migrations/               # Migration history
-├── public/                       # Static assets
-└── project_docs/                 # Documentation
-
-⭐ = Critical files to understand the system
-```
-
----
-
-## 🎯 Core Concepts
-
-### Multi-Tenant Architecture
-```
-Agency (Root Tenant)
-├── Team Members & Invitations
-├── Billing & Subscription
-└── SubAccounts (Client Isolation)
-    ├── SubAccount A
-    │   ├── Pipelines → Lanes → Tickets
-    │   ├── Contacts
-    │   ├── Funnels → Pages
-    │   └── Media
-    └── SubAccount B
-        ├── Pipelines
-        ├── Contacts
-        └── Funnels
-```
-
-### Role-Based Access Control
-```
-AGENCY_OWNER    → Full agency control
-    ↓
-AGENCY_ADMIN    → Manage team & subaccounts
-    ↓
-SUBACCOUNT_USER → Full subaccount access
-    ↓
-SUBACCOUNT_GUEST → Read-only access
-```
-
-### Server Actions Pattern
-All backend operations centralized in `/src/lib/queries.ts`:
-
-```typescript
-// Direct import and usage in client components
-import { upsertAgency, getAuthUserDetails } from '@/lib/queries'
-
-const user = await getAuthUserDetails()
-const agency = await upsertAgency(formData)
-```
-
----
-
-## 💻 Usage Examples
-
-### Get Current User
-```typescript
-import { getAuthUserDetails } from '@/lib/queries'
-
-const authUser = await getAuthUserDetails()
-// Returns: User with Agency, Permissions, Notifications
-```
-
-### Create Agency
-```typescript
-import { upsertAgency } from '@/lib/queries'
-
-const agency = await upsertAgency({
-  name: 'My Digital Agency',
-  email: 'hello@agency.com',
-  phone: '+1-234-567-8900',
-  companyEmail: 'company@agency.com',
-  address: '123 Business St',
-  city: 'San Francisco',
-  state: 'CA',
-  zipCode: '94105',
-  country: 'USA',
-  agencyLogo: 'https://url.com/logo.png',
-  whiteLabel: true,
-  goal: 1000 // monthly revenue goal
-})
-```
-
-### Create Subaccount (Auto-initializes)
-```typescript
-import { upsertSubAccount } from '@/lib/queries'
-
-const subaccount = await upsertSubAccount({
-  agencyId: 'agency-uuid',
-  name: 'Client Company',
-  companyEmail: 'contact@client.com',
-  subAccountLogo: 'https://url.com/logo.png',
-  address: '456 Client Ave',
-  // Automatically creates:
-  // - Default pipeline with 5 lanes
-  // - Creator gets SUBACCOUNT_USER permission
-  // - Activity notification
-})
-```
-
-### Send Team Invitation
-```typescript
-import { sendInvitation } from '@/lib/queries'
-
-const invitation = await sendInvitation({
-  email: 'teammate@example.com',
-  agencyId: 'agency-uuid',
-  role: 'AGENCY_ADMIN'
-  // Auto-sends email with acceptance link
-})
-```
-
-### Log Activity
-```typescript
-import { saveActivityLogsNotification } from '@/lib/queries'
-
-await saveActivityLogsNotification({
-  agencyId: 'agency-uuid',
-  subaccountId: 'subaccount-uuid', // optional
-  description: 'User created new funnel | Sales Funnel v2'
-})
-```
-
-### Upload Media
-```typescript
-import { createMedia } from '@/lib/queries'
-
-const media = await createMedia({
-  name: 'Company Logo',
-  link: 'https://uploadthing.com/file.png',
-  type: 'image',
-  subAccountId: 'subaccount-uuid'
-})
+src/
+├── app/                            # Next.js App Router
+│   ├── (main)/                     # Authenticated routes
+│   │   ├── agency/[agencyId]/      # Agency dashboard, settings, team, billing
+│   │   └── subaccount/[subaccountId]/  # Pipelines, funnels, contacts, media
+│   ├── site/                       # Public marketing site
+│   ├── api/                        # API routes (Razorpay, UploadThing)
+│   └── [domain]/                   # Dynamic subdomain routing
+├── components/
+│   ├── global/                     # InfoBar, CustomModal, FileUpload, Loading
+│   ├── forms/                      # AgencyDetails, UserDetails, FunnelPageForm, etc.
+│   ├── sidebar/                    # Dynamic navigation (agency/subaccount aware)
+│   └── ui/                         # 50+ Shadcn/UI primitives
+├── lib/
+│   ├── queries.ts                  # ⭐ All server actions & business logic
+│   ├── db.ts                       # Prisma client singleton
+│   ├── types.ts                    # Extended TypeScript types
+│   ├── razorpay/                   # Razorpay client & server actions
+│   └── constants.ts                # Pricing plans, icon config
+├── providers/
+│   ├── ModalProvider.tsx           # Global modal state
+│   └── ThemeProvider.tsx           # Dark/light mode
+└── proxy.ts                        # ⭐ Auth & routing middleware
 ```
 
 ---
 
 ## 🗄️ Database Schema
 
-**23 Models** organized by domain:
+**23 models** powering a fully relational multi-tenant system:
 
-### Authentication & Authorization
-- `User` - User accounts (synced from Clerk)
-- `Permissions` - User-SubAccount access matrix
-- `Invitation` - Team invite tracking (PENDING, ACCEPTED, REVOKED)
+| Domain            | Models                                                                                              |
+| ----------------- | --------------------------------------------------------------------------------------------------- |
+| **Auth & Access** | `User`, `Permissions`, `Invitation`                                                                 |
+| **Core Business** | `Agency`, `SubAccount`                                                                              |
+| **CRM**           | `Pipeline`, `Lane`, `Ticket`, `Contact`, `Tag`                                                      |
+| **Marketing**     | `Funnel`, `FunnelPage`, `ClassName`                                                                 |
+| **Automation**    | `Trigger`, `Automation`, `Action`, `AutomationInstance`                                             |
+| **Platform**      | `Media`, `Notification`, `Subscription`, `AddOns`, `AgencySidebarOption`, `SubAccountSidebarOption` |
 
-### Core Business
-- `Agency` - Tenant root (owner, settings, branding)
-- `SubAccount` - Client isolation (1:Many with Agency)
+All relationships use **cascade deletes** — deleting an agency removes all subaccounts, pipelines, funnels, media, and related data safely.
 
-### CRM System
-- `Pipeline` - Deal tracking stages
-- `Lane` - Pipeline sections (Lead, Contacted, etc.)
-- `Ticket` - Individual deals/tasks
-- `Contact` - CRM contacts
-- `Tag` - Custom categorization
-
-### Marketing Automation
-- `Funnel` - Landing page sequences
-- `FunnelPage` - Individual funnel pages
-- `Automation` - Workflow definitions
-- `Trigger` - Workflow triggers (form submission, etc.)
-- `Action` - Automation actions (create contact, etc.)
-- `AutomationInstance` - Automation execution records
-
-### Supporting Models
-- `Media` - File storage records
-- `Notification` - Activity logs
-- `Subscription` - Billing (ready for Stripe)
-- `AddOns` - Subscription add-ons
-- `AgencySidebarOption` - Navigation items
-- `SubAccountSidebarOption` - Navigation items
-- `ClassName` - CSS class storage (for pages)
-
-**View full schema:** [prisma/schema.prisma](./prisma/schema.prisma)
+📄 **Full schema:** [`prisma/schema.prisma`](./prisma/schema.prisma) | **Field-level docs:** [`project_docs/tables.md`](./project_docs/tables.md)
 
 ---
 
-## ⚙️ Available Commands
+## ⚙️ Commands
 
 ```bash
-# Development & Building
-npm run dev              # Start development server
-npm run build            # Create production build
-npm run start            # Run production server
-npm run lint             # Run ESLint
+# Development
+bun run dev                          # Start dev server (localhost:3000)
+bun run build                        # Production build
+bun run start                        # Run production server
+bun run lint                         # ESLint
 
-# Database Management
-npx prisma generate              # Regenerate Prisma client
-npx prisma migrate dev            # Create and apply migration
-npx prisma migrate dev --name xyz # Named migration
-npx prisma studio                 # Open database GUI (localhost:5555)
-npx prisma db push                # Push schema to DB (dev only)
-npx prisma db seed                # Run seed script
-npx prisma migrate reset           # Reset database (DESTRUCTIVE!)
+# Database
+npx prisma generate                  # Regenerate Prisma client
+npx prisma migrate dev               # Create & apply migration
+npx prisma migrate dev --name <name> # Named migration
+npx prisma studio                    # Database GUI (localhost:5555)
+npx prisma db push                   # Push schema without migration
 ```
-
----
-
-## 🔐 Security Features
-
-✅ **Authentication**
-- Clerk OAuth & email/password authentication
-- Session management with Clerk middleware
-- Automatic user sync to database
-
-✅ **Authorization**
-- Role-based access control (4 roles)
-- Route protection via middleware
-- Data-level permission checks
-- Subaccount access verification
-
-✅ **Data Validation**
-- Zod schema validation on all forms
-- Type-safe database queries with Prisma
-- Server-side validation
-- Input sanitization
-
-✅ **Audit Trail**
-- Activity notifications for important actions
-- User attribution on all changes
-- Timestamps on all records
-- Complete notification history
-
----
-
-## 📱 Responsive Design
-
-Built with **Tailwind CSS** for optimal experience on:
-- 📱 Mobile (320px - 767px)
-- 📱 Tablet (768px - 1024px)  
-- 🖥️ Desktop (1025px+)
-
-Features:
-- Dark/light mode toggle
-- Mobile-optimized navigation
-- Touch-friendly interfaces
-- Fast, optimized loading
-
----
-
-## 📚 Key Files
-
-| File | Lines | Purpose |
-|------|-------|---------|
-| **src/lib/queries.ts** | 646 | All server actions & business logic |
-| **prisma/schema.prisma** | 500+ | Complete database schema |
-| **src/proxy.ts** | 150 | Authentication & routing middleware |
-| **src/providers/ModalProvider.tsx** | 80 | Global modal state management |
-| **src/components/sidebar/index.tsx** | 200 | Dynamic navigation component |
-| **src/components/global/InfoBar.tsx** | 150 | Notification center component |
-
----
-
-## 🗺️ Roadmap
-
-### Phase 2 - CRM Implementation ⏳
-- [ ] Kanban board with drag-and-drop (dnd-kit)
-- [ ] Contact management UI
-- [ ] Pipeline analytics
-- [ ] Ticket assignment system
-
-### Phase 3 - Funnel Builder ⏳
-- [ ] Visual page editor (GrapesJS)
-- [ ] Component library
-- [ ] Template gallery
-- [ ] Preview & publishing
-- [ ] Form analytics
-
-### Phase 4 - Automation Engine ⏳
-- [ ] Workflow builder UI
-- [ ] Trigger configuration
-- [ ] Action chaining
-- [ ] Email sequences
-- [ ] Webhook integration
-
-### Phase 5 - Advanced Features ⏳
-- [ ] Stripe billing integration
-- [ ] Advanced analytics dashboard
-- [ ] API for external tools
-- [ ] Subdomain white-labeling
-- [ ] Custom domain support
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Prisma Client Error
+<details>
+<summary><b>Prisma Client Not Found</b></summary>
+
 ```bash
 npx prisma generate
 ```
 
-### Database Connection Failed
-- Check `DATABASE_URL` in `.env.local`
-- Ensure MySQL/MariaDB is running
-- Verify credentials are correct
+</details>
 
-### File Upload Not Working
+<details>
+<summary><b>Database Connection Failed</b></summary>
+
+- Verify `DATABASE_URL` in `.env` uses `127.0.0.1` (not `localhost` — avoids DNS latency)
+- Ensure MySQL/MariaDB is running
+- Check credentials
+</details>
+
+<details>
+<summary><b>File Upload Not Working</b></summary>
+
 - Verify `UPLOADTHING_TOKEN` is set
 - Check image domains in `next.config.ts`
 - Confirm UploadThing account is active
+</details>
 
-### Authentication Issues
-- Verify Clerk keys in `.env.local`
-- Check Clerk dashboard for configuration
+<details>
+<summary><b>Authentication Issues</b></summary>
+
+- Verify Clerk keys in `.env`
+- Check Clerk dashboard configuration
 - Clear browser cookies and retry
+</details>
 
-### Build Errors
+<details>
+<summary><b>Build or Runtime Errors</b></summary>
+
 ```bash
 rm -rf .next node_modules
-npm install
-npm run build
+bun install
+bun run build
 ```
+
+</details>
 
 ---
 
-## 📖 Documentation
+## 📚 Documentation
 
-- **[Full Documentation](./project_docs/documentation.md)** - Comprehensive guide
-- **[Database Schema](./project_docs/tables.md)** - Detailed table definitions
-- **[Development Timeline](./project_docs/dayTitle.md)** - Progress tracking
-- **[Daily Logs](./project_docs/day/)** - Detailed implementation notes
+| Document                                            | Description                                   |
+| --------------------------------------------------- | --------------------------------------------- |
+| [documentation.md](./project_docs/documentation.md) | High-level project reference                  |
+| [main-doc.md](./project_docs/main-doc.md)           | Comprehensive technical documentation         |
+| [tables.md](./project_docs/tables.md)               | Database schema field-level breakdown         |
+| [dayTitle.md](./project_docs/week-01/dayTitle.md)   | Development timeline index                    |
+| [week-01/](./project_docs/week-01/)                 | Foundation, auth, agency, team (Days 1–8)     |
+| [week-02/](./project_docs/week-02/)                 | CRM, pipelines, funnels, billing (Days 9–16)  |
+| [week-03/](./project_docs/week-03/)                 | Infrastructure, DnD, refactoring (Days 17–19) |
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Multi-tenant agency & subaccount system
+- [x] Team management with RBAC
+- [x] Pipeline & Kanban CRM with drag-and-drop
+- [x] Funnel builder with subdomain support
+- [x] Media management system
+- [x] Contact management with value tracking
+- [x] Razorpay billing integration
+- [x] Agency analytics dashboard
+- [ ] Visual drag-and-drop page editor
+- [ ] Automation engine UI (triggers, actions, workflows)
+- [ ] Advanced per-funnel analytics
+- [ ] Webhook & API integrations
+- [ ] Custom domain support for subdomains
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
+3. **Commit** your changes: `git commit -m 'Add amazing feature'`
+4. **Push** to branch: `git push origin feature/amazing-feature`
+5. **Open** a Pull Request
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see [LICENSE](./LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for details.
 
 ---
 
 ## 🙏 Acknowledgments
 
-- [Clerk](https://clerk.com) - Excellent authentication platform
-- [UploadThing](https://uploadthing.com) - Simple file uploads
-- [Shadcn/UI](https://ui.shadcn.com) - Beautiful component library
-- [Prisma](https://prisma.io) - Type-safe database toolkit
-- [Next.js](https://nextjs.org) - The React framework
-
----
-
-## 📞 Support & Contact
-
-- 📧 Email: [GitHub Issues](https://github.com/Manish6523/stratos---Agency-Website-Builder/issues)
-- 📚 Docs: See documentation folder
-- 🐛 Bug Reports: [Create an issue](https://github.com/Manish6523/stratos---Agency-Website-Builder/issues/new)
+- [Next.js](https://nextjs.org) — The React Framework
+- [Clerk](https://clerk.com) — Authentication Platform
+- [Prisma](https://prisma.io) — Type-safe Database Toolkit
+- [Shadcn/UI](https://ui.shadcn.com) — Component Library
+- [UploadThing](https://uploadthing.com) — File Uploads
+- [Razorpay](https://razorpay.com) — Payment Processing
+- [Tremor](https://tremor.so) — Dashboard Components
 
 ---
 
 <div align="center">
 
-### Made with ❤️ by [Manish](https://github.com/Manish6523)
+### Built with ❤️ by [Manish](https://github.com/Manish6523)
 
-⭐ Star us on GitHub — it helps!
+⭐ Star this repo if you find it useful!
 
-[⬆ Back to top](#stratos---agency-saas-platform)
+[⬆ Back to top](#-stratos)
 
 </div>
