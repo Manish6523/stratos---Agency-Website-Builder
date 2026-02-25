@@ -20,7 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="theme-portfolio" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme-flavor");if(t){document.documentElement.className=document.documentElement.className.replace(/theme-[\\w-]+/g,"");document.documentElement.classList.add("theme-"+t)}}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className={`${font.className} antialiased`}>
         <ThemeProvider
           attribute="class"

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Card,
   CardContent,
@@ -16,13 +16,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const Home = () => {
-  const {theme} = useTheme()
+  const { theme } = useTheme();
 
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
   return (
     <>
       <section className="min-h-screen w-full  relative flex items-center md:justify-center flex-col">
@@ -35,16 +35,16 @@ const Home = () => {
           </h1>
         </div>
         <div className="flex justify-center items-center relative md:-mt-17.5 px-2">
-        <Image
-      src={"/assets/preview.png"}
-      alt="banner image"
-      width={1200}
-      height={1200}
-      className={`rounded-tl-2xl rounded-tr-2xl border-2 border-muted ${
-        // If not mounted, use a neutral class. If mounted, check the theme.
-        !mounted ? '' : theme === 'light' ? 'invert' : 'invert-0'
-      }`}
-    />
+          <Image
+            src={"/assets/preview.png"}
+            alt="banner image"
+            width={1200}
+            height={1200}
+            className={`rounded-tl-2xl rounded-tr-2xl border-2 border-muted ${
+              // If not mounted, use a neutral class. If mounted, check the theme.
+              !mounted ? "" : theme === "light" ? "invert" : "invert-0"
+            }`}
+          />
           <div className="bottom-0 top-1/2 bg-linear-to-t dark:from-background left-0 right-0 absolute z-10"></div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 # STRATOS - Comprehensive Project Documentation
 
-**Version:** 0.5.0 (Alpha)
-**Last Updated:** 2026-02-10
+**Version:** 1.3.0 (Beta)
+**Last Updated:** 2026-02-26
 **Purpose:** Primary reference for Claude Code - AI-optimized project documentation
 
 ---
@@ -30,13 +30,15 @@
 **Stratos** is a multi-tenant SaaS platform designed for digital agencies to manage clients, projects, and marketing automation workflows. It provides white-labeling capabilities, team collaboration features, and comprehensive CRM functionality.
 
 ### Core Purpose
+
 - **Agency Management:** Create and manage digital agencies with team members and permissions
 - **Client Isolation:** Separate subaccounts for each client with independent resources
 - **CRM & Pipeline Management:** Track deals, contacts, and sales processes
 - **Marketing Automation:** Build funnels, landing pages, and automated workflows
 - **White-labeling:** Customizable branding per agency
 
-### Key Capabilities (Current - Day 8)
+### Key Capabilities (Current - Day 20)
+
 ✅ User authentication and authorization (Clerk)
 ✅ Multi-tenant agency and subaccount management
 ✅ Role-based access control (4 role types)
@@ -45,8 +47,12 @@
 ✅ Activity logging and notifications
 ✅ Dynamic sidebar navigation
 ✅ Global modal system
-⏳ Pipeline/CRM features (database ready, UI pending)
-⏳ Funnel builder (database ready, UI pending)
+✅ Pipeline/CRM with Kanban boards (react-beautiful-dnd)
+✅ Funnel builder with multi-page support
+✅ Multi-theme system (7 themes with light/dark variants)
+✅ Razorpay payment & subscription system
+✅ Contact management with value tracking
+⏳ Visual page builder (database ready, UI pending)
 ⏳ Automation engine (database ready, UI pending)
 
 ---
@@ -54,6 +60,7 @@
 ## 2. Quick Start Guide
 
 ### Prerequisites
+
 - Node.js 18+ (LTS recommended)
 - npm or yarn package manager
 - MariaDB 10.11+ or MySQL 8.0+
@@ -82,6 +89,7 @@ npm run dev
 ```
 
 ### Initial Setup Checklist
+
 - [ ] Configure `.env` with Clerk credentials
 - [ ] Configure `.env` with database connection
 - [ ] Configure `.env` with UploadThing token
@@ -94,31 +102,32 @@ npm run dev
 
 ### Frontend Technologies
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| Next.js | 16.1.6 | React framework with App Router |
-| React | 19.2.3 | UI library |
-| TypeScript | 5.x | Type safety |
-| Tailwind CSS | 4.x | Utility-first styling |
-| Radix UI | Latest | Accessible component primitives |
-| Shadcn/UI | Latest | Pre-built component library |
-| TanStack React Table | 8.21.3 | Data tables |
-| React Hook Form | 7.54.2 | Form management |
-| Zod | 3.24.1 | Schema validation |
-| Lucide React | Latest | Icon library |
-| Sonner | Latest | Toast notifications |
-| Recharts | 2.15.0 | Data visualization |
+| Technology           | Version | Purpose                         |
+| -------------------- | ------- | ------------------------------- |
+| Next.js              | 16.1.6  | React framework with App Router |
+| React                | 19.2.3  | UI library                      |
+| TypeScript           | 5.x     | Type safety                     |
+| Tailwind CSS         | 4.x     | Utility-first styling           |
+| Radix UI             | Latest  | Accessible component primitives |
+| Shadcn/UI            | Latest  | Pre-built component library     |
+| TanStack React Table | 8.21.3  | Data tables                     |
+| React Hook Form      | 7.54.2  | Form management                 |
+| Zod                  | 3.24.1  | Schema validation               |
+| Lucide React         | Latest  | Icon library                    |
+| Sonner               | Latest  | Toast notifications             |
+| Recharts             | 2.15.0  | Data visualization              |
 
 ### Backend Technologies
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| Prisma | 7.3.0 | ORM and database toolkit |
-| MariaDB/MySQL | 10.11+ / 8.0+ | Relational database |
-| Clerk | 6.37.1 | Authentication & user management |
-| UploadThing | 7.7.4 | File upload and storage |
+| Technology    | Version       | Purpose                          |
+| ------------- | ------------- | -------------------------------- |
+| Prisma        | 7.3.0         | ORM and database toolkit         |
+| MariaDB/MySQL | 10.11+ / 8.0+ | Relational database              |
+| Clerk         | 6.37.1        | Authentication & user management |
+| UploadThing   | 7.7.4         | File upload and storage          |
 
 ### Additional Libraries
+
 - **@tremor/react** (3.19.3) - Dashboard components
 - **next-themes** (0.4.4) - Theme management
 - **stripe** (17.5.0) - Payment processing (planned)
@@ -147,29 +156,35 @@ User (Clerk Auth)
 ### Core Architectural Patterns
 
 **1. Authentication & Authorization**
+
 - **Clerk** handles authentication (sign-up, sign-in, session management)
 - Middleware (`/src/proxy.ts`) enforces route protection
 - RBAC implemented via `Permissions` model
 - 4 Role Types: `AGENCY_OWNER`, `AGENCY_ADMIN`, `SUBACCOUNT_USER`, `SUBACCOUNT_GUEST`
 
 **2. Server Actions Pattern**
+
 - All backend operations centralized in `/src/lib/queries.ts`
 - "use server" directive for server-side execution
 - Type-safe operations with Prisma
 - Direct function imports in client components
 
 **3. Subdomain-Based Routing**
+
 - Marketing site: `yourdomain.com`
 - Agency dashboard: Authenticated route `/agency/[agencyId]`
 - Subaccount dashboard: `/subaccount/[subaccountId]`
 - Dynamic subdomains: `[clientname].yourdomain.com` (future)
 
 **4. Global State Management**
+
 - **ModalProvider**: Global modal dialog system
 - **ThemeProvider**: Dark/light mode via next-themes
+- **ThemePicker**: Multi-theme system with 7 visual themes (Portfolio, 2077, Claude, Dark Matter, Kodama Grove, MX-Brutalist, Notebook) scoped via `.theme-*` CSS classes, with `localStorage` persistence and inline script for flash-free restoration
 - No Redux or Zustand - Context API for minimal global state
 
 **5. File Storage Architecture**
+
 - UploadThing for file uploads
 - Media organized by subaccount
 - File types: Agency logos, subaccount logos, avatars, general media
@@ -214,7 +229,7 @@ User (Clerk Auth)
 │   │   │   ├── CustomModal.tsx
 │   │   │   ├── FileUpload.tsx
 │   │   │   ├── InfoBar.tsx           # Notification center
-│   │   │   ├── ModeToggle.tsx
+│   │   │   ├── ThemePicker.tsx       # Multi-theme & dark/light toggle
 │   │   │   └── Loading.tsx
 │   │   │
 │   │   ├── forms/                    # Form components
@@ -288,6 +303,7 @@ User (Clerk Auth)
 ### 6.1 User Management System
 
 **Authentication:** Powered by Clerk
+
 - Email/password authentication
 - OAuth providers support
 - Session management
@@ -295,14 +311,15 @@ User (Clerk Auth)
 
 **Authorization:** Role-Based Access Control (RBAC)
 
-| Role | Access Level | Capabilities |
-|------|--------------|--------------|
-| `AGENCY_OWNER` | Full agency access | Create/delete agency, manage all subaccounts, billing |
-| `AGENCY_ADMIN` | Agency management | Manage team, create subaccounts, view all data |
-| `SUBACCOUNT_USER` | Subaccount access | Full access to assigned subaccounts |
-| `SUBACCOUNT_GUEST` | Limited access | Read-only or restricted subaccount access |
+| Role               | Access Level       | Capabilities                                          |
+| ------------------ | ------------------ | ----------------------------------------------------- |
+| `AGENCY_OWNER`     | Full agency access | Create/delete agency, manage all subaccounts, billing |
+| `AGENCY_ADMIN`     | Agency management  | Manage team, create subaccounts, view all data        |
+| `SUBACCOUNT_USER`  | Subaccount access  | Full access to assigned subaccounts                   |
+| `SUBACCOUNT_GUEST` | Limited access     | Read-only or restricted subaccount access             |
 
 **Team Invitations:**
+
 - Email-based invitation flow
 - Automatic permission assignment on acceptance
 - Invitation expiration tracking
@@ -310,6 +327,7 @@ User (Clerk Auth)
 - Status tracking: `PENDING`, `ACCEPTED`, `REVOKED`
 
 **Key Functions:**
+
 - `initUser()` - Syncs Clerk user to database
 - `getAuthUserDetails()` - Fetches user with permissions and agency
 - `verifyAndAcceptInvitation()` - Auto-accepts pending invitations
@@ -318,6 +336,7 @@ User (Clerk Auth)
 ### 6.2 Agency Management System
 
 **Core Features:**
+
 - Agency creation with automatic owner assignment
 - White-labeling: Custom logo, brand colors
 - Company information: Name, email, phone, address
@@ -326,18 +345,21 @@ User (Clerk Auth)
 
 **Auto-Initialization:**
 When a new agency is created:
+
 1. Owner permissions automatically assigned
 2. Default sidebar options created
 3. User role set to `AGENCY_OWNER` or `AGENCY_ADMIN`
 4. Activity notification logged
 
 **Agency Settings:**
+
 - Located at: `/agency/[agencyId]/settings`
 - Combines agency form and user management
 - File upload for agency logo
 - Address and contact information
 
 **Key Functions:**
+
 - `upsertAgency()` - Create or update agency
 - `updateAgencyDetails()` - Partial updates
 - `deleteAgency()` - Cascade deletes all related data
@@ -348,6 +370,7 @@ When a new agency is created:
 **Purpose:** Client/project isolation within an agency
 
 **Core Features:**
+
 - Independent resources per subaccount
 - Separate permissions for each subaccount
 - Custom branding (logo, colors)
@@ -356,6 +379,7 @@ When a new agency is created:
 
 **Auto-Initialization:**
 When a new subaccount is created:
+
 1. Default sidebar options added
 2. Default pipeline created with 5 lanes:
    - Lead, Contacted, Demo Scheduled, Proposal Sent, Closed Won
@@ -363,6 +387,7 @@ When a new subaccount is created:
 4. Activity notification logged
 
 **Subaccount Resources:**
+
 - Pipelines and lanes
 - Contacts and tickets
 - Funnels and pages
@@ -370,6 +395,7 @@ When a new subaccount is created:
 - Permissions (user access)
 
 **Key Functions:**
+
 - `upsertSubAccount()` - Create or update with defaults
 - `getSubaccountDetails()` - Fetch with permissions
 - `deleteSubAccount()` - Cascade deletes resources
@@ -380,23 +406,27 @@ When a new subaccount is created:
 **File Storage:** UploadThing integration
 
 **Media Types:**
+
 - Agency logos
 - Subaccount logos
 - User avatars
 - General media files (images, documents)
 
 **Organization:**
+
 - Media linked to subaccounts
 - File URLs stored in database
 - Created timestamp for tracking
 - Name and type metadata
 
 **Component:**
+
 - `FileUpload` component (`/src/components/global/FileUpload.tsx`)
 - Handles upload, preview, and deletion
 - Returns public URL on successful upload
 
 **Key Functions:**
+
 - `createMedia()` - Save media record to database
 - `getMedia()` - Fetch media for subaccount
 
@@ -405,11 +435,13 @@ When a new subaccount is created:
 **Purpose:** Activity tracking and audit logging
 
 **Notification Types:**
+
 - Agency-level notifications
 - Subaccount-level notifications
 - User-specific notifications
 
 **Tracked Activities:**
+
 - Agency created/updated
 - Subaccount created/updated
 - User permissions changed
@@ -418,23 +450,27 @@ When a new subaccount is created:
 - (Future: Pipeline updates, automation triggers)
 
 **Display:**
+
 - **InfoBar** component shows latest notifications
 - Real-time count display
 - User context switching (agency ↔ subaccount)
 
 **Key Functions:**
+
 - `saveActivityLogsNotification()` - Create notification entry
 - `getNotificationAndUser()` - Fetch for InfoBar display
 
 ### 6.6 CRM Features (Database Ready, UI Pending)
 
 **Pipeline Management:**
+
 - Kanban-style deal tracking
 - Customizable lanes per pipeline
 - Drag-and-drop ticket movement
 - Lane order management
 
 **Ticket System:**
+
 - Linked to contacts
 - Assigned to team members
 - Value tracking for deal size
@@ -442,17 +478,20 @@ When a new subaccount is created:
 - Due dates and descriptions
 
 **Contact Management:**
+
 - Full contact profiles
 - Email and phone
 - Linked to tickets
 - Tag-based organization
 
 **Tag System:**
+
 - Custom tags per subaccount
 - Color-coded categories
 - Multi-tag support per ticket/contact
 
 **Database Models Ready:**
+
 - `Pipeline`, `Lane`, `Ticket`
 - `Contact`, `Tag`
 - Relationships fully defined
@@ -460,6 +499,7 @@ When a new subaccount is created:
 ### 6.7 Marketing Automation (Database Ready, UI Pending)
 
 **Funnel Builder:**
+
 - Multi-page funnels
 - Landing page creation
 - Visual page editor (planned)
@@ -467,24 +507,28 @@ When a new subaccount is created:
 - DOM content storage
 
 **Automation Engine:**
+
 - Trigger-based workflows
 - Action sequences
 - Automation instances for tracking
 - Status: `ACTIVE`, `PUBLISHED`
 
 **Triggers:**
+
 - Form submissions
 - Contact creation
 - Ticket movement
 - Custom events
 
 **Actions:**
+
 - Create/update contact
 - Send email
 - Update ticket
 - Custom webhooks
 
 **Database Models Ready:**
+
 - `Funnel`, `FunnelPage`, `ClassName`
 - `Trigger`, `Automation`, `AutomationInstance`, `Action`
 
@@ -502,31 +546,31 @@ When a new subaccount is created:
 
 ### Core Models Summary
 
-| Model | Purpose | Key Relations |
-|-------|---------|---------------|
-| `User` | User accounts (synced from Clerk) | → Agency, Permissions, Tickets |
-| `Agency` | Tenant root entity | → Users, SubAccounts, Invitations |
-| `SubAccount` | Client/project isolation | → Agency, Permissions, Pipelines, Media |
-| `Permissions` | User access control | → User, SubAccount |
-| `Invitation` | Team invite tracking | → Agency |
-| `Pipeline` | Deal tracking system | → SubAccount, Lanes |
-| `Lane` | Pipeline stages | → Pipeline, Tickets |
-| `Ticket` | Individual deals/tasks | → Lane, Contact, Assigned User, Tags |
-| `Tag` | Categorization labels | → SubAccount, Tickets |
-| `Contact` | CRM contacts | → SubAccount, Tickets |
-| `Media` | File storage records | → SubAccount |
-| `Funnel` | Marketing funnels | → SubAccount, FunnelPages |
-| `FunnelPage` | Landing pages | → Funnel |
-| `Trigger` | Automation triggers | → SubAccount |
-| `Automation` | Workflow definitions | → SubAccount, Actions, Instances |
-| `Action` | Automation steps | → Automation |
-| `Notification` | Activity logs | → Agency, SubAccount, User |
-| `Subscription` | Billing subscriptions | → Agency |
-| `AddOns` | Subscription add-ons | → Agency |
-| `AgencySidebarOption` | Navigation items | → Agency |
-| `SubAccountSidebarOption` | Navigation items | → SubAccount |
-| `ClassName` | CSS class storage | → FunnelPage |
-| `AutomationInstance` | Automation execution tracking | → Automation |
+| Model                     | Purpose                           | Key Relations                           |
+| ------------------------- | --------------------------------- | --------------------------------------- |
+| `User`                    | User accounts (synced from Clerk) | → Agency, Permissions, Tickets          |
+| `Agency`                  | Tenant root entity                | → Users, SubAccounts, Invitations       |
+| `SubAccount`              | Client/project isolation          | → Agency, Permissions, Pipelines, Media |
+| `Permissions`             | User access control               | → User, SubAccount                      |
+| `Invitation`              | Team invite tracking              | → Agency                                |
+| `Pipeline`                | Deal tracking system              | → SubAccount, Lanes                     |
+| `Lane`                    | Pipeline stages                   | → Pipeline, Tickets                     |
+| `Ticket`                  | Individual deals/tasks            | → Lane, Contact, Assigned User, Tags    |
+| `Tag`                     | Categorization labels             | → SubAccount, Tickets                   |
+| `Contact`                 | CRM contacts                      | → SubAccount, Tickets                   |
+| `Media`                   | File storage records              | → SubAccount                            |
+| `Funnel`                  | Marketing funnels                 | → SubAccount, FunnelPages               |
+| `FunnelPage`              | Landing pages                     | → Funnel                                |
+| `Trigger`                 | Automation triggers               | → SubAccount                            |
+| `Automation`              | Workflow definitions              | → SubAccount, Actions, Instances        |
+| `Action`                  | Automation steps                  | → Automation                            |
+| `Notification`            | Activity logs                     | → Agency, SubAccount, User              |
+| `Subscription`            | Billing subscriptions             | → Agency                                |
+| `AddOns`                  | Subscription add-ons              | → Agency                                |
+| `AgencySidebarOption`     | Navigation items                  | → Agency                                |
+| `SubAccountSidebarOption` | Navigation items                  | → SubAccount                            |
+| `ClassName`               | CSS class storage                 | → FunnelPage                            |
+| `AutomationInstance`      | Automation execution tracking     | → Automation                            |
 
 ### Critical Relationships
 
@@ -600,6 +644,7 @@ enum InvitationStatus {
 ### Cascade Delete Behavior
 
 **Deleting Agency:**
+
 - ✅ All Users (set agencyId to NULL)
 - ✅ All SubAccounts + their resources
 - ✅ All Invitations
@@ -608,6 +653,7 @@ enum InvitationStatus {
 - ✅ AgencySidebarOptions
 
 **Deleting SubAccount:**
+
 - ✅ All Permissions
 - ✅ All Pipelines → Lanes → Tickets
 - ✅ All Contacts
@@ -617,6 +663,7 @@ enum InvitationStatus {
 - ✅ All Automations
 
 **Deleting Pipeline:**
+
 - ✅ All Lanes
 - ✅ All Tickets in those Lanes
 
@@ -633,35 +680,45 @@ enum InvitationStatus {
 
 **📄 Detailed Daily Logs:** `/home/manish/codes/work/stratos/project_docs/day/`
 
-| Day | Date | Focus Area | Key Achievements | Files Modified |
-|-----|------|------------|------------------|----------------|
-| **Day 1** | Early Jan | Foundation & Auth | • Clerk integration<br>• Next.js 16 App Router setup<br>• Middleware implementation<br>• Shadcn/UI design system | `src/proxy.ts`<br>`src/lib/db.ts`<br>Components initialized |
-| **Day 2** | Early Jan | Marketing Site | • Landing page design<br>• Subdomain routing setup<br>• Theme provider (dark/light)<br>• Public site layout | `src/app/site/`<br>`src/providers/ThemeProvider.tsx` |
-| **Day 3** | Early Jan | Database Layer | • Prisma schema design (23 models)<br>• Migrations setup<br>• Dashboard foundation<br>• Type definitions | `prisma/schema.prisma`<br>`src/lib/types.ts`<br>`src/lib/queries.ts` started |
-| **Day 4** | Mid Jan | Agency Creation | • `upsertAgency()` implementation<br>• `initUser()` Clerk sync<br>• Role-based routing<br>• Agency creation flow | `src/lib/queries.ts`<br>`src/components/forms/AgencyDetails.tsx`<br>`src/app/(main)/agency/` |
-| **Day 5** | Mid Jan | Dashboard Layout | • Sidebar navigation (agency/subaccount aware)<br>• Modal system (`ModalProvider`)<br>• RBAC enforcement<br>• InfoBar component | `src/components/sidebar/`<br>`src/providers/ModalProvider.tsx`<br>`src/components/global/InfoBar.tsx` |
-| **Day 6** | Late Jan | Settings & Users | • Agency settings page<br>• UserDetails form<br>• Permission management UI<br>• Notification center<br>• Activity logging | `src/app/(main)/agency/[agencyId]/settings/`<br>`src/components/forms/UserDetails.tsx`<br>`saveActivityLogsNotification()` |
-| **Day 7** | Late Jan | Media & Subaccounts | • UploadThing integration<br>• Subaccount CRUD operations<br>• Auto-defaults (pipeline, sidebar)<br>• Media management UI | `src/lib/uploadthing.ts`<br>`src/components/forms/SubaccountDetails.tsx`<br>`upsertSubAccount()` with defaults |
-| **Day 8** | Feb 2026 | Team Management | • TanStack Table integration<br>• SendInvitation form<br>• Email invitation flow<br>• Team member list UI<br>• Notification polish | `src/app/(main)/agency/[agencyId]/team/`<br>`src/components/forms/SendInvitation.tsx`<br>`sendInvitation()` |
+| Day           | Date         | Focus Area              | Key Achievements                                                                                                                                                                         | Files Modified                                                                                                             |
+| ------------- | ------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Day 1**     | Early Jan    | Foundation & Auth       | • Clerk integration<br>• Next.js 16 App Router setup<br>• Middleware implementation<br>• Shadcn/UI design system                                                                         | `src/proxy.ts`<br>`src/lib/db.ts`<br>Components initialized                                                                |
+| **Day 2**     | Early Jan    | Marketing Site          | • Landing page design<br>• Subdomain routing setup<br>• Theme provider (dark/light)<br>• Public site layout                                                                              | `src/app/site/`<br>`src/providers/ThemeProvider.tsx`                                                                       |
+| **Day 3**     | Early Jan    | Database Layer          | • Prisma schema design (23 models)<br>• Migrations setup<br>• Dashboard foundation<br>• Type definitions                                                                                 | `prisma/schema.prisma`<br>`src/lib/types.ts`<br>`src/lib/queries.ts` started                                               |
+| **Day 4**     | Mid Jan      | Agency Creation         | • `upsertAgency()` implementation<br>• `initUser()` Clerk sync<br>• Role-based routing<br>• Agency creation flow                                                                         | `src/lib/queries.ts`<br>`src/components/forms/AgencyDetails.tsx`<br>`src/app/(main)/agency/`                               |
+| **Day 5**     | Mid Jan      | Dashboard Layout        | • Sidebar navigation (agency/subaccount aware)<br>• Modal system (`ModalProvider`)<br>• RBAC enforcement<br>• InfoBar component                                                          | `src/components/sidebar/`<br>`src/providers/ModalProvider.tsx`<br>`src/components/global/InfoBar.tsx`                      |
+| **Day 6**     | Late Jan     | Settings & Users        | • Agency settings page<br>• UserDetails form<br>• Permission management UI<br>• Notification center<br>• Activity logging                                                                | `src/app/(main)/agency/[agencyId]/settings/`<br>`src/components/forms/UserDetails.tsx`<br>`saveActivityLogsNotification()` |
+| **Day 7**     | Late Jan     | Media & Subaccounts     | • UploadThing integration<br>• Subaccount CRUD operations<br>• Auto-defaults (pipeline, sidebar)<br>• Media management UI                                                                | `src/lib/uploadthing.ts`<br>`src/components/forms/SubaccountDetails.tsx`<br>`upsertSubAccount()` with defaults             |
+| **Day 8**     | Feb 2026     | Team Management         | • TanStack Table integration<br>• SendInvitation form<br>• Email invitation flow<br>• Team member list UI<br>• Notification polish                                                       | `src/app/(main)/agency/[agencyId]/team/`<br>`src/components/forms/SendInvitation.tsx`<br>`sendInvitation()`                |
+| **Day 9-12**  | Feb 2026     | CRM & Funnels           | • Agency Analytics Dashboard<br>• Media Management System<br>• Pipeline & Kanban Boards<br>• Ticket & Tag Management<br>• Funnel Management System                                       | `src/app/(main)/agency/`, `subaccount/`<br>Pipeline, Lane, Ticket components                                               |
+| **Day 13-16** | Feb 2026     | Settings & Billing      | • Subaccount Settings<br>• Contact Management<br>• Razorpay Integration<br>• Open-Access Billing                                                                                         | `src/lib/razorpay/`<br>`billing/`, `contacts/` routes                                                                      |
+| **Day 17-19** | Feb 2026     | Infrastructure & Polish | • Prisma fixes<br>• Funnel expansion & editor routing<br>• Form refactors & DnD fixes                                                                                                    | `funnel-step.tsx`, `funnel-page-form.tsx`                                                                                  |
+| **Day 20**    | Feb 26, 2026 | Multi-Theme System      | • 7 CSS themes with `.theme-*` scoping<br>• ThemePicker (dropdown + dark/light toggle)<br>• Flash-free theme restoration via inline script<br>• Deployed to site nav & dashboard InfoBar | `src/app/globals.css`<br>`src/components/global/theme-picker.tsx`<br>`src/app/layout.tsx`                                  |
 
-### Current Status (Day 8 Complete)
+### Current Status (Day 20 Complete)
 
 **✅ Implemented:**
+
 - Authentication & authorization
 - Agency & subaccount management
 - Team invitations & permissions
 - Media management
 - Notification system
 - Dashboard layouts & navigation
+- Pipeline/CRM with Kanban boards
+- Ticket & Tag management
+- Funnel builder with multi-page support
+- Contact management
+- Razorpay payment & subscriptions
+- Multi-theme system (7 themes, light/dark)
 
 **⏳ Database Ready, UI Pending:**
-- Pipeline/CRM (Tickets, Lanes, Contacts)
-- Funnel builder
+
+- Visual page builder
 - Automation engine
-- Stripe billing
 
 **🔮 Planned:**
-- Visual page builder
+
 - Advanced analytics
 - Webhook integrations
 - API for external tools
@@ -673,55 +730,62 @@ enum InvitationStatus {
 ### 9.1 Critical Server-Side Files
 
 #### `/src/lib/queries.ts` (646 lines) ⭐⭐⭐
+
 **Purpose:** Central hub for all server actions and database operations
 
 **Key Functions:**
 
-| Function | Purpose | Returns |
-|----------|---------|---------|
-| `getAuthUserDetails()` | Get logged-in user with agency, permissions, notifications | `User \| null` |
-| `initUser(newUser)` | Sync Clerk user to database | `User` |
-| `upsertAgency(agency)` | Create/update agency with defaults | `Agency` |
-| `updateAgencyDetails()` | Partial agency updates | `Agency` |
-| `deleteAgency(agencyId)` | Delete agency and cascade | `void` |
-| `getAgencyDetails(agencyId)` | Fetch agency with subaccounts | `Agency \| null` |
-| `upsertSubAccount(subaccount)` | Create/update subaccount with pipeline & permissions | `SubAccount` |
-| `getSubaccountDetails(subaccountId)` | Fetch subaccount with permissions | `SubAccount \| null` |
-| `deleteSubAccount(subaccountId)` | Delete subaccount and resources | `void` |
-| `getUserPermissions(userId)` | Get user's permissions list | `Permissions[]` |
-| `saveActivityLogsNotification(...)` | Log activity notification | `Notification` |
-| `sendInvitation(role, email, agencyId)` | Create and email team invite | `Invitation` |
-| `verifyAndAcceptInvitation()` | Auto-accept pending invitations | `void` |
-| `getNotificationAndUser(agencyId)` | Fetch notifications for InfoBar | `NotificationWithUser[]` |
-| `createMedia(...)` | Save media record | `Media` |
-| `getMedia(subaccountId)` | Fetch media files | `Media[]` |
+| Function                                | Purpose                                                    | Returns                  |
+| --------------------------------------- | ---------------------------------------------------------- | ------------------------ |
+| `getAuthUserDetails()`                  | Get logged-in user with agency, permissions, notifications | `User \| null`           |
+| `initUser(newUser)`                     | Sync Clerk user to database                                | `User`                   |
+| `upsertAgency(agency)`                  | Create/update agency with defaults                         | `Agency`                 |
+| `updateAgencyDetails()`                 | Partial agency updates                                     | `Agency`                 |
+| `deleteAgency(agencyId)`                | Delete agency and cascade                                  | `void`                   |
+| `getAgencyDetails(agencyId)`            | Fetch agency with subaccounts                              | `Agency \| null`         |
+| `upsertSubAccount(subaccount)`          | Create/update subaccount with pipeline & permissions       | `SubAccount`             |
+| `getSubaccountDetails(subaccountId)`    | Fetch subaccount with permissions                          | `SubAccount \| null`     |
+| `deleteSubAccount(subaccountId)`        | Delete subaccount and resources                            | `void`                   |
+| `getUserPermissions(userId)`            | Get user's permissions list                                | `Permissions[]`          |
+| `saveActivityLogsNotification(...)`     | Log activity notification                                  | `Notification`           |
+| `sendInvitation(role, email, agencyId)` | Create and email team invite                               | `Invitation`             |
+| `verifyAndAcceptInvitation()`           | Auto-accept pending invitations                            | `void`                   |
+| `getNotificationAndUser(agencyId)`      | Fetch notifications for InfoBar                            | `NotificationWithUser[]` |
+| `createMedia(...)`                      | Save media record                                          | `Media`                  |
+| `getMedia(subaccountId)`                | Fetch media files                                          | `Media[]`                |
 
 **Usage Pattern:**
+
 ```typescript
 // Import and call directly in client components
-import { getAuthUserDetails } from '@/lib/queries'
+import { getAuthUserDetails } from "@/lib/queries";
 
-const user = await getAuthUserDetails()
+const user = await getAuthUserDetails();
 ```
 
 #### `/src/proxy.ts` ⭐⭐⭐
+
 **Purpose:** Authentication and routing middleware
 
 **Key Logic:**
+
 - Clerk authentication enforcement
 - Public vs. protected route handling
 - Agency access verification
 - Redirect logic for unauthorized users
 
 **Protected Routes:**
+
 - `/agency/*` - Requires agency access
 - `/subaccount/*` - Requires subaccount permissions
 - `/api/*` - API authentication (excluding UploadThing)
 
 #### `/prisma/schema.prisma` ⭐⭐⭐
+
 **Purpose:** Database schema definition
 
 **Key Sections:**
+
 - Generator and datasource config
 - 23 model definitions
 - Enum types (Role, Icon, TriggerTypes, etc.)
@@ -729,20 +793,24 @@ const user = await getAuthUserDetails()
 - Index definitions
 
 **Critical Command:**
+
 ```bash
 npx prisma migrate dev --name description
 ```
 
 #### `/src/providers/ModalProvider.tsx` ⭐⭐
+
 **Purpose:** Global modal dialog system
 
 **Features:**
+
 - Context-based modal state
 - Reusable across entire app
 - Supports custom titles, subtitles, children
 - Default and custom action buttons
 
 **Usage:**
+
 ```typescript
 const { setOpen } = useModal()
 
@@ -757,25 +825,26 @@ setOpen(
 
 #### Global Components (`/src/components/global/`)
 
-| Component | Purpose | Props |
-|-----------|---------|-------|
-| `InfoBar` | Notification center with user context | `notifications`, `role`, `className` |
-| `CustomModal` | Reusable modal dialog | `title`, `subheading`, `children`, `defaultOpen` |
-| `FileUpload` | UploadThing file upload wrapper | `onChange`, `endpoint`, `value` |
-| `ModeToggle` | Dark/light theme switcher | None |
-| `Loading` | Loading spinner | None |
-| `BlurPage` | Blur background effect | `children` |
+| Component     | Purpose                                  | Props                                            |
+| ------------- | ---------------------------------------- | ------------------------------------------------ |
+| `InfoBar`     | Notification center with user context    | `notifications`, `role`, `className`             |
+| `CustomModal` | Reusable modal dialog                    | `title`, `subheading`, `children`, `defaultOpen` |
+| `FileUpload`  | UploadThing file upload wrapper          | `onChange`, `endpoint`, `value`                  |
+| `ThemePicker` | Multi-theme selector + dark/light toggle | None (uses `useTheme` + `localStorage`)          |
+| `Loading`     | Loading spinner                          | None                                             |
+| `BlurPage`    | Blur background effect                   | `children`                                       |
 
 #### Form Components (`/src/components/forms/`)
 
-| Component | Purpose | Validation |
-|-----------|---------|------------|
-| `AgencyDetails` | Create/update agency | Zod schema with logo, name, email, phone, address |
-| `UserDetails` | Manage user permissions | Zod schema with name, email, role, permissions |
-| `SubaccountDetails` | Create/update subaccount | Zod schema with logo, name, address |
-| `SendInvitation` | Invite team members | Zod schema with email, role |
+| Component           | Purpose                  | Validation                                        |
+| ------------------- | ------------------------ | ------------------------------------------------- |
+| `AgencyDetails`     | Create/update agency     | Zod schema with logo, name, email, phone, address |
+| `UserDetails`       | Manage user permissions  | Zod schema with name, email, role, permissions    |
+| `SubaccountDetails` | Create/update subaccount | Zod schema with logo, name, address               |
+| `SendInvitation`    | Invite team members      | Zod schema with email, role                       |
 
 **Common Pattern:**
+
 - React Hook Form for state management
 - Zod schemas for validation
 - Shadcn/UI form primitives
@@ -784,13 +853,14 @@ setOpen(
 
 #### Sidebar Components (`/src/components/sidebar/`)
 
-| Component | Purpose | Context |
-|-----------|---------|---------|
-| `Sidebar` | Main navigation wrapper | Agency or Subaccount |
-| `MenuOptions` | Dynamic menu items | Fetches sidebar options from DB |
-| `SubaccountSelector` | Switch between subaccounts | Shows agency's subaccounts |
+| Component            | Purpose                    | Context                         |
+| -------------------- | -------------------------- | ------------------------------- |
+| `Sidebar`            | Main navigation wrapper    | Agency or Subaccount            |
+| `MenuOptions`        | Dynamic menu items         | Fetches sidebar options from DB |
+| `SubaccountSelector` | Switch between subaccounts | Shows agency's subaccounts      |
 
 **Dynamic Behavior:**
+
 - Renders different options for agency vs. subaccount
 - Highlights active route
 - Supports custom icons from enum
@@ -799,21 +869,25 @@ setOpen(
 ### 9.3 Utility Files
 
 #### `/src/lib/db.ts`
+
 **Purpose:** Prisma client singleton
 
 **Pattern:**
-```typescript
-import { db } from '@/lib/db'
 
-const user = await db.user.findUnique({ where: { email } })
+```typescript
+import { db } from "@/lib/db";
+
+const user = await db.user.findUnique({ where: { email } });
 ```
 
 **Prevents:** Multiple Prisma client instances in development
 
 #### `/src/lib/types.ts`
+
 **Purpose:** Extended TypeScript types
 
 **Key Types:**
+
 - `NotificationWithUser` - Notification with user relation
 - `UserWithPermissionsAndSubAccounts` - Full user data
 - `AuthUserWithAgencySigebarOptionsSubAccounts` - Auth user complete
@@ -822,24 +896,30 @@ const user = await db.user.findUnique({ where: { email } })
 - (Ticket, Contact, Pipeline types as needed)
 
 #### `/src/lib/constants.ts`
+
 **Purpose:** Application constants
 
 **Exports:**
+
 - `pricingCards` - Pricing plan configurations
 - `defaultPriceId` - Default pricing tier
 - `icons` - Icon mapping for sidebar
 
 #### `/src/lib/utils.ts`
+
 **Purpose:** Helper functions
 
 **Key Functions:**
+
 - `cn()` - Tailwind class name merger (clsx + tailwind-merge)
 - Additional utility functions as needed
 
 #### `/src/lib/uploadthing.ts`
+
 **Purpose:** UploadThing configuration
 
 **Exports:**
+
 - `ourFileRouter` - File upload endpoints
 - Middleware for authentication
 - File size and type restrictions
@@ -851,24 +931,28 @@ const user = await db.user.findUnique({ where: { email } })
 ### 10.1 Code Organization
 
 **Server Logic:**
+
 - ✅ All database operations in `/src/lib/queries.ts`
 - ✅ "use server" directive at function level
 - ✅ Type-safe with Prisma client
 - ❌ No inline database queries in components
 
 **Client Components:**
+
 - ✅ "use client" only when needed (interactivity, hooks, context)
 - ✅ Server components by default
 - ✅ Import server actions directly
 - ❌ No database access in client components
 
 **Form Management:**
+
 - ✅ React Hook Form + Zod for all forms
 - ✅ Shadcn/UI form primitives
 - ✅ Sonner toast for user feedback
 - ❌ No unvalidated form submissions
 
 **State Management:**
+
 - ✅ React Context for minimal global state (Modal, Theme)
 - ✅ Server components fetch data directly
 - ✅ URL state for navigation
@@ -877,59 +961,67 @@ const user = await db.user.findUnique({ where: { email } })
 ### 10.2 Naming Conventions
 
 **Server Actions:**
+
 ```typescript
 // Pattern: verb + noun (camelCase)
-getAuthUserDetails()
-upsertAgency()
-sendInvitation()
-deleteSubAccount()
-saveActivityLogsNotification()
+getAuthUserDetails();
+upsertAgency();
+sendInvitation();
+deleteSubAccount();
+saveActivityLogsNotification();
 ```
 
 **Components:**
+
 ```typescript
 // PascalCase
-UserDetails
-InfoBar
-CustomModal
-SendInvitation
+UserDetails;
+InfoBar;
+CustomModal;
+SendInvitation;
 ```
 
 **Files:**
+
 ```typescript
 // kebab-case
-user-details.tsx
-send-invitation.tsx
-agency-details.tsx
+user - details.tsx;
+send - invitation.tsx;
+agency - details.tsx;
 ```
 
 **Types:**
+
 ```typescript
 // PascalCase with context suffix
-NotificationWithUser
-UserWithPermissionsAndSubAccounts
+NotificationWithUser;
+UserWithPermissionsAndSubAccounts;
 ```
 
 **Database Models:**
+
 ```typescript
 // PascalCase singular
-User
-Agency
-SubAccount
+User;
+Agency;
+SubAccount;
 ```
 
 ### 10.3 Architecture Patterns
 
 #### 1. Server Actions First
+
 **Rule:** All backend operations go through server actions in `queries.ts`
 
 **Benefits:**
+
 - Centralized business logic
 - Type safety end-to-end
 - Easy testing and debugging
 - Clear separation of concerns
 
 **Example:**
+
 ```typescript
 // ✅ GOOD - queries.ts
 "use server"
@@ -946,74 +1038,84 @@ const response = await db.agency.upsert({ ... }) // Direct DB access
 ```
 
 #### 2. Automatic Defaults
+
 **Rule:** New entities are seeded with sensible defaults
 
 **Examples:**
+
 - New agency → Default sidebar options
 - New subaccount → Default pipeline with 5 lanes
 - New subaccount → Creator gets SUBACCOUNT_USER permission
 - New user → AGENCY_OWNER or AGENCY_ADMIN role
 
 **Implementation:**
+
 ```typescript
 // In upsertSubAccount()
 if (!subaccount.id) {
   // Create default pipeline
   await db.pipeline.create({
     data: {
-      name: 'Lead Cycle',
+      name: "Lead Cycle",
       lanes: {
         create: [
-          { name: 'Lead', order: 0 },
-          { name: 'Contacted', order: 1 },
+          { name: "Lead", order: 0 },
+          { name: "Contacted", order: 1 },
           // ...
-        ]
-      }
-    }
-  })
+        ],
+      },
+    },
+  });
 }
 ```
 
 #### 3. RBAC Enforcement
+
 **Rule:** Check permissions at route and component level
 
 **Route Protection (middleware):**
+
 ```typescript
 // proxy.ts
-if (pathname.includes('/agency') && !user.agencyId) {
-  return NextResponse.redirect('/unauthorized')
+if (pathname.includes("/agency") && !user.agencyId) {
+  return NextResponse.redirect("/unauthorized");
 }
 ```
 
 **Component Protection:**
+
 ```typescript
 // In page.tsx
-const authUser = await getAuthUserDetails()
-if (!authUser || authUser.role !== 'AGENCY_OWNER') {
-  return redirect('/unauthorized')
+const authUser = await getAuthUserDetails();
+if (!authUser || authUser.role !== "AGENCY_OWNER") {
+  return redirect("/unauthorized");
 }
 ```
 
 **Permission Checks:**
+
 ```typescript
 const hasAccess = authUser.Permissions.some(
-  p => p.subAccountId === params.subaccountId
-)
+  (p) => p.subAccountId === params.subaccountId,
+);
 ```
 
 #### 4. Activity Logging
+
 **Rule:** All important actions create notifications
 
 **Pattern:**
+
 ```typescript
 await saveActivityLogsNotification({
   agencyId,
   description: `${user.name} | created a subaccount | ${subaccount.name}`,
-  subaccountId: subaccount.id
-})
+  subaccountId: subaccount.id,
+});
 ```
 
 **Logged Actions:**
+
 - Agency/subaccount created/updated
 - User invited/joined
 - Permissions changed
@@ -1021,48 +1123,56 @@ await saveActivityLogsNotification({
 - (Future: Pipeline/ticket updates)
 
 #### 5. Type Safety
+
 **Rule:** Full TypeScript with strict mode
 
 **Patterns:**
+
 - Prisma-generated types as source of truth
 - Extended types in `types.ts` for complex queries
 - Zod schemas for runtime validation
 - Type inference from server actions
 
 **Example:**
+
 ```typescript
 // Extended type with relations
 export type UserWithPermissionsAndSubAccounts = Prisma.UserGetPayload<{
   include: {
-    Permissions: { include: { SubAccount: true } }
-    Agency: { include: { SubAccount: true } }
-  }
-}>
+    Permissions: { include: { SubAccount: true } };
+    Agency: { include: { SubAccount: true } };
+  };
+}>;
 ```
 
 ### 10.4 Security Patterns
 
 **Authentication:**
+
 - ✅ Clerk handles all auth flows
 - ✅ Middleware protects routes
 - ✅ Session verification on server actions
 
 **Authorization:**
+
 - ✅ RBAC via Permissions model
 - ✅ Route-level checks
 - ✅ Data-level permission verification
 
 **Input Validation:**
+
 - ✅ Zod schemas for all forms
 - ✅ Type checking on server actions
 - ✅ Sanitization where needed
 
 **Audit Trails:**
+
 - ✅ Activity notifications for critical actions
 - ✅ Timestamps on all records
 - ✅ User attribution
 
 **Best Practices:**
+
 - Never expose sensitive data in client components
 - Validate all inputs server-side
 - Check permissions before data access
@@ -1071,6 +1181,7 @@ export type UserWithPermissionsAndSubAccounts = Prisma.UserGetPayload<{
 ### 10.5 Error Handling
 
 **Server Actions:**
+
 ```typescript
 try {
   const result = await db.agency.create({ ... })
@@ -1082,17 +1193,19 @@ try {
 ```
 
 **Client Components:**
+
 ```typescript
 try {
-  await upsertAgency(data)
-  toast.success('Agency created')
-  router.push('/agency/dashboard')
+  await upsertAgency(data);
+  toast.success("Agency created");
+  router.push("/agency/dashboard");
 } catch (error) {
-  toast.error('Failed to create agency')
+  toast.error("Failed to create agency");
 }
 ```
 
 **Patterns:**
+
 - Server actions throw errors
 - Client catches and shows toast
 - Critical errors logged to console
@@ -1134,6 +1247,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_key
 ```
 
 **Development Setup:**
+
 1. Copy `.env.example` to `.env`
 2. Fill in Clerk credentials
 3. Set up local MariaDB/MySQL database
@@ -1143,30 +1257,33 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_key
 ### 11.2 Configuration Files
 
 #### `next.config.ts`
+
 ```typescript
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
     domains: [
-      'uploadthing.com',
-      'utfs.io',
-      'img.clerk.com',
-      'subdomain',
-      'files.stripe.com'
-    ]
+      "uploadthing.com",
+      "utfs.io",
+      "img.clerk.com",
+      "subdomain",
+      "files.stripe.com",
+    ],
   },
-  reactStrictMode: false
-}
+  reactStrictMode: false,
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 **Key Settings:**
+
 - Image domains for external sources
 - React strict mode disabled (for development convenience)
 
 #### `tsconfig.json`
+
 ```json
 {
   "compilerOptions": {
@@ -1195,47 +1312,52 @@ export default nextConfig
 ```
 
 **Key Settings:**
+
 - Strict mode enabled
 - Path alias: `@/*` → `./src/*`
 - JSX preserve for Next.js
 
 #### `tailwind.config.ts`
+
 ```typescript
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ['class'],
+  darkMode: ["class"],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
         // Custom color palette
-        border: 'hsl(var(--border))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        border: "hsl(var(--border))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         // ... full Shadcn/UI color system
-      }
-    }
+      },
+    },
   },
-  plugins: [require('tailwindcss-animate')]
-}
+  plugins: [require("tailwindcss-animate")],
+};
 
-export default config
+export default config;
 ```
 
 **Key Features:**
+
 - Dark mode support
 - Shadcn/UI color system
 - Tailwind animations
 
 #### `prisma/schema.prisma`
+
 **See Section 7 for full details**
 
 **Generator:**
+
 ```prisma
 generator client {
   provider = "prisma-client-js"
@@ -1243,6 +1365,7 @@ generator client {
 ```
 
 **Datasource:**
+
 ```prisma
 datasource db {
   provider = "mysql"
@@ -1280,6 +1403,7 @@ npx prisma db seed               # Run seed script (if configured)
 ```
 
 **Package.json Scripts:**
+
 ```json
 {
   "scripts": {
@@ -1300,6 +1424,7 @@ npx prisma db seed               # Run seed script (if configured)
 **Location:** `/home/manish/codes/work/stratos/src/lib/queries.ts`
 
 **Steps:**
+
 1. Add "use server" directive (already at file level)
 2. Define function with TypeScript types
 3. Use `db` client for Prisma operations
@@ -1307,27 +1432,28 @@ npx prisma db seed               # Run seed script (if configured)
 5. Return typed data
 
 **Example:**
+
 ```typescript
 // In queries.ts
-"use server"
+"use server";
 
 export async function getSubaccountTeam(subaccountId: string) {
   try {
     const permissions = await db.permissions.findMany({
       where: { subAccountId: subaccountId },
-      include: { User: true }
-    })
-    return permissions
+      include: { User: true },
+    });
+    return permissions;
   } catch (error) {
-    console.error('Error fetching subaccount team:', error)
-    throw new Error('Failed to fetch team')
+    console.error("Error fetching subaccount team:", error);
+    throw new Error("Failed to fetch team");
   }
 }
 
 // In component
-import { getSubaccountTeam } from '@/lib/queries'
+import { getSubaccountTeam } from "@/lib/queries";
 
-const team = await getSubaccountTeam(params.subaccountId)
+const team = await getSubaccountTeam(params.subaccountId);
 ```
 
 ### 12.2 Creating a New Form Component
@@ -1339,6 +1465,7 @@ const team = await getSubaccountTeam(params.subaccountId)
 1. **Create component file** (e.g., `contact-form.tsx`)
 
 2. **Set up form with React Hook Form + Zod:**
+
 ```typescript
 'use client'
 
@@ -1391,6 +1518,7 @@ export function ContactForm() {
 ```
 
 3. **Add to modal or page:**
+
 ```typescript
 // In parent component
 <CustomModal title="Create Contact">
@@ -1407,6 +1535,7 @@ export function ContactForm() {
 1. **Create page file** (e.g., `contacts/page.tsx`)
 
 2. **Implement with RBAC:**
+
 ```typescript
 import { getAuthUserDetails } from '@/lib/queries'
 import { redirect } from 'next/navigation'
@@ -1438,6 +1567,7 @@ export default async function ContactsPage({
 ```
 
 3. **Add to sidebar navigation:**
+
 ```typescript
 // Update AgencySidebarOption or SubAccountSidebarOption in database
 // Or add to default options in upsertAgency/upsertSubAccount
@@ -1450,6 +1580,7 @@ export default async function ContactsPage({
 **Steps:**
 
 1. **Modify schema:**
+
 ```prisma
 model Contact {
   id            String   @id @default(uuid())
@@ -1464,23 +1595,27 @@ model Contact {
 ```
 
 2. **Create migration:**
+
 ```bash
 npx prisma migrate dev --name add_company_to_contact
 ```
 
 3. **Regenerate Prisma client:**
+
 ```bash
 npx prisma generate
 ```
 
 4. **Update types** (if needed) in `/src/lib/types.ts`:
+
 ```typescript
 export type ContactWithCompany = Prisma.ContactGetPayload<{
-  include: { SubAccount: true }
-}>
+  include: { SubAccount: true };
+}>;
 ```
 
 5. **Update server actions** in `/src/lib/queries.ts`:
+
 ```typescript
 export async function createContact(data: ContactData) {
   return await db.contact.create({
@@ -1489,9 +1624,9 @@ export async function createContact(data: ContactData) {
       email: data.email,
       phone: data.phone,
       company: data.company, // Use new field
-      subAccountId: data.subAccountId
-    }
-  })
+      subAccountId: data.subAccountId,
+    },
+  });
 }
 ```
 
@@ -1500,19 +1635,22 @@ export async function createContact(data: ContactData) {
 **Steps:**
 
 1. **Import FileUpload component:**
+
 ```typescript
-import FileUpload from '@/components/global/FileUpload'
+import FileUpload from "@/components/global/FileUpload";
 ```
 
 2. **Add to form schema:**
+
 ```typescript
 const formSchema = z.object({
   name: z.string(),
-  logo: z.string().min(1, 'Logo is required')
-})
+  logo: z.string().min(1, "Logo is required"),
+});
 ```
 
 3. **Add to form:**
+
 ```typescript
 <FormField
   control={form.control}
@@ -1534,14 +1672,15 @@ const formSchema = z.object({
 ```
 
 4. **Handle in server action:**
+
 ```typescript
 // Logo URL is already a string from UploadThing
 await db.agency.create({
   data: {
     name: data.name,
-    agencyLogo: data.logo // Direct URL
-  }
-})
+    agencyLogo: data.logo, // Direct URL
+  },
+});
 ```
 
 ### 12.6 Adding Activity Notifications
@@ -1549,6 +1688,7 @@ await db.agency.create({
 **Location:** After important actions in `/src/lib/queries.ts`
 
 **Pattern:**
+
 ```typescript
 export async function updateSubAccount(data: SubAccountData) {
   const response = await db.subAccount.update({ ... })
@@ -1565,38 +1705,41 @@ export async function updateSubAccount(data: SubAccountData) {
 ```
 
 **Usage in saveActivityLogsNotification:**
+
 ```typescript
 export async function saveActivityLogsNotification({
   agencyId,
   subaccountId,
-  description
+  description,
 }: {
-  agencyId?: string
-  subaccountId?: string
-  description: string
+  agencyId?: string;
+  subaccountId?: string;
+  description: string;
 }) {
-  const authUser = await currentUser()
+  const authUser = await currentUser();
 
   await db.notification.create({
     data: {
       notification: description,
       agencyId,
       subaccountId,
-      userId: authUser?.id
-    }
-  })
+      userId: authUser?.id,
+    },
+  });
 }
 ```
 
 ### 12.7 Debugging Common Issues
 
 **Issue: Prisma Client Not Found**
+
 ```bash
 # Solution: Regenerate client
 npx prisma generate
 ```
 
 **Issue: Migration Conflicts**
+
 ```bash
 # Solution: Reset database (DESTRUCTIVE - dev only)
 npx prisma migrate reset
@@ -1604,12 +1747,14 @@ npx prisma migrate dev
 ```
 
 **Issue: Clerk User Not Syncing**
+
 ```bash
 # Check: initUser() is called in middleware or on first load
 # Verify: CLERK_SECRET_KEY is correct in .env
 ```
 
 **Issue: File Upload Not Working**
+
 ```bash
 # Check: UPLOADTHING_TOKEN is set
 # Verify: Image domains in next.config.ts
@@ -1617,6 +1762,7 @@ npx prisma migrate dev
 ```
 
 **Issue: Permissions Not Working**
+
 ```bash
 # Check: Permissions record exists in database
 # Verify: User has correct role
@@ -1635,6 +1781,7 @@ npx prisma migrate dev
 **UI:** ⏳ Pending
 
 **Features to Build:**
+
 - Kanban board view with drag-and-drop (React DnD or dnd-kit)
 - Ticket creation and editing forms
 - Contact management interface
@@ -1644,12 +1791,14 @@ npx prisma migrate dev
 - Due date management
 
 **Critical Files to Create:**
+
 - `/src/app/(main)/subaccount/[subaccountId]/pipelines/page.tsx`
 - `/src/components/forms/ticket-form.tsx`
 - `/src/components/forms/contact-form.tsx`
 - `/src/components/pipeline/kanban-board.tsx`
 
 **Server Actions Needed:**
+
 - `getPipelines()`, `createPipeline()`, `updatePipeline()`
 - `getLanes()`, `createLane()`, `updateLaneOrder()`
 - `getTickets()`, `createTicket()`, `updateTicket()`, `moveTicket()`
@@ -1662,6 +1811,7 @@ npx prisma migrate dev
 **UI:** ⏳ Pending
 
 **Features to Build:**
+
 - Visual page builder with drag-and-drop elements
 - Template gallery
 - Component library (headers, forms, CTAs, etc.)
@@ -1671,17 +1821,20 @@ npx prisma migrate dev
 - A/B testing support
 
 **Critical Files to Create:**
+
 - `/src/app/(main)/subaccount/[subaccountId]/funnels/page.tsx`
 - `/src/app/(main)/subaccount/[subaccountId]/funnels/[funnelId]/editor/page.tsx`
 - `/src/components/funnel/page-editor.tsx`
 - `/src/components/funnel/element-library.tsx`
 
 **Server Actions Needed:**
+
 - `getFunnels()`, `createFunnel()`, `updateFunnel()`
 - `getFunnelPages()`, `createPage()`, `updatePageContent()`
 - `publishFunnel()`
 
 **External Libraries to Consider:**
+
 - GrapesJS or similar page builder
 - React DnD for drag-and-drop
 - Monaco Editor for custom code
@@ -1692,6 +1845,7 @@ npx prisma migrate dev
 **UI:** ⏳ Pending
 
 **Features to Build:**
+
 - Visual workflow builder
 - Trigger configuration (form submissions, ticket moves, etc.)
 - Action chaining (create contact → send email → assign to pipeline)
@@ -1700,17 +1854,20 @@ npx prisma migrate dev
 - Active/inactive toggle
 
 **Critical Files to Create:**
+
 - `/src/app/(main)/subaccount/[subaccountId]/automations/page.tsx`
 - `/src/components/automation/workflow-builder.tsx`
 - `/src/lib/automation-engine.ts` - Execution logic
 
 **Server Actions Needed:**
+
 - `getAutomations()`, `createAutomation()`, `updateAutomation()`
 - `getTriggers()`, `createTrigger()`
 - `executeAutomation()` - Run automation instances
 - `getAutomationHistory()`
 
 **Background Job System:**
+
 - Consider implementing job queue (Bull, BullMQ, or similar)
 - Webhook listener for external triggers
 - Scheduled task execution
@@ -1721,6 +1878,7 @@ npx prisma migrate dev
 **UI:** ⏳ Pending
 
 **Features to Build:**
+
 - Subscription plan selection
 - Payment form with Stripe Elements
 - Billing history
@@ -1729,17 +1887,20 @@ npx prisma migrate dev
 - Usage tracking
 
 **Critical Files to Create:**
+
 - `/src/app/(main)/agency/[agencyId]/billing/page.tsx`
 - `/src/components/billing/plan-selector.tsx`
 - `/src/components/billing/payment-form.tsx`
 - `/src/lib/stripe.ts` - Stripe API wrapper
 
 **Server Actions Needed:**
+
 - `createSubscription()`, `updateSubscription()`, `cancelSubscription()`
 - `addAddon()`, `removeAddon()`
 - `getInvoices()`, `downloadInvoice()`
 
 **Stripe Integration:**
+
 - Webhook handling (`/api/stripe/webhook`)
 - Subscription status sync
 - Invoice.paid event handling
@@ -1748,6 +1909,7 @@ npx prisma migrate dev
 ### 13.5 Advanced Analytics Dashboard
 
 **Features to Build:**
+
 - Revenue tracking
 - Funnel conversion rates
 - Pipeline velocity
@@ -1756,17 +1918,20 @@ npx prisma migrate dev
 - Custom date ranges
 
 **Critical Files to Create:**
+
 - `/src/app/(main)/agency/[agencyId]/analytics/page.tsx`
 - `/src/components/analytics/revenue-chart.tsx`
 - `/src/components/analytics/conversion-funnel.tsx`
 
 **Libraries:**
+
 - Recharts (already installed)
 - Tremor (already installed)
 
 ### 13.6 Email System
 
 **Features to Build:**
+
 - Email template builder
 - SMTP configuration
 - Email campaigns
@@ -1774,6 +1939,7 @@ npx prisma migrate dev
 - Email analytics (open rate, click rate)
 
 **Integration Options:**
+
 - Resend
 - SendGrid
 - AWS SES
@@ -1782,6 +1948,7 @@ npx prisma migrate dev
 ### 13.7 Webhook & API System
 
 **Features to Build:**
+
 - REST API for external tools
 - Webhook endpoints for integrations
 - API key management
@@ -1789,11 +1956,13 @@ npx prisma migrate dev
 - Request logging
 
 **Critical Files to Create:**
+
 - `/src/app/api/v1/` - Public API routes
 - `/src/lib/api-auth.ts` - API authentication
 - `/src/lib/rate-limiter.ts`
 
 **Integrations to Support:**
+
 - Zapier
 - Make (Integromat)
 - Custom webhooks
@@ -1804,6 +1973,7 @@ npx prisma migrate dev
 **Future:** Full subdomain-based client access
 
 **Features to Build:**
+
 - DNS configuration guide
 - Subdomain verification
 - Custom domain support
@@ -1811,6 +1981,7 @@ npx prisma migrate dev
 - Subdomain-based theming
 
 **Implementation:**
+
 - Update `proxy.ts` for subdomain detection
 - Create `/src/app/[domain]/` routes
 - Fetch subaccount by subdomain
@@ -1822,74 +1993,84 @@ npx prisma migrate dev
 
 ### 14.1 Internal Documentation
 
-| Document | Path | Purpose |
-|----------|------|---------|
-| **Master Documentation** | `/home/manish/codes/work/stratos/project_docs/documentation.md` | Comprehensive project guide |
-| **Database Schema** | `/home/manish/codes/work/stratos/project_docs/tables.md` | Detailed table definitions |
-| **Day Index** | `/home/manish/codes/work/stratos/project_docs/dayTitle.md` | Quick reference to daily logs |
-| **Daily Logs** | `/home/manish/codes/work/stratos/project_docs/day/` | Day-by-day development history |
-| **Day 1 Log** | `/home/manish/codes/work/stratos/project_docs/day/day01.md` | Foundation & authentication |
-| **Day 2 Log** | `/home/manish/codes/work/stratos/project_docs/day/day02.md` | Marketing site |
-| **Day 3 Log** | `/home/manish/codes/work/stratos/project_docs/day/day03.md` | Database layer |
-| **Day 4 Log** | `/home/manish/codes/work/stratos/project_docs/day/day04.md` | Agency creation |
-| **Day 5 Log** | `/home/manish/codes/work/stratos/project_docs/day/day05.md` | Dashboard layout |
-| **Day 6 Log** | `/home/manish/codes/work/stratos/project_docs/day/day06.md` | Settings & users |
-| **Day 7 Log** | `/home/manish/codes/work/stratos/project_docs/day/day07.md` | Media & subaccounts |
-| **Day 8 Log** | `/home/manish/codes/work/stratos/project_docs/day/day08.md` | Team management |
+| Document                 | Path                                                            | Purpose                        |
+| ------------------------ | --------------------------------------------------------------- | ------------------------------ |
+| **Master Documentation** | `/home/manish/codes/work/stratos/project_docs/documentation.md` | Comprehensive project guide    |
+| **Database Schema**      | `/home/manish/codes/work/stratos/project_docs/tables.md`        | Detailed table definitions     |
+| **Day Index**            | `/home/manish/codes/work/stratos/project_docs/dayTitle.md`      | Quick reference to daily logs  |
+| **Daily Logs**           | `/home/manish/codes/work/stratos/project_docs/day/`             | Day-by-day development history |
+| **Day 1 Log**            | `/home/manish/codes/work/stratos/project_docs/day/day01.md`     | Foundation & authentication    |
+| **Day 2 Log**            | `/home/manish/codes/work/stratos/project_docs/day/day02.md`     | Marketing site                 |
+| **Day 3 Log**            | `/home/manish/codes/work/stratos/project_docs/day/day03.md`     | Database layer                 |
+| **Day 4 Log**            | `/home/manish/codes/work/stratos/project_docs/day/day04.md`     | Agency creation                |
+| **Day 5 Log**            | `/home/manish/codes/work/stratos/project_docs/day/day05.md`     | Dashboard layout               |
+| **Day 6 Log**            | `/home/manish/codes/work/stratos/project_docs/day/day06.md`     | Settings & users               |
+| **Day 7 Log**            | `/home/manish/codes/work/stratos/project_docs/day/day07.md`     | Media & subaccounts            |
+| **Day 8 Log**            | `/home/manish/codes/work/stratos/project_docs/day/day08.md`     | Team management                |
 
 ### 14.2 Critical Source Files
 
-| File | Path | Lines | Description |
-|------|------|-------|-------------|
-| **Server Actions** | `/home/manish/codes/work/stratos/src/lib/queries.ts` | 646 | All backend operations |
-| **Middleware** | `/home/manish/codes/work/stratos/src/proxy.ts` | ~150 | Auth & routing |
-| **Database Schema** | `/home/manish/codes/work/stratos/prisma/schema.prisma` | ~500 | Prisma models |
-| **Modal Provider** | `/home/manish/codes/work/stratos/src/providers/ModalProvider.tsx` | ~80 | Global modal state |
-| **Types** | `/home/manish/codes/work/stratos/src/lib/types.ts` | ~100 | Extended types |
-| **Constants** | `/home/manish/codes/work/stratos/src/lib/constants.ts` | ~150 | Pricing, icons |
-| **InfoBar** | `/home/manish/codes/work/stratos/src/components/global/InfoBar.tsx` | ~150 | Notification UI |
-| **Sidebar** | `/home/manish/codes/work/stratos/src/components/sidebar/index.tsx` | ~200 | Navigation |
+| File                | Path                                                                | Lines | Description            |
+| ------------------- | ------------------------------------------------------------------- | ----- | ---------------------- |
+| **Server Actions**  | `/home/manish/codes/work/stratos/src/lib/queries.ts`                | 646   | All backend operations |
+| **Middleware**      | `/home/manish/codes/work/stratos/src/proxy.ts`                      | ~150  | Auth & routing         |
+| **Database Schema** | `/home/manish/codes/work/stratos/prisma/schema.prisma`              | ~500  | Prisma models          |
+| **Modal Provider**  | `/home/manish/codes/work/stratos/src/providers/ModalProvider.tsx`   | ~80   | Global modal state     |
+| **Types**           | `/home/manish/codes/work/stratos/src/lib/types.ts`                  | ~100  | Extended types         |
+| **Constants**       | `/home/manish/codes/work/stratos/src/lib/constants.ts`              | ~150  | Pricing, icons         |
+| **InfoBar**         | `/home/manish/codes/work/stratos/src/components/global/InfoBar.tsx` | ~150  | Notification UI        |
+| **Sidebar**         | `/home/manish/codes/work/stratos/src/components/sidebar/index.tsx`  | ~200  | Navigation             |
 
 ### 14.3 External Resources
 
 **Framework & Core:**
+
 - [Next.js Documentation](https://nextjs.org/docs) - App Router, Server Actions
 - [React Documentation](https://react.dev) - React 19 features
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/) - Type system
 
 **Database & ORM:**
+
 - [Prisma Documentation](https://prisma.io/docs) - ORM, migrations, queries
 - [Prisma Schema Reference](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference)
 - [MariaDB Documentation](https://mariadb.org/documentation/)
 
 **Authentication:**
+
 - [Clerk Documentation](https://clerk.com/docs) - Auth, user management
 - [Clerk Next.js Guide](https://clerk.com/docs/quickstarts/nextjs)
 
 **UI & Styling:**
+
 - [Shadcn/UI](https://ui.shadcn.com) - Component library
 - [Radix UI](https://www.radix-ui.com/primitives) - Accessible primitives
 - [Tailwind CSS](https://tailwindcss.com/docs) - Utility classes
 
 **Forms & Validation:**
+
 - [React Hook Form](https://react-hook-form.com) - Form management
 - [Zod Documentation](https://zod.dev) - Schema validation
 
 **Data Tables:**
+
 - [TanStack Table](https://tanstack.com/table/latest) - React Table v8
 
 **File Upload:**
+
 - [UploadThing Documentation](https://docs.uploadthing.com) - File storage
 
 **Icons & UI:**
+
 - [Lucide Icons](https://lucide.dev) - Icon library
 - [Sonner](https://sonner.emilkowal.ski/) - Toast notifications
 
 **Payments:**
+
 - [Stripe Documentation](https://stripe.com/docs) - Payment processing
 - [Stripe Next.js Integration](https://stripe.com/docs/stripe-js/react)
 
 **Charts:**
+
 - [Recharts](https://recharts.org/en-US/) - React charts
 - [Tremor](https://www.tremor.so/) - Dashboard components
 
@@ -1918,21 +2099,25 @@ git push                 # Push to remote
 ### 14.5 Related Tools
 
 **Development:**
+
 - VS Code + Prisma extension
 - VS Code + Tailwind CSS IntelliSense
 - React Developer Tools (browser extension)
 
 **Database Management:**
+
 - Prisma Studio (built-in)
 - DBeaver (desktop client)
 - phpMyAdmin (web-based)
 
 **API Testing:**
+
 - Postman
 - Insomnia
 - Thunder Client (VS Code extension)
 
 **Deployment:**
+
 - Vercel (recommended for Next.js)
 - Railway (database hosting)
 - PlanetScale (MySQL-compatible serverless)
@@ -1942,6 +2127,7 @@ git push                 # Push to remote
 ## Appendix: Maintenance Notes
 
 ### For Claude Code:
+
 - This document is AI-optimized for quick comprehension
 - File paths are absolute for easy navigation
 - Critical files marked with ⭐ for priority
@@ -1950,6 +2136,7 @@ git push                 # Push to remote
 - Cross-references to existing documentation prevent duplication
 
 ### For Human Developers:
+
 - Use this as a comprehensive onboarding guide
 - Refer to `/project_docs/` for detailed daily logs
 - All server actions are in `/src/lib/queries.ts` - start there
@@ -1957,6 +2144,7 @@ git push                 # Push to remote
 - Follow established patterns for consistency
 
 ### Updating This Document:
+
 - Update after major feature additions
 - Keep file paths accurate
 - Add new server actions to Section 9

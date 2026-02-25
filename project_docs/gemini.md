@@ -191,3 +191,20 @@
 - Created `project_docs/week-03/day19.md` detailing Day 19 Funnel Page Form Refactor & DnD Fixes.
 - Updated `project_docs/documentation.md` (Version 1.2.1) and `project_docs/week-01/dayTitle.md`.
   **Outcome**: Documentation successfully synchronized with Week 03 "Day 19" work. Form components now use a lighter abstraction pattern, and drag-and-drop stability has been improved.
+
+## [Current Session: Wednesday, February 26, 2026]
+
+**User Action**: Requested multi-theme support and theme picker redesign, then triggered documentation update.
+**Analysis**:
+
+- Detected two themes in `globals.css` both defined under `:root`/`.dark`, causing Dark Matter to always overwrite Portfolio.
+- Identified the need for a scalable CSS architecture scoping each theme under its own class (`.theme-*`).
+- Implemented 7 themes: Portfolio, 2077, Claude, Dark Matter, Kodama Grove, MX-Brutalist, Notebook — each with full light/dark variants.
+- Redesigned `ThemePicker` from a single dropdown into a two-part UI: theme selector dropdown + separate dark/light toggle button.
+- Resolved `:root` specificity conflict by removing `:root` from default theme selector and adding `className="theme-portfolio"` on `<html>` with inline `<script>` for flash-free theme restoration from `localStorage`.
+- Renamed `theme-toggle.tsx` → `theme-picker.tsx`. Removed standalone `ModeToggle` component usage. Deployed `ThemePicker` to both site navigation and dashboard InfoBar.
+  **Actions**:
+- Created `project_docs/week-03/day20.md` detailing Multi-Theme System & Theme Picker Redesign.
+- Updated `project_docs/documentation.md` (Version 1.3.0) with Multi-Theme System feature and Day 20 progress.
+- Updated `project_docs/week-01/dayTitle.md` with Day 20 entry.
+  **Outcome**: Documentation successfully synchronized with Week 03 "Day 20" work. Platform now supports 7 visual themes with independent light/dark modes and a scalable architecture for adding more.

@@ -170,9 +170,9 @@ export default function FunnelSteps({
             Create New Steps
           </Button>
         </aside>
-        <aside className="flex-[0.7] bg-muted p-4 ">
+        <aside className="flex-[0.7] bg-muted md:p-0 p-4 ">
           {!!pages.length ? (
-            <Card className="h-full flex justify-between flex-col">
+            <Card className="h-full flex justify-between flex-col md:rounded-none">
               <CardHeader>
                 <p className="text-sm text-muted-foreground">Page name</p>
                 <CardTitle>{clickedPage?.name}</CardTitle>

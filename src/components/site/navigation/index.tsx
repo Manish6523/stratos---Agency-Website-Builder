@@ -1,5 +1,7 @@
 import { ModeToggle } from "@/components/global/mode-toggle";
+import { ThemePicker } from "@/components/global/theme-picker";
 import Userbutton from "@/components/global/user-button";
+import { Button } from "@/components/ui/button";
 import { User } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +12,7 @@ type Props = {
 
 const Navigation = ({ user }: Props) => {
   return (
-    <div className="backdrop-blur-sm fixed top-0 left-0 right-0 p-4 flex items-center justify-between z-105">
+    <div className="backdrop-blur-sm fixed top-0 left-0 right-0 p-4 flex items-center justify-between z-20">
       <aside className="flex items-center gap-2">
         <Image
           src={"./assets/stratos-logo.svg"}
@@ -29,14 +31,11 @@ const Navigation = ({ user }: Props) => {
         </ul>
       </nav>
       <aside className="flex gap-2 items-center">
-        <Link
-          href={"/agency"}
-          className="bg-primary text-primary-foreground p-2 px-4 rounded-md hover:bg-primary/80 "
-        > 
-          Login
+        <ThemePicker />
+        <Link href={"/agency"}>
+          <Button size={"sm"}>Login</Button>
         </Link>
         <Userbutton />
-        <ModeToggle /> 
       </aside>
     </div>
   );

@@ -25,3 +25,4 @@
 - Day 17: Infrastructure Fixes & Prisma Optimization
 - Day 18: Funnel Management Expansion & UI Refinement
 - Day 19: Funnel Page Form Refactor & DnD Fixes
+- Day 20: Multi-Theme System & Theme Picker Redesign
