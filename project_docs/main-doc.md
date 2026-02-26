@@ -1,7 +1,7 @@
 # STRATOS - Comprehensive Project Documentation
 
-**Version:** 1.3.0 (Beta)
-**Last Updated:** 2026-02-26
+**Version:** 1.4.0 (Beta)
+**Last Updated:** 2026-02-27
 **Purpose:** Primary reference for Claude Code - AI-optimized project documentation
 
 ---
@@ -37,7 +37,7 @@
 - **Marketing Automation:** Build funnels, landing pages, and automated workflows
 - **White-labeling:** Customizable branding per agency
 
-### Key Capabilities (Current - Day 20)
+### Key Capabilities (Current - Day 21)
 
 ✅ User authentication and authorization (Clerk)
 ✅ Multi-tenant agency and subaccount management
@@ -52,7 +52,7 @@
 ✅ Multi-theme system (7 themes with light/dark variants)
 ✅ Razorpay payment & subscription system
 ✅ Contact management with value tracking
-⏳ Visual page builder (database ready, UI pending)
+🔨 Visual page builder (EditorProvider state machine implemented, canvas rendering in progress)
 ⏳ Automation engine (database ready, UI pending)
 
 ---
@@ -264,7 +264,10 @@ User (Clerk Auth)
 │   │
 │   ├── providers/                    # React Context providers
 │   │   ├── ModalProvider.tsx         # Global modal state ⭐
-│   │   └── ThemeProvider.tsx         # Dark/light mode
+│   │   ├── ThemeProvider.tsx         # Dark/light mode
+│   │   └── editor/                   # Visual editor state
+│   │       ├── editor-provider.tsx   # Editor context, reducer, useEditor hook ⭐
+│   │       └── editor-actions.ts     # Discriminated union of 10 action types
 │   │
 │   └── proxy.ts                      # Auth & routing middleware ⭐ CRITICAL
 │
@@ -680,22 +683,23 @@ enum InvitationStatus {
 
 **📄 Detailed Daily Logs:** `/home/manish/codes/work/stratos/project_docs/day/`
 
-| Day           | Date         | Focus Area              | Key Achievements                                                                                                                                                                         | Files Modified                                                                                                             |
-| ------------- | ------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| **Day 1**     | Early Jan    | Foundation & Auth       | • Clerk integration<br>• Next.js 16 App Router setup<br>• Middleware implementation<br>• Shadcn/UI design system                                                                         | `src/proxy.ts`<br>`src/lib/db.ts`<br>Components initialized                                                                |
-| **Day 2**     | Early Jan    | Marketing Site          | • Landing page design<br>• Subdomain routing setup<br>• Theme provider (dark/light)<br>• Public site layout                                                                              | `src/app/site/`<br>`src/providers/ThemeProvider.tsx`                                                                       |
-| **Day 3**     | Early Jan    | Database Layer          | • Prisma schema design (23 models)<br>• Migrations setup<br>• Dashboard foundation<br>• Type definitions                                                                                 | `prisma/schema.prisma`<br>`src/lib/types.ts`<br>`src/lib/queries.ts` started                                               |
-| **Day 4**     | Mid Jan      | Agency Creation         | • `upsertAgency()` implementation<br>• `initUser()` Clerk sync<br>• Role-based routing<br>• Agency creation flow                                                                         | `src/lib/queries.ts`<br>`src/components/forms/AgencyDetails.tsx`<br>`src/app/(main)/agency/`                               |
-| **Day 5**     | Mid Jan      | Dashboard Layout        | • Sidebar navigation (agency/subaccount aware)<br>• Modal system (`ModalProvider`)<br>• RBAC enforcement<br>• InfoBar component                                                          | `src/components/sidebar/`<br>`src/providers/ModalProvider.tsx`<br>`src/components/global/InfoBar.tsx`                      |
-| **Day 6**     | Late Jan     | Settings & Users        | • Agency settings page<br>• UserDetails form<br>• Permission management UI<br>• Notification center<br>• Activity logging                                                                | `src/app/(main)/agency/[agencyId]/settings/`<br>`src/components/forms/UserDetails.tsx`<br>`saveActivityLogsNotification()` |
-| **Day 7**     | Late Jan     | Media & Subaccounts     | • UploadThing integration<br>• Subaccount CRUD operations<br>• Auto-defaults (pipeline, sidebar)<br>• Media management UI                                                                | `src/lib/uploadthing.ts`<br>`src/components/forms/SubaccountDetails.tsx`<br>`upsertSubAccount()` with defaults             |
-| **Day 8**     | Feb 2026     | Team Management         | • TanStack Table integration<br>• SendInvitation form<br>• Email invitation flow<br>• Team member list UI<br>• Notification polish                                                       | `src/app/(main)/agency/[agencyId]/team/`<br>`src/components/forms/SendInvitation.tsx`<br>`sendInvitation()`                |
-| **Day 9-12**  | Feb 2026     | CRM & Funnels           | • Agency Analytics Dashboard<br>• Media Management System<br>• Pipeline & Kanban Boards<br>• Ticket & Tag Management<br>• Funnel Management System                                       | `src/app/(main)/agency/`, `subaccount/`<br>Pipeline, Lane, Ticket components                                               |
-| **Day 13-16** | Feb 2026     | Settings & Billing      | • Subaccount Settings<br>• Contact Management<br>• Razorpay Integration<br>• Open-Access Billing                                                                                         | `src/lib/razorpay/`<br>`billing/`, `contacts/` routes                                                                      |
-| **Day 17-19** | Feb 2026     | Infrastructure & Polish | • Prisma fixes<br>• Funnel expansion & editor routing<br>• Form refactors & DnD fixes                                                                                                    | `funnel-step.tsx`, `funnel-page-form.tsx`                                                                                  |
-| **Day 20**    | Feb 26, 2026 | Multi-Theme System      | • 7 CSS themes with `.theme-*` scoping<br>• ThemePicker (dropdown + dark/light toggle)<br>• Flash-free theme restoration via inline script<br>• Deployed to site nav & dashboard InfoBar | `src/app/globals.css`<br>`src/components/global/theme-picker.tsx`<br>`src/app/layout.tsx`                                  |
+| Day           | Date         | Focus Area               | Key Achievements                                                                                                                                                                                                                                                                                                           | Files Modified                                                                                                                                       |
+| ------------- | ------------ | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Day 1**     | Early Jan    | Foundation & Auth        | • Clerk integration<br>• Next.js 16 App Router setup<br>• Middleware implementation<br>• Shadcn/UI design system                                                                                                                                                                                                           | `src/proxy.ts`<br>`src/lib/db.ts`<br>Components initialized                                                                                          |
+| **Day 2**     | Early Jan    | Marketing Site           | • Landing page design<br>• Subdomain routing setup<br>• Theme provider (dark/light)<br>• Public site layout                                                                                                                                                                                                                | `src/app/site/`<br>`src/providers/ThemeProvider.tsx`                                                                                                 |
+| **Day 3**     | Early Jan    | Database Layer           | • Prisma schema design (23 models)<br>• Migrations setup<br>• Dashboard foundation<br>• Type definitions                                                                                                                                                                                                                   | `prisma/schema.prisma`<br>`src/lib/types.ts`<br>`src/lib/queries.ts` started                                                                         |
+| **Day 4**     | Mid Jan      | Agency Creation          | • `upsertAgency()` implementation<br>• `initUser()` Clerk sync<br>• Role-based routing<br>• Agency creation flow                                                                                                                                                                                                           | `src/lib/queries.ts`<br>`src/components/forms/AgencyDetails.tsx`<br>`src/app/(main)/agency/`                                                         |
+| **Day 5**     | Mid Jan      | Dashboard Layout         | • Sidebar navigation (agency/subaccount aware)<br>• Modal system (`ModalProvider`)<br>• RBAC enforcement<br>• InfoBar component                                                                                                                                                                                            | `src/components/sidebar/`<br>`src/providers/ModalProvider.tsx`<br>`src/components/global/InfoBar.tsx`                                                |
+| **Day 6**     | Late Jan     | Settings & Users         | • Agency settings page<br>• UserDetails form<br>• Permission management UI<br>• Notification center<br>• Activity logging                                                                                                                                                                                                  | `src/app/(main)/agency/[agencyId]/settings/`<br>`src/components/forms/UserDetails.tsx`<br>`saveActivityLogsNotification()`                           |
+| **Day 7**     | Late Jan     | Media & Subaccounts      | • UploadThing integration<br>• Subaccount CRUD operations<br>• Auto-defaults (pipeline, sidebar)<br>• Media management UI                                                                                                                                                                                                  | `src/lib/uploadthing.ts`<br>`src/components/forms/SubaccountDetails.tsx`<br>`upsertSubAccount()` with defaults                                       |
+| **Day 8**     | Feb 2026     | Team Management          | • TanStack Table integration<br>• SendInvitation form<br>• Email invitation flow<br>• Team member list UI<br>• Notification polish                                                                                                                                                                                         | `src/app/(main)/agency/[agencyId]/team/`<br>`src/components/forms/SendInvitation.tsx`<br>`sendInvitation()`                                          |
+| **Day 9-12**  | Feb 2026     | CRM & Funnels            | • Agency Analytics Dashboard<br>• Media Management System<br>• Pipeline & Kanban Boards<br>• Ticket & Tag Management<br>• Funnel Management System                                                                                                                                                                         | `src/app/(main)/agency/`, `subaccount/`<br>Pipeline, Lane, Ticket components                                                                         |
+| **Day 13-16** | Feb 2026     | Settings & Billing       | • Subaccount Settings<br>• Contact Management<br>• Razorpay Integration<br>• Open-Access Billing                                                                                                                                                                                                                           | `src/lib/razorpay/`<br>`billing/`, `contacts/` routes                                                                                                |
+| **Day 17-19** | Feb 2026     | Infrastructure & Polish  | • Prisma fixes<br>• Funnel expansion & editor routing<br>• Form refactors & DnD fixes                                                                                                                                                                                                                                      | `funnel-step.tsx`, `funnel-page-form.tsx`                                                                                                            |
+| **Day 20**    | Feb 26, 2026 | Multi-Theme System       | • 7 CSS themes with `.theme-*` scoping<br>• ThemePicker (dropdown + dark/light toggle)<br>• Flash-free theme restoration via inline script<br>• Deployed to site nav & dashboard InfoBar                                                                                                                                   | `src/app/globals.css`<br>`src/components/global/theme-picker.tsx`<br>`src/app/layout.tsx`                                                            |
+| **Day 21**    | Feb 27, 2026 | Visual Editor Foundation | • `EditorProvider` state machine (useReducer + history stack)<br>• 10 typed `EditorAction` variants (add/update/delete, undo/redo, device, modes)<br>• `EditorBtns` type + `defaultStyles` in constants<br>• Editor page bootstrapped with DB fetch + `EditorProvider`<br>• Funnel step card UI polish & Tailwind v4 fixes | `src/providers/editor/editor-provider.tsx`<br>`src/providers/editor/editor-actions.ts`<br>`src/lib/constants.ts`<br>`editor/[funnelPageId]/page.tsx` |
 
-### Current Status (Day 20 Complete)
+### Current Status (Day 21 Complete)
 
 **✅ Implemented:**
 
@@ -712,9 +716,21 @@ enum InvitationStatus {
 - Razorpay payment & subscriptions
 - Multi-theme system (7 themes, light/dark)
 
+**🔨 In Progress (Visual Page Builder):**
+
+- ✅ Database schema (`FunnelPage`, `ClassName`)
+- ✅ `EditorProvider` state machine (reducer, history, context, hook)
+- ✅ `EditorAction` discriminated union (10 actions)
+- ✅ `EditorBtns` type + `defaultStyles` constant
+- ✅ Editor route bootstrapped with DB fetch & `EditorProvider`
+- ⏳ `FunnelEditor` canvas (recursive element rendering)
+- ⏳ `FunnelEditorNavigation` (device selector, undo/redo, preview, publish)
+- ⏳ `FunnelEditorSidebar` (element palette, style inspector)
+- ⏳ Drag-and-drop from sidebar to canvas
+- ⏳ Inline style editing & element selection
+
 **⏳ Database Ready, UI Pending:**
 
-- Visual page builder
 - Automation engine
 
 **🔮 Planned:**

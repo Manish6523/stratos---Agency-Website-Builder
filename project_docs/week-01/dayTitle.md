@@ -26,3 +26,4 @@
 - Day 18: Funnel Management Expansion & UI Refinement
 - Day 19: Funnel Page Form Refactor & DnD Fixes
 - Day 20: Multi-Theme System & Theme Picker Redesign
+- Day 21: Visual Page Editor — Foundation & State Architecture
