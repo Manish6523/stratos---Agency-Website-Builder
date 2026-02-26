@@ -10,7 +10,7 @@ import {
   Role,
   SubAccount,
   User,
-} from "../../../../../../generated/prisma";
+} from "../../../../../../generated/prisma/client";
 import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
