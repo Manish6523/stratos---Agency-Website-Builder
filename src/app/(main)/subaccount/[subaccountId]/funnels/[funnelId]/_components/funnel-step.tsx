@@ -107,7 +107,7 @@ export default function FunnelSteps({
 
   return (
     <AlertDialog>
-      <div className="flex border-[1px] lg:!flex-row flex-col ">
+      <div className="flex border lg:flex-row! flex-col ">
         <aside className="flex-[0.3] bg-background p-6  flex flex-col justify-between ">
           <ScrollArea className="h-full">
             <div className="flex gap-4 items-center">
@@ -177,17 +177,17 @@ export default function FunnelSteps({
                 <p className="text-sm text-muted-foreground">Page name</p>
                 <CardTitle>{clickedPage?.name}</CardTitle>
                 <CardDescription className="flex flex-col gap-4">
-                  <div className="border-2 rounded-lg sm:w-80 w-full  overflow-clip">
+                  <div className=" relative border-2 rounded-lg sm:w-80 w-full  overflow-clip">
                     <Link
                       href={`/subaccount/${subaccountId}/funnels/${funnelId}/editor/${clickedPage?.id}`}
-                      className="relative group"
+                      className=" group"
                     >
                       <div className="cursor-pointer group-hover:opacity-30 w-full">
                         <FunnelPagePlaceholder />
                       </div>
                       <LucideEdit
                         size={50}
-                        className="!text-muted-foreground absolute top-1/2 left-1/2 opacity-0 transofrm -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all duration-100"
+                        className="text-muted-foreground! absolute top-1/2 left-1/2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all duration-100"
                       />
                     </Link>
 
