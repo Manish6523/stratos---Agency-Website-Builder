@@ -2,9 +2,7 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import EditorProvider from "@/providers/editor/editor-provider";
 import FunnelEditorNavigation from "./_components/funnel-editor-navigation";
-// import FunnelEditorNavigation from './_components/FunnelEditorNavigation'
-// import FunnelEditorSidebar from './_components/FunnelEditorSidebar'
-// import FunnelEditor from './_components/FunnelEditor'
+import FunnelEditorSidebar from "./_components/funnel-editor-sidebar";
 
 type Props = {
   params: Promise<{
@@ -43,9 +41,9 @@ export default async function Page({ params }: Props) {
         />
         {/* <div className="h-full flex justify-center">
           <FunnelEditor funnelPageId={param.funnelPageId} />
-        </div>
+        </div> */}
 
-        <FunnelEditorSidebar subaccountId={param.subaccountId} /> */}
+        <FunnelEditorSidebar subaccountId={param.subaccountId} />
       </EditorProvider>
     </div>
   );
