@@ -226,3 +226,25 @@
 - Updated `project_docs/week-01/dayTitle.md` with Day 21 entry.
 - Updated `project_docs/main-doc.md` to reflect Day 21 state.
   **Outcome**: Documentation successfully synchronized with Week 03 "Day 21" work. The visual page editor now has its full state management core in place (useReducer, history/undo/redo, context), ready for canvas rendering components to be built on top.
+
+## [Current Session: Saturday, February 28, 2026]
+
+**User Action**: Triggered "Update project documentation" for Day 22.
+**Analysis**:
+
+- Detected `FunnelEditorSidebar` activated in `editor/[funnelPageId]/page.tsx` — import uncommented and component rendered alongside `FunnelEditorNavigation` inside `EditorProvider`.
+- Identified dual-panel Sheet sidebar architecture: narrow 64px icon-rail `SheetContent` (zIndex 80) + wide 320px content `SheetContent` (zIndex 40), both offset below the navigation bar with `marginTop: 93px`.
+- Found 4-tab `TabList` icon rail: Settings (`SettingsIcon`), Components (`Plus`), Layers (`SquareStackIcon`), Media (`Database`).
+- Detected accessibility pattern using `@radix-ui/react-visually-hidden` to supply `SheetTitle` for screen readers without visible text.
+- Noted `previewMode` conditional hiding: both panels use `clsx` to apply `hidden` class when `state.editor.previewMode` is `true`.
+- Identified `TooltipTrigger asChild` fix in `funnel-editor-navigation.tsx` to resolve nested `<button>` console error (3 tooltip wrappers updated — Desktop, Tablet, Mobile device tabs).
+- Detected Tailwind v4 `!` suffix fix for `data-[state=active]:bg-muted!` on Desktop tab trigger.
+- Found padding alignment fix: `p-0` → `pl-2` on page name Input and Path span.
+- Noted `table.tsx` update: `[&>[role=checkbox]]` → `*[[role=checkbox]]` child selector syntax for Tailwind v4 in `TableHead` and `TableCell`.
+- Observed `sheet.tsx` code style cleanup: added semicolons to all function return statements (no logic changes).
+  **Actions**:
+- Created `project_docs/week-03/day22.md` detailing Funnel Editor Sidebar Activation & Bug Fixes.
+- Updated `project_docs/documentation.md` (Version 1.4.1).
+- Updated `project_docs/week-01/dayTitle.md` with Day 22 entry.
+- Updated `project_docs/main-doc.md` to reflect Day 22 state.
+  **Outcome**: Documentation successfully synchronized with Week 03 "Day 22" work. The editor layout is now fully framed: navigation bar + dual-panel sidebar are live, with canvas rendering and tab content components (`SettingsTab`, `ComponentsTab`, `MediaBucketTab`) remaining as next steps.
