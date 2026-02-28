@@ -125,10 +125,10 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
           <div className="flex flex-col w-full ">
             <Input
               defaultValue={funnelPageDetails.name}
-              className="border-none h-5 m-0 p-0 text-lg"
+              className="border-none h-5 m-0 pl-2 text-lg"
               onBlur={handleOnBlurTitleChange}
             />
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm pl-2 text-muted-foreground">
               Path: /{funnelPageDetails.pathName}
             </span>
           </div>
@@ -147,10 +147,10 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
           >
             <TabsList className="grid w-full grid-cols-3 bg-transparent h-fit">
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <TabsTrigger
                     value="Desktop"
-                    className="data-[state=active]:bg-muted w-10 h-10 p-0"
+                    className="data-[state=active]:bg-muted! w-10 h-10 p-0"
                   >
                     <Laptop />
                   </TabsTrigger>
@@ -160,7 +160,7 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <TabsTrigger
                     value="Tablet"
                     className="w-10 h-10 p-0 data-[state=active]:bg-muted"
@@ -173,7 +173,7 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <TabsTrigger
                     value="Mobile"
                     className="w-10 h-10 p-0 data-[state=active]:bg-muted"
