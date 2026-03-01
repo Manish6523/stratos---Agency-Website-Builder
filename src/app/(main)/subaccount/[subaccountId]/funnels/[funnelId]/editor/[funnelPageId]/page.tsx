@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import EditorProvider from "@/providers/editor/editor-provider";
 import FunnelEditorNavigation from "./_components/funnel-editor-navigation";
 import FunnelEditorSidebar from "./_components/funnel-editor-sidebar";
+import FunnelEditor from "./_components/funnel-editor";
 
 type Props = {
   params: Promise<{
@@ -39,9 +40,9 @@ export default async function Page({ params }: Props) {
           funnelPageDetails={funnelPageDetails}
           subaccountId={param.subaccountId}
         />
-        {/* <div className="h-full flex justify-center">
+        <div className="h-full flex justify-center">
           <FunnelEditor funnelPageId={param.funnelPageId} />
-        </div> */}
+        </div>
 
         <FunnelEditorSidebar subaccountId={param.subaccountId} />
       </EditorProvider>

@@ -1,16 +1,23 @@
-import { GetMediaFiles } from '@/lib/types'
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command";
-import React from 'react'
-import MediaUploadButton from './media-upload-button';
-import MediaCard from './media-card';
-import { FolderSearch } from 'lucide-react';
+import { GetMediaFiles } from "@/lib/types";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "../ui/command";
+import React from "react";
+import MediaUploadButton from "./media-upload-button";
+import MediaCard from "./media-card";
+import { FolderSearch } from "lucide-react";
 
 type Props = {
-    data: GetMediaFiles,
-    subaccountId: string
-}
+  data: GetMediaFiles;
+  subaccountId: string;
+};
 
-const MediaComponent = async({data, subaccountId}: Props) => {
+const MediaComponent = ({ data, subaccountId }: Props) => {
   return (
     <div className="flex flex-col gap-4 h-full w-full">
       <div className="flex justify-between items-center">
@@ -24,14 +31,20 @@ const MediaComponent = async({data, subaccountId}: Props) => {
           <CommandEmpty>No Media Files</CommandEmpty>
           <CommandGroup heading="Media Files">
             <div className="flex flex-wrap gap-4 pt-4">
-              {data?.Media.map(file => (
-                <CommandItem key={file.id} className="p-0 max-w-75 w-full rounded-lg bg-transparent! font-medium! text-white!">
+              {data?.Media.map((file) => (
+                <CommandItem
+                  key={file.id}
+                  className="p-0 max-w-75 w-full rounded-lg bg-transparent! font-medium! text-white!"
+                >
                   <MediaCard file={file} />
                 </CommandItem>
               ))}
               {!data?.Media.length && (
                 <div className="flex items-center justify-center w-full flex-col">
-                  <FolderSearch size={200} className="dark:text-muted text-slate-300" />
+                  <FolderSearch
+                    size={200}
+                    className="dark:text-muted text-slate-300"
+                  />
                   <p className="text-muted-foreground">
                     Empty! no files to show.
                   </p>
@@ -42,7 +55,7 @@ const MediaComponent = async({data, subaccountId}: Props) => {
         </CommandList>
       </Command>
     </div>
-  )
-}
+  );
+};
 
 export default MediaComponent;

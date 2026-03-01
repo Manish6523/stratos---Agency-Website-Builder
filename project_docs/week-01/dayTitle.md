@@ -28,3 +28,5 @@
 - Day 20: Multi-Theme System & Theme Picker Redesign
 - Day 21: Visual Page Editor — Foundation & State Architecture
 - Day 22: Funnel Editor Sidebar Activation & Bug Fixes
+- Day 23: Funnel Editor Configuration & Media Integration
+- Day 24: Funnel Components (Checkout & Contact Form)

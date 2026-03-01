@@ -1,7 +1,7 @@
 # STRATOS - Comprehensive Project Documentation
 
-**Version:** 1.4.1 (Beta)
-**Last Updated:** 2026-02-28
+**Version:** 1.5.0 (Beta)
+**Last Updated:** 2026-03-01
 **Purpose:** Primary reference for Claude Code - AI-optimized project documentation
 
 ---
@@ -699,6 +699,7 @@ enum InvitationStatus {
 | **Day 20**    | Feb 26, 2026 | Multi-Theme System         | • 7 CSS themes with `.theme-*` scoping<br>• ThemePicker (dropdown + dark/light toggle)<br>• Flash-free theme restoration via inline script<br>• Deployed to site nav & dashboard InfoBar                                                                                                                                                                                            | `src/app/globals.css`<br>`src/components/global/theme-picker.tsx`<br>`src/app/layout.tsx`                                                                                       |
 | **Day 21**    | Feb 27, 2026 | Visual Editor Foundation   | • `EditorProvider` state machine (useReducer + history stack)<br>• 10 typed `EditorAction` variants (add/update/delete, undo/redo, device, modes)<br>• `EditorBtns` type + `defaultStyles` in constants<br>• Editor page bootstrapped with DB fetch + `EditorProvider`<br>• Funnel step card UI polish & Tailwind v4 fixes                                                          | `src/providers/editor/editor-provider.tsx`<br>`src/providers/editor/editor-actions.ts`<br>`src/lib/constants.ts`<br>`editor/[funnelPageId]/page.tsx`                            |
 | **Day 22**    | Feb 28, 2026 | Editor Sidebar & Bug Fixes | • `FunnelEditorSidebar` activated (dual-panel Sheet: 64px icon rail + 320px content panel)<br>• 4-tab icon rail (Settings, Components, Layers, Media) with `previewMode` hiding<br>• `TooltipTrigger asChild` fix — resolved nested `<button>` HTML error in navigation<br>• Tailwind v4 child selector syntax fix in `table.tsx`<br>• `table.tsx` & `sheet.tsx` code style cleanup | `funnel-editor-sidebar/index.tsx`<br>`funnel-editor-sidebar/tabs/index.tsx`<br>`funnel-editor-navigation.tsx`<br>`src/components/ui/table.tsx`<br>`src/components/ui/sheet.tsx` |
+| **Day 23-24** | Mar 1, 2026  | Editor Canvas & Media      | • `SettingsTab` expansive styling properties (Typography, Dimensions, Decorations, Flexbox)<br>• `MediaBucketTab` integrated into editor sidebar<br>• `Checkout` component with live Stripe products<br>• `contactForm` component for funnels<br>• Uncached promise bug fixed in media components                                                                                   | `setting-tab.tsx`<br>`media-bucket-tab.tsx`<br>`FunnelEditorComponents/Checkout.tsx`<br>`contactForm.tsx`                                                                       |
 
 ### Current Status (Day 22 Complete)
 
@@ -726,10 +727,10 @@ enum InvitationStatus {
 - ✅ Editor route bootstrapped with DB fetch & `EditorProvider`
 - ✅ `FunnelEditorNavigation` — device tabs (Desktop/Tablet/Mobile), undo/redo, preview/publish actions
 - ✅ `FunnelEditorSidebar` — dual-panel Sheet (icon rail + content panel), 4 tabs, previewMode hiding
+- ✅ `SettingsTab` — style inspector panel (Typography, Dimensions, Decorations, Flexbox)
+- ✅ `MediaBucketTab` — media picker panel
 - ⏳ `FunnelEditor` canvas (recursive element rendering)
-- ⏳ `SettingsTab` — style inspector panel
 - ⏳ `ComponentsTab` — element palette with drag-and-drop
-- ⏳ `MediaBucketTab` — media picker panel
 - ⏳ Drag-and-drop from sidebar to canvas
 - ⏳ Inline style editing & element selection
 

@@ -12,6 +12,8 @@ import { useEditor } from "@/providers/editor/editor-provider";
 import clsx from "clsx";
 import React from "react";
 import TabList from "./tabs";
+import SettingsTab from "./tabs/setting-tab";
+import MediaBucketTab from "./tabs/media-bucket-tab";
 
 type Props = {
   subaccountId: string;
@@ -43,7 +45,7 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
         <SheetContent
           showCloseButton={false}
           side="right"
-          style={{ ...style, zIndex: 40, width: "320px", marginRight:"64px" }}
+          style={{ ...style, zIndex: 40, width: "320px", marginRight: "64px" }}
           className={clsx(
             "w-80 shadow-none p-0 bg-background h-full transition-all overflow-hidden ",
             { hidden: state.editor.previewMode },
@@ -62,10 +64,10 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
                   like.
                 </SheetDescription>
               </SheetHeader>
-              {/* <SettingsTab /> */}
+              <SettingsTab />
             </TabsContent>
             <TabsContent value="Media">
-              {/* <MediaBucketTab subaccountId={subaccountId} /> */}
+              <MediaBucketTab subaccountId={subaccountId} />
             </TabsContent>
             <TabsContent value="Components">
               <SheetHeader className="text-left p-6 ">

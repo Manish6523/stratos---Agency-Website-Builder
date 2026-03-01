@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Friday, February 27, 2026
-**Version:** 1.4.0 (Beta)
+**Date:** Sunday, March 1, 2026
+**Version:** 1.5.0 (Beta)
 
 ---
 
@@ -27,7 +27,7 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Launchpad**: Onboarding checklist for new subaccounts to complete setup steps.
 - **Dynamic Navigation**: Context-aware UI headers in the global InfoBar that adapt based on the user's current section.
 - **Multi-Theme System**: Scalable CSS architecture with 7 visual themes (Portfolio, 2077, Claude, Dark Matter, Kodama Grove, MX-Brutalist, Notebook), each with independent light/dark mode variants, persistent selection, and flash-free page loads.
-- **Visual Page Building**: (In Progress) `EditorProvider` state machine implemented with `useReducer`, 10-action discriminated union, full undo/redo history stack, and device-responsive canvas scaffold. Canvas rendering components are next.
+- **Visual Page Building**: (In Progress) `EditorProvider` state machine implemented with `useReducer`, 10-action discriminated union, full undo/redo history stack, and device-responsive canvas scaffold. Advanced sidebar tabs (`SettingsTab`, `MediaBucketTab`) and canvas components (`Checkout`, Contact Form) are implemented.
 
 ---
 
@@ -200,6 +200,9 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 - **Day 19**: Refactored Funnel Page Form to remove shadcn/ui form abstraction in favor of native inputs with `react-hook-form` register. Fixed `router.refresh()` state sync in FunnelSteps with `useEffect`. Resolved drag-and-drop container collapse by adding `provided.placeholder`. Polished funnel step cards, navigation, and SVG attribute casing.
 - **Day 20**: Implemented scalable Multi-Theme CSS Architecture with 7 themes scoped under `.theme-*` classes. Redesigned ThemePicker into a two-part UI (theme dropdown + dark/light toggle). Added inline script for flash-free theme restoration. Deployed theme picker to both site navigation and dashboard InfoBar.
 - **Day 21**: Scaffolded Visual Page Editor infrastructure. Created `editor-provider.tsx` (full state machine with `useReducer`, recursive element operations, undo/redo history stack) and `editor-actions.ts` (discriminated union of 10 action types). Added `EditorBtns` union type and `defaultStyles` to `constants.ts`. Rebuilt funnel editor route with DB-fetched `FunnelPage` data, guard clause, and `EditorProvider` wrapper. Polished funnel step card UI and fixed Tailwind v4 class syntax.
+- **Day 22**: Activated `FunnelEditorSidebar` with dual-panel layout, `TooltipTrigger` fixes, and refined Tailwind `table.tsx` child selectors.
+- **Day 23**: Built expansive `SettingsTab` property inspector (Typography, Dimensions, Decorations, Flexbox) and embedded the `MediaBucketTab` into the editor allowing seamless asset selection. Fixed uncached promise routing bugs.
+- **Day 24**: Developed dynamic funnel components including a Stripe `Checkout` element and an embedded `contactForm`. Addressed Stripe elements integration complexities regarding async liveProducts and connected account ID loading.
 
 ---
 

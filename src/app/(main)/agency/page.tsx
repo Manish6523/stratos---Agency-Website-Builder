@@ -2,7 +2,7 @@ import { getAuthUserDetails, verifyAndAcceptInvitation } from "@/lib/queries";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
-import { Plan } from "../../../../generated/prisma";
+import { Plan } from "../../../../generated/prisma/client";
 import AgencyDetails from "@/components/forms/agency-details";
 
 const page = async ({

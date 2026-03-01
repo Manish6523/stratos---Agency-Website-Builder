@@ -65,7 +65,7 @@ const AllSubAccountsPage = async ({ params }: Props) => {
                       />
                     </div>
                     <div className="flex flex-col justify-center">
-                      <p className="font-bold text-lg">{subaccount.name}</p>
+                      <p className="font-bold dark:text-primary text-lg">{subaccount.name}</p>
                       <span className="text-muted-foreground text-xs">
                         {subaccount.address}
                       </span>

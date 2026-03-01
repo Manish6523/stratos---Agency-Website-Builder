@@ -24,7 +24,7 @@ import { useState } from "react";
 import { Copy, MoreVertical, Trash, Calendar } from "lucide-react";
 import { deleteMedia, saveActivityLogsNotification } from "@/lib/queries";
 import { toast } from "sonner";
-import { Media } from "../../../generated/prisma";
+import { Media } from "../../../generated/prisma/client";
 
 type Props = {
   file: Media;
