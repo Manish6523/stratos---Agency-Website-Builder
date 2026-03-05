@@ -282,3 +282,19 @@
 - Updated `project_docs/week-01/dayTitle.md` with Day 25 entry.
 - Updated `project_docs/main-doc.md` to reflect Day 25 state.
   **Outcome**: Documentation successfully synchronized with Week 03 "Day 25" work. The visual page builder now has its ComponentsTab live for drag-and-drop element placement. ContentEditable components are stable across both Text and Link elements.
+
+## [Current Session: Friday, March 6, 2026]
+
+**User Action**: Requested implementation of drag and drop reordering inside containers and disabling canvas edits in live/preview modes. Triggered documentation update.
+**Analysis**:
+
+- Detected robust geometry-based positional reordering (`getBoundingClientRect`) implemented securely in `Container.tsx` and `TwoColumns.tsx` via new drop target index resolution calculations.
+- Identified standard `id={props.element.id}` mapping across all `FunnelEditorComponents` (`TextComponent`, `ButtonComponent`, `ImageComponent`, etc) unlocking native DOM node searches during drop events.
+- Discovered sweeping restrictions on `draggable` allowing it only when `!state.editor.liveMode && !state.editor.previewMode`.
+- Noted `Array.prototype.splice` adaptation in `addAnElement` block within `editor-provider.tsx` alongside proper `insertIndex` payload transmission within `ADD_ELEMENT` and `MOVE_ELEMENT` dispatches in `editor-actions.ts`.
+- Detected bug fixation on empty hook destructuring (`useEditor`) within `TwoColumns.tsx`.
+  **Actions**:
+- Created `project_docs/week-03/day26.md` detailing Canvas Drag & Drop Reordering System implementation.
+- Updated `project_docs/main-doc.md` timeline and checklist showing item placement vs item sorting.
+- Hooked Day 26 onto `project_docs/dayTitle.md`.
+  **Outcome**: Documentation successfully synchronized with Week 03 "Day 26" work. The visual page builder is now thoroughly functional concerning nesting depth limits, relative sorting capabilities, and mode-based interaction restrictions.

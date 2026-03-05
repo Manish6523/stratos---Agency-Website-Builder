@@ -701,8 +701,9 @@ enum InvitationStatus {
 | **Day 22**    | Feb 28, 2026 | Editor Sidebar & Bug Fixes            | • `FunnelEditorSidebar` activated (dual-panel Sheet: 64px icon rail + 320px content panel)<br>• 4-tab icon rail (Settings, Components, Layers, Media) with `previewMode` hiding<br>• `TooltipTrigger asChild` fix — resolved nested `<button>` HTML error in navigation<br>• Tailwind v4 child selector syntax fix in `table.tsx`<br>• `table.tsx` & `sheet.tsx` code style cleanup | `funnel-editor-sidebar/index.tsx`<br>`funnel-editor-sidebar/tabs/index.tsx`<br>`funnel-editor-navigation.tsx`<br>`src/components/ui/table.tsx`<br>`src/components/ui/sheet.tsx` |
 | **Day 23-24** | Mar 1, 2026  | Editor Canvas & Media                 | • `SettingsTab` expansive styling properties (Typography, Dimensions, Decorations, Flexbox)<br>• `MediaBucketTab` integrated into editor sidebar<br>• `Checkout` component with live Stripe products<br>• `contactForm` component for funnels<br>• Uncached promise bug fixed in media components                                                                                   | `setting-tab.tsx`<br>`media-bucket-tab.tsx`<br>`FunnelEditorComponents/Checkout.tsx`<br>`contactForm.tsx`                                                                       |
 | **Day 25**    | Mar 5, 2026  | ContentEditable Fixes & ComponentsTab | • `contentEditable` + React children fix in `TextComponent` & `LinkComponent` (suppressContentEditableWarning + dangerouslySetInnerHTML)<br>• `ComponentsTab` activated in editor sidebar for drag-and-drop element palette<br>• Navigation bar padding polish (`py-3`)<br>• `setting-tab.tsx` code formatting cleanup<br>• Prebuilt landing page JSON template for DB seeding      | `TextComponent.tsx`<br>`LinkComponent.tsx`<br>`funnel-editor-sidebar/index.tsx`<br>`funnel-editor-navigation.tsx`<br>`setting-tab.tsx`                                          |
+| **Day 26**    | Mar 5, 2026  | Canvas Drag & Drop System             | • Visual reordering logic via drag and drop using geometry bounding boxes (`getBoundingClientRect`) inside `Container` and `TwoColumns`<br>• Canvas element drag disabled in Live and Preview modes<br>• DOM ID assignment to editor canvas elements for precise drop targeting<br>• `insertIndex` payloads added to `editor-actions`                                               | `editor-provider.tsx`<br>`editor-actions.ts`<br>`Container.tsx`<br>`TwoColumns.tsx`<br>All Canvas Components                                                                    |
 
-### Current Status (Day 25 Complete)
+### Current Status (Day 26 Complete)
 
 **✅ Implemented:**
 
@@ -732,8 +733,8 @@ enum InvitationStatus {
 - ✅ `MediaBucketTab` — media picker panel
 - ✅ `ComponentsTab` — element palette with drag-and-drop
 - ✅ `contentEditable` stability — TextComponent & LinkComponent use `dangerouslySetInnerHTML` pattern
+- ✅ Drag-and-drop element reordering with visual targeting indices
 - ⏳ `FunnelEditor` canvas (recursive element rendering polish)
-- ⏳ Drag-and-drop from sidebar to canvas refinement
 - ⏳ Inline style editing & element selection
 
 **⏳ Database Ready, UI Pending:**
