@@ -54,6 +54,7 @@ const TextComponent = (props: Props) => {
         )}
       <span
         contentEditable={!state.editor.liveMode}
+        suppressContentEditableWarning={true}
         onBlur={(e) => {
           const spanElement = e.target as HTMLSpanElement;
           dispatch({
@@ -68,10 +69,12 @@ const TextComponent = (props: Props) => {
             },
           });
         }}
-      >
-        {!Array.isArray(props.element.content) &&
-          props.element.content.innerText}
-      </span>
+        dangerouslySetInnerHTML={{
+          __html: !Array.isArray(props.element.content)
+            ? (props.element.content.innerText ?? "")
+            : "",
+        }}
+      />
       {state.editor.selectedElement.id === props.element.id &&
         !state.editor.liveMode && (
           <div className="absolute bg-primary px-2.5 py-1 text-xs font-bold -top-[25px] -right-px rounded-none rounded-t-lg text-white!">

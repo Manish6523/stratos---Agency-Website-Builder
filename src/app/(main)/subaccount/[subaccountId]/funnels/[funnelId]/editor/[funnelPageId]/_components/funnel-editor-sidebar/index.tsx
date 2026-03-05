@@ -14,6 +14,7 @@ import React from "react";
 import TabList from "./tabs";
 import SettingsTab from "./tabs/setting-tab";
 import MediaBucketTab from "./tabs/media-bucket-tab";
+import ComponentsTab from "./tabs/components-tab";
 
 type Props = {
   subaccountId: string;
@@ -22,7 +23,7 @@ type Props = {
 export default function FunnelEditorSidebar({ subaccountId }: Props) {
   const { state } = useEditor();
   const style = {
-    marginTop: "93px",
+    marginTop: "70px",
     zIndex: 80,
   };
   return (
@@ -55,7 +56,7 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
             <SheetTitle>Editor Sidebar Panel</SheetTitle>
           </VisuallyHidden>
 
-          <div className="grid gap-4 h-full pb-36 overflow-auto">
+          <div className="grid gap-4 h-full pb-26 overflow-auto">
             <TabsContent value="Settings">
               <SheetHeader className="text-left p-6">
                 <SheetTitle>Styles</SheetTitle>
@@ -76,7 +77,7 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
                   You can drag and drop components on the canvas
                 </SheetDescription>
               </SheetHeader>
-              {/* <ComponentsTab /> */}
+              <ComponentsTab />
             </TabsContent>
           </div>
         </SheetContent>

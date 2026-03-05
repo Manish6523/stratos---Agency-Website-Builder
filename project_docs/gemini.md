@@ -263,3 +263,22 @@
 - Updated `project_docs/main-doc.md` and `project_docs/documentation.md` (Version 1.5.0) to reflect the new feature state.
 - Updated `project_docs/week-01/dayTitle.md` with new entries.
   **Outcome**: Documentation successfully synchronized for the work spanning the weekend (Days 23 and 24). The visual page builder is rapidly approaching a fully functional canvas setup.
+
+## [Current Session: Wednesday, March 5, 2026]
+
+**User Action**: Triggered "Update project documentation" for Day 25.
+**Analysis**:
+
+- Detected `contentEditable` + React children conflict in both `TextComponent.tsx` and `LinkComponent.tsx`. Both components used `<span contentEditable>` with React-managed children, causing React warnings about DOM manipulation conflicts.
+- Identified fix: `suppressContentEditableWarning={true}` + `dangerouslySetInnerHTML` replaces direct React children, handing DOM control to the browser during editing. Nullish coalescing (`?? ""`) added for TypeScript safety.
+- Detected `ComponentsTab` activation in `FunnelEditorSidebar/index.tsx` — import uncommented and component rendered, enabling the drag-and-drop element palette.
+- Noted navigation bar padding polish: `py-3` added to compact the editor nav bar.
+- Observed `setting-tab.tsx` formatting cleanup: multi-line `<TabsTrigger>` collapsed, trailing whitespace fixed, `<AccordionTrigger>` content reformatted. No logic changes.
+- Identified prebuilt landing page JSON template creation for database seeding — full page with Navbar, Hero, Stats, Features, Testimonials, CTA, and Footer sections.
+- Noted debug `console.log` added in `page.tsx` for page data inspection.
+  **Actions**:
+- Created `project_docs/week-03/day25.md` detailing ContentEditable Fixes, ComponentsTab Activation & Landing Page Template.
+- Updated `project_docs/documentation.md` (Version 1.5.1).
+- Updated `project_docs/week-01/dayTitle.md` with Day 25 entry.
+- Updated `project_docs/main-doc.md` to reflect Day 25 state.
+  **Outcome**: Documentation successfully synchronized with Week 03 "Day 25" work. The visual page builder now has its ComponentsTab live for drag-and-drop element placement. ContentEditable components are stable across both Text and Link elements.

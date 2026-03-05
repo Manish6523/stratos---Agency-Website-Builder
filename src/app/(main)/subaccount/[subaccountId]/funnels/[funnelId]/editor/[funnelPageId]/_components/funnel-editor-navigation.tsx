@@ -114,7 +114,7 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
     <TooltipProvider>
       <nav
         className={clsx(
-          'border-b flex items-center justify-between p-6 gap-2 transition-all',
+          'border-b flex items-center justify-between p-6 py-3 gap-2 transition-all',
           { 'h-0! p-0! overflow-hidden! z-300': state.editor.previewMode }
         )}
       >

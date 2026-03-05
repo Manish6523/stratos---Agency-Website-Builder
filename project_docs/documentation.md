@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Sunday, March 1, 2026
-**Version:** 1.5.0 (Beta)
+**Date:** Wednesday, March 5, 2026
+**Version:** 1.5.1 (Beta)
 
 ---
 
@@ -27,7 +27,7 @@ Stratos is a comprehensive **SaaS (Software as a Service) platform** designed fo
 - **Launchpad**: Onboarding checklist for new subaccounts to complete setup steps.
 - **Dynamic Navigation**: Context-aware UI headers in the global InfoBar that adapt based on the user's current section.
 - **Multi-Theme System**: Scalable CSS architecture with 7 visual themes (Portfolio, 2077, Claude, Dark Matter, Kodama Grove, MX-Brutalist, Notebook), each with independent light/dark mode variants, persistent selection, and flash-free page loads.
-- **Visual Page Building**: (In Progress) `EditorProvider` state machine implemented with `useReducer`, 10-action discriminated union, full undo/redo history stack, and device-responsive canvas scaffold. Advanced sidebar tabs (`SettingsTab`, `MediaBucketTab`) and canvas components (`Checkout`, Contact Form) are implemented.
+- **Visual Page Building**: (In Progress) `EditorProvider` state machine implemented with `useReducer`, 10-action discriminated union, full undo/redo history stack, and device-responsive canvas scaffold. Advanced sidebar tabs (`SettingsTab`, `MediaBucketTab`, `ComponentsTab`) and canvas components (`Checkout`, Contact Form) are implemented. `contentEditable` elements stabilized with `dangerouslySetInnerHTML` pattern.
 
 ---
 
@@ -203,6 +203,7 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 - **Day 22**: Activated `FunnelEditorSidebar` with dual-panel layout, `TooltipTrigger` fixes, and refined Tailwind `table.tsx` child selectors.
 - **Day 23**: Built expansive `SettingsTab` property inspector (Typography, Dimensions, Decorations, Flexbox) and embedded the `MediaBucketTab` into the editor allowing seamless asset selection. Fixed uncached promise routing bugs.
 - **Day 24**: Developed dynamic funnel components including a Stripe `Checkout` element and an embedded `contactForm`. Addressed Stripe elements integration complexities regarding async liveProducts and connected account ID loading.
+- **Day 25**: Resolved `contentEditable` + React children conflicts in `TextComponent` and `LinkComponent` using `suppressContentEditableWarning` + `dangerouslySetInnerHTML`. Activated `ComponentsTab` in editor sidebar. Polished editor navigation padding. Created prebuilt landing page JSON template for DB seeding.
 
 ---
 

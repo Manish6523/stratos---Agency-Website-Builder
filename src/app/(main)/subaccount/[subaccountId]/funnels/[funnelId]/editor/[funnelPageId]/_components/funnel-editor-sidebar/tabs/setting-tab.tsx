@@ -40,9 +40,11 @@ type Props = {};
 export default function SettingsTab({}: Props) {
   const { state, dispatch } = useEditor();
 
-  const TABS_TRIGGER_CLASS = "cursor-pointer w-10 h-10 p-0 data-[state=active]:bg-muted"
-  const ACCORDIAN_TIRGGER_CLASS = "no-underline! cursor-pointer"
-  const TABLIST_CLASS = "flex items-center flex-row justify-between border rounded-md bg-transparent h-fit gap-4"
+  const TABS_TRIGGER_CLASS =
+    "cursor-pointer w-10 h-10 p-0 data-[state=active]:bg-muted";
+  const ACCORDIAN_TIRGGER_CLASS = "no-underline! cursor-pointer";
+  const TABLIST_CLASS =
+    "flex items-center flex-row justify-between border rounded-md bg-transparent h-fit gap-4";
 
   const handleOnChanges = (e: any) => {
     const styleSettings = e.target.id;
@@ -93,7 +95,9 @@ export default function SettingsTab({}: Props) {
       defaultValue={["Typography", "Dimensions", "Decorations", "Flexbox"]}
     >
       <AccordionItem value="Custom" className="px-6 py-0  ">
-        <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>Custom</AccordionTrigger>
+        <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
+          Custom
+        </AccordionTrigger>
         <AccordionContent>
           {state.editor.selectedElement.type === "link" &&
             !Array.isArray(state.editor.selectedElement.content) && (
@@ -104,6 +108,18 @@ export default function SettingsTab({}: Props) {
                   placeholder="https:domain.example.com/pathname"
                   onChange={handleChangeCustomValues}
                   value={state.editor.selectedElement.content.href || ""}
+                />
+              </div>
+            )}
+          {state.editor.selectedElement.type === "video" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-2">
+                <p className="text-muted-foreground">Video URL</p>
+                <Input
+                  id="src"
+                  placeholder="embedded video url"
+                  onChange={handleChangeCustomValues}
+                  value={state.editor.selectedElement.content.src || ""}
                 />
               </div>
             )}
@@ -128,28 +144,16 @@ export default function SettingsTab({}: Props) {
               value={state.editor.selectedElement.styles.textAlign || ""}
             >
               <TabsList className={TABLIST_CLASS}>
-                <TabsTrigger
-                  value="left"
-                  className={TABS_TRIGGER_CLASS}
-                >
+                <TabsTrigger value="left" className={TABS_TRIGGER_CLASS}>
                   <AlignLeft size={18} />
                 </TabsTrigger>
-                <TabsTrigger
-                  value="right"
-                  className={TABS_TRIGGER_CLASS}
-                >
+                <TabsTrigger value="right" className={TABS_TRIGGER_CLASS}>
                   <AlignRight size={18} />
                 </TabsTrigger>
-                <TabsTrigger
-                  value="center"
-                  className={TABS_TRIGGER_CLASS}
-                >
+                <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
                   <AlignCenter size={18} />
                 </TabsTrigger>
-                <TabsTrigger
-                  value="justify"
-                  className={TABS_TRIGGER_CLASS}
-                >
+                <TabsTrigger value="justify" className={TABS_TRIGGER_CLASS}>
                   <AlignJustify size={18} />
                 </TabsTrigger>
               </TabsList>
@@ -178,7 +182,7 @@ export default function SettingsTab({}: Props) {
                 onValueChange={(e) =>
                   handleOnChanges({
                     target: {
-                      id: "font-weight",
+                      id: "fontWeight",
                       value: e,
                     },
                   })
@@ -247,7 +251,9 @@ export default function SettingsTab({}: Props) {
                       id="marginTop"
                       placeholder="px"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.marginTop || ""}
+                      value={
+                        state.editor.selectedElement.styles.marginTop || ""
+                      }
                     />
                   </div>
                   <div>
@@ -256,7 +262,9 @@ export default function SettingsTab({}: Props) {
                       placeholder="px"
                       id="marginBottom"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.marginBottom || ""}
+                      value={
+                        state.editor.selectedElement.styles.marginBottom || ""
+                      }
                     />
                   </div>
                 </div>
@@ -267,7 +275,9 @@ export default function SettingsTab({}: Props) {
                       placeholder="px"
                       id="marginLeft"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.marginLeft || ""}
+                      value={
+                        state.editor.selectedElement.styles.marginLeft || ""
+                      }
                     />
                   </div>
                   <div>
@@ -276,7 +286,9 @@ export default function SettingsTab({}: Props) {
                       placeholder="px"
                       id="marginRight"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.marginRight || ""}
+                      value={
+                        state.editor.selectedElement.styles.marginRight || ""
+                      }
                     />
                   </div>
                 </div>
@@ -292,7 +304,9 @@ export default function SettingsTab({}: Props) {
                       placeholder="px"
                       id="paddingTop"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.paddingTop || ""}
+                      value={
+                        state.editor.selectedElement.styles.paddingTop || ""
+                      }
                     />
                   </div>
                   <div>
@@ -301,7 +315,9 @@ export default function SettingsTab({}: Props) {
                       placeholder="px"
                       id="paddingBottom"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.paddingBottom || ""}
+                      value={
+                        state.editor.selectedElement.styles.paddingBottom || ""
+                      }
                     />
                   </div>
                 </div>
@@ -312,7 +328,9 @@ export default function SettingsTab({}: Props) {
                       placeholder="px"
                       id="paddingLeft"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.paddingLeft || ""}
+                      value={
+                        state.editor.selectedElement.styles.paddingLeft || ""
+                      }
                     />
                   </div>
                   <div>
@@ -321,7 +339,9 @@ export default function SettingsTab({}: Props) {
                       placeholder="px"
                       id="paddingRight"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.paddingRight || ""}
+                      value={
+                        state.editor.selectedElement.styles.paddingRight || ""
+                      }
                     />
                   </div>
                 </div>
@@ -425,7 +445,9 @@ export default function SettingsTab({}: Props) {
                 className="border-y-0! rounded-none border-r-0! mr-2"
                 id="backgroundColor"
                 onChange={handleOnChanges}
-                value={state.editor.selectedElement.styles.backgroundColor || ""}
+                value={
+                  state.editor.selectedElement.styles.backgroundColor || ""
+                }
               />
             </div>
           </div>
@@ -444,7 +466,9 @@ export default function SettingsTab({}: Props) {
                 className="border-y-0! rounded-none border-r-0! mr-2"
                 id="backgroundImage"
                 onChange={handleOnChanges}
-                value={state.editor.selectedElement.styles.backgroundImage || ""}
+                value={
+                  state.editor.selectedElement.styles.backgroundImage || ""
+                }
               />
             </div>
           </div>
@@ -462,22 +486,13 @@ export default function SettingsTab({}: Props) {
               value={state.editor.selectedElement.styles.backgroundSize?.toString()}
             >
               <TabsList className={TABLIST_CLASS}>
-                <TabsTrigger
-                  value="cover"
-                  className={TABS_TRIGGER_CLASS}
-                >
+                <TabsTrigger value="cover" className={TABS_TRIGGER_CLASS}>
                   <ChevronsLeftRightIcon size={18} />
                 </TabsTrigger>
-                <TabsTrigger
-                  value="contain"
-                  className={TABS_TRIGGER_CLASS}
-                >
+                <TabsTrigger value="contain" className={TABS_TRIGGER_CLASS}>
                   <AlignVerticalJustifyCenter size={22} />
                 </TabsTrigger>
-                <TabsTrigger
-                  value="auto"
-                  className={TABS_TRIGGER_CLASS}
-                >
+                <TabsTrigger value="auto" className={TABS_TRIGGER_CLASS}>
                   <LucideImageDown size={18} />
                 </TabsTrigger>
               </TabsList>
@@ -486,7 +501,9 @@ export default function SettingsTab({}: Props) {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="Flexbox" className="px-6 py-0  ">
-        <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>Flexbox</AccordionTrigger>
+        <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
+          Flexbox
+        </AccordionTrigger>
         <AccordionContent>
           <Label className="text-muted-foreground">Justify Content</Label>
           <Tabs
@@ -501,34 +518,19 @@ export default function SettingsTab({}: Props) {
             value={state.editor.selectedElement.styles.justifyContent || ""}
           >
             <TabsList className={TABLIST_CLASS}>
-              <TabsTrigger
-                value="space-between"
-                className={TABS_TRIGGER_CLASS}
-              >
+              <TabsTrigger value="space-between" className={TABS_TRIGGER_CLASS}>
                 <AlignHorizontalSpaceBetween size={18} />
               </TabsTrigger>
-              <TabsTrigger
-                value="space-evenly"
-                className={TABS_TRIGGER_CLASS}
-              >
+              <TabsTrigger value="space-evenly" className={TABS_TRIGGER_CLASS}>
                 <AlignHorizontalSpaceAround size={18} />
               </TabsTrigger>
-              <TabsTrigger
-                value="center"
-                className={TABS_TRIGGER_CLASS}
-              >
+              <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
                 <AlignHorizontalJustifyCenterIcon size={18} />
               </TabsTrigger>
-              <TabsTrigger
-                value="start"
-                className={TABS_TRIGGER_CLASS}
-              >
+              <TabsTrigger value="start" className={TABS_TRIGGER_CLASS}>
                 <AlignHorizontalJustifyStart size={18} />
               </TabsTrigger>
-              <TabsTrigger
-                value="end"
-                className={TABS_TRIGGER_CLASS}
-              >
+              <TabsTrigger value="end" className={TABS_TRIGGER_CLASS}>
                 <AlignHorizontalJustifyEndIcon size={18} />
               </TabsTrigger>
             </TabsList>
@@ -546,16 +548,10 @@ export default function SettingsTab({}: Props) {
             value={state.editor.selectedElement.styles.alignItems || ""}
           >
             <TabsList className={TABLIST_CLASS}>
-              <TabsTrigger
-                value="center"
-                className={TABS_TRIGGER_CLASS}
-              >
+              <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
                 <AlignVerticalJustifyCenter size={18} />
               </TabsTrigger>
-              <TabsTrigger
-                value="normal"
-                className={TABS_TRIGGER_CLASS}
-              >
+              <TabsTrigger value="normal" className={TABS_TRIGGER_CLASS}>
                 <AlignVerticalJustifyStart size={18} />
               </TabsTrigger>
             </TabsList>
@@ -564,7 +560,7 @@ export default function SettingsTab({}: Props) {
             <Input
               className="h-4 w-4"
               placeholder="px"
-              type="checkbox"      
+              type="checkbox"
               id="display"
               onChange={(va) => {
                 handleOnChanges({

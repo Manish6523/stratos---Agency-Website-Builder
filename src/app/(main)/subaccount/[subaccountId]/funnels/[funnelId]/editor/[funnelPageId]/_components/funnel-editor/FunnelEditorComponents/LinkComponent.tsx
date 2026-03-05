@@ -72,6 +72,7 @@ const LinkComponent = (props: Props) => {
       {!state.editor.previewMode && !state.editor.liveMode && (
         <span
           contentEditable={!state.editor.liveMode}
+          suppressContentEditableWarning={true}
           onBlur={(e) => {
             const spanElement = e.target as HTMLSpanElement;
             dispatch({
@@ -86,10 +87,12 @@ const LinkComponent = (props: Props) => {
               },
             });
           }}
-        >
-          {!Array.isArray(props.element.content) &&
-            props.element.content.innerText}
-        </span>
+          dangerouslySetInnerHTML={{
+            __html: !Array.isArray(props.element.content)
+              ? (props.element.content.innerText ?? "")
+              : "",
+          }}
+        />
       )}
       {state.editor.selectedElement.id === props.element.id &&
         !state.editor.liveMode && (

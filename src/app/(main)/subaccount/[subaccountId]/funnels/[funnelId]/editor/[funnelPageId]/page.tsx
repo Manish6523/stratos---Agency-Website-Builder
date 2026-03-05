@@ -22,6 +22,8 @@ export default async function Page({ params }: Props) {
     },
   });
 
+  console.log("funnelPageDetails : ", funnelPageDetails);
+
   if (!funnelPageDetails) {
     return redirect(
       `/subaccount/${param.subaccountId}/funnels/${param.funnelId}`,
