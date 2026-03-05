@@ -20,6 +20,13 @@ const TextComponent = (props: Props) => {
   };
   const styles = props.element.styles;
 
+  const handleDragStart = (e: React.DragEvent, type: string) => {
+    e.stopPropagation();
+    if (type === "__body") return;
+    e.dataTransfer.setData("componentType", type);
+    e.dataTransfer.setData("componentId", props.element.id);
+  };
+
   const handleOnClickBody = (e: React.MouseEvent) => {
     e.stopPropagation();
     dispatch({
@@ -34,8 +41,9 @@ const TextComponent = (props: Props) => {
   return (
     <div
       style={styles}
+      id={props.element.id}
       className={clsx(
-        "p-[2px] w-full m-[5px] relative text-[16px] transition-all",
+        "p-[2px] w-full my-[5px] relative text-[16px] transition-all",
         {
           "border-blue-500!":
             state.editor.selectedElement.id === props.element.id,
@@ -45,10 +53,12 @@ const TextComponent = (props: Props) => {
         },
       )}
       onClick={handleOnClickBody}
+      draggable={!state.editor.liveMode && !state.editor.previewMode}
+      onDragStart={(e) => handleDragStart(e, "text")}
     >
       {state.editor.selectedElement.id === props.element.id &&
         !state.editor.liveMode && (
-          <Badge className="absolute -top-[23px] -left-px rounded-none rounded-t-lg">
+          <Badge className="absolute -top-[23px] -left-px rounded-none rounded-t-lg tracking-normal font-sans">
             {state.editor.selectedElement.name}
           </Badge>
         )}
@@ -77,7 +87,7 @@ const TextComponent = (props: Props) => {
       />
       {state.editor.selectedElement.id === props.element.id &&
         !state.editor.liveMode && (
-          <div className="absolute bg-primary px-2.5 py-1 text-xs font-bold -top-[25px] -right-px rounded-none rounded-t-lg text-white!">
+          <div className="absolute bg-primary px-2.5 py-1 text-xs font-bold -top-[25px] -right-px rounded-none rounded-t-lg text-white! tracking-normal font-sans">
             <Trash
               className="cursor-pointer"
               size={16}

@@ -13,7 +13,7 @@ export type EditorElement = {
   type: EditorBtns;
   content:
     | EditorElement[]
-    | { href?: string; innerText?: string; src?: string };
+    | { href?: string; innerText?: string; src?: string; customCode?: string };
 };
 
 export type Editor = {
@@ -78,6 +78,18 @@ const addAnElement = (
     );
   return editorArray.map((item) => {
     if (item.id === action.payload.containerId && Array.isArray(item.content)) {
+      if (typeof action.payload.insertIndex === "number") {
+        const newContent = [...item.content];
+        newContent.splice(
+          action.payload.insertIndex,
+          0,
+          action.payload.elementDetails,
+        );
+        return {
+          ...item,
+          content: newContent,
+        };
+      }
       return {
         ...item,
         content: [...item.content, action.payload.elementDetails],
@@ -128,6 +140,28 @@ const deleteAnElement = (
     }
     return true;
   });
+};
+
+const findAnElement = (
+  editorArray: EditorElement[],
+  elementId: string,
+): EditorElement | null => {
+  for (const item of editorArray) {
+    if (item.id === elementId) return item;
+    if (item.content && Array.isArray(item.content)) {
+      const found = findAnElement(item.content, elementId);
+      if (found) return found;
+    }
+  }
+  return null;
+};
+
+const isDescendant = (element: EditorElement, targetId: string): boolean => {
+  if (element.id === targetId) return true;
+  if (element.content && Array.isArray(element.content)) {
+    return element.content.some((child) => isDescendant(child, targetId));
+  }
+  return false;
 };
 
 const editorReducer = (
@@ -219,6 +253,53 @@ const editorReducer = (
         },
       };
       return deletedState;
+
+    case "MOVE_ELEMENT":
+      const elementToMove = findAnElement(
+        state.editor.elements,
+        action.payload.elementId,
+      );
+      if (!elementToMove) return state;
+
+      // Check to prevent dropping a container into itself or its own children
+      if (isDescendant(elementToMove, action.payload.newContainerId))
+        return state;
+
+      // First delete it from current location to prevent duplicate IDs
+      const stateAfterDelete = deleteAnElement(state.editor.elements, {
+        type: "DELETE_ELEMENT",
+        payload: { elementDetails: elementToMove },
+      });
+
+      // Then add it to the new container location
+      const stateAfterMove = addAnElement(stateAfterDelete, {
+        type: "ADD_ELEMENT",
+        payload: {
+          containerId: action.payload.newContainerId,
+          elementDetails: elementToMove,
+          insertIndex: action.payload.insertIndex,
+        },
+      });
+
+      const updatedEditorStateAfterMove = {
+        ...state.editor,
+        elements: stateAfterMove,
+      };
+
+      const updatedHistoryAfterMove = [
+        ...state.history.history.slice(0, state.history.currentIndex + 1),
+        { ...updatedEditorStateAfterMove },
+      ];
+
+      return {
+        ...state,
+        editor: updatedEditorStateAfterMove,
+        history: {
+          ...state.history,
+          history: updatedHistoryAfterMove,
+          currentIndex: updatedHistoryAfterMove.length - 1,
+        },
+      };
 
     case "CHANGE_CLICKED_ELEMENT":
       const clickedState = {

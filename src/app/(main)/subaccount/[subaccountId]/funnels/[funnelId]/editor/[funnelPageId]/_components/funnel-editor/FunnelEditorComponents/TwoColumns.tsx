@@ -7,6 +7,7 @@ import { v4 } from "uuid";
 import clsx from "clsx";
 import { Badge } from "@/components/ui/badge";
 import { EditorBtns, defaultStyles } from "@/lib/constants";
+import { Trash } from "lucide-react";
 
 type Props = {
   element: EditorElement;
@@ -15,10 +16,57 @@ type Props = {
 const TwoColumns = (props: Props) => {
   const { id, content, type } = props.element;
   const { dispatch, state } = useEditor();
+  const handleDeleteElement = () => {
+    dispatch({
+      type: "DELETE_ELEMENT",
+      payload: { elementDetails: props.element },
+    });
+  };
 
   const handleOnDrop = (e: React.DragEvent, type: string) => {
     e.stopPropagation();
     const componentType = e.dataTransfer.getData("componentType") as EditorBtns;
+    const componentId = e.dataTransfer.getData("componentId");
+
+    let insertIndex = Array.isArray(content) ? content.length : 0;
+    if (Array.isArray(content)) {
+      for (let i = 0; i < content.length; i++) {
+        const el = document.getElementById(content[i].id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const isTopHalf = e.clientY < rect.top + rect.height / 2;
+          const isRow =
+            props.element.styles?.display === "flex" &&
+            props.element.styles?.flexDirection === "row";
+
+          if (isRow) {
+            const isLeftHalf = e.clientX < rect.left + rect.width / 2;
+            if (isLeftHalf) {
+              insertIndex = i;
+              break;
+            }
+          } else {
+            if (isTopHalf) {
+              insertIndex = i;
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if (componentId) {
+      dispatch({
+        type: "MOVE_ELEMENT",
+        payload: {
+          elementId: componentId,
+          newContainerId: id,
+          insertIndex,
+        },
+      });
+      return;
+    }
+
     switch (componentType) {
       case "text":
         dispatch({
@@ -35,6 +83,7 @@ const TwoColumns = (props: Props) => {
               },
               type: "text",
             },
+            insertIndex,
           },
         });
         break;
@@ -50,6 +99,7 @@ const TwoColumns = (props: Props) => {
               styles: { ...defaultStyles },
               type: "container",
             },
+            insertIndex,
           },
         });
         break;
@@ -65,6 +115,7 @@ const TwoColumns = (props: Props) => {
               styles: { ...defaultStyles },
               type: "2Col",
             },
+            insertIndex,
           },
         });
         break;
@@ -75,8 +126,10 @@ const TwoColumns = (props: Props) => {
     e.preventDefault();
   };
   const handleDragStart = (e: React.DragEvent, type: string) => {
+    e.stopPropagation();
     if (type === "__body") return;
     e.dataTransfer.setData("componentType", type);
+    e.dataTransfer.setData("componentId", id);
   };
 
   const handleOnClickBody = (e: React.MouseEvent) => {
@@ -104,18 +157,24 @@ const TwoColumns = (props: Props) => {
           !state.editor.liveMode,
         "border-dashed border border-slate-300": !state.editor.liveMode,
       })}
-      id="innerContainer"
+      id={id}
       onDrop={(e) => handleOnDrop(e, id)}
       onDragOver={handleDragOver}
-      draggable={type !== "__body"}
+      draggable={
+        type !== "__body" && !state.editor.liveMode && !state.editor.previewMode
+      }
       onClick={handleOnClickBody}
       onDragStart={(e) => handleDragStart(e, "container")}
     >
       {state.editor.selectedElement.id === props.element.id &&
-        !state.editor.liveMode && (
-          <Badge className="absolute -top-[23px] -left-px rounded-none rounded-t-lg ">
-            {state.editor.selectedElement.name}
-          </Badge>
+        state.editor.selectedElement.type !== "__body" && (
+          <div className="absolute bg-primary px-2.5 py-1 text-xs font-bold -top-[25px] -right-px rounded-none rounded-t-lg text-white! tracking-normal font-sans">
+            <Trash
+              className="cursor-pointer"
+              size={16}
+              onClick={handleDeleteElement}
+            />
+          </div>
         )}
       {Array.isArray(content) &&
         content.map((childElement) => (

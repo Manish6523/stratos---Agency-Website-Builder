@@ -17,6 +17,45 @@ const Container = ({ element }: Props) => {
   const handleOnDrop = (e: React.DragEvent, type: string) => {
     e.stopPropagation();
     const componentType = e.dataTransfer.getData("componentType") as EditorBtns;
+    const componentId = e.dataTransfer.getData("componentId");
+
+    let insertIndex = Array.isArray(content) ? content.length : 0;
+    if (Array.isArray(content)) {
+      for (let i = 0; i < content.length; i++) {
+        const el = document.getElementById(content[i].id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const isTopHalf = e.clientY < rect.top + rect.height / 2;
+          const isRow =
+            styles?.display === "flex" && styles?.flexDirection === "row";
+
+          if (isRow) {
+            const isLeftHalf = e.clientX < rect.left + rect.width / 2;
+            if (isLeftHalf) {
+              insertIndex = i;
+              break;
+            }
+          } else {
+            if (isTopHalf) {
+              insertIndex = i;
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if (componentId) {
+      dispatch({
+        type: "MOVE_ELEMENT",
+        payload: {
+          elementId: componentId,
+          newContainerId: id,
+          insertIndex,
+        },
+      });
+      return;
+    }
 
     switch (componentType) {
       case "text":
@@ -34,6 +73,7 @@ const Container = ({ element }: Props) => {
               },
               type: "text",
             },
+            insertIndex,
           },
         });
         break;
@@ -55,6 +95,7 @@ const Container = ({ element }: Props) => {
               },
               type: "link",
             },
+            insertIndex,
           },
         });
         break;
@@ -72,6 +113,7 @@ const Container = ({ element }: Props) => {
               styles: {},
               type: "video",
             },
+            insertIndex,
           },
         });
         break;
@@ -87,6 +129,7 @@ const Container = ({ element }: Props) => {
               styles: { ...defaultStyles },
               type: "container",
             },
+            insertIndex,
           },
         });
         break;
@@ -102,6 +145,7 @@ const Container = ({ element }: Props) => {
               styles: {},
               type: "contactForm",
             },
+            insertIndex,
           },
         });
         break;
@@ -117,6 +161,7 @@ const Container = ({ element }: Props) => {
               styles: {},
               type: "paymentForm",
             },
+            insertIndex,
           },
         });
         break;
@@ -147,6 +192,178 @@ const Container = ({ element }: Props) => {
               styles: { ...defaultStyles, display: "flex" },
               type: "2Col",
             },
+            insertIndex,
+          },
+        });
+        break;
+      case "3Col":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: [
+                {
+                  content: [],
+                  id: v4(),
+                  name: "Container",
+                  styles: { ...defaultStyles, width: "100%" },
+                  type: "container",
+                },
+                {
+                  content: [],
+                  id: v4(),
+                  name: "Container",
+                  styles: { ...defaultStyles, width: "100%" },
+                  type: "container",
+                },
+                {
+                  content: [],
+                  id: v4(),
+                  name: "Container",
+                  styles: { ...defaultStyles, width: "100%" },
+                  type: "container",
+                },
+              ],
+              id: v4(),
+              name: "Three Columns",
+              styles: { ...defaultStyles, display: "flex" },
+              type: "3Col",
+            },
+          },
+        });
+        break;
+      case "divider":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: [],
+              id: v4(),
+              name: "Divider",
+              styles: { ...defaultStyles },
+              type: "divider",
+            },
+          },
+        });
+        break;
+      case "button":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: { innerText: "Click me", href: "#" },
+              id: v4(),
+              name: "Button",
+              styles: {
+                ...defaultStyles,
+                backgroundColor: "#2563eb",
+                color: "white",
+                paddingTop: "8px",
+                paddingBottom: "8px",
+                paddingLeft: "16px",
+                paddingRight: "16px",
+                borderRadius: "6px",
+                display: "inline-block",
+              },
+              type: "button",
+            },
+          },
+        });
+        break;
+      case "customEmbed":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: { customCode: "" },
+              id: v4(),
+              name: "Custom Embed",
+              styles: { ...defaultStyles, width: "100%" },
+              type: "customEmbed",
+            },
+            insertIndex,
+          },
+        });
+        break;
+      case "h1":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: { innerText: "Heading 1" },
+              id: v4(),
+              name: "Heading 1",
+              styles: {
+                ...defaultStyles,
+                fontSize: "40px",
+                fontWeight: "bold",
+              },
+              type: "h1",
+            },
+            insertIndex,
+          },
+        });
+        break;
+      case "h2":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: { innerText: "Heading 2" },
+              id: v4(),
+              name: "Heading 2",
+              styles: {
+                ...defaultStyles,
+                fontSize: "32px",
+                fontWeight: "bold",
+              },
+              type: "h2",
+            },
+            insertIndex,
+          },
+        });
+        break;
+      case "h3":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: { innerText: "Heading 3" },
+              id: v4(),
+              name: "Heading 3",
+              styles: {
+                ...defaultStyles,
+                fontSize: "24px",
+                fontWeight: "bold",
+              },
+              type: "h3",
+            },
+            insertIndex,
+          },
+        });
+        break;
+      case "image":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                src: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
+              },
+              id: v4(),
+              name: "Image",
+              styles: { ...defaultStyles, width: "100%", height: "auto" },
+              type: "image",
+            },
+            insertIndex,
           },
         });
         break;
@@ -158,8 +375,10 @@ const Container = ({ element }: Props) => {
   };
 
   const handleDragStart = (e: React.DragEvent, type: string) => {
+    e.stopPropagation();
     if (type === "__body") return;
     e.dataTransfer.setData("componentType", type);
+    e.dataTransfer.setData("componentId", id);
   };
 
   const handleOnClickBody = (e: React.MouseEvent) => {
@@ -184,6 +403,7 @@ const Container = ({ element }: Props) => {
   return (
     <div
       style={styles}
+      id={id}
       className={clsx("relative p-4 transition-all group", {
         "max-w-full w-full": type === "container" || type === "2Col",
         "h-fit": type === "container",
@@ -204,13 +424,15 @@ const Container = ({ element }: Props) => {
       })}
       onDrop={(e) => handleOnDrop(e, id)}
       onDragOver={handleDragOver}
-      draggable={type !== "__body"}
+      draggable={
+        type !== "__body" && !state.editor.liveMode && !state.editor.previewMode
+      }
       onClick={handleOnClickBody}
       onDragStart={(e) => handleDragStart(e, "container")}
     >
       <Badge
         className={clsx(
-          "absolute -top-[23px] -left-px rounded-none rounded-t-lg hidden",
+          "absolute -top-[23px] -left-px rounded-none rounded-t-lg hidden tracking-normal font-sans",
           {
             block:
               state.editor.selectedElement.id === element.id &&
@@ -229,8 +451,12 @@ const Container = ({ element }: Props) => {
       {state.editor.selectedElement.id === element.id &&
         !state.editor.liveMode &&
         state.editor.selectedElement.type !== "__body" && (
-          <div className="absolute bg-primary px-2.5 py-1 text-xs font-bold  -top-[25px] -right-px rounded-none rounded-t-lg ">
-            <Trash size={16} onClick={handleDeleteElement} />
+          <div className="absolute bg-primary px-2.5 py-1 text-xs font-bold  -top-[25px] -right-px rounded-none rounded-t-lg tracking-normal font-sans">
+            <Trash
+              size={16}
+              onClick={handleDeleteElement}
+              className="text-white!"
+            />
           </div>
         )}
     </div>
