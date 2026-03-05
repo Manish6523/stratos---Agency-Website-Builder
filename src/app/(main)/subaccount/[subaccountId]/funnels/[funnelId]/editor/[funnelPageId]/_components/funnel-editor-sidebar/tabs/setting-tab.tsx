@@ -123,6 +123,38 @@ export default function SettingsTab({}: Props) {
                 />
               </div>
             )}
+          {state.editor.selectedElement.type === "image" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-2">
+                <p className="text-muted-foreground">Image Source</p>
+                <Input
+                  id="src"
+                  placeholder="https://images.unsplash.com/..."
+                  onChange={handleChangeCustomValues}
+                  value={state.editor.selectedElement.content.src || ""}
+                />
+                <p className="text-muted-foreground mt-2">Alt Text</p>
+                <Input
+                  id="alt"
+                  placeholder="Description for screen readers"
+                  onChange={handleChangeCustomValues}
+                  value={state.editor.selectedElement.content.innerText || ""}
+                />
+              </div>
+            )}
+          {state.editor.selectedElement.type === "customEmbed" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-2">
+                <p className="text-muted-foreground">Custom HTML/JS</p>
+                <textarea
+                  id="customCode"
+                  className="w-full bg-background border p-2 rounded-md h-32 text-sm font-mono"
+                  placeholder="<div>Hello World</div>"
+                  onChange={handleChangeCustomValues}
+                  value={state.editor.selectedElement.content.customCode || ""}
+                />
+              </div>
+            )}
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="Typography" className="px-6 py-0  border-y">
@@ -161,11 +193,38 @@ export default function SettingsTab({}: Props) {
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-muted-foreground">Font Family</p>
-            <Input
-              id="DM Sans"
-              onChange={handleOnChanges}
+            <Select
+              onValueChange={(e) =>
+                handleOnChanges({
+                  target: {
+                    id: "fontFamily",
+                    value: e,
+                  },
+                })
+              }
               value={state.editor.selectedElement.styles.fontFamily || ""}
-            />
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a font" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fonts</SelectLabel>
+                  <SelectItem value="Inter">Inter</SelectItem>
+                  <SelectItem value="Roboto">Roboto</SelectItem>
+                  <SelectItem value="Open Sans">Open Sans</SelectItem>
+                  <SelectItem value="Lato">Lato</SelectItem>
+                  <SelectItem value="Montserrat">Montserrat</SelectItem>
+                  <SelectItem value="DM Sans">DM Sans</SelectItem>
+                  <SelectItem value="Arial">Arial</SelectItem>
+                  <SelectItem value="Helvetica">Helvetica</SelectItem>
+                  <SelectItem value="Times New Roman">
+                    Times New Roman
+                  </SelectItem>
+                  <SelectItem value="Courier New">Courier New</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-muted-foreground">Color</p>
@@ -211,6 +270,79 @@ export default function SettingsTab({}: Props) {
               />
             </div>
           </div>
+          <div className="flex gap-4">
+            <div>
+              <Label className="text-muted-foreground">Line Height</Label>
+              <Input
+                placeholder="px/em"
+                id="lineHeight"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.lineHeight || ""}
+              />
+            </div>
+            <div>
+              <Label className="text-muted-foreground">Letter Spacing</Label>
+              <Input
+                placeholder="px"
+                id="letterSpacing"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.letterSpacing || ""}
+              />
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <div>
+              <Label className="text-muted-foreground">Transform</Label>
+              <Select
+                onValueChange={(e) =>
+                  handleOnChanges({
+                    target: {
+                      id: "textTransform",
+                      value: e,
+                    },
+                  })
+                }
+                value={state.editor.selectedElement.styles.textTransform || ""}
+              >
+                <SelectTrigger className="w-[120px]">
+                  <SelectValue placeholder="None" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="none">None</SelectItem>
+                    <SelectItem value="uppercase">Uppercase</SelectItem>
+                    <SelectItem value="lowercase">Lowercase</SelectItem>
+                    <SelectItem value="capitalize">Capitalize</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-muted-foreground">Decoration</Label>
+              <Select
+                onValueChange={(e) =>
+                  handleOnChanges({
+                    target: {
+                      id: "textDecoration",
+                      value: e,
+                    },
+                  })
+                }
+                value={state.editor.selectedElement.styles.textDecoration || ""}
+              >
+                <SelectTrigger className="w-[120px]">
+                  <SelectValue placeholder="None" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="none">None</SelectItem>
+                    <SelectItem value="underline">Underline</SelectItem>
+                    <SelectItem value="line-through">Line-through</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="Dimensions" className=" px-6 py-0 ">
@@ -238,6 +370,50 @@ export default function SettingsTab({}: Props) {
                       id="width"
                       onChange={handleOnChanges}
                       value={state.editor.selectedElement.styles.width || ""}
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div>
+                    <Label className="text-muted-foreground">Max W</Label>
+                    <Input
+                      id="maxWidth"
+                      placeholder="px"
+                      onChange={handleOnChanges}
+                      value={state.editor.selectedElement.styles.maxWidth || ""}
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-muted-foreground">Min W</Label>
+                    <Input
+                      placeholder="px"
+                      id="minWidth"
+                      onChange={handleOnChanges}
+                      value={state.editor.selectedElement.styles.minWidth || ""}
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div>
+                    <Label className="text-muted-foreground">Max H</Label>
+                    <Input
+                      id="maxHeight"
+                      placeholder="px"
+                      onChange={handleOnChanges}
+                      value={
+                        state.editor.selectedElement.styles.maxHeight || ""
+                      }
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-muted-foreground">Min H</Label>
+                    <Input
+                      placeholder="px"
+                      id="minHeight"
+                      onChange={handleOnChanges}
+                      value={
+                        state.editor.selectedElement.styles.minHeight || ""
+                      }
                     />
                   </div>
                 </div>
@@ -498,6 +674,147 @@ export default function SettingsTab({}: Props) {
               </TabsList>
             </Tabs>
           </div>
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground">Border</Label>
+            <div className="flex gap-4">
+              <Input
+                placeholder="1px"
+                id="borderWidth"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.borderWidth || ""}
+              />
+              <Select
+                onValueChange={(e) =>
+                  handleOnChanges({
+                    target: {
+                      id: "borderStyle",
+                      value: e,
+                    },
+                  })
+                }
+                value={state.editor.selectedElement.styles.borderStyle || ""}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Style" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="solid">Solid</SelectItem>
+                    <SelectItem value="dashed">Dashed</SelectItem>
+                    <SelectItem value="dotted">Dotted</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex  border rounded-md overflow-clip">
+              <div
+                className="w-12 "
+                style={{
+                  backgroundColor:
+                    state.editor.selectedElement.styles.borderColor,
+                }}
+              />
+              <Input
+                placeholder="#000000"
+                className="border-y-0! rounded-none border-r-0! mr-2"
+                id="borderColor"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.borderColor || ""}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground">Box Shadow</Label>
+            <Input
+              placeholder="0px 4px 6px rgba(0,0,0,0.1)"
+              id="boxShadow"
+              onChange={handleOnChanges}
+              value={state.editor.selectedElement.styles.boxShadow || ""}
+            />
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="Position" className="px-6 py-0 ">
+        <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
+          Position
+        </AccordionTrigger>
+        <AccordionContent className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground">Position</Label>
+            <Select
+              onValueChange={(e) =>
+                handleOnChanges({
+                  target: {
+                    id: "position",
+                    value: e,
+                  },
+                })
+              }
+              value={state.editor.selectedElement.styles.position || ""}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Static" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="static">Static</SelectItem>
+                  <SelectItem value="relative">Relative</SelectItem>
+                  <SelectItem value="absolute">Absolute</SelectItem>
+                  <SelectItem value="fixed">Fixed</SelectItem>
+                  <SelectItem value="sticky">Sticky</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex gap-4">
+            <div>
+              <Label className="text-muted-foreground">Top</Label>
+              <Input
+                placeholder="px/%"
+                id="top"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.top || ""}
+              />
+            </div>
+            <div>
+              <Label className="text-muted-foreground">Bottom</Label>
+              <Input
+                placeholder="px/%"
+                id="bottom"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.bottom || ""}
+              />
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <div>
+              <Label className="text-muted-foreground">Left</Label>
+              <Input
+                placeholder="px/%"
+                id="left"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.left || ""}
+              />
+            </div>
+            <div>
+              <Label className="text-muted-foreground">Right</Label>
+              <Input
+                placeholder="px/%"
+                id="right"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.right || ""}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground">Z-Index</Label>
+            <Input
+              placeholder="0"
+              id="zIndex"
+              onChange={handleOnChanges}
+              value={state.editor.selectedElement.styles.zIndex || ""}
+            />
+          </div>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="Flexbox" className="px-6 py-0  ">
@@ -581,6 +898,42 @@ export default function SettingsTab({}: Props) {
               onChange={handleOnChanges}
               value={state.editor.selectedElement.styles.flexDirection || ""}
             />
+          </div>
+          <div className="flex gap-4">
+            <div>
+              <Label className="text-muted-foreground">Gap</Label>
+              <Input
+                placeholder="px"
+                id="gap"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.gap || ""}
+              />
+            </div>
+            <div>
+              <Label className="text-muted-foreground">Wrap</Label>
+              <Select
+                onValueChange={(e) =>
+                  handleOnChanges({
+                    target: {
+                      id: "flexWrap",
+                      value: e,
+                    },
+                  })
+                }
+                value={state.editor.selectedElement.styles.flexWrap || ""}
+              >
+                <SelectTrigger className="w-[120px]">
+                  <SelectValue placeholder="Nowrap" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="nowrap">No Wrap</SelectItem>
+                    <SelectItem value="wrap">Wrap</SelectItem>
+                    <SelectItem value="wrap-reverse">Wrap Reverse</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </AccordionContent>
       </AccordionItem>

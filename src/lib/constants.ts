@@ -30,31 +30,31 @@ import Warning from "@/components/icons/warning";
 
 export const pricingCards = [
   {
-    title: 'Starter',
-    description: 'Perfect for trying out plura',
-    price: 'Free',
-    duration: '',
-    highlight: 'Key features',
-    features: ['3 Sub accounts', '2 Team members', 'Unlimited pipelines'],
-    priceId: '',
+    title: "Starter",
+    description: "Perfect for trying out plura",
+    price: "Free",
+    duration: "",
+    highlight: "Key features",
+    features: ["3 Sub accounts", "2 Team members", "Unlimited pipelines"],
+    priceId: "",
   },
   {
-    title: 'Unlimited Saas',
-    description: 'The ultimate agency kit',
-    price: '$199',
-    duration: 'month',
-    highlight: 'Key features',
-    features: ['Rebilling', '24/7 Support team'],
-    priceId: 'price_1OMhtcIld5Bk5htqx5CvF5mj',
+    title: "Unlimited Saas",
+    description: "The ultimate agency kit",
+    price: "$199",
+    duration: "month",
+    highlight: "Key features",
+    features: ["Rebilling", "24/7 Support team"],
+    priceId: "price_1OMhtcIld5Bk5htqx5CvF5mj",
   },
   {
-    title: 'Basic',
-    description: 'For serious agency owners',
-    price: '$49',
-    duration: 'month',
-    highlight: 'Everything in Starter, plus',
-    features: ['Unlimited Sub accounts', 'Unlimited Team members'],
-    priceId: 'price_1OMhuQild5Bk5htqogRZXP2e',
+    title: "Basic",
+    description: "For serious agency owners",
+    price: "$49",
+    duration: "month",
+    highlight: "Everything in Starter, plus",
+    features: ["Unlimited Sub accounts", "Unlimited Team members"],
+    priceId: "price_1OMhuQild5Bk5htqogRZXP2e",
   },
 ];
 
@@ -217,6 +217,12 @@ export type EditorBtns =
   | "video"
   | "__body"
   | "image"
+  | "divider"
+  | "button"
+  | "customEmbed"
+  | "h1"
+  | "h2"
+  | "h3"
   | null
   | "3Col";
 
