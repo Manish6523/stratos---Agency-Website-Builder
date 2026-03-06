@@ -47,6 +47,7 @@ Return ONLY valid JSON representing the layout block. No markdown wrappers.
 Structure Types:
 - container: A layout box that can hold other elements.
 - 2Col: A two-column grid layout element (its content array must have exactly two 'container' elements).
+- 3Col: A three-column grid layout element (its content array must have exactly three 'container' elements).
 - text: A generic paragraph of text. (innerText, color, fontSize)
 - h1: A large heading. (innerText, color, fontSize, fontWeight)
 - h2: A medium heading. (innerText, color, fontSize, fontWeight)
@@ -56,6 +57,11 @@ Structure Types:
 - image: An image block. (src, alt)
 - video: A video block. (src)
 - divider: A horizontal line.
+- progressBar: A progress bar. (progressValue, progressColor, progressBackground)
+- slider: A slider. (sliderImages, sliderBackground)
+- form: A form block. (formFields, formBackground)
+- testimonial: A customer quote block. (innerText, authorName)
+- iconBlock: A dynamic icon display. (icon, innerText)
 
 Guidelines:
 1. Use valid Tailwind-like styling via standard CSS properties in camelCase [camelCase is most important] (e.g., backgroundColor, padding, display, flexDirection, maxWidth).

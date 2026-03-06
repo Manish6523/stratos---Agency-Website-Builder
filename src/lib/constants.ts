@@ -223,6 +223,10 @@ export type EditorBtns =
   | "h1"
   | "h2"
   | "h3"
+  | "testimonial"
+  | "progressBar"
+  | "slider"
+  | "iconBlock"
   | null
   | "3Col";
 

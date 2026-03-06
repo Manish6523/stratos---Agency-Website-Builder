@@ -11,6 +11,10 @@ import ButtonComponent from "./ButtonComponent";
 import CustomEmbedComponent from "./CustomEmbedComponent";
 import ImageComponent from "./ImageComponent";
 import HeadingComponent from "./HeadingComponent";
+import TestimonialComponent from "./TestimonialComponent";
+import ProgressBarComponent from "./ProgressBarComponent";
+import SliderComponent from "./SliderComponent";
+import IconBlockComponent from "./IconBlockComponent";
 
 type Props = {
   element: EditorElement;
@@ -48,6 +52,14 @@ const Recursive = ({ element }: Props) => {
     case "h2":
     case "h3":
       return <HeadingComponent element={element} />;
+    case "testimonial":
+      return <TestimonialComponent element={element} />;
+    case "progressBar":
+      return <ProgressBarComponent element={element} />;
+    case "slider":
+      return <SliderComponent element={element} />;
+    case "iconBlock":
+      return <IconBlockComponent element={element} />;
     default:
       return null;
   }

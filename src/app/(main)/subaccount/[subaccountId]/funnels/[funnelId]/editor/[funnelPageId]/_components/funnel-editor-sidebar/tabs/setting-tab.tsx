@@ -99,12 +99,27 @@ export default function SettingsTab({}: Props) {
 
     setIsGenerating(true);
     try {
+      const elementType = state.editor.selectedElement.type;
+
+      const enhancedPrompt = `
+      You are an AI assistant helping a user build a website inside a visual drag-and-drop editor.
+      The user is currently editing a "${elementType}" component.
+      
+      Their prompt is: "${aiPrompt}"
+      
+      Please generate the appropriate text content for this specific component. 
+      - If it is a heading or title, keep it short and punchy.
+      - If it is a testimonial, write it from the perspective of a happy customer.
+      - If it is a paragraph or description, ensure it is engaging and web-ready.
+      - ONLY return the generated text. Do not include quotes, Markdown formatting, or conversational filler like "Here is your text:".
+      `;
+
       const response = await fetch("/api/generate-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt: aiPrompt }),
+        body: JSON.stringify({ prompt: enhancedPrompt }),
       });
 
       const data = await response.json();
@@ -252,6 +267,121 @@ export default function SettingsTab({}: Props) {
                   placeholder="<div>Hello World</div>"
                   onChange={handleChangeCustomValues}
                   value={state.editor.selectedElement.content.customCode || ""}
+                />
+              </div>
+            )}
+          {state.editor.selectedElement.type === "progressBar" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-2 mt-4">
+                <Label className="text-muted-foreground">
+                  Progress Value (%)
+                </Label>
+                <div className="flex items-center justify-end">
+                  <small className="p-2">
+                    {state.editor.selectedElement.content.progressValue || 50}%
+                  </small>
+                </div>
+                <Slider
+                  onValueChange={(e) => {
+                    handleChangeCustomValues({
+                      target: {
+                        id: "progressValue",
+                        value: e[0],
+                      },
+                    });
+                  }}
+                  value={[
+                    state.editor.selectedElement.content.progressValue || 50,
+                  ]}
+                  max={100}
+                  step={1}
+                />
+
+                <Label className="text-muted-foreground mt-4">
+                  Completed Bar Color
+                </Label>
+                <div className="flex border rounded-md overflow-clip">
+                  <div
+                    className="w-12"
+                    style={{
+                      backgroundColor:
+                        state.editor.selectedElement.content.progressColor ||
+                        "#3b82f6",
+                    }}
+                  />
+                  <Input
+                    placeholder="#3b82f6 or blue-500"
+                    className="border-y-0! rounded-none border-r-0! mr-2"
+                    id="progressColor"
+                    onChange={handleChangeCustomValues}
+                    value={
+                      state.editor.selectedElement.content.progressColor ||
+                      "bg-primary"
+                    }
+                  />
+                </div>
+
+                <Label className="text-muted-foreground mt-2">
+                  Background Track Color
+                </Label>
+                <div className="flex border rounded-md overflow-clip">
+                  <div
+                    className="w-12"
+                    style={{
+                      backgroundColor:
+                        state.editor.selectedElement.content
+                          .progressBackground || "#e2e8f0",
+                    }}
+                  />
+                  <Input
+                    placeholder="#e2e8f0 or slate-200"
+                    className="border-y-0! rounded-none border-r-0! mr-2"
+                    id="progressBackground"
+                    onChange={handleChangeCustomValues}
+                    value={
+                      state.editor.selectedElement.content.progressBackground ||
+                      "bg-secondary"
+                    }
+                  />
+                </div>
+              </div>
+            )}
+          {state.editor.selectedElement.type === "iconBlock" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-2 mt-4">
+                <p className="text-muted-foreground">Icon ID/Name</p>
+                <Input
+                  id="icon"
+                  placeholder="Info, Shield, Star, etc."
+                  onChange={handleChangeCustomValues}
+                  value={state.editor.selectedElement.content.icon || ""}
+                />
+              </div>
+            )}
+          {state.editor.selectedElement.type === "slider" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-2 mt-4">
+                <p className="text-muted-foreground">
+                  Image URLs (Comma separated)
+                </p>
+                <textarea
+                  className="w-full bg-background border p-2 rounded-md h-32 text-sm font-mono"
+                  placeholder="https://image1.jpg, https://image2.jpg"
+                  onChange={(e) => {
+                    handleChangeCustomValues({
+                      target: {
+                        id: "sliderImages",
+                        value: e.target.value
+                          .split(",")
+                          .map((url) => url.trim()),
+                      },
+                    });
+                  }}
+                  value={
+                    state.editor.selectedElement.content.sliderImages?.join(
+                      ", ",
+                    ) || ""
+                  }
                 />
               </div>
             )}

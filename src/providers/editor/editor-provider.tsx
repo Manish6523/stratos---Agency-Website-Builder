@@ -19,6 +19,13 @@ export type EditorElement = {
         src?: string;
         customCode?: string;
         alt?: string;
+        authorName?: string;
+        icon?: string;
+        title?: string;
+        sliderImages?: string[];
+        progressValue?: number;
+        progressColor?: string;
+        progressBackground?: string;
       };
 };
 

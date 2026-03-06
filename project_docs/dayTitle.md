@@ -30,4 +30,10 @@
 - Day 22: Funnel Editor Sidebar Activation & Bug Fixes
 - Day 23: Funnel Editor Configuration & Media Integration
 - Day 24: Funnel Components (Checkout & Contact Form)
+
+## Week 04
+
 - Day 25: ContentEditable Fixes, ComponentsTab Activation & Landing Page Template
+- Day 26: Canvas Drag & Drop System
+- Day 27: AI Assistant & Editor Refinements
+- Day 28: Component Refinements & AI Integration Enhancements

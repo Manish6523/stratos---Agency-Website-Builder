@@ -6,6 +6,7 @@ import {
   SettingsIcon,
   Sparkles,
   SquareStackIcon,
+  LayoutTemplate,
 } from "lucide-react";
 
 type Props = {};
@@ -43,6 +44,12 @@ export default function TabList({}: Props) {
         className="w-10 h-10 cursor-pointer p-3 data-[state=active]:bg-muted"
       >
         <Sparkles />
+      </TabsTrigger>
+      <TabsTrigger
+        value="Pages"
+        className="w-10 h-10 cursor-pointer p-3 data-[state=active]:bg-muted"
+      >
+        <LayoutTemplate />
       </TabsTrigger>
     </TabsList>
   );

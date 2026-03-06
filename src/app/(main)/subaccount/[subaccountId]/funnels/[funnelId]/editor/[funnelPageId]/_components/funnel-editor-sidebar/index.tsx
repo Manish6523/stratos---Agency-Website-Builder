@@ -16,6 +16,7 @@ import SettingsTab from "./tabs/setting-tab";
 import MediaBucketTab from "./tabs/media-bucket-tab";
 import ComponentsTab from "./tabs/components-tab";
 import AiBuilderTab from "./tabs/ai-builder-tab";
+import PagesTab from "./tabs/pages-tab";
 
 type Props = {
   subaccountId: string;
@@ -82,6 +83,9 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
             </TabsContent>
             <TabsContent value="AI">
               <AiBuilderTab />
+            </TabsContent>
+            <TabsContent value="Pages" className="h-full">
+              <PagesTab />
             </TabsContent>
           </div>
         </SheetContent>

@@ -367,6 +367,72 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+      case "testimonial":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                innerText: "This is a fantastic tool that changed my agency!",
+              },
+              id: v4(),
+              name: "Testimonial",
+              styles: { ...defaultStyles },
+              type: "testimonial",
+            },
+            insertIndex,
+          },
+        });
+        break;
+      case "progressBar":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: { innerText: "75" },
+              id: v4(),
+              name: "Progress Bar",
+              styles: { ...defaultStyles },
+              type: "progressBar",
+            },
+            insertIndex,
+          },
+        });
+        break;
+      case "slider":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: { sliderImages: [] },
+              id: v4(),
+              name: "Slider",
+              styles: { ...defaultStyles, width: "100%" },
+              type: "slider",
+            },
+            insertIndex,
+          },
+        });
+        break;
+      case "iconBlock":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: { innerText: "Description for this awesome feature." },
+              id: v4(),
+              name: "Icon Block",
+              styles: { ...defaultStyles },
+              type: "iconBlock",
+            },
+            insertIndex,
+          },
+        });
+        break;
     }
   };
 
