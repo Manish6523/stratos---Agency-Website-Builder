@@ -1,18 +1,18 @@
-'use client'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+"use client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { saveActivityLogsNotification, upsertFunnelPage } from '@/lib/queries'
-import { DeviceTypes, useEditor } from '@/providers/editor/editor-provider'
-import { FunnelPage } from '../../../../../../../../../../generated/prisma/client'
-import clsx from 'clsx'
+} from "@/components/ui/tooltip";
+import { saveActivityLogsNotification, upsertFunnelPage } from "@/lib/queries";
+import { DeviceTypes, useEditor } from "@/providers/editor/editor-provider";
+import { FunnelPage } from "../../../../../../../../../../generated/prisma/client";
+import clsx from "clsx";
 import {
   ArrowLeftCircle,
   EyeIcon,
@@ -21,33 +21,39 @@ import {
   Smartphone,
   Tablet,
   Undo2,
-} from 'lucide-react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import React, { FocusEventHandler, useEffect } from 'react'
-import { toast } from 'sonner'
+  PanelRightClose,
+  PanelRightOpen,
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { FocusEventHandler, useEffect } from "react";
+import { toast } from "sonner";
 
 type Props = {
-  funnelId: string
-  funnelPageDetails: FunnelPage
-  subaccountId: string
-}
+  funnelId: string;
+  funnelPageDetails: FunnelPage;
+  subaccountId: string;
+};
 
-export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, subaccountId }: Props) {
-  const router = useRouter()
-  const { state, dispatch } = useEditor()
+export default function FunnelEditorNavigation({
+  funnelId,
+  funnelPageDetails,
+  subaccountId,
+}: Props) {
+  const router = useRouter();
+  const { state, dispatch } = useEditor();
 
   useEffect(() => {
     dispatch({
-      type: 'SET_FUNNELPAGE_ID',
+      type: "SET_FUNNELPAGE_ID",
       payload: { funnelPageId: funnelPageDetails.id },
-    })
-  }, [funnelPageDetails, dispatch])
+    });
+  }, [funnelPageDetails, dispatch]);
 
   const handleOnBlurTitleChange: FocusEventHandler<HTMLInputElement> = async (
-    event
+    event,
   ) => {
-    if (event.target.value === funnelPageDetails.name) return
+    if (event.target.value === funnelPageDetails.name) return;
     if (event.target.value) {
       await upsertFunnelPage(
         subaccountId,
@@ -56,36 +62,40 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
           name: event.target.value,
           order: funnelPageDetails.order,
         },
-        funnelId
-      )
+        funnelId,
+      );
 
-      toast('Success', {
-        description: 'Saved Funnel Page title',
-      })
-      router.refresh()
+      toast("Success", {
+        description: "Saved Funnel Page title",
+      });
+      router.refresh();
     } else {
-      toast('Oppse!', {
-        description: 'You need to have a title!',
-      })
-      event.target.value = funnelPageDetails.name
+      toast("Oppse!", {
+        description: "You need to have a title!",
+      });
+      event.target.value = funnelPageDetails.name;
     }
-  }
+  };
 
   const handlePreviewClick = () => {
-    dispatch({ type: 'TOGGLE_PREVIEW_MODE' })
-    dispatch({ type: 'TOGGLE_LIVE_MODE' })
-  }
+    dispatch({ type: "TOGGLE_PREVIEW_MODE" });
+    dispatch({ type: "TOGGLE_LIVE_MODE" });
+  };
 
   const handleUndo = () => {
-    dispatch({ type: 'UNDO' })
-  }
+    dispatch({ type: "UNDO" });
+  };
 
   const handleRedo = () => {
-    dispatch({ type: 'REDO' })
-  }
+    dispatch({ type: "REDO" });
+  };
+
+  const handleToggleSidebar = () => {
+    dispatch({ type: "TOGGLE_SIDEBAR" });
+  };
 
   const handleOnSave = async () => {
-    const content = JSON.stringify(state.editor.elements)
+    const content = JSON.stringify(state.editor.elements);
     try {
       const response = await upsertFunnelPage(
         subaccountId,
@@ -93,29 +103,29 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
           ...funnelPageDetails,
           content,
         },
-        funnelId
-      )
+        funnelId,
+      );
       await saveActivityLogsNotification({
         agencyId: undefined,
         description: `Updated a funnel page | ${response?.name}`,
         subAccountId: subaccountId,
-      })
-      toast('Success', {
-        description: 'Saved Editor',
-      })
+      });
+      toast("Success", {
+        description: "Saved Editor",
+      });
     } catch (error) {
-      toast('Oppse!', {
-        description: 'Could not save editor',
-      })
+      toast("Oppse!", {
+        description: "Could not save editor",
+      });
     }
-  }
+  };
 
   return (
     <TooltipProvider>
       <nav
         className={clsx(
-          'border-b flex items-center justify-between p-6 py-3 gap-2 transition-all',
-          { 'h-0! p-0! overflow-hidden! z-300': state.editor.previewMode }
+          "border-b flex items-center justify-between p-6 py-3 gap-2 transition-all",
+          { "h-0! p-0! overflow-hidden! z-300": state.editor.previewMode },
         )}
       >
         <aside className="flex items-center gap-4 max-w-[260px] w-[300px]">
@@ -140,9 +150,9 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
             value={state.editor.device}
             onValueChange={(value) => {
               dispatch({
-                type: 'CHANGE_DEVICE',
+                type: "CHANGE_DEVICE",
                 payload: { device: value as DeviceTypes },
-              })
+              });
             }}
           >
             <TabsList className="grid w-full grid-cols-3 bg-transparent h-fit">
@@ -190,18 +200,31 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
         </aside>
         <aside className="flex items-center gap-2">
           <Button
-            variant={'ghost'}
-            size={'icon'}
+            variant={"ghost"}
+            size={"icon"}
             className="hover:bg-slate-800"
             onClick={handlePreviewClick}
           >
             <EyeIcon />
           </Button>
           <Button
+            variant={"ghost"}
+            size={"icon"}
+            className="hover:bg-slate-800"
+            onClick={handleToggleSidebar}
+            title="Toggle Sidebar"
+          >
+            {state.editor.sidebarOpen ? (
+              <PanelRightClose />
+            ) : (
+              <PanelRightOpen />
+            )}
+          </Button>
+          <Button
             disabled={!(state.history.currentIndex > 0)}
             onClick={handleUndo}
-            variant={'ghost'}
-            size={'icon'}
+            variant={"ghost"}
+            size={"icon"}
             className="hover:bg-slate-800"
           >
             <Undo2 />
@@ -211,8 +234,8 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
               !(state.history.currentIndex < state.history.history.length - 1)
             }
             onClick={handleRedo}
-            variant={'ghost'}
-            size={'icon'}
+            variant={"ghost"}
+            size={"icon"}
             className="hover:bg-slate-800 mr-4"
           >
             <Redo2 />
@@ -220,10 +243,7 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
           <div className="flex flex-col item-center mr-4">
             <div className="flex flex-row items-center gap-4">
               Draft
-              <Switch
-                disabled
-                defaultChecked={true}
-              />
+              <Switch disabled defaultChecked={true} />
               Publish
             </div>
             <span className="text-muted-foreground text-sm">
@@ -234,5 +254,5 @@ export default function FunnelEditorNavigation({ funnelId, funnelPageDetails, su
         </aside>
       </nav>
     </TooltipProvider>
-  )
+  );
 }

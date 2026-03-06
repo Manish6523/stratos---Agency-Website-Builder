@@ -13,7 +13,13 @@ export type EditorElement = {
   type: EditorBtns;
   content:
     | EditorElement[]
-    | { href?: string; innerText?: string; src?: string; customCode?: string };
+    | {
+        href?: string;
+        innerText?: string;
+        src?: string;
+        customCode?: string;
+        alt?: string;
+      };
 };
 
 export type Editor = {
@@ -22,6 +28,7 @@ export type Editor = {
   selectedElement: EditorElement;
   device: DeviceTypes;
   previewMode: boolean;
+  sidebarOpen: boolean;
   funnelPageId: string;
 };
 
@@ -55,6 +62,7 @@ const initialEditorState: EditorState["editor"] = {
   device: "Desktop",
   previewMode: false,
   liveMode: false,
+  sidebarOpen: true,
   funnelPageId: "",
 };
 
@@ -344,6 +352,16 @@ const editorReducer = (
       };
       return toggleState;
 
+    case "TOGGLE_SIDEBAR":
+      const sidebarState = {
+        ...state,
+        editor: {
+          ...state.editor,
+          sidebarOpen: !state.editor.sidebarOpen,
+        },
+      };
+      return sidebarState;
+
     case "TOGGLE_LIVE_MODE":
       const toggleLiveMode: EditorState = {
         ...state,
@@ -362,7 +380,13 @@ const editorReducer = (
         const nextEditorState = { ...state.history.history[nextIndex] };
         const redoState = {
           ...state,
-          editor: nextEditorState,
+          editor: {
+            ...nextEditorState,
+            previewMode: state.editor.previewMode,
+            liveMode: state.editor.liveMode,
+            device: state.editor.device,
+            sidebarOpen: state.editor.sidebarOpen,
+          },
           history: {
             ...state.history,
             currentIndex: nextIndex,
@@ -378,7 +402,13 @@ const editorReducer = (
         const prevEditorState = { ...state.history.history[prevIndex] };
         const undoState = {
           ...state,
-          editor: prevEditorState,
+          editor: {
+            ...prevEditorState,
+            previewMode: state.editor.previewMode,
+            liveMode: state.editor.liveMode,
+            device: state.editor.device,
+            sidebarOpen: state.editor.sidebarOpen,
+          },
           history: {
             ...state.history,
             currentIndex: prevIndex,

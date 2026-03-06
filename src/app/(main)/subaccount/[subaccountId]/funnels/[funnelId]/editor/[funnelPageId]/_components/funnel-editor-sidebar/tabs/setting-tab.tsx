@@ -34,11 +34,17 @@ import {
 } from "@/components/ui/select";
 import { useEditor } from "@/providers/editor/editor-provider";
 import { Slider } from "@/components/ui/slider";
+import { useState } from "react";
+import { Loader2, Wand2 } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 type Props = {};
 
 export default function SettingsTab({}: Props) {
   const { state, dispatch } = useEditor();
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const TABS_TRIGGER_CLASS =
     "cursor-pointer w-10 h-10 p-0 data-[state=active]:bg-muted";
@@ -88,12 +94,106 @@ export default function SettingsTab({}: Props) {
     });
   };
 
+  const handleGenerateText = async () => {
+    if (!aiPrompt) return;
+
+    setIsGenerating(true);
+    try {
+      const response = await fetch("/api/generate-text", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: aiPrompt }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to generate text");
+      }
+
+      // Update the element text
+      dispatch({
+        type: "UPDATE_ELEMENT",
+        payload: {
+          elementDetails: {
+            ...state.editor.selectedElement,
+            content: {
+              ...state.editor.selectedElement.content,
+              innerText: data.text,
+            },
+          },
+        },
+      });
+
+      toast.success("Text generated successfully");
+      setAiPrompt("");
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error.message || "Failed to generate text");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <Accordion
       type="multiple"
       className="w-full"
-      defaultValue={["Typography", "Dimensions", "Decorations", "Flexbox"]}
+      defaultValue={[
+        "AI Assistant",
+        "Typography",
+        "Dimensions",
+        "Decorations",
+        "Flexbox",
+      ]}
     >
+      {(state.editor.selectedElement.type === "text" ||
+        state.editor.selectedElement.type === "h1" ||
+        state.editor.selectedElement.type === "h2" ||
+        state.editor.selectedElement.type === "h3" ||
+        state.editor.selectedElement.type === "link") && (
+        <AccordionItem value="AI Assistant" className="px-6 py-0 border-y">
+          <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
+            <div className="flex items-center gap-2">
+              <Wand2 size={16} className="text-primary" />
+              AI Assistant
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-2">
+            <p className="text-muted-foreground text-xs mb-2">
+              Generate content using Google Gemini
+            </p>
+            <div className="flex flex-col gap-2">
+              <Label className="text-muted-foreground">Prompt</Label>
+              <textarea
+                className="w-full bg-background border p-2 rounded-md h-24 text-sm"
+                placeholder="E.g. Write a catchy headline for a real estate agency..."
+                value={aiPrompt}
+                onChange={(e) => setAiPrompt(e.target.value)}
+              />
+              <Button
+                onClick={handleGenerateText}
+                className="w-full mt-2"
+                disabled={isGenerating || !aiPrompt.trim()}
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <Wand2 className="mr-2 h-4 w-4" />
+                    Generate Text
+                  </>
+                )}
+              </Button>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      )}
       <AccordionItem value="Custom" className="px-6 py-0  ">
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
           Custom
@@ -138,7 +238,7 @@ export default function SettingsTab({}: Props) {
                   id="alt"
                   placeholder="Description for screen readers"
                   onChange={handleChangeCustomValues}
-                  value={state.editor.selectedElement.content.innerText || ""}
+                  value={state.editor.selectedElement.content.alt || ""}
                 />
               </div>
             )}
@@ -328,7 +428,10 @@ export default function SettingsTab({}: Props) {
                     },
                   })
                 }
-                value={state.editor.selectedElement.styles.textDecoration || ""}
+                value={
+                  state.editor.selectedElement.styles.textDecoration?.toString() ||
+                  ""
+                }
               >
                 <SelectTrigger className="w-[120px]">
                   <SelectValue placeholder="None" />

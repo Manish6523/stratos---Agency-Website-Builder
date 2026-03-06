@@ -60,6 +60,7 @@ export type EditorAction =
     }
   | { type: "REDO" }
   | { type: "UNDO" }
+  | { type: "TOGGLE_SIDEBAR" }
   | {
       type: "LOAD_DATA";
       payload: {

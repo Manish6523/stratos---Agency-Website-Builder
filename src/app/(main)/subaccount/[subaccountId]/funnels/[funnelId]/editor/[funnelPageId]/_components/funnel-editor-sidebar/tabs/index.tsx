@@ -1,6 +1,12 @@
 import React from "react";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Database, Plus, SettingsIcon, SquareStackIcon } from "lucide-react";
+import {
+  Database,
+  Plus,
+  SettingsIcon,
+  Sparkles,
+  SquareStackIcon,
+} from "lucide-react";
 
 type Props = {};
 
@@ -31,6 +37,12 @@ export default function TabList({}: Props) {
         className="w-10 h-10 cursor-pointer p-3 data-[state=active]:bg-muted"
       >
         <Database />
+      </TabsTrigger>
+      <TabsTrigger
+        value="AI"
+        className="w-10 h-10 cursor-pointer p-3 data-[state=active]:bg-muted"
+      >
+        <Sparkles />
       </TabsTrigger>
     </TabsList>
   );

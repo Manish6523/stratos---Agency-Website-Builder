@@ -15,6 +15,7 @@ import TabList from "./tabs";
 import SettingsTab from "./tabs/setting-tab";
 import MediaBucketTab from "./tabs/media-bucket-tab";
 import ComponentsTab from "./tabs/components-tab";
+import AiBuilderTab from "./tabs/ai-builder-tab";
 
 type Props = {
   subaccountId: string;
@@ -35,7 +36,7 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
           style={style}
           className={clsx(
             "w-16 shadow-none focus:border-none transition-all overflow-hidden",
-            { hidden: state.editor.previewMode },
+            { hidden: state.editor.previewMode || !state.editor.sidebarOpen },
           )}
         >
           <VisuallyHidden>
@@ -49,7 +50,7 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
           style={{ ...style, zIndex: 40, width: "320px", marginRight: "64px" }}
           className={clsx(
             "w-80 shadow-none p-0 bg-background h-full transition-all overflow-hidden ",
-            { hidden: state.editor.previewMode },
+            { hidden: state.editor.previewMode || !state.editor.sidebarOpen },
           )}
         >
           <VisuallyHidden>
@@ -78,6 +79,9 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
                 </SheetDescription>
               </SheetHeader>
               <ComponentsTab />
+            </TabsContent>
+            <TabsContent value="AI">
+              <AiBuilderTab />
             </TabsContent>
           </div>
         </SheetContent>
