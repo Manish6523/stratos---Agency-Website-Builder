@@ -35,7 +35,7 @@ import {
 import { useEditor } from "@/providers/editor/editor-provider";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
-import { Loader2, Wand2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
@@ -43,8 +43,6 @@ type Props = {};
 
 export default function SettingsTab({}: Props) {
   const { state, dispatch } = useEditor();
-  const [aiPrompt, setAiPrompt] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
 
   const TABS_TRIGGER_CLASS =
     "cursor-pointer w-10 h-10 p-0 data-[state=active]:bg-muted";
@@ -94,121 +92,12 @@ export default function SettingsTab({}: Props) {
     });
   };
 
-  const handleGenerateText = async () => {
-    if (!aiPrompt) return;
-
-    setIsGenerating(true);
-    try {
-      const elementType = state.editor.selectedElement.type;
-
-      const enhancedPrompt = `
-      You are an AI assistant helping a user build a website inside a visual drag-and-drop editor.
-      The user is currently editing a "${elementType}" component.
-      
-      Their prompt is: "${aiPrompt}"
-      
-      Please generate the appropriate text content for this specific component. 
-      - If it is a heading or title, keep it short and punchy.
-      - If it is a testimonial, write it from the perspective of a happy customer.
-      - If it is a paragraph or description, ensure it is engaging and web-ready.
-      - ONLY return the generated text. Do not include quotes, Markdown formatting, or conversational filler like "Here is your text:".
-      `;
-
-      const response = await fetch("/api/generate-text", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt: enhancedPrompt }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to generate text");
-      }
-
-      // Update the element text
-      dispatch({
-        type: "UPDATE_ELEMENT",
-        payload: {
-          elementDetails: {
-            ...state.editor.selectedElement,
-            content: {
-              ...state.editor.selectedElement.content,
-              innerText: data.text,
-            },
-          },
-        },
-      });
-
-      toast.success("Text generated successfully");
-      setAiPrompt("");
-    } catch (error: any) {
-      console.error(error);
-      toast.error(error.message || "Failed to generate text");
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
   return (
     <Accordion
       type="multiple"
       className="w-full"
-      defaultValue={[
-        "AI Assistant",
-        "Typography",
-        "Dimensions",
-        "Decorations",
-        "Flexbox",
-      ]}
+      defaultValue={["Typography", "Dimensions", "Decorations", "Flexbox"]}
     >
-      {(state.editor.selectedElement.type === "text" ||
-        state.editor.selectedElement.type === "h1" ||
-        state.editor.selectedElement.type === "h2" ||
-        state.editor.selectedElement.type === "h3" ||
-        state.editor.selectedElement.type === "link") && (
-        <AccordionItem value="AI Assistant" className="px-6 py-0 border-y">
-          <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
-            <div className="flex items-center gap-2">
-              <Wand2 size={16} className="text-primary" />
-              AI Assistant
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-2">
-            <p className="text-muted-foreground text-xs mb-2">
-              Generate content using Google Gemini
-            </p>
-            <div className="flex flex-col gap-2">
-              <Label className="text-muted-foreground">Prompt</Label>
-              <textarea
-                className="w-full bg-background border p-2 rounded-md h-24 text-sm"
-                placeholder="E.g. Write a catchy headline for a real estate agency..."
-                value={aiPrompt}
-                onChange={(e) => setAiPrompt(e.target.value)}
-              />
-              <Button
-                onClick={handleGenerateText}
-                className="w-full mt-2"
-                disabled={isGenerating || !aiPrompt.trim()}
-              >
-                {isGenerating ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Generating...
-                  </>
-                ) : (
-                  <>
-                    <Wand2 className="mr-2 h-4 w-4" />
-                    Generate Text
-                  </>
-                )}
-              </Button>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      )}
       <AccordionItem value="Custom" className="px-6 py-0  ">
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
           Custom
@@ -1125,12 +1014,27 @@ export default function SettingsTab({}: Props) {
           </div>
           <div>
             <Label className="text-muted-foreground"> Direction</Label>
-            <Input
-              placeholder="px"
-              id="flexDirection"
-              onChange={handleOnChanges}
+            <Select
+              onValueChange={(e) =>
+                handleOnChanges({
+                  target: {
+                    id: "flexDirection",
+                    value: e,
+                  },
+                })
+              }
               value={state.editor.selectedElement.styles.flexDirection || ""}
-            />
+            >
+              <SelectTrigger className="w-[120px]">
+                <SelectValue placeholder="Row" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="row">Row</SelectItem>
+                  <SelectItem value="column">Column</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
           <div className="flex gap-4">
             <div>

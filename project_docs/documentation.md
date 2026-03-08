@@ -2,7 +2,7 @@
 
 **Project Name:** Stratos
 **Date:** Wednesday, March 5, 2026
-**Version:** 1.5.1 (Beta)
+**Version:** 1.5.2 (Beta)
 
 ---
 

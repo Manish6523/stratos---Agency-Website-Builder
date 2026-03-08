@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { GoogleGenAI, Type } from "@google/genai";
-import { v4 } from "uuid";
+import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
@@ -22,9 +21,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: `You are an expert web designer assisting a user in a drag-and-drop website builder. 
+    const systemPrompt = `You are an expert web designer assisting a user in a drag-and-drop website builder. 
 The user wants to accomplish the following based on this prompt: "${prompt}"
 
 ${
@@ -45,23 +42,35 @@ Generate meaningful default copy for texts, headings, and buttons.`
 Return ONLY valid JSON representing the layout block. No markdown wrappers.
 
 Structure Types:
-- container: A layout box that can hold other elements.
-- 2Col: A two-column grid layout element (its content array must have exactly two 'container' elements).
-- 3Col: A three-column grid layout element (its content array must have exactly three 'container' elements).
-- text: A generic paragraph of text. (innerText, color, fontSize)
-- h1: A large heading. (innerText, color, fontSize, fontWeight)
-- h2: A medium heading. (innerText, color, fontSize, fontWeight)
-- h3: A small heading. (innerText, color, fontSize, fontWeight)
-- link: A clickable text link. (innerText, href, color)
-- button: A standalone button. (innerText, backgroundColor, color, padding)
-- image: An image block. (src, alt)
-- video: A video block. (src)
-- divider: A horizontal line.
-- progressBar: A progress bar. (progressValue, progressColor, progressBackground)
-- slider: A slider. (sliderImages, sliderBackground)
-- form: A form block. (formFields, formBackground)
-- testimonial: A customer quote block. (innerText, authorName)
-- iconBlock: A dynamic icon display. (icon, innerText)
+
+**1. Basic Layouts**
+- container: A layout box that can hold other elements inside its 'content' array. Minimum padding is recommended.
+- 2Col: A two-column grid. Its 'content' MUST be an array of exactly two 'container' elements. Styles MUST include {"display": "flex"}.
+- 3Col: A three-column grid. Its 'content' MUST be an array of exactly three 'container' elements. Styles MUST include {"display": "flex"}.
+- divider: A horizontal dividing line. (content: [])
+
+**2. Typography (Basic)**
+- text: A paragraph of text. (content MUST be an object: { innerText: "..." })
+- h1: Large heading. (content: { innerText: "..." })
+- h2: Medium heading. (content: { innerText: "..." })
+- h3: Small heading. (content: { innerText: "..." })
+- link: A clickable link. (content: { innerText: "...", href: "..." })
+- button: Call to action button. (content: { innerText: "...", href: "..." })
+
+**3. Media**
+- image: An image block. (content: { src: "https://picsum.photos/800/400" })
+- video: A youtube video embed. (content: { src: "https://www.youtube.com/embed/dQw4w9WgXcQ" })
+
+**4. Advanced UI Components**
+- slider: An image carousel. (content: { sliderImages: ["url1", "url2", "url3"] })
+- progressBar: A completion bar. (content: { progressValue: 75, progressColor: "#2563eb", progressBackground: "#e2e8f0" })
+- testimonial: A customer quote block. (content: { innerText: "...", authorName: "..." })
+- iconBlock: A dynamic lucide-react icon display. (content: { innerText: "...", icon: "shield-check" })
+
+**5. Forms & Code**
+- contactForm: A full contact form block. (content: [])
+- paymentForm: A checkout form block. (content: [])
+- customEmbed: A raw HTML block. Use only in-line CSS; no external scripts or external assets are allowed. (content: { customCode: "<div style='padding: 20px; background-color: #f3f4f6; border-radius: 8px;'><h2 style='color: #1f2937;'>Custom Embed</h2><p style='color: #4b5563;'>This is a custom HTML block with inline styles.</p></div>" })
 
 Guidelines:
 1. Use valid Tailwind-like styling via standard CSS properties in camelCase [camelCase is most important] (e.g., backgroundColor, padding, display, flexDirection, maxWidth).
@@ -75,7 +84,11 @@ Guidelines:
   "content": (Either an array of child elements, OR an object like {"innerText": "...", "href": "...", "src": "..."})
 }
 
-Return ONLY valid JSON. No markdown wrappers.`,
+Return ONLY valid JSON. No markdown wrappers.`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: [{ role: "user", parts: [{ text: systemPrompt }] }],
       config: {
         responseMimeType: "application/json",
       },
@@ -88,8 +101,9 @@ Return ONLY valid JSON. No markdown wrappers.`,
     // Attempt to parse the valid JSON
     let layoutData;
     try {
-      layoutData = JSON.parse(response.text);
+      layoutData = JSON.parse(response.text.trim());
     } catch (err) {
+      console.error("Failed to parse JSON:", response.text);
       throw new Error("AI returned malformed JSON");
     }
 

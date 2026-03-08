@@ -73,12 +73,12 @@ export default function ComponentsTab({}: Props) {
       id: "contactForm",
       group: "elements",
     },
-    {
-      Component: <CheckoutPlaceholder />,
-      label: "Checkout",
-      id: "paymentForm",
-      group: "elements",
-    },
+    // {
+    //   Component: <CheckoutPlaceholder />,
+    //   label: "Checkout",
+    //   id: "paymentForm",
+    //   group: "elements",
+    // },
     {
       Component: <LinkPlaceholder />,
       label: "Link",
@@ -156,12 +156,10 @@ export default function ComponentsTab({}: Props) {
               .map((element) => (
                 <div
                   key={element.id}
-                  className="group flex flex-col items-center justify-center gap-2"
+                  className="group flex flex-col cursor-grab items-center justify-center gap-2"
                 >
-                  <div className="h-12 w-full flex items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/10 bg-muted/20 group-hover:bg-primary/5 group-hover:border-primary/40 transition-all cursor-grab active:cursor-grabbing shadow-sm">
-                    <div className="opacity-60 group-hover:opacity-100 transition-opacity scale-90">
-                      {element.Component}
-                    </div>
+                  <div className="opacity-60 group-hover:opacity-100 transition-opacity scale-90">
+                    {element.Component}
                   </div>
                   <span className="text-[10px] font-medium text-muted-foreground group-hover:text-foreground text-center truncate w-full">
                     {element.label}
@@ -178,20 +176,18 @@ export default function ComponentsTab({}: Props) {
           Basic Elements
         </AccordionTrigger>
         <AccordionContent className="px-6 pb-6 mt-2">
-          <div className="grid grid-cols-3 gap-y-5 gap-x-3">
+          <div className="grid grid-cols-4 gap-y-5 gap-x-3">
             {elements
               .filter((el) => el.group === "elements")
               .map((element) => (
                 <div
                   key={element.id}
-                  className="group flex flex-col items-center justify-center gap-2"
+                  className="group flex flex-col cursor-grab items-center justify-center gap-2"
                 >
-                  <div className="h-12 w-full flex items-center justify-center rounded-md border bg-card shadow-sm group-hover:border-primary group-hover:shadow-md group-hover:-translate-y-0.5 transition-all cursor-grab active:cursor-grabbing">
-                    <div className="scale-75 text-muted-foreground group-hover:text-primary transition-colors">
-                      {element.Component}
-                    </div>
+                  <div className="opacity-60 group-hover:opacity-100 transition-opacity scale-90">
+                    {element.Component}
                   </div>
-                  <span className="text-[10px] font-semibold text-muted-foreground group-hover:text-foreground uppercase tracking-tight text-center truncate w-full">
+                  <span className="text-[10px] font-medium text-muted-foreground group-hover:text-foreground text-center truncate w-full">
                     {element.label}
                   </span>
                 </div>

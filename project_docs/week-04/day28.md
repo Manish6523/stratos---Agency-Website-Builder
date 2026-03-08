@@ -8,7 +8,8 @@ Refine the user experience and visual flexibility of the newly added custom comp
 
 ### 1. Component UX & Styling Refinements
 
-- **Slider Component**: Removed `overflow-hidden` constraints that were clipping the editor Badge and Delete buttons. Implemented interactive React state (`currentIndex`) with left/right Chevron controls allowing users to preview image slides directly on the canvas. Fixed initialization payload to drop as an object instead of an empty array.
+- **Slider Component**: Removed `overflow-hidde 
+n` constraints that were clipping the editor Badge and Delete buttons. Implemented interactive React state (`currentIndex`) with left/right Chevron controls allowing users to preview image slides directly on the canvas. Fixed initialization payload to drop as an object instead of an empty array.
 - **Progress Bar Component**: Overhauled the color ingestion logic. The component now intelligently distinguishes between Tailwind utility classes (e.g., `bg-primary`) and raw CSS color values (e.g., `#ff0000`, `rgb()`, `red`). Raw values are injected directly into the inline `style` attribute, bypassing Tailwind compilation restrictions.
 - **Testimonial Component**: Upgraded the `authorName` element to utilize `contentEditable` with `suppressContentEditableWarning`, allowing users to type the author's name directly on the canvas instead of using a separated sidebar input.
 - **Icon Block Component**: Streamlined the block to focus entirely on visual icon delivery. Implemented a robust regex-based parser that converts user input (e.g., `arrow-right`, `ArrowRight`, `arrow right`) into valid PascalCase to dynamically render the correct `lucide-react` icon.

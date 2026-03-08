@@ -51,7 +51,7 @@ const IconBlockComponent = (props: Props) => {
       style={styles}
       id={props.element.id}
       className={clsx(
-        "p-6 w-full my-2 relative transition-all rounded-xl border border-muted bg-muted/20 flex items-center justify-center gap-4",
+        "p-3 w-full my-2 relative transition-all rounded-xl border border-muted bg-muted/20 flex items-center justify-center gap-4",
         {
           "border-blue-500! border-solid!":
             state.editor.selectedElement.id === props.element.id,
@@ -70,7 +70,7 @@ const IconBlockComponent = (props: Props) => {
           </Badge>
         )}
 
-      <IconComponent size={64} className="text-primary" />
+      <IconComponent size={24} className="text-primary" />
 
       {state.editor.selectedElement.id === props.element.id &&
         !state.editor.liveMode && (
