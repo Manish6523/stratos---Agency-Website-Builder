@@ -72,6 +72,7 @@ const ImageComponent = (props: Props) => {
         alt="User uploaded image"
         style={styles}
         className="w-full object-cover"
+        draggable={false}
       />
 
       {state.editor.selectedElement.id === props.element.id &&

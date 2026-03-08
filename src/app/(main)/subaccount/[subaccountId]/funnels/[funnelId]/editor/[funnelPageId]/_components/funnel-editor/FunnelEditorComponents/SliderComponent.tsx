@@ -97,6 +97,7 @@ const SliderComponent = (props: Props) => {
             src={currentImage as string}
             alt="Slider Display"
             className="absolute inset-0 w-full h-full object-cover rounded-xl"
+            draggable={false}
           />
         ) : (
           <>
