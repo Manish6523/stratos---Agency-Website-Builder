@@ -185,9 +185,34 @@ const editorReducer = (
 ): EditorState => {
   switch (action.type) {
     case "ADD_ELEMENT":
+      const elementToAdd = { ...action.payload.elementDetails };
+
+      // Inject default font size uniquely for iconBlock elements
+      if (elementToAdd.type === "iconBlock") {
+        elementToAdd.content = {
+          icon:
+            elementToAdd.content &&
+            !Array.isArray(elementToAdd.content) &&
+            elementToAdd.content.icon
+              ? elementToAdd.content.icon
+              : "Info",
+        };
+        elementToAdd.styles = {
+          ...elementToAdd.styles,
+          color: elementToAdd.styles.color || "black",
+          fontSize: elementToAdd.styles.fontSize || "48px",
+        };
+      }
+
       const updatedEditorState = {
         ...state.editor,
-        elements: addAnElement(state.editor.elements, action),
+        elements: addAnElement(state.editor.elements, {
+          ...action,
+          payload: {
+            ...action.payload,
+            elementDetails: elementToAdd,
+          },
+        }),
       };
       // Update the history to include the entire updated EditorState
       const updatedHistory = [

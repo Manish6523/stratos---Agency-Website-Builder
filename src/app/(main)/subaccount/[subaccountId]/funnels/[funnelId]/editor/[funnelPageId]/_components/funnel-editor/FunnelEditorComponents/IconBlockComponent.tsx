@@ -46,16 +46,20 @@ const IconBlockComponent = (props: Props) => {
   const IconComponent =
     (lucideIcons as any)[formattedIconName] || lucideIcons.Info;
 
+  const fontSizeValue = styles.fontSize
+    ? parseInt(styles.fontSize.toString().replace("px", ""))
+    : 48;
+
   return (
     <div
       style={styles}
       id={props.element.id}
       className={clsx(
-        "p-3 w-full my-2 relative transition-all rounded-xl border border-muted bg-muted/20 flex items-center justify-center gap-4",
+        "relative transition-all flex items-center justify-center",
         {
-          "border-blue-500! border-solid!":
+          "ring-1 ring-blue-500":
             state.editor.selectedElement.id === props.element.id,
-          "border-dashed border-slate-300": !state.editor.liveMode,
+          "ring-1 ring-dashed ring-slate-300": !state.editor.liveMode,
           "cursor-pointer": !state.editor.liveMode,
         },
       )}
@@ -70,7 +74,10 @@ const IconBlockComponent = (props: Props) => {
           </Badge>
         )}
 
-      <IconComponent size={24} className="text-primary" />
+      <IconComponent
+        size={fontSizeValue}
+        color={(styles.color as string) || "currentColor"}
+      />
 
       {state.editor.selectedElement.id === props.element.id &&
         !state.editor.liveMode && (
