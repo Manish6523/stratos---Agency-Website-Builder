@@ -57,8 +57,6 @@ const IconBlockComponent = (props: Props) => {
       className={clsx(
         "relative transition-all flex items-center justify-center",
         {
-          "ring-1 ring-blue-500":
-            state.editor.selectedElement.id === props.element.id,
           "ring-1 ring-dashed ring-slate-300": !state.editor.liveMode,
           "cursor-pointer": !state.editor.liveMode,
         },
@@ -69,7 +67,7 @@ const IconBlockComponent = (props: Props) => {
     >
       {state.editor.selectedElement.id === props.element.id &&
         !state.editor.liveMode && (
-          <Badge className="absolute -top-[23px] -left-px rounded-none rounded-t-lg tracking-normal font-sans">
+          <Badge className="absolute hidden -top-[23px] -left-px rounded-none rounded-t-lg tracking-normal font-sans">
             {state.editor.selectedElement.name}
           </Badge>
         )}
