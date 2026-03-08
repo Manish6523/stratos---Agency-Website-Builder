@@ -1,9 +1,34 @@
+import FunnelEditor from '@/app/(main)/subaccount/[subaccountId]/funnels/[funnelId]/editor/[funnelPageId]/_components/funnel-editor'
+import { getDomainContent } from '@/lib/queries'
+import EditorProvider from '@/providers/editor/editor-provider'
+import { notFound } from 'next/navigation'
 import React from 'react'
 
-const page = () => {
+const Page = async ({
+  params,
+}: {
+  params: Promise<{ domain: string; path: string }>
+}) => {
+  const param = await params;
+  const domainData = await getDomainContent(param.domain.slice(0, -1))
+  const pageData = domainData?.FunnelPages.find(
+    (page) => page.pathName === param.path
+  )
+
+  if (!pageData || !domainData) return notFound()
+
   return (
-    <div>Path</div>
+    <EditorProvider
+      subaccountId={domainData.subAccountId}
+      pageDetails={pageData}
+      funnelId={domainData.id}
+    >
+      <FunnelEditor
+        funnelPageId={pageData.id}
+        liveMode={true}
+      />
+    </EditorProvider>
   )
 }
 
-export default page
+export default Page

@@ -347,3 +347,18 @@
 - Updated `project_docs/dayTitle.md` appending the Day 29 entry under Week 04.
 - Updated `project_docs/main-doc.md` and `project_docs/documentation.md` timeline to reflect Day 29 achievements and bumped last updated date.
   **Outcome**: Documentation successfully synchronized with Week 04 "Day 29" updates. The AI layout generator is now highly structural and fault-tolerant, leading to more responsive automatic block insertion.
+
+## [Current Session: Sunday, March 8, 2026]
+
+**User Action**: Triggered "Update project documentation" to include Day 30 updates.
+**Analysis**:
+
+- Detected live rendering endpoints initialized inside `src/app/[domain]/page.tsx` and `src/app/[domain]/[path]/page.tsx` acting as public funnels.
+- Observed that live public endpoints instantiate `EditorProvider` loaded with `liveMode={true}` to prevent drag-and-drop actions.
+- Identified an issue with HTML5 native `<img>` elements dragging outside the canvas, fixed via `draggable={false}` injections inside `ImageComponent` and `SliderComponent`.
+- Noted CSS purification inside `IconBlockComponent` exchanging static borders and backgrounds for dynamic `fontSize` configurations and editor default injection.
+  **Actions**:
+- Created `project_docs/week-04/day30.md` reporting Live Domain Rendering & Editor UX Polish achievements.
+- Appended Day 30 onto `project_docs/dayTitle.md` within the `Week 04` block.
+- Updated `project_docs/main-doc.md` detailing the live page pipeline, browser drag fixes, and icon block optimizations.
+  **Outcome**: Documentation completely synchronized with "Day 30". Live domain mapping logic is securely established, while visual builder UX reflects mature drag-and-drop resilience against default browser behaviors.
