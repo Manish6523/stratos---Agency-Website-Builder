@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import ModalProvider from "@/providers/ModalProvider";
+import AiWebsiteAgent from "@/components/global/ai-website-agent";
 
 const font = DM_Sans({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
           <ModalProvider>
             {children}
             <Toaster />
+            {/* <AiWebsiteAgent /> */}
           </ModalProvider>
         </ThemeProvider>
       </body>

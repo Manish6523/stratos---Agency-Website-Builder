@@ -47,7 +47,7 @@ const HeadingComponent = (props: Props) => {
     <div
       style={styles}
       id={props.element.id}
-      className={clsx("p-[2px] w-full my-[5px] relative transition-all", {
+      className={clsx("p-[2px] w-fit my-[5px] relative transition-all", {
         "border-blue-500!":
           state.editor.selectedElement.id === props.element.id,
         "border-solid!": state.editor.selectedElement.id === props.element.id,

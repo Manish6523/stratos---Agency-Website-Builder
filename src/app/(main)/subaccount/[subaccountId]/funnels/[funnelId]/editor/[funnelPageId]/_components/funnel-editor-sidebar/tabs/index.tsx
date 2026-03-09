@@ -7,6 +7,7 @@ import {
   Sparkles,
   SquareStackIcon,
   LayoutTemplate,
+  PanelsTopLeft,
 } from "lucide-react";
 
 type Props = {};
@@ -56,6 +57,13 @@ export default function TabList({}: Props) {
         className="w-10 h-10 hover:bg-muted cursor-pointer p-3 data-[state=active]:bg-muted"
       >
         <Sparkles className="text-primary" />
+      </TabsTrigger>
+      <TabsTrigger
+        value="Templates"
+        title="Templates"
+        className="w-10 h-10 hover:bg-muted cursor-pointer p-3 data-[state=active]:bg-muted"
+      >
+        <PanelsTopLeft />
       </TabsTrigger>
     </TabsList>
   );

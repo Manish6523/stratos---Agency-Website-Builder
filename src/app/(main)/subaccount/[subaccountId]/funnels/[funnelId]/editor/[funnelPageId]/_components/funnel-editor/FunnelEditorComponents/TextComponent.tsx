@@ -43,7 +43,7 @@ const TextComponent = (props: Props) => {
       style={styles}
       id={props.element.id}
       className={clsx(
-        "p-[2px] w-full my-[5px] relative text-[16px] transition-all",
+        "p-[2px] w-fit my-[5px] relative text-[16px] transition-all",
         {
           "border-blue-500!":
             state.editor.selectedElement.id === props.element.id,

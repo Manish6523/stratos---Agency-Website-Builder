@@ -1,7 +1,7 @@
 # STRATOS - Comprehensive Project Documentation
 
-**Version:** 1.5.3 (Beta)
-**Last Updated:** 2026-03-08
+**Version:** 1.6.0 (Beta)
+**Last Updated:** 2026-03-09
 **Purpose:** Primary reference for Claude Code - AI-optimized project documentation
 
 ---
@@ -707,8 +707,9 @@ enum InvitationStatus {
 | **Day 28**    | Mar 6, 2026  | Component Refinements & AI Context | • Interactive preview state for Slider arrows and raw CSS Hex Code injection for Progress Bars<br>• Enhanced AI block text generation via dynamic context injection based on selected element type<br>• Layout generation engine expanded to support Icon Blocks and Testimonials                                                                                                   | `FunnelEditorComponents/`<br>`api/generate-text/`<br>`api/generate-layout/`                                                                                                     |
 | **Day 29**    | Mar 8, 2026  | AI Generation & UI Polish          | • Rewrote Gemini system prompt to enforce strict JSON schemas for element structures<br>• Layout generation engine expanded with robust error logging and categorized blocks<br>• Global `sonner` Toaster added and component padding/icon refinements applied                                                                                                                      | `api/generate-layout/`<br>`layout.tsx`<br>`FunnelEditorComponents/`                                                                                                             |
 | **Day 30**    | Mar 8, 2026  | Live Context & UX Polish           | • Enabled live funnel domain routing utilizing Recursive Editor functionality under zero-interaction `<EditorProvider liveMode={true}>` injections<br>• Restricted raw HTML5 image drag behavior across components, prioritizing custom geometry tracking<br>• Abstracted specific styles from `IconBlockComponent` and tied bounds directly to custom Typography states            | `[domain]/page.tsx`<br>`IconBlockComponent.tsx`<br>`ImageComponent.tsx`                                                                                                         |
+| **Day 31**    | Mar 9, 2026  | Template Categories & Sidebar UI   | • Categorized builder templates into Portfolio, E-commerce, Landing Page<br>• Added Next/Image graphical rendering to `templates-tab.tsx` mapping to `imageUrl` metadata<br>• Adjusted Drag-Bounding borders for Element Canvas interaction (`w-full` to `w-fit`)                                                                                                                   | `templates.ts`<br>`templates-tab.tsx`<br>`next.config.ts`<br>`TextComponent.tsx`, `ButtonComponent.tsx`, `LinkComponent.tsx`                                                    |
 
-### Current Status (Day 29 Complete)
+### Current Status (Day 31 Complete)
 
 **✅ Implemented:**
 
@@ -726,6 +727,7 @@ enum InvitationStatus {
 - Multi-theme system (7 themes, light/dark)
 - Visual Page Builder (Drag and Drop, Mode switching, History logic, Editor Provider)
 - AI Content Generations (Layout Drafting via Gemini)
+- Visual Editor UI Scaling (Template Previews, Element Bounding)
 
 **⏳ Database Ready, UI Pending:**
 

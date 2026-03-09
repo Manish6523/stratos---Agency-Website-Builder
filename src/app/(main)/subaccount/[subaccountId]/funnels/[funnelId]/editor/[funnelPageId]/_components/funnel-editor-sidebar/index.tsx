@@ -17,6 +17,7 @@ import MediaBucketTab from "./tabs/media-bucket-tab";
 import ComponentsTab from "./tabs/components-tab";
 import AiBuilderTab from "./tabs/ai-builder-tab";
 import PagesTab from "./tabs/pages-tab";
+import TemplatesTab from "./tabs/templates-tab";
 
 type Props = {
   subaccountId: string;
@@ -86,6 +87,15 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
             </TabsContent>
             <TabsContent value="Pages" className="h-full">
               <PagesTab />
+            </TabsContent>
+            <TabsContent value="Templates">
+              <SheetHeader className="text-left p-6">
+                <SheetTitle>Templates</SheetTitle>
+                <SheetDescription>
+                  Drag and drop pre-built sections onto your canvas.
+                </SheetDescription>
+              </SheetHeader>
+              <TemplatesTab />
             </TabsContent>
           </div>
         </SheetContent>

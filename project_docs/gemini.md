@@ -362,3 +362,18 @@
 - Appended Day 30 onto `project_docs/dayTitle.md` within the `Week 04` block.
 - Updated `project_docs/main-doc.md` detailing the live page pipeline, browser drag fixes, and icon block optimizations.
   **Outcome**: Documentation completely synchronized with "Day 30". Live domain mapping logic is securely established, while visual builder UX reflects mature drag-and-drop resilience against default browser behaviors.
+
+## [Current Session: Monday, March 9, 2026]
+
+**User Action**: Triggered "Update project documentation" to include Day 31 updates involving Template category organization and Editor refinements.
+**Analysis**:
+
+- Detected systematic restructuring of website builder templates (`src/lib/templates.ts`), introducing categorization (`Portfolio`, `E-commerce`, `Landing Page`), new templates (`creativePortfolio`, `professionalPortfolio`, `neoBrutalismPortfolio`, `modernCommerce`, `streetwearCommerce`) and adding the `imageUrl` metadata property to all `EditorElement` components.
+- Identified UI overhaul in the Editor Sidebar (`templates-tab.tsx`), abandoning raw SVG placeholders for dynamic visual previews via `Next/Image`. A conditional fallback structure maps unavailable `imageUrl` strings safely.
+- Analyzed modifications within `next.config.ts` inserting a wildcard generic `hostname: '**'` rule targeting `https` remote image domains.
+- Noted precise layout fixes applied to the `Text`, `Link`, `Button`, and `Heading` editor components shifting default bounding boxes from `w-full` to `w-fit`, granting tighter drag-and-drop control on active selection borders (`border-blue-500!`).
+  **Actions**:
+- Created `project_docs/week-04/day31.md` documenting the Template Categorization System, visual preview mapping, and tight bounds logic formatting.
+- Appended Day 31 onto `project_docs/dayTitle.md` within the `Week 04` block.
+- Updated `project_docs/main-doc.md` timeline documenting the structural template integration and bounding-box updates.
+  **Outcome**: Documentation completely synchronized with "Day 31". The visual editor template sidebar effectively showcases categorized design elements with real graphical imagery for enhanced builder UX.
