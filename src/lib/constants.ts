@@ -227,6 +227,7 @@ export type EditorBtns =
   | "progressBar"
   | "slider"
   | "iconBlock"
+  | "grid"
   | null
   | "3Col";
 

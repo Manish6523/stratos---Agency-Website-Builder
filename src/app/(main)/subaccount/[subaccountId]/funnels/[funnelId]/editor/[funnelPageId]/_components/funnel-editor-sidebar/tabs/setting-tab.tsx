@@ -23,7 +23,7 @@ import {
   ChevronsLeftRightIcon,
   LucideImageDown,
 } from "lucide-react";
-import { Tabs, TabsTrigger, TabsList } from "@/components/ui/tabs";
+import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
@@ -151,6 +151,66 @@ export default function SettingsTab({}: Props) {
                   onChange={handleChangeCustomValues}
                   value={state.editor.selectedElement.content.alt || ""}
                 />
+
+                <Label className={`${LABEL_CLASS} mt-2`}>Aspect Ratio</Label>
+                <Select
+                  onValueChange={(e) =>
+                    handleOnChanges({
+                      target: {
+                        id: "aspectRatio",
+                        value: e,
+                      },
+                    })
+                  }
+                  value={
+                    (state.editor.selectedElement.styles
+                      .aspectRatio as string) || "auto"
+                  }
+                >
+                  <SelectTrigger className="h-8 text-xs w-full">
+                    <SelectValue placeholder="Auto" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="auto">Auto</SelectItem>
+                      <SelectItem value="1/1">1:1 (Square)</SelectItem>
+                      <SelectItem value="16/9">16:9 (Landscape)</SelectItem>
+                      <SelectItem value="4/3">4:3 (Landscape)</SelectItem>
+                      <SelectItem value="3/2">3:2 (Landscape)</SelectItem>
+                      <SelectItem value="2/3">2:3 (Portrait)</SelectItem>
+                      <SelectItem value="9/16">9:16 (Portrait)</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <Label className={`${LABEL_CLASS} mt-2`}>Object Fit</Label>
+                <Select
+                  onValueChange={(e) =>
+                    handleOnChanges({
+                      target: {
+                        id: "objectFit",
+                        value: e,
+                      },
+                    })
+                  }
+                  value={
+                    (state.editor.selectedElement.styles.objectFit as string) ||
+                    "fill"
+                  }
+                >
+                  <SelectTrigger className="h-8 text-xs w-full">
+                    <SelectValue placeholder="Fill" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="fill">Fill (Stretches)</SelectItem>
+                      <SelectItem value="cover">Cover (Crops)</SelectItem>
+                      <SelectItem value="contain">
+                        Contain (Letterbox)
+                      </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
             )}
           {state.editor.selectedElement.type === "customEmbed" &&
@@ -714,6 +774,98 @@ export default function SettingsTab({}: Props) {
                 </div>
               </div>
             </div>
+
+            <div className="flex flex-col gap-2">
+              <Label className={`${LABEL_CLASS} mb-1 block`}>Overflow</Label>
+              <div className="flex gap-2 flex-col">
+                <div>
+                  <Label className={LABEL_CLASS}>All</Label>
+                  <Select
+                    onValueChange={(e) =>
+                      handleOnChanges({
+                        target: {
+                          id: "overflow",
+                          value: e,
+                        },
+                      })
+                    }
+                    value={state.editor.selectedElement.styles.overflow || ""}
+                  >
+                    <SelectTrigger className="h-8 text-xs w-full">
+                      <SelectValue placeholder="Auto" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="visible">Visible</SelectItem>
+                        <SelectItem value="hidden">Hidden</SelectItem>
+                        <SelectItem value="scroll">Scroll</SelectItem>
+                        <SelectItem value="auto">Auto</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <Label className={LABEL_CLASS}>X</Label>
+                    <Select
+                      onValueChange={(e) =>
+                        handleOnChanges({
+                          target: {
+                            id: "overflowX",
+                            value: e,
+                          },
+                        })
+                      }
+                      value={
+                        (state.editor.selectedElement.styles as any)
+                          .overflowX || ""
+                      }
+                    >
+                      <SelectTrigger className="h-8 text-xs w-full">
+                        <SelectValue placeholder="Auto" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="visible">Visible</SelectItem>
+                          <SelectItem value="hidden">Hidden</SelectItem>
+                          <SelectItem value="scroll">Scroll</SelectItem>
+                          <SelectItem value="auto">Auto</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label className={LABEL_CLASS}>Y</Label>
+                    <Select
+                      onValueChange={(e) =>
+                        handleOnChanges({
+                          target: {
+                            id: "overflowY",
+                            value: e,
+                          },
+                        })
+                      }
+                      value={
+                        (state.editor.selectedElement.styles as any)
+                          .overflowY || ""
+                      }
+                    >
+                      <SelectTrigger className="h-8 text-xs w-full">
+                        <SelectValue placeholder="Auto" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="visible">Visible</SelectItem>
+                          <SelectItem value="hidden">Hidden</SelectItem>
+                          <SelectItem value="scroll">Scroll</SelectItem>
+                          <SelectItem value="auto">Auto</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </AccordionContent>
       </AccordionItem>
@@ -1085,141 +1237,247 @@ export default function SettingsTab({}: Props) {
       </AccordionItem>
       <AccordionItem value="Flexbox" className="px-6 py-0  ">
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
-          Flexbox
+          Flexbox / Grid
         </AccordionTrigger>
         <AccordionContent>
-          <Label className={LABEL_CLASS}>Justify Content</Label>
-          <Tabs
-            onValueChange={(e) =>
-              handleOnChanges({
-                target: {
-                  id: "justifyContent",
-                  value: e,
-                },
-              })
-            }
-            value={state.editor.selectedElement.styles.justifyContent || ""}
-          >
-            <TabsList className={TABLIST_CLASS}>
-              <TabsTrigger value="space-between" className={TABS_TRIGGER_CLASS}>
-                <AlignHorizontalSpaceBetween size={18} />
+          <Tabs defaultValue="flex" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 bg-transparent h-fit mb-4">
+              <TabsTrigger
+                value="flex"
+                className="px-3 py-1.5 text-xs font-medium"
+              >
+                Flex
               </TabsTrigger>
-              <TabsTrigger value="space-evenly" className={TABS_TRIGGER_CLASS}>
-                <AlignHorizontalSpaceAround size={18} />
-              </TabsTrigger>
-              <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
-                <AlignHorizontalJustifyCenterIcon size={18} />
-              </TabsTrigger>
-              <TabsTrigger value="start" className={TABS_TRIGGER_CLASS}>
-                <AlignHorizontalJustifyStart size={18} />
-              </TabsTrigger>
-              <TabsTrigger value="end" className={TABS_TRIGGER_CLASS}>
-                <AlignHorizontalJustifyEndIcon size={18} />
+              <TabsTrigger
+                value="grid"
+                className="px-3 py-1.5 text-xs font-medium"
+              >
+                Grid
               </TabsTrigger>
             </TabsList>
-          </Tabs>
-          <Label className={`${LABEL_CLASS} mt-2`}>Align Items</Label>
-          <Tabs
-            onValueChange={(e) =>
-              handleOnChanges({
-                target: {
-                  id: "alignItems",
-                  value: e,
-                },
-              })
-            }
-            value={state.editor.selectedElement.styles.alignItems || ""}
-          >
-            <TabsList className={TABLIST_CLASS}>
-              <TabsTrigger value="end" className={TABS_TRIGGER_CLASS}>
-                <AlignVerticalJustifyEnd size={18} />
-              </TabsTrigger>
-              <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
-                <AlignVerticalJustifyCenter size={18} />
-              </TabsTrigger>
-              <TabsTrigger value="start" className={TABS_TRIGGER_CLASS}>
-                <AlignVerticalJustifyStart size={18} />
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-          <div className="flex items-center gap-2">
-            <Input
-              className="h-4 w-4 shrink-0"
-              placeholder="px"
-              type="checkbox"
-              id="display"
-              onChange={(va) => {
-                handleOnChanges({
-                  target: {
-                    id: "display",
-                    value: va.target.checked ? "flex" : "block",
-                  },
-                });
-              }}
-            />
-            <Label className={LABEL_CLASS}>Flex</Label>
-          </div>
-          <div>
-            <Label className={LABEL_CLASS}> Direction</Label>
-            <Select
-              onValueChange={(e) =>
-                handleOnChanges({
-                  target: {
-                    id: "flexDirection",
-                    value: e,
-                  },
-                })
-              }
-              value={state.editor.selectedElement.styles.flexDirection || ""}
-            >
-              <SelectTrigger className="h-8 text-xs w-full">
-                <SelectValue placeholder="Row" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="row">Row</SelectItem>
-                  <SelectItem value="column">Column</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <Label className={LABEL_CLASS}>Gap</Label>
-              <Input
-                className="h-8 text-xs"
-                placeholder="px"
-                id="gap"
-                onChange={handleOnChanges}
-                value={state.editor.selectedElement.styles.gap || ""}
-              />
-            </div>
-            <div>
-              <Label className={LABEL_CLASS}>Wrap</Label>
-              <Select
+            <TabsContent value="flex" className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <Input
+                  className="h-4 w-4 shrink-0"
+                  type="checkbox"
+                  id="display"
+                  checked={
+                    state.editor.selectedElement.styles.display === "flex"
+                  }
+                  onChange={(va) => {
+                    handleOnChanges({
+                      target: {
+                        id: "display",
+                        value: va.target.checked ? "flex" : "block",
+                      },
+                    });
+                  }}
+                />
+                <Label className={LABEL_CLASS}>Enable Flex</Label>
+              </div>
+              <Label className={LABEL_CLASS}>Justify Content</Label>
+              <Tabs
                 onValueChange={(e) =>
                   handleOnChanges({
                     target: {
-                      id: "flexWrap",
+                      id: "justifyContent",
                       value: e,
                     },
                   })
                 }
-                value={state.editor.selectedElement.styles.flexWrap || ""}
+                value={state.editor.selectedElement.styles.justifyContent || ""}
               >
-                <SelectTrigger className="h-8 text-xs w-full">
-                  <SelectValue placeholder="Nowrap" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="nowrap">No Wrap</SelectItem>
-                    <SelectItem value="wrap">Wrap</SelectItem>
-                    <SelectItem value="wrap-reverse">Wrap Reverse</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+                <TabsList className={TABLIST_CLASS}>
+                  <TabsTrigger
+                    value="space-between"
+                    className={TABS_TRIGGER_CLASS}
+                  >
+                    <AlignHorizontalSpaceBetween size={18} />
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="space-evenly"
+                    className={TABS_TRIGGER_CLASS}
+                  >
+                    <AlignHorizontalSpaceAround size={18} />
+                  </TabsTrigger>
+                  <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
+                    <AlignHorizontalJustifyCenterIcon size={18} />
+                  </TabsTrigger>
+                  <TabsTrigger value="start" className={TABS_TRIGGER_CLASS}>
+                    <AlignHorizontalJustifyStart size={18} />
+                  </TabsTrigger>
+                  <TabsTrigger value="end" className={TABS_TRIGGER_CLASS}>
+                    <AlignHorizontalJustifyEndIcon size={18} />
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+              <Label className={`${LABEL_CLASS} mt-2`}>Align Items</Label>
+              <Tabs
+                onValueChange={(e) =>
+                  handleOnChanges({
+                    target: {
+                      id: "alignItems",
+                      value: e,
+                    },
+                  })
+                }
+                value={state.editor.selectedElement.styles.alignItems || ""}
+              >
+                <TabsList className={TABLIST_CLASS}>
+                  <TabsTrigger value="end" className={TABS_TRIGGER_CLASS}>
+                    <AlignVerticalJustifyEnd size={18} />
+                  </TabsTrigger>
+                  <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
+                    <AlignVerticalJustifyCenter size={18} />
+                  </TabsTrigger>
+                  <TabsTrigger value="start" className={TABS_TRIGGER_CLASS}>
+                    <AlignVerticalJustifyStart size={18} />
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+              <div>
+                <Label className={LABEL_CLASS}> Direction</Label>
+                <Select
+                  onValueChange={(e) =>
+                    handleOnChanges({
+                      target: {
+                        id: "flexDirection",
+                        value: e,
+                      },
+                    })
+                  }
+                  value={
+                    state.editor.selectedElement.styles.flexDirection || ""
+                  }
+                >
+                  <SelectTrigger className="h-8 text-xs w-full">
+                    <SelectValue placeholder="Row" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="row">Row</SelectItem>
+                      <SelectItem value="column">Column</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <Label className={LABEL_CLASS}>Gap</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="px"
+                    id="gap"
+                    onChange={handleOnChanges}
+                    value={state.editor.selectedElement.styles.gap || ""}
+                  />
+                </div>
+                <div>
+                  <Label className={LABEL_CLASS}>Wrap</Label>
+                  <Select
+                    onValueChange={(e) =>
+                      handleOnChanges({
+                        target: {
+                          id: "flexWrap",
+                          value: e,
+                        },
+                      })
+                    }
+                    value={state.editor.selectedElement.styles.flexWrap || ""}
+                  >
+                    <SelectTrigger className="h-8 text-xs w-full">
+                      <SelectValue placeholder="Nowrap" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="nowrap">No Wrap</SelectItem>
+                        <SelectItem value="wrap">Wrap</SelectItem>
+                        <SelectItem value="wrap-reverse">
+                          Wrap Reverse
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </TabsContent>
+            <TabsContent value="grid" className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <Input
+                  className="h-4 w-4 shrink-0"
+                  type="checkbox"
+                  id="display"
+                  checked={
+                    state.editor.selectedElement.styles.display === "grid"
+                  }
+                  onChange={(va) => {
+                    handleOnChanges({
+                      target: {
+                        id: "display",
+                        value: va.target.checked ? "grid" : "block",
+                      },
+                    });
+                  }}
+                />
+                <Label className={LABEL_CLASS}>Enable Grid</Label>
+              </div>
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                <div>
+                  <Label className={LABEL_CLASS}>Columns (fr, px)</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="repeat(2, 1fr)"
+                    id="gridTemplateColumns"
+                    onChange={handleOnChanges}
+                    value={
+                      (state.editor.selectedElement.styles as any)
+                        .gridTemplateColumns || ""
+                    }
+                  />
+                </div>
+                <div>
+                  <Label className={LABEL_CLASS}>Rows (fr, px)</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="auto"
+                    id="gridTemplateRows"
+                    onChange={handleOnChanges}
+                    value={
+                      (state.editor.selectedElement.styles as any)
+                        .gridTemplateRows || ""
+                    }
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                <div>
+                  <Label className={LABEL_CLASS}>Col Span</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="span 2"
+                    id="gridColumn"
+                    onChange={handleOnChanges}
+                    value={
+                      (state.editor.selectedElement.styles as any).gridColumn ||
+                      ""
+                    }
+                  />
+                </div>
+                <div>
+                  <Label className={LABEL_CLASS}>Row Span</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="span 2"
+                    id="gridRow"
+                    onChange={handleOnChanges}
+                    value={
+                      (state.editor.selectedElement.styles as any).gridRow || ""
+                    }
+                  />
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </AccordionContent>
       </AccordionItem>
     </Accordion>

@@ -15,6 +15,7 @@ import TestimonialComponent from "./TestimonialComponent";
 import ProgressBarComponent from "./ProgressBarComponent";
 import SliderComponent from "./SliderComponent";
 import IconBlockComponent from "./IconBlockComponent";
+import GridContainer from "./GridContainer";
 
 type Props = {
   element: EditorElement;
@@ -35,6 +36,8 @@ const Recursive = ({ element }: Props) => {
     case "2Col":
     case "3Col":
       return <Container element={element} />;
+    case "grid":
+      return <GridContainer element={element} />;
     case "__body":
       return <Container element={element} />;
 

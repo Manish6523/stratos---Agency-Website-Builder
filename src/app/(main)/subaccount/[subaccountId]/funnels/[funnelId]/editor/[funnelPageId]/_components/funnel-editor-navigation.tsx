@@ -98,6 +98,7 @@ export default function FunnelEditorNavigation({
 
   const handleOnSave = async () => {
     const content = JSON.stringify(state.editor.elements);
+    console.log(content);
     try {
       const response = await upsertFunnelPage(
         subaccountId,

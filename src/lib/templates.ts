@@ -5,7 +5,7 @@ import { bestHeroSection } from "./templates/miscellaneous/hero";
 import { standardLandingPage } from "./templates/landing-page/standard";
 import { neoBrutalismPortfolio } from "./templates/portfolio/neo-brutalism";
 import { modernCommerce } from "./templates/ecommerce/modern-ecommerce";
-import { sneakerStoreDP } from "./templates/ecommerce/temp-ecommerce";
+import { sneakerStoreDP } from "./templates/ecommerce/shoes-ecommerce";
 
 export type TemplateCategory =
   | "Portfolio"

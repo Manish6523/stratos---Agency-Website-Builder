@@ -12,6 +12,7 @@ import TextPlaceholder from "./TextPlaceholder";
 import ContainerPlaceholder from "./ContainerPlaceholder";
 import VideoPlaceholder from "./VideoPlaceholder";
 import TwoColumnsPlaceholder from "./TwoColumnsPlaceholder";
+import GridPlaceholder from "./GridPlaceholder";
 import LinkPlaceholder from "./LinkPlaceholder";
 import ContactFormComponentPlaceholder from "./ContactFormComponentPlaceholder";
 import CheckoutPlaceholder from "./CheckoutPlaceholder";
@@ -53,6 +54,12 @@ export default function ComponentsTab({}: Props) {
       Component: <ThreeColumnsPlaceholder />,
       label: "3 Columns",
       id: "3Col",
+      group: "layout",
+    },
+    {
+      Component: <GridPlaceholder />,
+      label: "Grid",
+      id: "grid",
       group: "layout",
     },
     {

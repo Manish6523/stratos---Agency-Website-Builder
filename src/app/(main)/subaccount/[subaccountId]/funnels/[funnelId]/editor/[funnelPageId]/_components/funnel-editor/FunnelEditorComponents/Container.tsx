@@ -233,6 +233,43 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+      case "grid":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: [
+                {
+                  content: [],
+                  id: v4(),
+                  name: "Container",
+                  styles: { ...defaultStyles, width: "100%" },
+                  type: "container",
+                },
+                {
+                  content: [],
+                  id: v4(),
+                  name: "Container",
+                  styles: { ...defaultStyles, width: "100%" },
+                  type: "container",
+                },
+              ],
+              id: v4(),
+              name: "Grid",
+              styles: {
+                ...defaultStyles,
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: "16px",
+                width: "100%",
+              },
+              type: "grid",
+            },
+            insertIndex,
+          },
+        });
+        break;
       case "divider":
         dispatch({
           type: "ADD_ELEMENT",
