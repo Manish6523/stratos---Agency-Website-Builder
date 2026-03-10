@@ -23,6 +23,8 @@ import {
   Undo2,
   PanelRightClose,
   PanelRightOpen,
+  ClipboardCopy,
+  ClipboardPaste,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -219,6 +221,29 @@ export default function FunnelEditorNavigation({
             ) : (
               <PanelRightOpen />
             )}
+          </Button>
+          <Button
+            disabled={
+              !state.editor.selectedElement.id ||
+              state.editor.selectedElement.id === "__body"
+            }
+            onClick={() => dispatch({ type: "COPY_ELEMENT" })}
+            variant={"ghost"}
+            size={"icon"}
+            className="hover:bg-slate-800"
+            title="Copy Element"
+          >
+            <ClipboardCopy className="w-4 h-4" />
+          </Button>
+          <Button
+            disabled={!state.editor.clipboard}
+            onClick={() => dispatch({ type: "PASTE_ELEMENT" })}
+            variant={"ghost"}
+            size={"icon"}
+            className="hover:bg-slate-800"
+            title="Paste Element"
+          >
+            <ClipboardPaste className="w-4 h-4" />
           </Button>
           <Button
             disabled={!(state.history.currentIndex > 0)}

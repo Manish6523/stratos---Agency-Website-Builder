@@ -60,6 +60,8 @@ export type EditorAction =
     }
   | { type: "REDO" }
   | { type: "UNDO" }
+  | { type: "COPY_ELEMENT" }
+  | { type: "PASTE_ELEMENT" }
   | { type: "TOGGLE_SIDEBAR" }
   | {
       type: "LOAD_DATA";

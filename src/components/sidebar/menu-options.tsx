@@ -5,7 +5,7 @@ import {
   AgencySidebarOption,
   SubAccount,
   SubAccountSidebarOption,
-} from "../../../generated/prisma";
+} from "../../../generated/prisma/client";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { useModal } from "@/providers/ModalProvider";
 import { Button } from "../ui/button";

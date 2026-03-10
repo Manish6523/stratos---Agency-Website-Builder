@@ -423,10 +423,10 @@ const Container = ({ element }: Props) => {
           payload: {
             containerId: id,
             elementDetails: {
-              content: { innerText: "Description for this awesome feature." },
+              content: { icon: "Info", strokeWidth: "2" },
               id: v4(),
               name: "Icon Block",
-              styles: { ...defaultStyles },
+              styles: { ...defaultStyles, fontSize: "48px" },
               type: "iconBlock",
             },
             insertIndex,
@@ -470,7 +470,7 @@ const Container = ({ element }: Props) => {
     <div
       style={styles}
       id={id}
-      className={clsx("relative p-4 transition-all group", {
+      className={clsx("relative p-2 transition-all group", {
         "max-w-full w-full": type === "container" || type === "2Col",
         "h-fit": type === "container",
         "h-full": type === "__body",

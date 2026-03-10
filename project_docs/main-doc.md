@@ -1,7 +1,7 @@
 # STRATOS - Comprehensive Project Documentation
 
-**Version:** 1.6.0 (Beta)
-**Last Updated:** 2026-03-09
+**Version:** 1.6.1 (Beta)
+**Last Updated:** 2026-03-10
 **Purpose:** Primary reference for Claude Code - AI-optimized project documentation
 
 ---
@@ -708,8 +708,9 @@ enum InvitationStatus {
 | **Day 29**    | Mar 8, 2026  | AI Generation & UI Polish          | • Rewrote Gemini system prompt to enforce strict JSON schemas for element structures<br>• Layout generation engine expanded with robust error logging and categorized blocks<br>• Global `sonner` Toaster added and component padding/icon refinements applied                                                                                                                      | `api/generate-layout/`<br>`layout.tsx`<br>`FunnelEditorComponents/`                                                                                                             |
 | **Day 30**    | Mar 8, 2026  | Live Context & UX Polish           | • Enabled live funnel domain routing utilizing Recursive Editor functionality under zero-interaction `<EditorProvider liveMode={true}>` injections<br>• Restricted raw HTML5 image drag behavior across components, prioritizing custom geometry tracking<br>• Abstracted specific styles from `IconBlockComponent` and tied bounds directly to custom Typography states            | `[domain]/page.tsx`<br>`IconBlockComponent.tsx`<br>`ImageComponent.tsx`                                                                                                         |
 | **Day 31**    | Mar 9, 2026  | Template Categories & Sidebar UI   | • Categorized builder templates into Portfolio, E-commerce, Landing Page<br>• Added Next/Image graphical rendering to `templates-tab.tsx` mapping to `imageUrl` metadata<br>• Adjusted Drag-Bounding borders for Element Canvas interaction (`w-full` to `w-fit`)                                                                                                                   | `templates.ts`<br>`templates-tab.tsx`<br>`next.config.ts`<br>`TextComponent.tsx`, `ButtonComponent.tsx`, `LinkComponent.tsx`                                                    |
+| **Day 32**    | Mar 10, 2026 | Settings UI & Icon Extensions      | • Overhauled Settings Tab into dense grid structures replacing scattered flex groupings<br>• Integrated structural `w-full` overrides resolving Select overlap alongside live color visual swatches<br>• Built discrete Width `fit-content` toggle mechanism and extended `IconBlockComponent` configurations permitting `strokeWidth` alterations with robust `px` fallbacks.      | `setting-tab.tsx`<br>`IconBlockComponent.tsx`<br>`Container.tsx`                                                                                                                |
 
-### Current Status (Day 31 Complete)
+### Current Status (Day 32 Complete)
 
 **✅ Implemented:**
 

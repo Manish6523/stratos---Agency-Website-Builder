@@ -49,6 +49,34 @@ const FunnelEditor = ({ funnelPageId, liveMode }: Props) => {
     dispatch({ type: "TOGGLE_PREVIEW_MODE" });
     dispatch({ type: "TOGGLE_LIVE_MODE" });
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Avoid triggering when user is typing inside an input, textarea, or contentEditable element
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.isContentEditable
+      ) {
+        return;
+      }
+
+      if (e.key === "c" && (e.ctrlKey || e.metaKey)) {
+        dispatch({ type: "COPY_ELEMENT" });
+      }
+
+      if (e.key === "v" && (e.ctrlKey || e.metaKey)) {
+        dispatch({ type: "PASTE_ELEMENT" });
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [dispatch]);
+
   return (
     <div
       className={clsx(

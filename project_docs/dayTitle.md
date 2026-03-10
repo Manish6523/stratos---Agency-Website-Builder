@@ -40,3 +40,4 @@
 - Day 29: AI Layout Generation Enhancement & UI Polish
 - Day 30: Live Domain Rendering & Editor UX Polish
 - Day 31: Template Categorization & Visual Sidebar Previews
+- Day 32: Settings Tab Redesign & IconBlock Enhancements

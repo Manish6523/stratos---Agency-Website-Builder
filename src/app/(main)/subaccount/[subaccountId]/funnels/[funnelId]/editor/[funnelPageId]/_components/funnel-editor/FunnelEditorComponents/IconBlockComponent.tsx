@@ -46,9 +46,10 @@ const IconBlockComponent = (props: Props) => {
   const IconComponent =
     (lucideIcons as any)[formattedIconName] || lucideIcons.Info;
 
-  const fontSizeValue = styles.fontSize
-    ? parseInt(styles.fontSize.toString().replace("px", ""))
-    : 48;
+  const fontSizeValue = styles.fontSize || "48px";
+  const strokeWidthValue = !Array.isArray(props.element.content)
+    ? props.element.content.strokeWidth || 2
+    : 2;
 
   return (
     <div
@@ -74,6 +75,7 @@ const IconBlockComponent = (props: Props) => {
 
       <IconComponent
         size={fontSizeValue}
+        strokeWidth={Number(strokeWidthValue)}
         color={(styles.color as string) || "currentColor"}
       />
 

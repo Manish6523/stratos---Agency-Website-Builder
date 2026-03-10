@@ -1,8 +1,8 @@
 # Stratos Project Documentation
 
 **Project Name:** Stratos
-**Date:** Wednesday, March 5, 2026
-**Version:** 1.5.3 (Beta)
+**Date:** Tuesday, March 10, 2026
+**Version:** 1.6.1 (Beta)
 
 ---
 
@@ -204,6 +204,16 @@ The development is tracked in daily logs located in `project_docs/week-01/` and 
 - **Day 23**: Built expansive `SettingsTab` property inspector (Typography, Dimensions, Decorations, Flexbox) and embedded the `MediaBucketTab` into the editor allowing seamless asset selection. Fixed uncached promise routing bugs.
 - **Day 24**: Developed dynamic funnel components including a Stripe `Checkout` element and an embedded `contactForm`. Addressed Stripe elements integration complexities regarding async liveProducts and connected account ID loading.
 - **Day 25**: Resolved `contentEditable` + React children conflicts in `TextComponent` and `LinkComponent` using `suppressContentEditableWarning` + `dangerouslySetInnerHTML`. Activated `ComponentsTab` in editor sidebar. Polished editor navigation padding. Created prebuilt landing page JSON template for DB seeding.
+
+### Week 04
+
+- **Day 26**: Implemented Canvas Drag & Drop System leveraging bounding box geometry. Imposed edit restrictions inside live/preview modes. Linked DOM element mapping with dynamic identifiers. Built precise index payloads for positional arrays.
+- **Day 27**: Built AI Layout & Text generation endpoints hitting the Gemini API natively inside the editor interface via the `ai-builder-tab.tsx`.
+- **Day 28**: Integrated context-injection logic within Gemini API prompts, feeding block-specific variables from the Canvas directly to the AI text-generator. Stabilized `ProgressBar`, `Testimonial`, and `Slider` interactions on the Canvas.
+- **Day 29**: Completely retooled the AI system prompts, organizing them into discrete category structures to secure robust block drafting payloads that bypass JSON formatting crashes. Addressed missing UI padding and toasts global module.
+- **Day 30**: Expanded Funnel execution by securely activating recursive `<EditorProvider>` deployments under strict `liveMode={true}` across designated funnel endpoints. Blocked raw browser image drag-interactions disrupting builder flows.
+- **Day 31**: Defined scalable Visual Template capabilities bridging categories inside `<templates-tab.tsx>` natively powered by `next/image` thumbnails pointing directly towards metadata URLs.
+- **Day 32**: Radically optimized Settings properties via highly-dense CSS grids resolving legacy visual collisions for Select dropdowns. Introduced live, integrated color swatch previews on inputs. Deployed Width `fit-content` fast-toggle controls and enhanced vector `IconBlock` bounds mapping specifically addressing `strokeWidth` configuration overrides.
 
 ---
 

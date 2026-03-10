@@ -18,6 +18,7 @@ export type EditorElement = {
         innerText?: string;
         src?: string;
         customCode?: string;
+        strokeWidth?: string;
         alt?: string;
         authorName?: string;
         icon?: string;
@@ -37,6 +38,7 @@ export type Editor = {
   previewMode: boolean;
   sidebarOpen: boolean;
   funnelPageId: string;
+  clipboard?: EditorElement;
 };
 
 export type HistoryState = {
@@ -81,6 +83,21 @@ const initialHistoryState: HistoryState = {
 const initialState: EditorState = {
   editor: initialEditorState,
   history: initialHistoryState,
+};
+
+const duplicateElement = (element: EditorElement): EditorElement => {
+  const newId = crypto.randomUUID();
+  let newContent = element.content;
+
+  if (Array.isArray(element.content)) {
+    newContent = element.content.map(duplicateElement);
+  }
+
+  return {
+    ...element,
+    id: newId,
+    content: newContent,
+  };
 };
 
 const addAnElement = (
@@ -482,6 +499,114 @@ const editorReducer = (
         },
       };
       return funnelPageIdState;
+
+    case "COPY_ELEMENT":
+      if (
+        !state.editor.selectedElement.id ||
+        state.editor.selectedElement.id === "__body"
+      ) {
+        return state;
+      }
+      return {
+        ...state,
+        editor: {
+          ...state.editor,
+          clipboard: state.editor.selectedElement,
+        },
+      };
+
+    case "PASTE_ELEMENT":
+      if (!state.editor.clipboard) {
+        return state;
+      }
+
+      // Deep clone the clipboard element with new IDs
+      const pastedElement = duplicateElement(state.editor.clipboard);
+
+      const isContainer =
+        state.editor.selectedElement.type === "container" ||
+        state.editor.selectedElement.type === "2Col" ||
+        state.editor.selectedElement.type === "__body";
+
+      let newEditorStatePaste: EditorState["editor"];
+
+      if (isContainer) {
+        // Paste into the selected container
+        newEditorStatePaste = {
+          ...state.editor,
+          elements: addAnElement(state.editor.elements, {
+            type: "ADD_ELEMENT",
+            payload: {
+              containerId: state.editor.selectedElement.id,
+              elementDetails: pastedElement,
+            },
+          }),
+        };
+      } else {
+        // We are pasting next to a non-container element.
+        // We need to find its parent container to insert it there.
+        // We'll traverse the tree to find where this element lives.
+
+        let targetContainerId = "__body";
+        let targetInsertIndex = 0;
+
+        const findParent = (
+          elements: EditorElement[],
+          targetId: string,
+          parentId: string = "__body",
+        ): { parentId: string; index: number } | null => {
+          for (let i = 0; i < elements.length; i++) {
+            if (elements[i].id === targetId) {
+              return { parentId, index: i + 1 };
+            }
+            if (Array.isArray(elements[i].content)) {
+              const res = findParent(
+                elements[i].content as EditorElement[],
+                targetId,
+                elements[i].id,
+              );
+              if (res) return res;
+            }
+          }
+          return null;
+        };
+
+        const result = findParent(
+          state.editor.elements,
+          state.editor.selectedElement.id,
+        );
+        if (result) {
+          targetContainerId = result.parentId;
+          targetInsertIndex = result.index;
+        }
+
+        newEditorStatePaste = {
+          ...state.editor,
+          elements: addAnElement(state.editor.elements, {
+            type: "ADD_ELEMENT",
+            payload: {
+              containerId: targetContainerId,
+              elementDetails: pastedElement,
+              insertIndex: targetInsertIndex,
+            },
+          }),
+        };
+      }
+
+      const updatedHistoryPaste = [
+        ...state.history.history.slice(0, state.history.currentIndex + 1),
+        { ...newEditorStatePaste },
+      ];
+
+      return {
+        ...state,
+        editor: newEditorStatePaste,
+        history: {
+          ...state.history,
+          history: updatedHistoryPaste,
+          currentIndex: updatedHistoryPaste.length - 1,
+        },
+      };
 
     default:
       return state;

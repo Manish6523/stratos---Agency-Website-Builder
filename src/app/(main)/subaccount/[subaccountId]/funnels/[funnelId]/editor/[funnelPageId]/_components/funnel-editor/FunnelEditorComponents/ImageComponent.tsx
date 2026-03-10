@@ -47,7 +47,7 @@ const ImageComponent = (props: Props) => {
     <div
       id={props.element.id}
       className={clsx(
-        "p-[2px] w-full my-[5px] relative transition-all flex items-center justify-center",
+        "p-[2px] w-fit my-[5px] relative transition-all flex items-center justify-center",
         {
           "border-blue-500!":
             state.editor.selectedElement.id === props.element.id,

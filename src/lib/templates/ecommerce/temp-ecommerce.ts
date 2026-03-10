@@ -2,164 +2,154 @@ import { EditorElement } from "@/providers/editor/editor-provider";
 import { v4 } from "uuid";
 import { TemplateCategory } from "../../templates";
 
-export const streetwearCommerce: {
+export const sneakerStoreDP: {
   name: string;
   category: TemplateCategory;
   elements: EditorElement[];
   imageUrl?: string;
 } = {
-  name: "Streetwear Cyber Store",
+  name: "Sneaker Store Ultimate",
   category: "E-commerce",
-  imageUrl: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
+  imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200",
   elements: [
     {
       id: v4(),
-      name: "Streetwear Wrapper",
+      name: "Page Wrapper",
       styles: {
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        backgroundColor: "#0a0a0a", // Deep Midnight
-        fontFamily: "'Space Grotesk', sans-serif",
-        color: "#ffffff",
+        backgroundColor: "#ffffff",
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        color: "#1a1a1a",
       },
       type: "container",
       content: [
-        // --- 1. UTILITY TAPE (Top Bar) ---
+        // --- 1. NAV BAR ---
         {
           id: v4(),
-          name: "Utility Tape",
-          type: "text",
-          styles: {
-            backgroundColor: "#ccff00", // Neon Volt
-            color: "#000000",
-            padding: "10px",
-            fontSize: "11px",
-            textAlign: "center",
-            fontWeight: "900",
-            textTransform: "uppercase",
-            letterSpacing: "0.2em",
-          },
-          content: { innerText: "SYSTEM NOTIFICATION: DROP 004 IS NOW LIVE // SECURE THE CARGO" },
-        },
-
-        // --- 2. BRUTALIST NAV ---
-        {
-          id: v4(),
-          name: "Main Nav",
+          name: "Navbar",
           type: "container",
           styles: {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "30px 60px",
-            borderBottom: "2px solid #333",
+            padding: "20px 80px",
+            backgroundColor: "#ffffff",
           },
           content: [
-            { id: v4(), name: "Brand", type: "text", styles: { fontSize: "32px", fontWeight: "900", fontStyle: "italic", color: "#ccff00" }, content: { innerText: "NEON_VXD" } },
+            { id: v4(), name: "Logo", type: "text", styles: { fontSize: "24px", fontWeight: "800", color: "#FF5F2E" }, content: { innerText: "S Sneaker" } },
             { 
               id: v4(), 
-              name: "Links", 
+              name: "Nav links", 
               type: "container", 
-              styles: { display: "flex", gap: "50px" },
+              styles: { display: "flex", gap: "30px" },
               content: [
-                { id: v4(), name: "Link A", type: "link", styles: { fontSize: "14px", fontWeight: "700", color: "#888" }, content: { innerText: "[ ARCHIVE ]", href: "#" } },
-                { id: v4(), name: "Link B", type: "link", styles: { fontSize: "14px", fontWeight: "700", color: "#888" }, content: { innerText: "[ TACTICAL ]", href: "#" } },
+                { id: v4(), name: "L1", type: "link", styles: { fontSize: "14px", fontWeight: "600" }, content: { innerText: "Home", href: "#" } },
+                { id: v4(), name: "L2", type: "link", styles: { fontSize: "14px", color: "#666" }, content: { innerText: "Shop", href: "#" } },
+                { id: v4(), name: "L3", type: "link", styles: { fontSize: "14px", color: "#666" }, content: { innerText: "Blog", href: "#" } },
               ]
             },
-            { id: v4(), name: "Inventory", type: "button", styles: { backgroundColor: "transparent", color: "#ccff00", border: "2px solid #ccff00", padding: "12px 24px", fontWeight: "900", fontSize: "12px" }, content: { innerText: "ACCESS_CART (0)" } }
+            { id: v4(), name: "Icons", type: "text", styles: { fontSize: "18px" }, content: { innerText: "🔍 🛒 👤" } }
           ]
         },
 
-        // --- 3. ASYMMETRICAL HERO ---
+        // --- 2. HERO SECTION (Hotspots & Large Shoe) ---
         {
           id: v4(),
-          name: "Cyber Hero",
+          name: "Hero Section",
           type: "container",
-          styles: { display: "flex", flexWrap: "wrap", padding: "60px" },
+          styles: {
+            display: "flex",
+            alignItems: "center",
+            padding: "60px 80px",
+            backgroundColor: "#f9f9f9",
+            minHeight: "700px",
+            position: "relative",
+            overflow: "hidden"
+          },
           content: [
             {
               id: v4(),
-              name: "Hero Visual",
-              type: "image",
-              styles: { flex: "1.5", minWidth: "400px", height: "600px", objectFit: "cover", border: "4px solid #ccff00" },
-              content: { src: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=1000" }
+              name: "Hero Text",
+              type: "container",
+              styles: { flex: "1", zIndex: "10" },
+              content: [
+                { id: v4(), name: "H1", type: "h1", styles: { fontSize: "100px", fontWeight: "800", lineHeight: "0.9", marginBottom: "20px" }, content: { innerText: "Shoes\nCollect !" } },
+                { id: v4(), name: "Desc", type: "text", styles: { color: "#666", maxWidth: "400px", marginBottom: "40px", lineHeight: "1.6" }, content: { innerText: "Discover our stylish and comfortable shoes, perfect for every occasion and need." } },
+                { id: v4(), name: "CTA", type: "button", styles: { backgroundColor: "#FF5F2E", color: "#fff", padding: "16px 36px", borderRadius: "50px", fontWeight: "600" }, content: { innerText: "Shop Now" } },
+                { id: v4(), name: "Brands", type: "text", styles: { marginTop: "40px", color: "#aaa", fontSize: "12px", fontWeight: "700" }, content: { innerText: "PUMA  |  NIKE  |  7+ Brands" } }
+              ]
             },
             {
               id: v4(),
-              name: "Hero Copy",
+              name: "Shoe Showcase",
               type: "container",
-              styles: { flex: "1", minWidth: "350px", padding: "60px", display: "flex", flexDirection: "column", justifyContent: "flex-end" },
+              styles: { flex: "1.2", position: "relative", display: "flex", justifyContent: "center" },
               content: [
-                { id: v4(), name: "H-Code", type: "text", styles: { color: "#555", fontSize: "12px", marginBottom: "10px" }, content: { innerText: "MODEL_REF: 99-X-B" } },
-                { id: v4(), name: "H-H1", type: "h1", styles: { fontSize: "80px", lineHeight: "0.9", fontWeight: "900", marginBottom: "30px", textTransform: "uppercase" }, content: { innerText: "FUTURE PROOF GEAR." } },
-                { id: v4(), name: "H-Btn", type: "button", styles: { backgroundColor: "#ccff00", color: "#000", padding: "24px", fontWeight: "900", width: "100%", fontSize: "18px" }, content: { innerText: "ACQUIRE NOW" } }
+                { id: v4(), name: "Main Shoe", type: "image", styles: { width: "110%", height: "auto", transform: "rotate(-15deg)", zIndex: "5" }, content: { src: "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000" } },
+                // Hotspot labels (from image)
+                { id: v4(), name: "Hotspot1", type: "text", styles: { position: "absolute", top: "10%", right: "20%", backgroundColor: "#fff", padding: "8px 16px", borderRadius: "50px", fontSize: "12px", boxShadow: "0 4px 20px rgba(0,0,0,0.1)", zIndex: "10" }, content: { innerText: "100% Fit Shoelaces" } },
+                { id: v4(), name: "Hotspot2", type: "text", styles: { position: "absolute", bottom: "20%", left: "10%", backgroundColor: "#fff", padding: "8px 16px", borderRadius: "50px", fontSize: "12px", boxShadow: "0 4px 20px rgba(0,0,0,0.1)", zIndex: "10" }, content: { innerText: "Air Flow Technology" } }
               ]
             }
           ]
         },
 
-        // --- 4. THE TECH-GRID (Products) ---
+        // --- 3. TRENDING PRODUCTS (Cards) ---
         {
           id: v4(),
-          name: "Grid Wrapper",
+          name: "Trending Section",
           type: "container",
-          styles: { padding: "100px 60px" },
+          styles: { padding: "100px 80px" },
           content: [
-            { id: v4(), name: "Title", type: "h2", styles: { fontSize: "40px", fontWeight: "900", marginBottom: "50px", color: "#ffffff" }, content: { innerText: "// LATEST_EQUIPMENT" } },
+            { id: v4(), name: "Title", type: "h2", styles: { fontSize: "36px", fontWeight: "800", marginBottom: "50px" }, content: { innerText: "Trending Products" } },
             {
               id: v4(),
               name: "Grid",
               type: "container",
-              styles: { display: "flex", flexWrap: "wrap", gap: "20px" },
+              styles: { display: "flex", flexWrap: "wrap", gap: "30px" },
               content: [
-                // PRODUCT 01
-                {
-                  id: v4(),
-                  name: "P1",
-                  type: "container",
-                  styles: { flex: "1", minWidth: "300px", border: "1px solid #333", padding: "20px" },
-                  content: [
-                    { id: v4(), name: "P1-Img", type: "image", styles: { width: "100%", height: "350px", objectFit: "cover", filter: "grayscale(100%) contrast(120%)" }, content: { src: "https://images.unsplash.com/photo-1618354691373-d851c5c3a991?q=80&w=500" } },
-                    { id: v4(), name: "P1-Name", type: "text", styles: { fontSize: "20px", fontWeight: "900", marginTop: "20px" }, content: { innerText: "TECH-OVERSIZED HOODIE" } },
-                    { id: v4(), name: "P1-Price", type: "text", styles: { color: "#ccff00", fontSize: "16px", fontWeight: "700" }, content: { innerText: "89.00 USD" } }
-                  ]
-                },
-                // PRODUCT 02
-                {
-                  id: v4(),
-                  name: "P2",
-                  type: "container",
-                  styles: { flex: "1", minWidth: "300px", border: "1px solid #333", padding: "20px", backgroundColor: "#111" },
-                  content: [
-                    { id: v4(), name: "P2-Img", type: "image", styles: { width: "100%", height: "350px", objectFit: "cover" }, content: { src: "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=500" } },
-                    { id: v4(), name: "P2-Name", type: "text", styles: { fontSize: "20px", fontWeight: "900", marginTop: "20px" }, content: { innerText: "CARGO_V2 TROUSERS" } },
-                    { id: v4(), name: "P2-Price", type: "text", styles: { color: "#ccff00", fontSize: "16px", fontWeight: "700" }, content: { innerText: "120.00 USD" } }
-                  ]
-                }
+                // Product Card 1
+                { id: v4(), name: "C1", type: "container", styles: { flex: "1", minWidth: "260px" }, content: [
+                    { id: v4(), name: "C1-Box", type: "container", styles: { backgroundColor: "#f6f6f6", padding: "40px", borderRadius: "20px", position: "relative" }, content: [
+                        { id: v4(), name: "Img", type: "image", styles: { width: "100%", height: "180px", objectFit: "contain" }, content: { src: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500" } },
+                        { id: v4(), name: "Add", type: "button", styles: { position: "absolute", bottom: "20px", right: "20px", backgroundColor: "#FF5F2E", color: "#fff", width: "40px", height: "40px", borderRadius: "50%" }, content: { innerText: "+" } }
+                    ]},
+                    { id: v4(), name: "Info", type: "container", styles: { marginTop: "15px" }, content: [
+                        { id: v4(), name: "N", type: "text", styles: { fontWeight: "700" }, content: { innerText: "Nike Running Shoe" } },
+                        { id: v4(), name: "P", type: "text", styles: { color: "#666", fontSize: "14px" }, content: { innerText: "$349" } }
+                    ]}
+                ]},
+                // Product Card 2
+                { id: v4(), name: "C2", type: "container", styles: { flex: "1", minWidth: "260px" }, content: [
+                    { id: v4(), name: "C2-Box", type: "container", styles: { backgroundColor: "#f6f6f6", padding: "40px", borderRadius: "20px", position: "relative" }, content: [
+                        { id: v4(), name: "Img", type: "image", styles: { width: "100%", height: "180px", objectFit: "contain" }, content: { src: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=500" } },
+                        { id: v4(), name: "Add", type: "button", styles: { position: "absolute", bottom: "20px", right: "20px", backgroundColor: "#FF5F2E", color: "#fff", width: "40px", height: "40px", borderRadius: "50%" }, content: { innerText: "+" } }
+                    ]},
+                    { id: v4(), name: "Info", type: "container", styles: { marginTop: "15px" }, content: [
+                        { id: v4(), name: "N", type: "text", styles: { fontWeight: "700" }, content: { innerText: "Nike Shoe Airmax" } },
+                        { id: v4(), name: "P", type: "text", styles: { color: "#666", fontSize: "14px" }, content: { innerText: "$349" } }
+                    ]}
+                ]}
               ]
             }
           ]
         },
 
-        // --- 5. DECRYPTED FOOTER ---
+        // --- 4. BRAND VALUE SECTION ---
         {
           id: v4(),
-          name: "Footer",
+          name: "Value Section",
           type: "container",
-          styles: { padding: "80px 60px", borderTop: "4px solid #ccff00", backgroundColor: "#000" },
+          styles: { display: "flex", backgroundColor: "#000", color: "#fff", padding: "100px 80px", alignItems: "center", gap: "80px" },
           content: [
-            { id: v4(), name: "F-H3", type: "h3", styles: { fontSize: "24px", fontWeight: "900", marginBottom: "20px" }, content: { innerText: "JOIN_THE_NETWORK" } },
-            { 
-              id: v4(), 
-              name: "Input", 
-              type: "container", 
-              styles: { display: "flex", borderBottom: "2px solid #333", padding: "10px 0", maxWidth: "400px" },
-              content: [
-                { id: v4(), name: "Text", type: "text", styles: { color: "#555", flex: "1" }, content: { innerText: "ENTER_EMAIL_FOR_ACCESS" } },
-                { id: v4(), name: "Btn", type: "button", styles: { color: "#ccff00", fontWeight: "900" }, content: { innerText: "[ SEND ]" } }
-              ]
-            }
+            { id: v4(), name: "L", type: "image", styles: { flex: "1", borderRadius: "30px", height: "500px", objectFit: "cover" }, content: { src: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800" } },
+            { id: v4(), name: "R", type: "container", styles: { flex: "1" }, content: [
+                { id: v4(), name: "H", type: "h2", styles: { fontSize: "48px", fontWeight: "800", marginBottom: "30px" }, content: { innerText: "Why Choose Us?" } },
+                { id: v4(), name: "T", type: "text", styles: { color: "#aaa", lineHeight: "1.8", marginBottom: "40px" }, content: { innerText: "Our products are crafted to order in small batches and shipped directly to you. There's never unsold inventory or markups." } },
+                { id: v4(), name: "B", type: "button", styles: { border: "1px solid #fff", padding: "14px 30px", borderRadius: "50px", fontSize: "14px" }, content: { innerText: "Learn More" } }
+            ]}
           ]
         }
       ]

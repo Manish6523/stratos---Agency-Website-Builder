@@ -18,6 +18,7 @@ import {
   AlignLeft,
   AlignRight,
   AlignVerticalJustifyCenter,
+  AlignVerticalJustifyEnd,
   AlignVerticalJustifyStart,
   ChevronsLeftRightIcon,
   LucideImageDown,
@@ -45,10 +46,12 @@ export default function SettingsTab({}: Props) {
   const { state, dispatch } = useEditor();
 
   const TABS_TRIGGER_CLASS =
-    "cursor-pointer w-10 h-10 p-0 data-[state=active]:bg-muted";
-  const ACCORDIAN_TIRGGER_CLASS = "no-underline! cursor-pointer";
+    "cursor-pointer w-8 h-8 p-0 data-[state=active]:bg-background data-[state=active]:shadow-sm text-muted-foreground data-[state=active]:text-foreground rounded-sm transition-all flex items-center justify-center";
+  const ACCORDIAN_TIRGGER_CLASS =
+    "no-underline! cursor-pointer text-sm font-medium";
   const TABLIST_CLASS =
-    "flex items-center flex-row justify-between border rounded-md bg-transparent h-fit gap-4";
+    "flex items-center w-full bg-muted/50 rounded-md p-1 gap-1 h-fit";
+  const LABEL_CLASS = "text-muted-foreground text-xs font-medium";
 
   const handleOnChanges = (e: any) => {
     const styleSettings = e.target.id;
@@ -106,8 +109,9 @@ export default function SettingsTab({}: Props) {
           {state.editor.selectedElement.type === "link" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <div className="flex flex-col gap-2">
-                <p className="text-muted-foreground">Link Path</p>
+                <Label className={LABEL_CLASS}>Link Path</Label>
                 <Input
+                  className="h-8 text-xs"
                   id="href"
                   placeholder="https:domain.example.com/pathname"
                   onChange={handleChangeCustomValues}
@@ -118,8 +122,9 @@ export default function SettingsTab({}: Props) {
           {state.editor.selectedElement.type === "video" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <div className="flex flex-col gap-2">
-                <p className="text-muted-foreground">Video URL</p>
+                <Label className={LABEL_CLASS}>Video URL</Label>
                 <Input
+                  className="h-8 text-xs"
                   id="src"
                   placeholder="embedded video url"
                   onChange={handleChangeCustomValues}
@@ -130,15 +135,17 @@ export default function SettingsTab({}: Props) {
           {state.editor.selectedElement.type === "image" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <div className="flex flex-col gap-2">
-                <p className="text-muted-foreground">Image Source</p>
+                <Label className={LABEL_CLASS}>Image Source</Label>
                 <Input
+                  className="h-8 text-xs"
                   id="src"
                   placeholder="https://images.unsplash.com/..."
                   onChange={handleChangeCustomValues}
                   value={state.editor.selectedElement.content.src || ""}
                 />
-                <p className="text-muted-foreground mt-2">Alt Text</p>
+                <Label className={`${LABEL_CLASS} mt-2`}>Alt Text</Label>
                 <Input
+                  className="h-8 text-xs"
                   id="alt"
                   placeholder="Description for screen readers"
                   onChange={handleChangeCustomValues}
@@ -149,10 +156,10 @@ export default function SettingsTab({}: Props) {
           {state.editor.selectedElement.type === "customEmbed" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <div className="flex flex-col gap-2">
-                <p className="text-muted-foreground">Custom HTML/JS</p>
+                <Label className={LABEL_CLASS}>Custom HTML/JS</Label>
                 <textarea
                   id="customCode"
-                  className="w-full bg-background border p-2 rounded-md h-32 text-sm font-mono"
+                  className="w-full bg-background border p-2 rounded-md h-32 text-xs font-mono"
                   placeholder="<div>Hello World</div>"
                   onChange={handleChangeCustomValues}
                   value={state.editor.selectedElement.content.customCode || ""}
@@ -162,9 +169,7 @@ export default function SettingsTab({}: Props) {
           {state.editor.selectedElement.type === "progressBar" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <div className="flex flex-col gap-2 mt-4">
-                <Label className="text-muted-foreground">
-                  Progress Value (%)
-                </Label>
+                <Label className={LABEL_CLASS}>Progress Value (%)</Label>
                 <div className="flex items-center justify-end">
                   <small className="p-2">
                     {state.editor.selectedElement.content.progressValue || 50}%
@@ -186,12 +191,12 @@ export default function SettingsTab({}: Props) {
                   step={1}
                 />
 
-                <Label className="text-muted-foreground mt-4">
+                <Label className={`${LABEL_CLASS} mt-4`}>
                   Completed Bar Color
                 </Label>
-                <div className="flex border rounded-md overflow-clip">
+                <div className="flex border rounded-md overflow-hidden bg-transparent h-8">
                   <div
-                    className="w-12"
+                    className="w-10 h-full shrink-0 border-r"
                     style={{
                       backgroundColor:
                         state.editor.selectedElement.content.progressColor ||
@@ -200,7 +205,7 @@ export default function SettingsTab({}: Props) {
                   />
                   <Input
                     placeholder="#3b82f6 or blue-500"
-                    className="border-y-0! rounded-none border-r-0! mr-2"
+                    className="h-full text-xs border-none! shadow-none! rounded-none! flex-1 focus-visible:ring-0 px-2"
                     id="progressColor"
                     onChange={handleChangeCustomValues}
                     value={
@@ -210,12 +215,12 @@ export default function SettingsTab({}: Props) {
                   />
                 </div>
 
-                <Label className="text-muted-foreground mt-2">
+                <Label className={`${LABEL_CLASS} mt-2`}>
                   Background Track Color
                 </Label>
-                <div className="flex border rounded-md overflow-clip">
+                <div className="flex border rounded-md overflow-hidden bg-transparent h-8">
                   <div
-                    className="w-12"
+                    className="w-10 h-full shrink-0 border-r"
                     style={{
                       backgroundColor:
                         state.editor.selectedElement.content
@@ -224,7 +229,7 @@ export default function SettingsTab({}: Props) {
                   />
                   <Input
                     placeholder="#e2e8f0 or slate-200"
-                    className="border-y-0! rounded-none border-r-0! mr-2"
+                    className="h-full text-xs border-none! shadow-none! rounded-none! flex-1 focus-visible:ring-0 px-2"
                     id="progressBackground"
                     onChange={handleChangeCustomValues}
                     value={
@@ -238,23 +243,33 @@ export default function SettingsTab({}: Props) {
           {state.editor.selectedElement.type === "iconBlock" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <div className="flex flex-col gap-2 mt-4">
-                <p className="text-muted-foreground">Icon ID/Name</p>
+                <Label className={LABEL_CLASS}>Icon ID/Name</Label>
                 <Input
+                  className="h-8 text-xs"
                   id="icon"
                   placeholder="Info, Shield, Star, etc."
                   onChange={handleChangeCustomValues}
                   value={state.editor.selectedElement.content.icon || ""}
+                />
+                <Label className={`${LABEL_CLASS} mt-2`}>Stroke Width</Label>
+                <Input
+                  className="h-8 text-xs"
+                  id="strokeWidth"
+                  placeholder="2"
+                  type="number"
+                  onChange={handleChangeCustomValues}
+                  value={state.editor.selectedElement.content.strokeWidth || ""}
                 />
               </div>
             )}
           {state.editor.selectedElement.type === "slider" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <div className="flex flex-col gap-2 mt-4">
-                <p className="text-muted-foreground">
+                <Label className={LABEL_CLASS}>
                   Image URLs (Comma separated)
-                </p>
+                </Label>
                 <textarea
-                  className="w-full bg-background border p-2 rounded-md h-32 text-sm font-mono"
+                  className="w-full bg-background border p-2 rounded-md h-32 text-xs font-mono"
                   placeholder="https://image1.jpg, https://image2.jpg"
                   onChange={(e) => {
                     handleChangeCustomValues({
@@ -280,9 +295,9 @@ export default function SettingsTab({}: Props) {
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
           Typography
         </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-2 ">
-          <div className="flex flex-col gap-2 ">
-            <p className="text-muted-foreground">Text Align</p>
+        <AccordionContent className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
+            <Label className={LABEL_CLASS}>Text Align</Label>
             <Tabs
               onValueChange={(e) =>
                 handleOnChanges({
@@ -311,7 +326,7 @@ export default function SettingsTab({}: Props) {
             </Tabs>
           </div>
           <div className="flex flex-col gap-2">
-            <p className="text-muted-foreground">Font Family</p>
+            <Label className={LABEL_CLASS}>Font Family</Label>
             <Select
               onValueChange={(e) =>
                 handleOnChanges({
@@ -323,7 +338,7 @@ export default function SettingsTab({}: Props) {
               }
               value={state.editor.selectedElement.styles.fontFamily || ""}
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="h-8 text-xs w-full">
                 <SelectValue placeholder="Select a font" />
               </SelectTrigger>
               <SelectContent>
@@ -346,16 +361,25 @@ export default function SettingsTab({}: Props) {
             </Select>
           </div>
           <div className="flex flex-col gap-2">
-            <p className="text-muted-foreground">Color</p>
-            <Input
-              id="color"
-              onChange={handleOnChanges}
-              value={state.editor.selectedElement.styles.color || ""}
-            />
+            <Label className={LABEL_CLASS}>Color</Label>
+            <div className="flex border rounded-md overflow-hidden bg-transparent h-8">
+              <div
+                className="w-10 h-full shrink-0 border-r"
+                style={{
+                  backgroundColor: state.editor.selectedElement.styles.color,
+                }}
+              />
+              <Input
+                className="h-full text-xs border-none! shadow-none! rounded-none! flex-1 focus-visible:ring-0 px-2"
+                id="color"
+                onChange={handleOnChanges}
+                value={state.editor.selectedElement.styles.color || ""}
+              />
+            </div>
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label className="text-muted-foreground">Weight</Label>
+              <Label className={LABEL_CLASS}>Weight</Label>
               <Select
                 onValueChange={(e) =>
                   handleOnChanges({
@@ -366,7 +390,7 @@ export default function SettingsTab({}: Props) {
                   })
                 }
               >
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="h-8 text-xs w-full">
                   <SelectValue placeholder="Select a weight" />
                 </SelectTrigger>
                 <SelectContent>
@@ -380,8 +404,9 @@ export default function SettingsTab({}: Props) {
               </Select>
             </div>
             <div>
-              <Label className="text-muted-foreground">Size</Label>
+              <Label className={LABEL_CLASS}>Size</Label>
               <Input
+                className="h-8 text-xs"
                 placeholder="px"
                 id="fontSize"
                 onChange={handleOnChanges}
@@ -389,10 +414,11 @@ export default function SettingsTab({}: Props) {
               />
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label className="text-muted-foreground">Line Height</Label>
+              <Label className={LABEL_CLASS}>Line Height</Label>
               <Input
+                className="h-8 text-xs"
                 placeholder="px/em"
                 id="lineHeight"
                 onChange={handleOnChanges}
@@ -400,8 +426,9 @@ export default function SettingsTab({}: Props) {
               />
             </div>
             <div>
-              <Label className="text-muted-foreground">Letter Spacing</Label>
+              <Label className={LABEL_CLASS}>Letter Spacing</Label>
               <Input
+                className="h-8 text-xs"
                 placeholder="px"
                 id="letterSpacing"
                 onChange={handleOnChanges}
@@ -409,9 +436,9 @@ export default function SettingsTab({}: Props) {
               />
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label className="text-muted-foreground">Transform</Label>
+              <Label className={LABEL_CLASS}>Transform</Label>
               <Select
                 onValueChange={(e) =>
                   handleOnChanges({
@@ -423,7 +450,7 @@ export default function SettingsTab({}: Props) {
                 }
                 value={state.editor.selectedElement.styles.textTransform || ""}
               >
-                <SelectTrigger className="w-[120px]">
+                <SelectTrigger className="h-8 text-xs w-full">
                   <SelectValue placeholder="None" />
                 </SelectTrigger>
                 <SelectContent>
@@ -437,7 +464,7 @@ export default function SettingsTab({}: Props) {
               </Select>
             </div>
             <div>
-              <Label className="text-muted-foreground">Decoration</Label>
+              <Label className={LABEL_CLASS}>Decoration</Label>
               <Select
                 onValueChange={(e) =>
                   handleOnChanges({
@@ -452,7 +479,7 @@ export default function SettingsTab({}: Props) {
                   ""
                 }
               >
-                <SelectTrigger className="w-[120px]">
+                <SelectTrigger className="h-8 text-xs w-full">
                   <SelectValue placeholder="None" />
                 </SelectTrigger>
                 <SelectContent>
@@ -472,13 +499,14 @@ export default function SettingsTab({}: Props) {
           Dimensions
         </AccordionTrigger>
         <AccordionContent>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-2">
-              <div className="flex gap-4 flex-col">
-                <div className="flex gap-4">
+              <div className="flex gap-2 flex-col">
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <Label className="text-muted-foreground">Height</Label>
+                    <Label className={LABEL_CLASS}>Height</Label>
                     <Input
+                      className="h-8 text-xs"
                       id="height"
                       placeholder="px"
                       onChange={handleOnChanges}
@@ -486,19 +514,47 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                   <div>
-                    <Label className="text-muted-foreground">Width</Label>
-                    <Input
-                      placeholder="px"
-                      id="width"
-                      onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.width || ""}
-                    />
+                    <Label className={LABEL_CLASS}>Width</Label>
+                    <div className="flex items-center gap-2">
+                      <Input
+                        className="h-8 text-xs"
+                        placeholder="px"
+                        id="width"
+                        onChange={handleOnChanges}
+                        value={state.editor.selectedElement.styles.width || ""}
+                      />
+                      <Button
+                        variant={
+                          state.editor.selectedElement.styles.width ===
+                          "fit-content"
+                            ? "default"
+                            : "outline"
+                        }
+                        className="h-8 w-8 px-0 shrink-0"
+                        title="Fit Content"
+                        onClick={() => {
+                          handleOnChanges({
+                            target: {
+                              id: "width",
+                              value:
+                                state.editor.selectedElement.styles.width ===
+                                "fit-content"
+                                  ? "100%"
+                                  : "fit-content",
+                            },
+                          });
+                        }}
+                      >
+                        <AlignHorizontalSpaceAround size={14} />
+                      </Button>
+                    </div>
                   </div>
                 </div>
-                <div className="flex gap-4">
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <Label className="text-muted-foreground">Max W</Label>
+                    <Label className={LABEL_CLASS}>Max W</Label>
                     <Input
+                      className="h-8 text-xs"
                       id="maxWidth"
                       placeholder="px"
                       onChange={handleOnChanges}
@@ -506,8 +562,9 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                   <div>
-                    <Label className="text-muted-foreground">Min W</Label>
+                    <Label className={LABEL_CLASS}>Min W</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="minWidth"
                       onChange={handleOnChanges}
@@ -515,10 +572,11 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                 </div>
-                <div className="flex gap-4">
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <Label className="text-muted-foreground">Max H</Label>
+                    <Label className={LABEL_CLASS}>Max H</Label>
                     <Input
+                      className="h-8 text-xs"
                       id="maxHeight"
                       placeholder="px"
                       onChange={handleOnChanges}
@@ -528,8 +586,9 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                   <div>
-                    <Label className="text-muted-foreground">Min H</Label>
+                    <Label className={LABEL_CLASS}>Min H</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="minHeight"
                       onChange={handleOnChanges}
@@ -540,12 +599,13 @@ export default function SettingsTab({}: Props) {
                   </div>
                 </div>
               </div>
-              <p>Margin px</p>
-              <div className="flex gap-4 flex-col">
-                <div className="flex gap-4">
+              <Label className={`${LABEL_CLASS} mb-1 block`}>Margin (px)</Label>
+              <div className="flex gap-2 flex-col">
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <Label className="text-muted-foreground">Top</Label>
+                    <Label className={LABEL_CLASS}>Top</Label>
                     <Input
+                      className="h-8 text-xs"
                       id="marginTop"
                       placeholder="px"
                       onChange={handleOnChanges}
@@ -555,8 +615,9 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                   <div>
-                    <Label className="text-muted-foreground">Bottom</Label>
+                    <Label className={LABEL_CLASS}>Bottom</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="marginBottom"
                       onChange={handleOnChanges}
@@ -566,10 +627,11 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                 </div>
-                <div className="flex gap-4">
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <Label className="text-muted-foreground">Left</Label>
+                    <Label className={LABEL_CLASS}>Left</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="marginLeft"
                       onChange={handleOnChanges}
@@ -579,8 +641,9 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                   <div>
-                    <Label className="text-muted-foreground">Right</Label>
+                    <Label className={LABEL_CLASS}>Right</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="marginRight"
                       onChange={handleOnChanges}
@@ -593,12 +656,15 @@ export default function SettingsTab({}: Props) {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <p>Padding px</p>
-              <div className="flex gap-4 flex-col">
-                <div className="flex gap-4">
+              <Label className={`${LABEL_CLASS} mb-1 block`}>
+                Padding (px)
+              </Label>
+              <div className="flex gap-2 flex-col">
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <Label className="text-muted-foreground">Top</Label>
+                    <Label className={LABEL_CLASS}>Top</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="paddingTop"
                       onChange={handleOnChanges}
@@ -608,8 +674,9 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                   <div>
-                    <Label className="text-muted-foreground">Bottom</Label>
+                    <Label className={LABEL_CLASS}>Bottom</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="paddingBottom"
                       onChange={handleOnChanges}
@@ -619,10 +686,11 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                 </div>
-                <div className="flex gap-4">
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <Label className="text-muted-foreground">Left</Label>
+                    <Label className={LABEL_CLASS}>Left</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="paddingLeft"
                       onChange={handleOnChanges}
@@ -632,8 +700,9 @@ export default function SettingsTab({}: Props) {
                     />
                   </div>
                   <div>
-                    <Label className="text-muted-foreground">Right</Label>
+                    <Label className={LABEL_CLASS}>Right</Label>
                     <Input
+                      className="h-8 text-xs"
                       placeholder="px"
                       id="paddingRight"
                       onChange={handleOnChanges}
@@ -652,9 +721,9 @@ export default function SettingsTab({}: Props) {
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
           Decorations
         </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4">
+        <AccordionContent className="flex flex-col gap-3">
           <div>
-            <Label className="text-muted-foreground">Opacity</Label>
+            <Label className={LABEL_CLASS}>Opacity</Label>
             <div className="flex items-center justify-end">
               <small className="p-2">
                 {typeof state.editor.selectedElement.styles?.opacity ===
@@ -691,7 +760,7 @@ export default function SettingsTab({}: Props) {
             />
           </div>
           <div>
-            <Label className="text-muted-foreground">Border Radius</Label>
+            <Label className={LABEL_CLASS}>Border Radius</Label>
             <div className="flex items-center justify-end">
               <small className="">
                 {typeof state.editor.selectedElement.styles?.borderRadius ===
@@ -729,10 +798,10 @@ export default function SettingsTab({}: Props) {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground">Background Color</Label>
-            <div className="flex  border rounded-md overflow-clip">
+            <Label className={LABEL_CLASS}>Background Color</Label>
+            <div className="flex border rounded-md overflow-hidden bg-transparent h-8">
               <div
-                className="w-12 "
+                className="w-10 h-full shrink-0 border-r"
                 style={{
                   backgroundColor:
                     state.editor.selectedElement.styles.backgroundColor,
@@ -740,7 +809,7 @@ export default function SettingsTab({}: Props) {
               />
               <Input
                 placeholder="#HFI245"
-                className="border-y-0! rounded-none border-r-0! mr-2"
+                className="h-full text-xs border-none! shadow-none! rounded-none! flex-1 focus-visible:ring-0 px-2"
                 id="backgroundColor"
                 onChange={handleOnChanges}
                 value={
@@ -750,10 +819,10 @@ export default function SettingsTab({}: Props) {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground">Background Image</Label>
-            <div className="flex  border rounded-md overflow-clip">
+            <Label className={LABEL_CLASS}>Background Image</Label>
+            <div className="flex border rounded-md overflow-hidden bg-transparent h-8">
               <div
-                className="w-12 "
+                className="w-10 h-full shrink-0 border-r"
                 style={{
                   backgroundImage:
                     state.editor.selectedElement.styles.backgroundImage,
@@ -761,7 +830,7 @@ export default function SettingsTab({}: Props) {
               />
               <Input
                 placeholder="url()"
-                className="border-y-0! rounded-none border-r-0! mr-2"
+                className="h-full text-xs border-none! shadow-none! rounded-none! flex-1 focus-visible:ring-0 px-2"
                 id="backgroundImage"
                 onChange={handleOnChanges}
                 value={
@@ -771,7 +840,7 @@ export default function SettingsTab({}: Props) {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground">Image Position</Label>
+            <Label className={LABEL_CLASS}>Image Position</Label>
             <Tabs
               onValueChange={(e) =>
                 handleOnChanges({
@@ -797,14 +866,83 @@ export default function SettingsTab({}: Props) {
             </Tabs>
           </div>
           <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground">Border</Label>
-            <div className="flex gap-4">
-              <Input
-                placeholder="1px"
-                id="borderWidth"
-                onChange={handleOnChanges}
-                value={state.editor.selectedElement.styles.borderWidth || ""}
-              />
+            <Label className={`${LABEL_CLASS} mb-1 block`}>
+              Border Width (px)
+            </Label>
+            <div className="flex gap-2 flex-col">
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <Label className={LABEL_CLASS}>All</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="px"
+                    id="borderWidth"
+                    onChange={handleOnChanges}
+                    value={
+                      state.editor.selectedElement.styles.borderWidth || ""
+                    }
+                  />
+                </div>
+                <div>
+                  <Label className={LABEL_CLASS}>Top</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="px"
+                    id="borderTopWidth"
+                    onChange={handleOnChanges}
+                    value={
+                      state.editor.selectedElement.styles.borderTopWidth || ""
+                    }
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <Label className={LABEL_CLASS}>Bottom</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="px"
+                    id="borderBottomWidth"
+                    onChange={handleOnChanges}
+                    value={
+                      state.editor.selectedElement.styles.borderBottomWidth ||
+                      ""
+                    }
+                  />
+                </div>
+                <div>
+                  <Label className={LABEL_CLASS}>Left</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="px"
+                    id="borderLeftWidth"
+                    onChange={handleOnChanges}
+                    value={
+                      state.editor.selectedElement.styles.borderLeftWidth || ""
+                    }
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <Label className={LABEL_CLASS}>Right</Label>
+                  <Input
+                    className="h-8 text-xs"
+                    placeholder="px"
+                    id="borderRightWidth"
+                    onChange={handleOnChanges}
+                    value={
+                      state.editor.selectedElement.styles.borderRightWidth || ""
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <Label className={`${LABEL_CLASS} mt-2`}>
+              Border Style & Color
+            </Label>
+            <div className="grid grid-cols-2 gap-2">
               <Select
                 onValueChange={(e) =>
                   handleOnChanges({
@@ -816,7 +954,7 @@ export default function SettingsTab({}: Props) {
                 }
                 value={state.editor.selectedElement.styles.borderStyle || ""}
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="h-8 text-xs w-full">
                   <SelectValue placeholder="Style" />
                 </SelectTrigger>
                 <SelectContent>
@@ -828,9 +966,9 @@ export default function SettingsTab({}: Props) {
                 </SelectContent>
               </Select>
             </div>
-            <div className="flex  border rounded-md overflow-clip">
+            <div className="flex border rounded-md overflow-hidden bg-transparent h-8">
               <div
-                className="w-12 "
+                className="w-10 h-full shrink-0 border-r"
                 style={{
                   backgroundColor:
                     state.editor.selectedElement.styles.borderColor,
@@ -838,7 +976,7 @@ export default function SettingsTab({}: Props) {
               />
               <Input
                 placeholder="#000000"
-                className="border-y-0! rounded-none border-r-0! mr-2"
+                className="h-full text-xs border-none! shadow-none! rounded-none! flex-1 focus-visible:ring-0 px-2"
                 id="borderColor"
                 onChange={handleOnChanges}
                 value={state.editor.selectedElement.styles.borderColor || ""}
@@ -846,8 +984,9 @@ export default function SettingsTab({}: Props) {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground">Box Shadow</Label>
+            <Label className={LABEL_CLASS}>Box Shadow</Label>
             <Input
+              className="h-8 text-xs"
               placeholder="0px 4px 6px rgba(0,0,0,0.1)"
               id="boxShadow"
               onChange={handleOnChanges}
@@ -860,9 +999,9 @@ export default function SettingsTab({}: Props) {
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
           Position
         </AccordionTrigger>
-        <AccordionContent className="flex flex-col gap-4">
+        <AccordionContent className="flex flex-col gap-3">
           <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground">Position</Label>
+            <Label className={LABEL_CLASS}>Position</Label>
             <Select
               onValueChange={(e) =>
                 handleOnChanges({
@@ -874,7 +1013,7 @@ export default function SettingsTab({}: Props) {
               }
               value={state.editor.selectedElement.styles.position || ""}
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="h-8 text-xs w-full">
                 <SelectValue placeholder="Static" />
               </SelectTrigger>
               <SelectContent>
@@ -888,10 +1027,11 @@ export default function SettingsTab({}: Props) {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label className="text-muted-foreground">Top</Label>
+              <Label className={LABEL_CLASS}>Top</Label>
               <Input
+                className="h-8 text-xs"
                 placeholder="px/%"
                 id="top"
                 onChange={handleOnChanges}
@@ -899,8 +1039,9 @@ export default function SettingsTab({}: Props) {
               />
             </div>
             <div>
-              <Label className="text-muted-foreground">Bottom</Label>
+              <Label className={LABEL_CLASS}>Bottom</Label>
               <Input
+                className="h-8 text-xs"
                 placeholder="px/%"
                 id="bottom"
                 onChange={handleOnChanges}
@@ -908,10 +1049,11 @@ export default function SettingsTab({}: Props) {
               />
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label className="text-muted-foreground">Left</Label>
+              <Label className={LABEL_CLASS}>Left</Label>
               <Input
+                className="h-8 text-xs"
                 placeholder="px/%"
                 id="left"
                 onChange={handleOnChanges}
@@ -919,8 +1061,9 @@ export default function SettingsTab({}: Props) {
               />
             </div>
             <div>
-              <Label className="text-muted-foreground">Right</Label>
+              <Label className={LABEL_CLASS}>Right</Label>
               <Input
+                className="h-8 text-xs"
                 placeholder="px/%"
                 id="right"
                 onChange={handleOnChanges}
@@ -929,8 +1072,9 @@ export default function SettingsTab({}: Props) {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <Label className="text-muted-foreground">Z-Index</Label>
+            <Label className={LABEL_CLASS}>Z-Index</Label>
             <Input
+              className="h-8 text-xs"
               placeholder="0"
               id="zIndex"
               onChange={handleOnChanges}
@@ -944,7 +1088,7 @@ export default function SettingsTab({}: Props) {
           Flexbox
         </AccordionTrigger>
         <AccordionContent>
-          <Label className="text-muted-foreground">Justify Content</Label>
+          <Label className={LABEL_CLASS}>Justify Content</Label>
           <Tabs
             onValueChange={(e) =>
               handleOnChanges({
@@ -974,7 +1118,7 @@ export default function SettingsTab({}: Props) {
               </TabsTrigger>
             </TabsList>
           </Tabs>
-          <Label className="text-muted-foreground mt-2">Align Items</Label>
+          <Label className={`${LABEL_CLASS} mt-2`}>Align Items</Label>
           <Tabs
             onValueChange={(e) =>
               handleOnChanges({
@@ -987,17 +1131,20 @@ export default function SettingsTab({}: Props) {
             value={state.editor.selectedElement.styles.alignItems || ""}
           >
             <TabsList className={TABLIST_CLASS}>
+              <TabsTrigger value="end" className={TABS_TRIGGER_CLASS}>
+                <AlignVerticalJustifyEnd size={18} />
+              </TabsTrigger>
               <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
                 <AlignVerticalJustifyCenter size={18} />
               </TabsTrigger>
-              <TabsTrigger value="normal" className={TABS_TRIGGER_CLASS}>
+              <TabsTrigger value="start" className={TABS_TRIGGER_CLASS}>
                 <AlignVerticalJustifyStart size={18} />
               </TabsTrigger>
             </TabsList>
           </Tabs>
           <div className="flex items-center gap-2">
             <Input
-              className="h-4 w-4"
+              className="h-4 w-4 shrink-0"
               placeholder="px"
               type="checkbox"
               id="display"
@@ -1010,10 +1157,10 @@ export default function SettingsTab({}: Props) {
                 });
               }}
             />
-            <Label className="text-muted-foreground">Flex</Label>
+            <Label className={LABEL_CLASS}>Flex</Label>
           </div>
           <div>
-            <Label className="text-muted-foreground"> Direction</Label>
+            <Label className={LABEL_CLASS}> Direction</Label>
             <Select
               onValueChange={(e) =>
                 handleOnChanges({
@@ -1025,7 +1172,7 @@ export default function SettingsTab({}: Props) {
               }
               value={state.editor.selectedElement.styles.flexDirection || ""}
             >
-              <SelectTrigger className="w-[120px]">
+              <SelectTrigger className="h-8 text-xs w-full">
                 <SelectValue placeholder="Row" />
               </SelectTrigger>
               <SelectContent>
@@ -1036,10 +1183,11 @@ export default function SettingsTab({}: Props) {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label className="text-muted-foreground">Gap</Label>
+              <Label className={LABEL_CLASS}>Gap</Label>
               <Input
+                className="h-8 text-xs"
                 placeholder="px"
                 id="gap"
                 onChange={handleOnChanges}
@@ -1047,7 +1195,7 @@ export default function SettingsTab({}: Props) {
               />
             </div>
             <div>
-              <Label className="text-muted-foreground">Wrap</Label>
+              <Label className={LABEL_CLASS}>Wrap</Label>
               <Select
                 onValueChange={(e) =>
                   handleOnChanges({
@@ -1059,7 +1207,7 @@ export default function SettingsTab({}: Props) {
                 }
                 value={state.editor.selectedElement.styles.flexWrap || ""}
               >
-                <SelectTrigger className="w-[120px]">
+                <SelectTrigger className="h-8 text-xs w-full">
                   <SelectValue placeholder="Nowrap" />
                 </SelectTrigger>
                 <SelectContent>

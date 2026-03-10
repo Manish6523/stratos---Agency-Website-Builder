@@ -1,3 +1,4 @@
+"use client"
 import { GetMediaFiles } from "@/lib/types";
 import {
   Command,
@@ -11,6 +12,7 @@ import React from "react";
 import MediaUploadButton from "./media-upload-button";
 import MediaCard from "./media-card";
 import { FolderSearch } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   data: GetMediaFiles;
@@ -18,10 +20,18 @@ type Props = {
 };
 
 const MediaComponent = ({ data, subaccountId }: Props) => {
+  const router = useRouter();
   return (
     <div className="flex flex-col gap-4 h-full w-full">
       <div className="flex justify-between items-center">
-        <h1 className="text-4xl">Media Bucket</h1>
+        <h1
+          className="text-4xl"
+          onClick={() => {
+            router.refresh();
+          }}
+        >
+          Media Bucket
+        </h1>
         <MediaUploadButton subaccountId={subaccountId} />
       </div>
 
