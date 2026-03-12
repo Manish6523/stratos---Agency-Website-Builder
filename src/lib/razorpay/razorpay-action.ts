@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 // import { Plan, Prisma } from "";
 import { logger } from "@/lib/utils";
 import { ADD_ONS } from "@/config/add-ons";
-import { Plan, Prisma } from "../../../generated/prisma";
+import { Plan, Prisma } from "../../../generated/prisma/client";
 
 /**
  * 1. subscriptionCreate (Formerly Stripe subscriptionCreate)
@@ -24,11 +24,14 @@ export const subscriptionCreate = async (
     if (!agency) throw new Error("Agency not found");
 
     const data: Prisma.SubscriptionUncheckedCreateInput = {
-      active: subscription.status === "active" || subscription.status === "captured",
+      active:
+        subscription.status === "active" || subscription.status === "captured",
       agencyId: agency.id,
       customerId,
       // Razorpay uses seconds for timestamps (like Stripe), so * 1000 for JS Date
-      currentPeriodEndDate: new Date((subscription.end_at || subscription.expire_by) * 1000),
+      currentPeriodEndDate: new Date(
+        (subscription.end_at || subscription.expire_by) * 1000,
+      ),
       priceId: subscription.plan_id,
       subscritiptionId: subscription.id, // Keeping your schema's typo
       plan: subscription.plan_id as Plan,
@@ -46,13 +49,13 @@ export const subscriptionCreate = async (
 
 /**
  * 2. getConnectAccountProducts (For Multi-tenancy)
- * NOTE: Razorpay doesn't have "Connect Accounts" in the same way. 
+ * NOTE: Razorpay doesn't have "Connect Accounts" in the same way.
  * This usually maps to "Razorpay Route" or linked accounts.
  */
 export const getConnectAccountProducts = async (accountId: string) => {
   // In Razorpay, you'd fetch items/plans specific to a linked account
   // Placeholder returning all items if Route isn't fully set up
-  const items = await razorpay.items.all(); 
+  const items = await razorpay.items.all();
   return items.items;
 };
 
@@ -77,12 +80,35 @@ export const getPrices = async () => {
 };
 
 /**
- * 5. getCharges
+ * 5. getAgencyPayments
+ * Fetches all Razorpay payments that have this agencyId in their notes.
  */
-export const getCharges = async (customerId: string | undefined) => {
-  // Razorpay calls these 'Payments'
-  const payments = await razorpay.payments.all({
-    count: 50,
-  });
-  return payments;
+export const getAgencyPayments = async (agencyId: string) => {
+  try {
+    // Fetch last 100 payments — filter by agencyId in notes
+    const response = (await razorpay.payments.all({
+      count: 100,
+    })) as any;
+
+    const allPayments: any[] = response?.items || [];
+
+    // Filter to only this agency's payments
+    const agencyPayments = allPayments.filter(
+      (p: any) => p.notes?.agencyId === agencyId,
+    );
+
+    return agencyPayments.map((p: any) => ({
+      id: p.id,
+      amount: Math.round(p.amount / 100), // paise → rupees
+      currency: p.currency,
+      status: p.status, // "captured" | "failed" | "refunded"
+      planId: p.notes?.planId || "",
+      orderId: p.order_id,
+      createdAt: new Date(p.created_at * 1000),
+      method: p.method, // "card" | "upi" | "netbanking" etc.
+    }));
+  } catch (error) {
+    logger("getAgencyPayments error:", error);
+    return [];
+  }
 };

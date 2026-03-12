@@ -1,21 +1,15 @@
 "use client";
 
-import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import CustomModal from "@/components/global/custom-modal";
-import { useModal } from "@/providers/ModalProvider";
-import { CheckCircle2 } from "lucide-react"; // Added for a "Verified" feel
+import { CheckCircle2, Loader2, XCircle } from "lucide-react";
+import { toast } from "sonner";
+import { loadRazorpay } from "@/lib/razorpay/razorpay-client";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface PricingCardProps {
-  features: string[];
+  features: { label: string; available: boolean }[];
   buttonCta: string;
   title: string;
   description: string;
@@ -24,8 +18,12 @@ interface PricingCardProps {
   highlightTitle: string;
   highlightDescription: string;
   customerId: string;
-  prices: any[];
+  prices: { recurring: boolean; productId: string; amount: number }[];
   isPlanExists: boolean;
+  agencyId: string;
+  planId: string;
+  userName: string;
+  userEmail: string;
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({
@@ -34,85 +32,184 @@ const PricingCard: React.FC<PricingCardProps> = ({
   description,
   duration,
   features,
-  highlightDescription,
-  highlightTitle,
   title,
+  isPlanExists,
+  prices,
+  agencyId,
+  planId,
+  userName,
+  userEmail,
 }) => {
-  const { setOpen } = useModal();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const handleShowDetails = async () => {
-    setOpen(
-      <CustomModal
-        title={`${title} Details`}
-        subHeading="Review the features included in this tier."
-      >
-        <div className="space-y-4 py-4">
-          <p className="text-sm text-muted-foreground">
-            Stratos is currently an open-access platform. You have full permission to use all 
-            features included in the {title} tier without any subscription requirements.
-          </p>
-          <ul className="space-y-2">
-            {features.map((feature) => (
-              <li key={feature} className="flex items-center gap-2 text-sm">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </CustomModal>
-    );
+  const isFreePlan = !planId;
+  const isDisabled = isPlanExists || isFreePlan;
+
+  const handleCheckout = async () => {
+    if (!planId || isPlanExists) return;
+    setLoading(true);
+    try {
+      const razorpayLoaded = await loadRazorpay();
+      if (!razorpayLoaded) {
+        toast.error("Failed to load Razorpay.");
+        setLoading(false);
+        return;
+      }
+
+      const priceData = prices[0];
+      const res = await fetch("/api/razorpay/create-subscription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          priceId: planId,
+          customerId: agencyId,
+          amount: priceData?.amount ?? 0,
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        toast.error(err?.message || "Could not initiate payment.");
+        setLoading(false);
+        return;
+      }
+
+      const { orderId, amount, currency } = await res.json();
+
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount,
+        currency: currency || "INR",
+        name: "Stratos Agency",
+        description: `${title} Plan`,
+        order_id: orderId,
+        prefill: { name: userName, email: userEmail },
+        notes: { agencyId, planId },
+        theme: { color: "#7C3AED" },
+        handler: async (response: {
+          razorpay_order_id: string;
+          razorpay_payment_id: string;
+          razorpay_signature: string;
+        }) => {
+          try {
+            const verifyRes = await fetch("/api/razorpay/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                agencyId,
+                planId,
+                amount,
+              }),
+            });
+            if (verifyRes.ok) {
+              toast.success(`🎉 ${title} plan activated!`);
+              router.refresh();
+            } else {
+              const err = await verifyRes.json();
+              toast.error(err?.error || "Verification failed.");
+            }
+          } catch {
+            toast.error("Verification error. Contact support.");
+          }
+        },
+        modal: {
+          ondismiss: () => {
+            setLoading(false);
+            toast.info("Payment cancelled.");
+          },
+        },
+      };
+
+      // @ts-ignore
+      const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", (r: { error: { description: string } }) => {
+        toast.error("Payment failed: " + r.error.description);
+        setLoading(false);
+      });
+      rzp.open();
+      setLoading(false);
+    } catch (error: any) {
+      toast.error(error?.message || "Something went wrong.");
+      setLoading(false);
+    }
   };
 
   return (
-    <Card className="flex flex-col justify-between lg:w-1/3 border-2 transition-all hover:border-primary/50">
+    <div
+      className={cn(
+        "flex flex-col lg:w-1/3 rounded-xl border bg-card p-6 gap-6",
+        isPlanExists
+          ? "border-primary ring-2 ring-primary/20"
+          : "border-border",
+      )}
+    >
+      {/* Plan name & price */}
       <div>
-        <CardHeader className="flex flex-col lg:items-start justify-between gap-4">
-          <div className="space-y-1">
-            <CardTitle className="text-2xl font-bold">{title}</CardTitle>
-            <CardDescription>{description}</CardDescription>
-          </div>
-          <div className="flex items-baseline gap-1">
-            <span className="text-4xl font-bold">{amt}</span>
-            <small className="text-sm font-light text-muted-foreground">
-              {duration}
-            </small>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-2">
-            {features.map((feature) => (
-              <li
-                key={feature}
-                className="flex items-start gap-2 text-sm text-muted-foreground"
-              >
-                <CheckCircle2 className="h-4 w-4 mt-0.5 text-primary shrink-0" />
-                {feature}
-              </li>
-              ))}
-            </ul>
-        </CardContent>
+        <div className="flex items-center justify-between mb-1">
+          <h3 className="font-semibold text-base">{title}</h3>
+          {isPlanExists && (
+            <span className="text-[11px] font-semibold text-primary bg-primary/10 rounded-full px-2.5 py-0.5">
+              Active
+            </span>
+          )}
+        </div>
+        <p className="text-sm text-muted-foreground mb-4">{description}</p>
+        <div className="flex items-end gap-1">
+          <span className="text-4xl font-bold">{amt}</span>
+          {duration && (
+            <span className="text-sm text-muted-foreground mb-1">
+              /{duration}
+            </span>
+          )}
+        </div>
       </div>
-      <CardFooter className="mt-auto">
-        <Card className="w-full bg-muted/50 border-none">
-          <div className="flex flex-col p-4 gap-4">
-            <div>
-              <p className="font-semibold text-sm">{highlightTitle}</p>
-              <p className="text-xs text-muted-foreground">
-                {highlightDescription}
-              </p>
-            </div>
-            <Button 
-              variant={title === "Unlimited Saas" ? "default" : "outline"}
-              className="w-full" 
-              onClick={handleShowDetails}
+
+      {/* Divider */}
+      <div className="h-px bg-border" />
+
+      {/* Features */}
+      <ul className="flex-1 space-y-2.5">
+        {features.map((f) => (
+          <li key={f.label} className="flex items-center gap-2.5 text-sm">
+            {f.available ? (
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
+            ) : (
+              <XCircle className="h-4 w-4 shrink-0 text-muted-foreground/40" />
+            )}
+            <span
+              className={
+                f.available
+                  ? "text-foreground/80"
+                  : "text-muted-foreground/40 line-through"
+              }
             >
-              {buttonCta}
-            </Button>
-          </div>
-        </Card>
-      </CardFooter>
-    </Card>
+              {f.label}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Button */}
+      <Button
+        className="w-full"
+        variant={isPlanExists ? "secondary" : "default"}
+        onClick={handleCheckout}
+        disabled={isDisabled || loading}
+      >
+        {loading ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Processing…
+          </>
+        ) : (
+          buttonCta
+        )}
+      </Button>
+    </div>
   );
 };
 

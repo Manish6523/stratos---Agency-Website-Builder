@@ -393,11 +393,37 @@
 - Updated `project_docs/main-doc.md` timeline documenting the structural editor panel integration and component-specific style resolutions.
   **Outcome**: Documentation completely synchronized with "Day 32". The visual editor property sidebar looks highly professional and robustly handles complex edge-case typings like nested SVG `stroke-width` requirements.
 
-
 ### Session [Day 33 - E-commerce Template Validation]
+
 **Objective:** Resolve layout logic constraints inside the Sneaker web template and clean workspace.
 **Actions Taken:**
+
 - Ran linter checks (`eslint`/`prettier`/`tsc`) over massive template trees.
 - Converted `temp-ecommerce.ts` into a structured, fully integrated `shoes-ecommerce.ts`.
 - Imposed rigorous typography and flex-box constraints across native `EditorElement` objects.
-**Final Resolution:** Concluding Day 33 having successfully fortified the large-scale E-commerce template integration, guaranteeing visual stability inside the central Page Builder.
+  **Final Resolution:** Concluding Day 33 having successfully fortified the large-scale E-commerce template integration, guaranteeing visual stability inside the central Page Builder.
+
+## [Current Session: Thursday, March 12, 2026]
+
+**User Action:** Triggered "Integrate Razorpay for this project" — full end-to-end payment wiring.
+**Analysis:**
+
+- Confirmed Razorpay SDK (`razorpay: ^2.9.6`) already installed and env vars set (`NEXT_PUBLIC_RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`). Skeleton API routes existed but were unwired.
+- `billing/page.tsx` and `pricing-card.tsx` were in "open-access" mode — no real checkout.
+- `Checkout.tsx` (funnel editor) still had legacy Stripe logic (`api/stripe/create-checkout-session`).
+- `constants.ts` still had USD prices with Stripe plan IDs.
+- No webhook handler or verify-payment route existed.
+
+**Actions:**
+
+- Created `src/app/api/razorpay/webhook/route.ts` — HMAC-SHA256 signature verification, handles `payment.captured`, `subscription.charged`, `subscription.activated` events, upserts `Subscription` record in DB.
+- Created `src/app/api/razorpay/verify-payment/route.ts` — verifies client-side payment signature and activates agency subscription.
+- Updated `src/lib/constants.ts` — INR pricing (₹999/₹2,999), plan IDs matching Prisma `Plan` enum.
+- Rewrote `billing/page.tsx` — parallel fetch of subscription, user, and Razorpay payment history.
+- Rewrote `pricing-card.tsx` — full checkout flow: loadRazorpay → create-subscription → Razorpay modal → verify-payment → router.refresh().
+- Replaced Stripe logic in `Checkout.tsx` — now uses `create-checkout-session` + Razorpay modal; shows CreditCard placeholder in editor mode.
+- Added `getAgencyPayments(agencyId)` to `razorpay-action.ts` — fetches all payments from Razorpay API filtered by `notes.agencyId`; billing page shows full payment history table.
+- Deleted unused `create-customer` API route.
+- Fixed broken `generated/prisma` imports (missing `/client`) across razorpay files.
+
+**Outcome:** Razorpay fully integrated end-to-end. Agency owners can upgrade plans via Razorpay modal, payments are server-verified, subscriptions activate in DB. Full payment history displays all past transactions. Funnel pages support end-customer Razorpay checkout.

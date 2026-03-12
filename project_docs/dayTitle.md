@@ -45,3 +45,4 @@
 ## Week 05
 
 - Day 33: E-commerce Template Refactoring & Styling Polish
+- Day 34: Razorpay Full Integration & Live Payment History
