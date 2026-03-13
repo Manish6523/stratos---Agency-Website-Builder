@@ -44,14 +44,14 @@ const SendInvitation: React.FC<SendInvitationProps> = ({ agencyId }) => {
       const res = await sendInvitation(values.role, values.email, agencyId);
       if (!res.success) {
         toast.error("Error", {
-          description: "Invitation already sent to this email",
+          description: res.error || "Invitation already sent to this email",
         });
         return;
       } else if (res.success && res.status === "SENT") {
         toast.success("Success", { description: "Invitation sent" });
         await saveActivityLogsNotification({
           agencyId: agencyId,
-          description: `Invited ${res.email}`,
+          description: `Invited ${values.email}`,
           subAccountId: undefined,
         });
       }

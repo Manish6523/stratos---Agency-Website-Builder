@@ -28,6 +28,24 @@ import Video from "@/components/icons/video_recorder";
 import Wallet from "@/components/icons/wallet";
 import Warning from "@/components/icons/warning";
 
+export const PLAN_LIMITS = {
+  starter: {
+    maxSubAccounts: 2,
+    maxTeamMembers: 3,
+    maxFunnels: 2,
+  },
+  plan_basic: {
+    maxSubAccounts: 4,
+    maxTeamMembers: 6,
+    maxFunnels: 4,
+  },
+  plan_unlimited_saas: {
+    maxSubAccounts: Infinity,
+    maxTeamMembers: Infinity,
+    maxFunnels: Infinity,
+  },
+} as const;
+
 export const pricingCards = [
   {
     title: "Starter",
@@ -36,7 +54,7 @@ export const pricingCards = [
     duration: "",
     highlight: "Key features",
     features: [
-      { label: "3 Sub accounts · 3 team members each", available: true },
+      { label: "2 Sub accounts · 3 team members each", available: true },
       { label: "2 Funnels (up to 3 steps)", available: true },
       { label: "Unlimited pipelines · Custom domains", available: true },
       { label: "AI Funnel Editor", available: false },
@@ -52,8 +70,8 @@ export const pricingCards = [
     duration: "month",
     highlight: "Everything in Starter, plus",
     features: [
-      { label: "6 Sub accounts · Unlimited team members", available: true },
-      { label: "6 Funnels with unlimited steps", available: true },
+      { label: "4 Sub accounts · 6 team members each", available: true },
+      { label: "4 Funnels with unlimited steps", available: true },
       { label: "Unlimited pipelines · Custom domains", available: true },
       { label: "AI Funnel Editor & all templates", available: true },
       { label: "White labelling & rebilling", available: false },

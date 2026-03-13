@@ -15,10 +15,10 @@ export default function CheckoutPlaceholder({ }: Props) {
       className=" h-14 w-14 bg-muted rounded-lg flex items-center justify-center"
     >
       <Image
-        src="/stripelogo.png"
+        src="/razorpaylogo.png"
         height={40}
         width={40}
-        alt="stripe logo"
+        alt="razorpay logo"
         className="object-cover"
       />
     </div>

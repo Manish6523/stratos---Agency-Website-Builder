@@ -1,7 +1,7 @@
-import TicketForm from '@/components/forms/ticket-form'
-import CustomModal from '@/components/global/custom-modal'
-import TagComponent from '@/components/global/tag-component'
-import LinkIcon from '@/components/icons/link'
+import TicketForm from "@/components/forms/ticket-form";
+import CustomModal from "@/components/global/custom-modal";
+import TagComponent from "@/components/global/tag-component";
+import LinkIcon from "@/components/icons/link";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,15 +12,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+} from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,47 +28,54 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@/components/ui/hover-card'
-import { deleteTicket, saveActivityLogsNotification } from '@/lib/queries'
-import { TicketWithTags } from '@/lib/types'
-import { useModal } from '@/providers/ModalProvider'
-import { Contact2, Edit, MoreHorizontalIcon, Trash, User2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import React, { Dispatch, SetStateAction } from 'react'
-import { toast } from 'sonner'
-import {Draggable} from 'react-beautiful-dnd'
+} from "@/components/ui/hover-card";
+import { deleteTicket, saveActivityLogsNotification } from "@/lib/queries";
+import { TicketWithTags } from "@/lib/types";
+import { useModal } from "@/providers/ModalProvider";
+import { Contact2, Edit, MoreHorizontalIcon, Trash, User2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { Dispatch, SetStateAction } from "react";
+import { toast } from "sonner";
+import { Draggable } from "react-beautiful-dnd";
 
 type Props = {
-  setAllTickets: Dispatch<SetStateAction<TicketWithTags>>
-  ticket: Omit<TicketWithTags[0], 'value'> & { value: number | null }
-  subaccountId: string
-  allTickets: TicketWithTags
-  index: number
-}
+  setAllTickets: Dispatch<SetStateAction<TicketWithTags>>;
+  ticket: Omit<TicketWithTags[0], "value"> & { value: number | null };
+  subaccountId: string;
+  allTickets: TicketWithTags;
+  index: number;
+};
 
-export default function PipelineTicket({ allTickets, index, setAllTickets, subaccountId, ticket }: Props) {
-  const router = useRouter()
-  const { setOpen, data } = useModal()
+export default function PipelineTicket({
+  allTickets,
+  index,
+  setAllTickets,
+  subaccountId,
+  ticket,
+}: Props) {
+  const router = useRouter();
+  const { setOpen, data } = useModal();
 
   const editNewTicket = (newTicket: TicketWithTags[0]) => {
     const sanitizedTicket = {
       ...newTicket,
       value: newTicket.value ? Number(newTicket.value) : null,
-    }
-    setAllTickets((tickets) =>
-      allTickets.map((t) => {
-        if (t.id === newTicket.id) {
-          return sanitizedTicket as any
-        }
-        return t
-      }) as any
-    )
-  }
+    };
+    setAllTickets(
+      (tickets) =>
+        allTickets.map((t) => {
+          if (t.id === newTicket.id) {
+            return sanitizedTicket as any;
+          }
+          return t;
+        }) as any,
+    );
+  };
 
   const handleClickEdit = async () => {
     const plainTicket = {
@@ -76,13 +83,10 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
       value: ticket.value ? Number(ticket.value) : null,
       Assigned: ticket.Assigned ? { ...ticket.Assigned } : null,
       Customer: ticket.Customer ? { ...ticket.Customer } : null,
-      Tags: ticket.Tags ? ticket.Tags.map(tag => ({ ...tag })) : [],
-    }
+      Tags: ticket.Tags ? ticket.Tags.map((tag) => ({ ...tag })) : [],
+    };
     setOpen(
-      <CustomModal
-        title="Update Ticket Details"
-        subHeading=""
-      >
+      <CustomModal title="Update Ticket Details" subHeading="">
         <TicketForm
           getNewTicket={editNewTicket}
           laneId={ticket.laneId}
@@ -90,51 +94,48 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
         />
       </CustomModal>,
       async () => {
-        return { ticket: plainTicket }
-      }
-    )
-  }
+        return { ticket: plainTicket };
+      },
+    );
+  };
 
   const handleDeleteTicket = async () => {
     try {
-      setAllTickets((tickets) => tickets.filter((t) => t.id !== ticket.id))
-      const response = await deleteTicket(ticket.id)
-      toast('Deleted',{
-        description: 'Deleted ticket from lane.',
-      })
+      setAllTickets((tickets) => tickets.filter((t) => t.id !== ticket.id));
+      const response = await deleteTicket(ticket.id);
+      toast("Deleted", {
+        description: "Deleted ticket from lane.",
+      });
 
       await saveActivityLogsNotification({
         agencyId: undefined,
         description: `Deleted a ticket | ${response?.name}`,
         subAccountId: subaccountId,
-      })
+      });
 
-      router.refresh()
+      router.refresh();
     } catch (error) {
-      toast('Oppse!',{
-        description: 'Could not delete the ticket.',
-      })
-      console.log(error)
+      toast("Oppse!", {
+        description: "Could not delete the ticket.",
+      });
+      console.log(error);
     }
-  }
+  };
   return (
-    <Draggable
-      draggableId={ticket.id.toString()}
-      index={index}
-    >
-      {(provided:any, snapshot:any) => {
+    <Draggable draggableId={ticket.id.toString()} index={index}>
+      {(provided: any, snapshot: any) => {
         if (snapshot.isDragging) {
-          const offset = { x: 300, y: 20 }
+          const offset = { x: 300, y: 20 };
           //@ts-ignore
-          const x = provided.draggableProps.style?.left - offset.x
+          const x = provided.draggableProps.style?.left - offset.x;
           //@ts-ignore
-          const y = provided.draggableProps.style?.top - offset.y
+          const y = provided.draggableProps.style?.top - offset.y;
           //@ts-ignore
           provided.draggableProps.style = {
             ...provided.draggableProps.style,
             top: y,
             left: x,
-          }
+          };
         }
         return (
           <div
@@ -174,10 +175,7 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
                           <span className="text-xs font-bold">CONTACT</span>
                         </div>
                       </HoverCardTrigger>
-                      <HoverCardContent
-                        side="right"
-                        className="w-fit"
-                      >
+                      <HoverCardContent side="right" className="w-fit">
                         <div className="flex justify-between space-x-4">
                           <Avatar>
                             <AvatarImage />
@@ -195,7 +193,7 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
                             <div className="flex items-center pt-2">
                               <Contact2 className="mr-2 h-4 w-4 opacity-70" />
                               <span className="text-xs text-muted-foreground">
-                                Joined{' '}
+                                Joined{" "}
                                 {ticket.Customer?.createdAt.toLocaleDateString()}
                               </span>
                             </div>
@@ -219,8 +217,8 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
                       <div className="flex flex-col justify-center">
                         <span className="text-sm text-muted-foreground">
                           {ticket.assignedUserId
-                            ? 'Assigned to'
-                            : 'Not Assigned'}
+                            ? "Assigned to"
+                            : "Not Assigned"}
                         </span>
                         {ticket.assignedUserId && (
                           <span className="text-xs w-28  overflow-ellipsis overflow-hidden whitespace-nowrap text-muted-foreground">
@@ -232,8 +230,8 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
                     <span className="text-sm font-bold">
                       {!!ticket.value &&
                         new Intl.NumberFormat(undefined, {
-                          style: 'currency',
-                          currency: 'USD',
+                          style: "currency",
+                          currency: "INR",
                         }).format(+ticket.value)}
                     </span>
                   </CardFooter>
@@ -278,8 +276,8 @@ export default function PipelineTicket({ allTickets, index, setAllTickets, subac
               </DropdownMenu>
             </AlertDialog>
           </div>
-        )
+        );
       }}
     </Draggable>
-  )
+  );
 }

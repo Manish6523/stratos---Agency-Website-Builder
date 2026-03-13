@@ -56,7 +56,7 @@ export default function PipelineLane({
 
   const amt = new Intl.NumberFormat(undefined, {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
   });
 
   const laneAmt = useMemo(() => {
@@ -69,7 +69,10 @@ export default function PipelineLane({
   const randomColor = `#${Math.random().toString(16).slice(2, 8)}`;
 
   const addNewTicket = (newTicket: TicketWithTags[0]) => {
-    const sanitizedTicket = { ...newTicket, value: newTicket.value ? Number(newTicket.value) : null };
+    const sanitizedTicket = {
+      ...newTicket,
+      value: newTicket.value ? Number(newTicket.value) : null,
+    };
     setAllTickets([...allTickets, sanitizedTicket] as any);
   };
 
@@ -186,10 +189,14 @@ export default function PipelineLane({
                               allTickets={allTickets}
                               setAllTickets={setAllTickets}
                               subaccountId={subaccountId}
-                              ticket={{
-                                ...ticket,
-                                value: ticket.value ? Number(ticket.value) : null,
-                              } as any}
+                              ticket={
+                                {
+                                  ...ticket,
+                                  value: ticket.value
+                                    ? Number(ticket.value)
+                                    : null,
+                                } as any
+                              }
                               key={ticket.id.toString()}
                               index={index}
                             />

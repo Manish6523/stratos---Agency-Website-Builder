@@ -9,7 +9,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import { Label } from "@/components/ui/label"; 
+import { Label } from "@/components/ui/label";
 import { useModal } from "@/providers/ModalProvider";
 import { saveActivityLogsNotification, upsertFunnel } from "@/lib/queries";
 import FileUpload from "../global/file-upload";
@@ -58,7 +58,7 @@ const FunnelDetails: React.FC<FunnelDetailsProps> = ({
 
   // 2. The handleChange logic for standard inputs
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -74,8 +74,13 @@ const FunnelDetails: React.FC<FunnelDetailsProps> = ({
       const response = await upsertFunnel(
         subAccountId,
         { ...formData, liveProducts: defaultData?.liveProducts || "[]" },
-        defaultData?.id || v4()
+        defaultData?.id || v4(),
       );
+
+      if (response && "error" in response) {
+        toast.error("Limit Reached", { description: response.error as string });
+        return;
+      }
 
       await saveActivityLogsNotification({
         agencyId: undefined,
@@ -102,7 +107,6 @@ const FunnelDetails: React.FC<FunnelDetailsProps> = ({
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          
           <div className="flex flex-col gap-2">
             <Label htmlFor="name">Funnel Name</Label>
             <Input
@@ -146,7 +150,9 @@ const FunnelDetails: React.FC<FunnelDetailsProps> = ({
             <FileUpload
               apiEndpoint="subaccountLogo"
               value={formData.favicon}
-              onChange={(url) => setFormData(prev => ({ ...prev, favicon: url }))}
+              onChange={(url) =>
+                setFormData((prev) => ({ ...prev, favicon: url }))
+              }
             />
           </div>
 

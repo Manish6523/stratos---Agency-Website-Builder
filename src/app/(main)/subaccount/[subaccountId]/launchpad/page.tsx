@@ -63,14 +63,14 @@ export default async function LaunchPad(props: Props) {
               <div className="flex justify-between items-center w-full h-20 border p-4 rounded-lg">
                 <div className="flex items-center gap-4">
                   <Image
-                    src="/stripelogo.png"
-                    alt="App logo"
+                    src="/razorpaylogo.png"
+                    alt="razorpay logo"
                     height={80}
                     width={80}
                     className="rounded-md object-contain "
                   />
                   <p>
-                    Connect your stripe account to accept payments. Stripe is
+                    Connect your razorpay account to accept payments. Razorpay is
                     used to run payouts.
                   </p>
                 </div>

@@ -427,3 +427,29 @@
 - Fixed broken `generated/prisma` imports (missing `/client`) across razorpay files.
 
 **Outcome:** Razorpay fully integrated end-to-end. Agency owners can upgrade plans via Razorpay modal, payments are server-verified, subscriptions activate in DB. Full payment history displays all past transactions. Funnel pages support end-customer Razorpay checkout.
+
+## [Current Session: Friday, March 13, 2026]
+
+**User Action:** Reported console errors on subaccount dashboard and requested currency localization + branding updates.
+**Analysis:**
+
+- Detected `Decimal` serialization error in `getPipelines()` — Prisma `Decimal` type cannot be passed from Server Components to Client Components.
+- Identified HTML hydration error: bare text `"No Data"` placed directly inside `<tbody>` (invalid HTML).
+- Found `@tremor/react` DonutChart `colors` prop using CSS custom property names (`"primary"`, `"secondary"`) instead of Tailwind color family names, rendering chart segments as black.
+- Discovered dynamic Tailwind class `bg-${variable}` in chart tooltip dot, which gets purged at build time.
+- Identified 6 files with hardcoded `USD` / `$` currency references needing INR localization.
+- Noted remaining Stripe branding in launchpad pages and checkout placeholder.
+
+**Actions:**
+
+- Fixed `getPipelines()` in `queries.ts` to convert `ticket.value` from `Decimal` to `Number()` for serialization.
+- Wrapped `"No Data"` text in `<TableRow><TableCell>` in subaccount dashboard.
+- Replaced dynamic Tailwind class with inline `style={{ backgroundColor }}` in funnel chart tooltip.
+- Converted all currency from USD ($) to INR (₹) across 6 files: dashboard pages, contacts, pipeline components, and pipeline-value.
+- Updated Stripe references to Razorpay in `CheckoutPlaceholder.tsx`, agency launchpad, and subaccount launchpad.
+- User added funnel page visit tracking (`visits: { increment: 1 }`) in `[domain]/[path]/page.tsx`.
+- User applied Tailwind v4 `!` suffix syntax fixes across dashboard pages.
+- Created `project_docs/week-05/day35.md` with full documentation.
+- Updated `project_docs/dayTitle.md` with Day 35 entry.
+
+**Outcome:** Dashboard console errors resolved. All currency references localized to INR. Razorpay branding is now consistent across the entire application. Funnel pages now track visitor counts.

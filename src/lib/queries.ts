@@ -2,6 +2,7 @@
 
 import { db } from "./db";
 import { v4 } from "uuid";
+import { PLAN_LIMITS } from "./constants";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { FunnelFormSchema } from "@/components/forms/funnel-details";
@@ -442,6 +443,38 @@ export const getAgencySubscription = async (agencyId: string) => {
 export const upsertSubAccount = async (subAccount: SubAccount) => {
   if (!subAccount.companyEmail) return null;
 
+  const agency = await db.agency.findUnique({
+    where: { id: subAccount.agencyId },
+    include: { SubAccount: true, Subscription: true },
+  });
+
+  if (!agency) return null;
+
+  const existingSubAccount = await db.subAccount.findUnique({
+    where: { id: subAccount.id },
+  });
+
+  if (!existingSubAccount) {
+    const activePlan = agency.Subscription?.active
+      ? agency.Subscription.plan
+      : null;
+    const subAccountsCount = agency.SubAccount.length;
+
+    if (
+      !activePlan ||
+      (activePlan !== "plan_unlimited_saas" && activePlan !== "plan_basic")
+    ) {
+      // Starter plan
+      if (subAccountsCount >= PLAN_LIMITS.starter.maxSubAccounts) {
+        return { error: "Upgrade your plan to add more sub accounts" };
+      }
+    } else if (activePlan === "plan_basic") {
+      if (subAccountsCount >= PLAN_LIMITS.plan_basic.maxSubAccounts) {
+        return { error: "Upgrade to Unlimited plan to add more sub accounts" };
+      }
+    }
+  }
+
   // 1. Find the Agency Owner to assign permissions
   const agencyOwner = await db.user.findFirst({
     where: {
@@ -623,6 +656,39 @@ export const sendInvitation = async (
   agencyId: string,
 ) => {
   try {
+    const agency = await db.agency.findUnique({
+      where: { id: agencyId },
+      include: { users: true, Subscription: true },
+    });
+
+    if (agency) {
+      const activePlan = agency.Subscription?.active
+        ? agency.Subscription.plan
+        : null;
+      if (
+        !activePlan ||
+        (activePlan !== "plan_basic" && activePlan !== "plan_unlimited_saas")
+      ) {
+        // Starter plan limits
+        if (agency.users.length >= PLAN_LIMITS.starter.maxTeamMembers) {
+          return {
+            error: "Upgrade your plan to add more team members",
+            success: false as const,
+            status: "LIMIT_EXCEEDED" as const,
+          };
+        }
+      } else if (activePlan === "plan_basic") {
+        // Basic plan limits
+        if (agency.users.length >= PLAN_LIMITS.plan_basic.maxTeamMembers) {
+          return {
+            error: "Upgrade to Unlimited plan to add more team members",
+            success: false as const,
+            status: "LIMIT_EXCEEDED" as const,
+          };
+        }
+      }
+    }
+
     const existingInvitation = await db.invitation.findUnique({
       where: {
         email,
@@ -635,8 +701,8 @@ export const sendInvitation = async (
       console.log("An invitation already exists for this email and agency.");
       return {
         ...existingInvitation,
-        status: "ALREADY_EXISTS",
-        success: false,
+        status: "ALREADY_EXISTS" as const,
+        success: false as const,
       };
     } else {
       const response = await db.invitation.create({
@@ -653,7 +719,7 @@ export const sendInvitation = async (
       //     role,
       //   },
       // });
-      return { ...response, status: "SENT", success: true };
+      return { ...response, status: "SENT" as const, success: true as const };
     }
   } catch (error) {
     console.log(error);
@@ -955,7 +1021,36 @@ export const upsertFunnel = async (
   funnelId: string,
 ) => {
   const { name, description, subDomainName, favicon } = funnel;
-  
+
+  const subaccount = await db.subAccount.findUnique({
+    where: { id: subaccountId },
+    include: { Funnels: true, Agency: { include: { Subscription: true } } },
+  });
+
+  const existingFunnel = await db.funnel.findUnique({
+    where: { id: funnelId },
+  });
+
+  if (!existingFunnel && subaccount) {
+    const activePlan = subaccount.Agency?.Subscription?.active
+      ? subaccount.Agency.Subscription.plan
+      : null;
+    const funnelsCount = subaccount.Funnels.length;
+
+    if (
+      !activePlan ||
+      (activePlan !== "plan_basic" && activePlan !== "plan_unlimited_saas")
+    ) {
+      if (funnelsCount >= PLAN_LIMITS.starter.maxFunnels) {
+        return { error: "Upgrade your plan to add more funnels" };
+      }
+    } else if (activePlan === "plan_basic") {
+      if (funnelsCount >= PLAN_LIMITS.plan_basic.maxFunnels) {
+        return { error: "Upgrade to Unlimited plan to add more funnels" };
+      }
+    }
+  }
+
   const response = await db.funnel.upsert({
     where: { id: funnelId },
     update: {
@@ -1009,7 +1104,7 @@ export const upsertFunnelPage = async (
 
 export const updateFunnelProducts = async (
   products: string,
-  funnelId: string
+  funnelId: string,
 ) => {
   const response = await db.funnel.update({
     where: {
@@ -1058,7 +1153,17 @@ export const getPipelines = async (subaccountId: string) => {
       },
     },
   });
-  return response;
+  // Convert Decimal values to plain numbers for Client Component serialization
+  return response.map((pipeline) => ({
+    ...pipeline,
+    Lane: pipeline.Lane.map((lane) => ({
+      ...lane,
+      Tickets: lane.Tickets.map((ticket) => ({
+        ...ticket,
+        value: ticket.value ? Number(ticket.value) : null,
+      })),
+    })),
+  }));
 };
 
 export const getSubAccountTeamMembers = async (subaccountId: string) => {
@@ -1081,4 +1186,11 @@ export const getSubAccountTeamMembers = async (subaccountId: string) => {
     },
   });
   return subaccountUsersWithAccess;
+};
+
+export const deleteFunnel = async (funnelId: string) => {
+  const response = await db.funnel.delete({
+    where: { id: funnelId },
+  });
+  return response;
 };

@@ -1,4 +1,4 @@
-// import CircleProgress from "@/components/global/CircleProgress";
+import CircleProgress from "@/components/global/circle-progress";
 import {
   Card,
   CardContent,
@@ -21,7 +21,7 @@ const Page = async ({
   searchParams: Promise<{ code: string }>;
 }) => {
   const { agencyId } = await params;
-  let currency = "USD";
+  let currency = "₹";
   let sessions;
   let totalClosedSessions;
   let totalPendingSessions;
@@ -54,7 +54,7 @@ const Page = async ({
             <CardHeader>
               <CardDescription>Income</CardDescription>
               <CardTitle className="text-4xl">
-                {net ? `${currency} ${net.toFixed(2)}` : `$0.00`}
+                {net ? `${currency}${net.toFixed(2)}` : `₹0.00`}
               </CardTitle>
               <small className="text-xs text-muted-foreground">
                 For the year {currentYear}
@@ -70,8 +70,8 @@ const Page = async ({
               <CardDescription>Potential Income</CardDescription>
               <CardTitle className="text-4xl">
                 {potentialIncome
-                  ? `${currency} ${potentialIncome.toFixed(2)}`
-                  : `$0.00`}
+                  ? `${currency}${potentialIncome.toFixed(2)}`
+                  : `₹0.00`}
               </CardTitle>
               <small className="text-xs text-muted-foreground">
                 For the year {currentYear}
@@ -143,7 +143,7 @@ const Page = async ({
               <CardTitle>Conversions</CardTitle>
             </CardHeader>
             <CardContent>
-              {/* <CircleProgress
+              <CircleProgress
                 value={closingRate}
                 description={
                   <>
@@ -167,7 +167,7 @@ const Page = async ({
                     )}
                   </>
                 }
-              /> */}
+              />
             </CardContent>
           </Card>
         </div>
