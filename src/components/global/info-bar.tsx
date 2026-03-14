@@ -69,7 +69,7 @@ export default function InfoBar({
         </h1>
         <div className="flex items-center gap-2 ml-auto">
           <ThemePicker />
-          <Button
+          {/* <Button
             size={"icon-sm"}
             variant={"default"}
             className="rounded-full"
@@ -78,7 +78,7 @@ export default function InfoBar({
             }}
           >
             <RefreshCcw size={17} />
-          </Button>
+          </Button> */}
           <Sheet>
             <SheetTrigger asChild>
               <Button
