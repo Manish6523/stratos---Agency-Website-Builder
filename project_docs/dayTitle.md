@@ -47,3 +47,4 @@
 - Day 33: E-commerce Template Refactoring & Styling Polish
 - Day 34: Razorpay Full Integration & Live Payment History
 - Day 35: Dashboard Fixes, Currency Localization & Branding Updates
+- Day 36: Subscription Feature Gating — AI & Templates

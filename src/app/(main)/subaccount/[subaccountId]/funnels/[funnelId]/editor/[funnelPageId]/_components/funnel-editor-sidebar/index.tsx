@@ -18,12 +18,17 @@ import ComponentsTab from "./tabs/components-tab";
 import AiBuilderTab from "./tabs/ai-builder-tab";
 import PagesTab from "./tabs/pages-tab";
 import TemplatesTab from "./tabs/templates-tab";
+import UpgradeOverlay from "./tabs/upgrade-overlay";
 
 type Props = {
   subaccountId: string;
+  isPaidPlan: boolean;
 };
 
-export default function FunnelEditorSidebar({ subaccountId }: Props) {
+export default function FunnelEditorSidebar({
+  subaccountId,
+  isPaidPlan,
+}: Props) {
   const { state } = useEditor();
   const style = {
     marginTop: "70px",
@@ -83,19 +88,29 @@ export default function FunnelEditorSidebar({ subaccountId }: Props) {
               <ComponentsTab />
             </TabsContent>
             <TabsContent value="AI">
-              <AiBuilderTab />
+              {isPaidPlan ? (
+                <AiBuilderTab />
+              ) : (
+                <UpgradeOverlay feature="AI Builder" />
+              )}
             </TabsContent>
             <TabsContent value="Pages" className="h-full">
               <PagesTab />
             </TabsContent>
             <TabsContent value="Templates">
-              <SheetHeader className="text-left p-6">
-                <SheetTitle>Templates</SheetTitle>
-                <SheetDescription>
-                  Drag and drop pre-built sections onto your canvas.
-                </SheetDescription>
-              </SheetHeader>
-              <TemplatesTab />
+              {isPaidPlan ? (
+                <>
+                  <SheetHeader className="text-left p-6">
+                    <SheetTitle>Templates</SheetTitle>
+                    <SheetDescription>
+                      Drag and drop pre-built sections onto your canvas.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <TemplatesTab />
+                </>
+              ) : (
+                <UpgradeOverlay feature="Templates" />
+              )}
             </TabsContent>
           </div>
         </SheetContent>

@@ -1,7 +1,7 @@
 # STRATOS - Comprehensive Project Documentation
 
-**Version:** 1.6.2 (Beta)
-**Last Updated:** 2026-03-13
+**Version:** 1.6.3 (Beta)
+**Last Updated:** 2026-03-14
 **Purpose:** Primary reference for Claude Code - AI-optimized project documentation
 
 ---
@@ -712,8 +712,9 @@ enum InvitationStatus {
 | **Day 33**    | Mar 11, 2026 | E-commerce Template Polish         | • Extracted Sneaker Store Ultimate template from `temp-ecommerce.ts` into permanent `shoes-ecommerce.ts`<br>• Style normalization across all `EditorElement` types (Container, Image, Text, 2Col, Button, Icon Block)<br>• UUID and fallback thumbnail sanitization                                                                                                                                                                                                                                                                                                                                                         | `shoes-ecommerce.ts` [NEW]<br>`temp-ecommerce.ts` [DELETED]                                                                                                                              |
 | **Day 34**    | Mar 12, 2026 | Razorpay Full Integration          | • Webhook handler with HMAC-SHA256 verification (`payment.captured`, `subscription.charged`, `subscription.activated`)<br>• `verify-payment` route for client-side signature check + DB subscription activation<br>• INR pricing in `constants.ts` (₹999/₹2,999) matching Prisma `Plan` enum<br>• Full Razorpay checkout flow in `pricing-card.tsx` (loadRazorpay → order → modal → verify → refresh)<br>• Funnel editor `Checkout.tsx` migrated from Stripe to Razorpay<br>• Full payment history table via `getAgencyPayments()` (Razorpay API, filtered by `notes.agencyId`)<br>• Deleted unused `create-customer` route | `webhook/route.ts` [NEW]<br>`verify-payment/route.ts` [NEW]<br>`pricing-card.tsx`<br>`billing/page.tsx`<br>`Checkout.tsx`<br>`razorpay-action.ts`<br>`constants.ts`                      |
 | **Day 35**    | Mar 13, 2026 | Dashboard Fixes & Localization     | • Prisma `Decimal` → `Number()` conversion in `getPipelines()` for Server→Client serialization<br>• Hydration fix: `"No Data"` text wrapped in `<TableRow><TableCell>` inside `<tbody>`<br>• Tremor chart tooltip color fix: dynamic Tailwind class → inline `style`<br>• USD ($) → INR (₹) currency conversion across 6 files<br>• Razorpay branding update in launchpad pages and checkout placeholder<br>• Funnel page visit tracking (`visits: { increment: 1 }`)<br>• Tailwind v4 `!` suffix syntax fixes                                                                                                              | `queries.ts`<br>`subaccount/page.tsx`<br>`agency/page.tsx`<br>`contacts/page.tsx`<br>`PipelineLane.tsx`<br>`PipelineTicket.tsx`<br>`pipeline-value.tsx`<br>`subaccount-funnel-chart.tsx` |
+| **Day 36**    | Mar 14, 2026 | Subscription Feature Gating        | • `getSubscriptionPlanBySubaccountId()` query resolving SubAccount → Agency → Subscription<br>• Editor page fetches active plan, computes `isPaidPlan`, passes to sidebar<br>• AI and Templates tabs show `<UpgradeOverlay>` for Starter plan users<br>• Reusable `upgrade-overlay.tsx` component with lock icon and billing link                                                                                                                                                                                                                                                                                           | `queries.ts`<br>`editor/[funnelPageId]/page.tsx`<br>`funnel-editor-sidebar/index.tsx`<br>`upgrade-overlay.tsx` [NEW]                                                                     |
 
-### Current Status (Day 35 Complete)
+### Current Status (Day 36 Complete)
 
 **✅ Implemented:**
 
@@ -736,6 +737,7 @@ enum InvitationStatus {
 - **Razorpay full integration** — Webhook, verify-payment, INR billing UI, funnel checkout, API-powered payment history
 - **INR currency localization** — All financial displays use ₹ (Rupee) symbol and `INR` Intl formatting
 - **Dashboard stability** — Decimal serialization, hydration errors, and Tailwind dynamic class issues resolved
+- **Subscription feature gating** — AI Builder and Templates tabs locked behind paid plans with upgrade overlay
 
 **⏳ Database Ready, UI Pending:**
 

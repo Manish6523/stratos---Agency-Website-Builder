@@ -4,6 +4,7 @@ import EditorProvider from "@/providers/editor/editor-provider";
 import FunnelEditorNavigation from "./_components/funnel-editor-navigation";
 import FunnelEditorSidebar from "./_components/funnel-editor-sidebar";
 import FunnelEditor from "./_components/funnel-editor";
+import { getSubscriptionPlanBySubaccountId } from "@/lib/queries";
 
 type Props = {
   params: Promise<{
@@ -22,13 +23,19 @@ export default async function Page({ params }: Props) {
     },
   });
 
-  // console.log("funnelPageDetails : ", funnelPageDetails);
-
   if (!funnelPageDetails) {
     return redirect(
       `/subaccount/${param.subaccountId}/funnels/${param.funnelId}`,
     );
   }
+
+  const activePlan = await getSubscriptionPlanBySubaccountId(
+    param.subaccountId,
+  );
+
+  console.log("activePlan : ", activePlan);
+  const isPaidPlan =
+    activePlan === "plan_basic" || activePlan === "plan_unlimited_saas";
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 z-20 bg-background overflow-hidden">
@@ -46,7 +53,10 @@ export default async function Page({ params }: Props) {
           <FunnelEditor funnelPageId={param.funnelPageId} />
         </div>
 
-        <FunnelEditorSidebar subaccountId={param.subaccountId} />
+        <FunnelEditorSidebar
+          subaccountId={param.subaccountId}
+          isPaidPlan={isPaidPlan}
+        />
       </EditorProvider>
     </div>
   );

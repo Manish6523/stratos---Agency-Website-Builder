@@ -610,6 +610,18 @@ export const updateUser = async (user: Partial<User>) => {
   return response;
 };
 
+export const getSubscriptionPlanBySubaccountId = async (
+  subaccountId: string,
+) => {
+  const subaccount = await db.subAccount.findUnique({
+    where: { id: subaccountId },
+    include: { Agency: { include: { Subscription: true } } },
+  });
+
+  if (!subaccount?.Agency?.Subscription?.active) return null;
+  return subaccount.Agency.Subscription.plan;
+};
+
 export const getSubaccountDetails = async (subaccountId: string) => {
   const response = await db.subAccount.findUnique({
     where: {

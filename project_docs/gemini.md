@@ -453,3 +453,24 @@
 - Updated `project_docs/dayTitle.md` with Day 35 entry.
 
 **Outcome:** Dashboard console errors resolved. All currency references localized to INR. Razorpay branding is now consistent across the entire application. Funnel pages now track visitor counts.
+
+## [Current Session: Saturday, March 14, 2026]
+
+**User Action:** Requested gating AI Builder and Templates tabs behind subscription plan.
+**Analysis:**
+
+- Identified that `constants.ts` pricing cards define AI Funnel Editor and Templates as unavailable on the Starter (free) plan.
+- Found that the funnel editor sidebar (`funnel-editor-sidebar/index.tsx`) renders `<AiBuilderTab>` and `<TemplatesTab>` unconditionally — no subscription check existed.
+- No existing query resolved subscription status from a `subaccountId`; required traversing SubAccount → Agency → Subscription.
+- Editor `page.tsx` is a server component with access to `subaccountId` — ideal place to fetch plan data.
+
+**Actions:**
+
+- Added `getSubscriptionPlanBySubaccountId()` to `queries.ts` — resolves `SubAccount → Agency → Subscription` and returns active plan or `null`.
+- Updated `editor/[funnelPageId]/page.tsx` to fetch plan, compute `isPaidPlan`, and pass it to `<FunnelEditorSidebar>`.
+- Modified `funnel-editor-sidebar/index.tsx` to accept `isPaidPlan` prop and conditionally render `<UpgradeOverlay>` for AI and Templates tabs.
+- Created reusable `upgrade-overlay.tsx` component with lock icon, feature-specific messaging, and link to `/agency/billing`.
+- Created `project_docs/week-05/day36.md` with full documentation.
+- Updated `project_docs/dayTitle.md` with Day 36 entry.
+
+**Outcome:** AI Builder and Templates tabs are now properly gated behind paid subscriptions. Free (Starter) plan users see a professional upgrade overlay instead of the feature content, directing them to the billing page.
