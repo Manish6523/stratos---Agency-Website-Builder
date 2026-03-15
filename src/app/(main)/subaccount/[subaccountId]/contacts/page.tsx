@@ -13,7 +13,7 @@ import {
   Contact,
   SubAccount,
   Ticket,
-} from "../../../../../../generated/prisma";
+} from "../../../../../../generated/prisma/client";
 import { formatDate } from "date-fns/format";
 import React from "react";
 import CraeteContactButton from "./_components/create-contact-button";
