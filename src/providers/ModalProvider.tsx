@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Agency, Contact, User } from "../../generated/prisma";
+import { Agency, Contact, User } from "../../generated/prisma/client";
 import { TicketDetails } from "@/lib/types";
 
 type ModalProviderProps = {

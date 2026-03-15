@@ -7,7 +7,7 @@ import {
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
-import { Permissions, Role } from "../../../../../generated/prisma";
+import { Permissions, Role } from "../../../../../generated/prisma/client";
 import Sidebar from "@/components/sidebar";
 import InfoBar from "@/components/global/info-bar";
 

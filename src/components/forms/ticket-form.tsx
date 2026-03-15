@@ -8,7 +8,7 @@ import {
 import { TicketWithTags, currencyNumberRegex } from '@/lib/types'
 import { useModal } from '@/providers/ModalProvider'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Contact, Tag, User } from '../../../generated/prisma'
+import { Contact, Tag, User } from '../../../generated/prisma/client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'

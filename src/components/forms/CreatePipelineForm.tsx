@@ -27,7 +27,7 @@ import {
 import { useModal } from '@/providers/ModalProvider'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Pipeline } from '../../../generated/prisma'
+import { Pipeline } from '../../../generated/prisma/client'
 import { toast } from 'sonner'
 
 type Props = {

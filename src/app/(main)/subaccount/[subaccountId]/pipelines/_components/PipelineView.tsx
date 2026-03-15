@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
 import PipelineLane from './PipelineLane'
-import { Lane, Ticket } from '../../../../../../../generated/prisma'
+import { Lane, Ticket } from '../../../../../../../generated/prisma/client'
 
 type Props = {
   lanes: LaneDetail[]

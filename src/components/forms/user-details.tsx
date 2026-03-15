@@ -1,6 +1,5 @@
 "use client";
 import {
-  AuthUserWithAgencySigebarOptionsSubAccounts,
   UserWithPermissionsAndSubAccounts,
 } from "@/lib/types";
 import { useModal } from "@/providers/ModalProvider";
@@ -37,8 +36,8 @@ import Loading from "../global/loading";
 import { Separator } from "../ui/separator";
 import { Switch } from "../ui/switch";
 import { v4 } from "uuid";
-import { SubAccount, User } from "../../../generated/prisma";
 import { toast } from "sonner";
+import { SubAccount, User } from "../../../generated/prisma/client";
 
 type Props = {
   id: string | null;
@@ -54,7 +53,7 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
   const [roleState, setRoleState] = useState("");
   const [loadingPermissions, setLoadingPermissions] = useState(false);
   const [authUserData, setAuthUserData] =
-    useState<AuthUserWithAgencySigebarOptionsSubAccounts | null>(null);
+    useState<any | null>(null);
   const router = useRouter();
 
   const userDataSchema = z.object({

@@ -17,7 +17,7 @@ import {
 import { deletePipeline, saveActivityLogsNotification } from '@/lib/queries'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { Pipeline } from '../../../../../../../generated/prisma'
+import { Pipeline } from '../../../../../../../generated/prisma/client'
 
 type Props = {
   pipelineId: string

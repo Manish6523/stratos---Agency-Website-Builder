@@ -8,7 +8,7 @@ import clsx from "clsx";
 import { Copy, Navigation, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { FunnelPage } from "../../../../../../../../../../../../generated/prisma/browser";
+import { FunnelPage } from "../../../../../../../../../../../../generated/prisma/client";
 
 const PagesTab = () => {
   const { funnelId, subaccountId, pageDetails } = useEditor();

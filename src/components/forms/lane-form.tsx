@@ -28,7 +28,7 @@ import {
 import { useModal } from '@/providers/ModalProvider'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Lane } from '../../../generated/prisma'
+import { Lane } from '../../../generated/prisma/client'
 import { toast } from 'sonner'
 
 
