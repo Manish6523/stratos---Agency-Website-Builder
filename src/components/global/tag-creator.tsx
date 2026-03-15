@@ -32,7 +32,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { toast } from "sonner";
-import { Tag } from "../../../generated/prisma";
+import { Tag } from "../../../generated/prisma/client";
 
 type Props = {
   subaccountId: string;
