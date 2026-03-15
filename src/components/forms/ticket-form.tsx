@@ -136,7 +136,7 @@ export default function TicketForm({ laneId, subaccountId, getNewTicket }: Props
       toast.success('Success', {
         description: 'Saved  details',
       })
-      if (response) getNewTicket(response as TicketWithTags[0])
+      if (response) getNewTicket(response as any)
       router.refresh()
     } catch (error) {
         toast.error('Oppse!', {
