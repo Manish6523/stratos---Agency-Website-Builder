@@ -473,4 +473,19 @@
 - Created `project_docs/week-05/day36.md` with full documentation.
 - Updated `project_docs/dayTitle.md` with Day 36 entry.
 
-**Outcome:** AI Builder and Templates tabs are now properly gated behind paid subscriptions. Free (Starter) plan users see a professional upgrade overlay instead of the feature content, directing them to the billing page.
+**Outcome**: AI Builder and Templates tabs are now properly gated behind paid subscriptions. Free (Starter) plan users see a professional upgrade overlay instead of the feature content, directing them to the billing page.
+
+## [Current Session: Sunday, March 15, 2026]
+
+**User Action**: Triggered "Update project documentation" for Day 37.
+**Analysis**:
+- Detected a significant redesign of the marketing landing page (`src/app/site/page.tsx`) with a high-aesthetic focus: glassmorphism, background spotlights, animated transitions, and improved typography.
+- Identified the expansion of the site's structural pages with new directory scaffolding for About, Features, Documentation, and Pricing.
+- Found the pivot of the root entry point (`src/app/page.tsx`) to a clean state, delegating primary routing to `/site` and `/(main)`.
+- Observed asset and branding cleanup: integrated new custom SVG logo and favicon, removed legacy Stripe branding assets.
+- Noted the addition of utility scripts for SVG management and content simplification.
+**Actions**:
+- Created `project_docs/week-05/day37.md` detailing the Marketing Site Redesign & Structural Expansion.
+- Updated `project_docs/documentation.md` (Version 1.7.0) with the new visual aesthetic features and Day 37 progress.
+- Updated `project_docs/dayTitle.md` and `project_docs/main-doc.md` with Day 37 entries.
+**Outcome**: Documentation successfully synchronized with Week 05 "Day 37" work. The platform now features a professional-grade marketing presence with a modern UI and complete site structure.

@@ -1,7 +1,7 @@
 # STRATOS - Comprehensive Project Documentation
 
-**Version:** 1.6.3 (Beta)
-**Last Updated:** 2026-03-14
+**Version:** 1.7.0 (Beta)
+**Last Updated:** 2026-03-15
 **Purpose:** Primary reference for Claude Code - AI-optimized project documentation
 
 ---
@@ -37,7 +37,7 @@
 - **Marketing Automation:** Build funnels, landing pages, and automated workflows
 - **White-labeling:** Customizable branding per agency
 
-### Key Capabilities (Current - Day 25)
+### Key Capabilities (Current - Day 37)
 
 ✅ User authentication and authorization (Clerk)
 ✅ Multi-tenant agency and subaccount management
@@ -54,6 +54,7 @@
 ✅ Contact management with value tracking
 ✅ Visual page builder (Canvas rendering, Media Integration, Sidebar, DnD reordering)
 ✅ AI Assistant Integration (Layout generation & Text generation)
+✅ High-Aesthetic Marketing Presence (Modern landing page, glassmorphism)
 ⏳ Automation engine (database ready, UI pending)
 
 ---
@@ -713,8 +714,9 @@ enum InvitationStatus {
 | **Day 34**    | Mar 12, 2026 | Razorpay Full Integration          | • Webhook handler with HMAC-SHA256 verification (`payment.captured`, `subscription.charged`, `subscription.activated`)<br>• `verify-payment` route for client-side signature check + DB subscription activation<br>• INR pricing in `constants.ts` (₹999/₹2,999) matching Prisma `Plan` enum<br>• Full Razorpay checkout flow in `pricing-card.tsx` (loadRazorpay → order → modal → verify → refresh)<br>• Funnel editor `Checkout.tsx` migrated from Stripe to Razorpay<br>• Full payment history table via `getAgencyPayments()` (Razorpay API, filtered by `notes.agencyId`)<br>• Deleted unused `create-customer` route | `webhook/route.ts` [NEW]<br>`verify-payment/route.ts` [NEW]<br>`pricing-card.tsx`<br>`billing/page.tsx`<br>`Checkout.tsx`<br>`razorpay-action.ts`<br>`constants.ts`                      |
 | **Day 35**    | Mar 13, 2026 | Dashboard Fixes & Localization     | • Prisma `Decimal` → `Number()` conversion in `getPipelines()` for Server→Client serialization<br>• Hydration fix: `"No Data"` text wrapped in `<TableRow><TableCell>` inside `<tbody>`<br>• Tremor chart tooltip color fix: dynamic Tailwind class → inline `style`<br>• USD ($) → INR (₹) currency conversion across 6 files<br>• Razorpay branding update in launchpad pages and checkout placeholder<br>• Funnel page visit tracking (`visits: { increment: 1 }`)<br>• Tailwind v4 `!` suffix syntax fixes                                                                                                              | `queries.ts`<br>`subaccount/page.tsx`<br>`agency/page.tsx`<br>`contacts/page.tsx`<br>`PipelineLane.tsx`<br>`PipelineTicket.tsx`<br>`pipeline-value.tsx`<br>`subaccount-funnel-chart.tsx` |
 | **Day 36**    | Mar 14, 2026 | Subscription Feature Gating        | • `getSubscriptionPlanBySubaccountId()` query resolving SubAccount → Agency → Subscription<br>• Editor page fetches active plan, computes `isPaidPlan`, passes to sidebar<br>• AI and Templates tabs show `<UpgradeOverlay>` for Starter plan users<br>• Reusable `upgrade-overlay.tsx` component with lock icon and billing link                                                                                                                                                                                                                                                                                           | `queries.ts`<br>`editor/[funnelPageId]/page.tsx`<br>`funnel-editor-sidebar/index.tsx`<br>`upgrade-overlay.tsx` [NEW]                                                                     |
+| **Day 37**    | Mar 15, 2026 | Marketing Site Redesign            | • Transformed `src/app/site/page.tsx` into high-aesthetic landing page with glassmorphism and spotlights<br>• Scaffolded structural pages for About, Features, and Documentation<br>• Pivot root entry point to clean state, delegating to site route group<br>• Integrated new custom SVG logo and favicon, removed legacy assets                                                                                                                                                                                                                                                                                 | `site/page.tsx`<br>`page.tsx`<br>`site/layout.tsx`<br>`logo.svg`<br>`about/`, `features/`, `documentation/`                                                                              |
 
-### Current Status (Day 36 Complete)
+### Current Status (Day 37 Complete)
 
 **✅ Implemented:**
 
@@ -738,6 +740,7 @@ enum InvitationStatus {
 - **INR currency localization** — All financial displays use ₹ (Rupee) symbol and `INR` Intl formatting
 - **Dashboard stability** — Decimal serialization, hydration errors, and Tailwind dynamic class issues resolved
 - **Subscription feature gating** — AI Builder and Templates tabs locked behind paid plans with upgrade overlay
+- **High-Aesthetic Marketing Presence** — Modern landing page with glassmorphism, animated transitions, and site structural expansion
 
 **⏳ Database Ready, UI Pending:**
 

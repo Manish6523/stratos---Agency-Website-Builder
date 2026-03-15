@@ -48,3 +48,4 @@
 - Day 34: Razorpay Full Integration & Live Payment History
 - Day 35: Dashboard Fixes, Currency Localization & Branding Updates
 - Day 36: Subscription Feature Gating — AI & Templates
+- Day 37: Marketing Site Redesign & Structural Expansion

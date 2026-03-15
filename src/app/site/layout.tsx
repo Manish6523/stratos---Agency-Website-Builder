@@ -6,7 +6,7 @@ import React from "react";
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <ClerkProvider appearance={{ theme: dark }} afterSignOutUrl={"/"}>
-      <main className="h-full pt-18">
+      <main className="h-full pt-">
         <Navigation /> {children}
       </main>
     </ClerkProvider>
