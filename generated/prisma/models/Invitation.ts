@@ -30,6 +30,7 @@ export type InvitationMinAggregateOutputType = {
   agencyId: string | null
   status: $Enums.InvitationStatus | null
   role: $Enums.Role | null
+  subAccountId: string | null
 }
 
 export type InvitationMaxAggregateOutputType = {
@@ -38,6 +39,7 @@ export type InvitationMaxAggregateOutputType = {
   agencyId: string | null
   status: $Enums.InvitationStatus | null
   role: $Enums.Role | null
+  subAccountId: string | null
 }
 
 export type InvitationCountAggregateOutputType = {
@@ -46,6 +48,7 @@ export type InvitationCountAggregateOutputType = {
   agencyId: number
   status: number
   role: number
+  subAccountId: number
   _all: number
 }
 
@@ -56,6 +59,7 @@ export type InvitationMinAggregateInputType = {
   agencyId?: true
   status?: true
   role?: true
+  subAccountId?: true
 }
 
 export type InvitationMaxAggregateInputType = {
@@ -64,6 +68,7 @@ export type InvitationMaxAggregateInputType = {
   agencyId?: true
   status?: true
   role?: true
+  subAccountId?: true
 }
 
 export type InvitationCountAggregateInputType = {
@@ -72,6 +77,7 @@ export type InvitationCountAggregateInputType = {
   agencyId?: true
   status?: true
   role?: true
+  subAccountId?: true
   _all?: true
 }
 
@@ -153,6 +159,7 @@ export type InvitationGroupByOutputType = {
   agencyId: string
   status: $Enums.InvitationStatus
   role: $Enums.Role
+  subAccountId: string | null
   _count: InvitationCountAggregateOutputType | null
   _min: InvitationMinAggregateOutputType | null
   _max: InvitationMaxAggregateOutputType | null
@@ -182,7 +189,9 @@ export type InvitationWhereInput = {
   agencyId?: Prisma.StringFilter<"Invitation"> | string
   status?: Prisma.EnumInvitationStatusFilter<"Invitation"> | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFilter<"Invitation"> | $Enums.Role
+  subAccountId?: Prisma.StringNullableFilter<"Invitation"> | string | null
   Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
+  SubAccount?: Prisma.XOR<Prisma.SubAccountNullableScalarRelationFilter, Prisma.SubAccountWhereInput> | null
 }
 
 export type InvitationOrderByWithRelationInput = {
@@ -191,7 +200,9 @@ export type InvitationOrderByWithRelationInput = {
   agencyId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  subAccountId?: Prisma.SortOrderInput | Prisma.SortOrder
   Agency?: Prisma.AgencyOrderByWithRelationInput
+  SubAccount?: Prisma.SubAccountOrderByWithRelationInput
   _relevance?: Prisma.InvitationOrderByRelevanceInput
 }
 
@@ -204,7 +215,9 @@ export type InvitationWhereUniqueInput = Prisma.AtLeast<{
   agencyId?: Prisma.StringFilter<"Invitation"> | string
   status?: Prisma.EnumInvitationStatusFilter<"Invitation"> | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFilter<"Invitation"> | $Enums.Role
+  subAccountId?: Prisma.StringNullableFilter<"Invitation"> | string | null
   Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
+  SubAccount?: Prisma.XOR<Prisma.SubAccountNullableScalarRelationFilter, Prisma.SubAccountWhereInput> | null
 }, "id" | "email">
 
 export type InvitationOrderByWithAggregationInput = {
@@ -213,6 +226,7 @@ export type InvitationOrderByWithAggregationInput = {
   agencyId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  subAccountId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.InvitationCountOrderByAggregateInput
   _max?: Prisma.InvitationMaxOrderByAggregateInput
   _min?: Prisma.InvitationMinOrderByAggregateInput
@@ -227,6 +241,7 @@ export type InvitationScalarWhereWithAggregatesInput = {
   agencyId?: Prisma.StringWithAggregatesFilter<"Invitation"> | string
   status?: Prisma.EnumInvitationStatusWithAggregatesFilter<"Invitation"> | $Enums.InvitationStatus
   role?: Prisma.EnumRoleWithAggregatesFilter<"Invitation"> | $Enums.Role
+  subAccountId?: Prisma.StringNullableWithAggregatesFilter<"Invitation"> | string | null
 }
 
 export type InvitationCreateInput = {
@@ -235,6 +250,7 @@ export type InvitationCreateInput = {
   status?: $Enums.InvitationStatus
   role?: $Enums.Role
   Agency: Prisma.AgencyCreateNestedOneWithoutInvitationInput
+  SubAccount?: Prisma.SubAccountCreateNestedOneWithoutInvitationInput
 }
 
 export type InvitationUncheckedCreateInput = {
@@ -243,6 +259,7 @@ export type InvitationUncheckedCreateInput = {
   agencyId: string
   status?: $Enums.InvitationStatus
   role?: $Enums.Role
+  subAccountId?: string | null
 }
 
 export type InvitationUpdateInput = {
@@ -251,6 +268,7 @@ export type InvitationUpdateInput = {
   status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   Agency?: Prisma.AgencyUpdateOneRequiredWithoutInvitationNestedInput
+  SubAccount?: Prisma.SubAccountUpdateOneWithoutInvitationNestedInput
 }
 
 export type InvitationUncheckedUpdateInput = {
@@ -259,6 +277,7 @@ export type InvitationUncheckedUpdateInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  subAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type InvitationCreateManyInput = {
@@ -267,6 +286,7 @@ export type InvitationCreateManyInput = {
   agencyId: string
   status?: $Enums.InvitationStatus
   role?: $Enums.Role
+  subAccountId?: string | null
 }
 
 export type InvitationUpdateManyMutationInput = {
@@ -282,6 +302,7 @@ export type InvitationUncheckedUpdateManyInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  subAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type InvitationListRelationFilter = {
@@ -306,6 +327,7 @@ export type InvitationCountOrderByAggregateInput = {
   agencyId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  subAccountId?: Prisma.SortOrder
 }
 
 export type InvitationMaxOrderByAggregateInput = {
@@ -314,6 +336,7 @@ export type InvitationMaxOrderByAggregateInput = {
   agencyId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  subAccountId?: Prisma.SortOrder
 }
 
 export type InvitationMinOrderByAggregateInput = {
@@ -322,6 +345,7 @@ export type InvitationMinOrderByAggregateInput = {
   agencyId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  subAccountId?: Prisma.SortOrder
 }
 
 export type InvitationCreateNestedManyWithoutAgencyInput = {
@@ -366,6 +390,48 @@ export type InvitationUncheckedUpdateManyWithoutAgencyNestedInput = {
   deleteMany?: Prisma.InvitationScalarWhereInput | Prisma.InvitationScalarWhereInput[]
 }
 
+export type InvitationCreateNestedManyWithoutSubAccountInput = {
+  create?: Prisma.XOR<Prisma.InvitationCreateWithoutSubAccountInput, Prisma.InvitationUncheckedCreateWithoutSubAccountInput> | Prisma.InvitationCreateWithoutSubAccountInput[] | Prisma.InvitationUncheckedCreateWithoutSubAccountInput[]
+  connectOrCreate?: Prisma.InvitationCreateOrConnectWithoutSubAccountInput | Prisma.InvitationCreateOrConnectWithoutSubAccountInput[]
+  createMany?: Prisma.InvitationCreateManySubAccountInputEnvelope
+  connect?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+}
+
+export type InvitationUncheckedCreateNestedManyWithoutSubAccountInput = {
+  create?: Prisma.XOR<Prisma.InvitationCreateWithoutSubAccountInput, Prisma.InvitationUncheckedCreateWithoutSubAccountInput> | Prisma.InvitationCreateWithoutSubAccountInput[] | Prisma.InvitationUncheckedCreateWithoutSubAccountInput[]
+  connectOrCreate?: Prisma.InvitationCreateOrConnectWithoutSubAccountInput | Prisma.InvitationCreateOrConnectWithoutSubAccountInput[]
+  createMany?: Prisma.InvitationCreateManySubAccountInputEnvelope
+  connect?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+}
+
+export type InvitationUpdateManyWithoutSubAccountNestedInput = {
+  create?: Prisma.XOR<Prisma.InvitationCreateWithoutSubAccountInput, Prisma.InvitationUncheckedCreateWithoutSubAccountInput> | Prisma.InvitationCreateWithoutSubAccountInput[] | Prisma.InvitationUncheckedCreateWithoutSubAccountInput[]
+  connectOrCreate?: Prisma.InvitationCreateOrConnectWithoutSubAccountInput | Prisma.InvitationCreateOrConnectWithoutSubAccountInput[]
+  upsert?: Prisma.InvitationUpsertWithWhereUniqueWithoutSubAccountInput | Prisma.InvitationUpsertWithWhereUniqueWithoutSubAccountInput[]
+  createMany?: Prisma.InvitationCreateManySubAccountInputEnvelope
+  set?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+  disconnect?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+  delete?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+  connect?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+  update?: Prisma.InvitationUpdateWithWhereUniqueWithoutSubAccountInput | Prisma.InvitationUpdateWithWhereUniqueWithoutSubAccountInput[]
+  updateMany?: Prisma.InvitationUpdateManyWithWhereWithoutSubAccountInput | Prisma.InvitationUpdateManyWithWhereWithoutSubAccountInput[]
+  deleteMany?: Prisma.InvitationScalarWhereInput | Prisma.InvitationScalarWhereInput[]
+}
+
+export type InvitationUncheckedUpdateManyWithoutSubAccountNestedInput = {
+  create?: Prisma.XOR<Prisma.InvitationCreateWithoutSubAccountInput, Prisma.InvitationUncheckedCreateWithoutSubAccountInput> | Prisma.InvitationCreateWithoutSubAccountInput[] | Prisma.InvitationUncheckedCreateWithoutSubAccountInput[]
+  connectOrCreate?: Prisma.InvitationCreateOrConnectWithoutSubAccountInput | Prisma.InvitationCreateOrConnectWithoutSubAccountInput[]
+  upsert?: Prisma.InvitationUpsertWithWhereUniqueWithoutSubAccountInput | Prisma.InvitationUpsertWithWhereUniqueWithoutSubAccountInput[]
+  createMany?: Prisma.InvitationCreateManySubAccountInputEnvelope
+  set?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+  disconnect?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+  delete?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+  connect?: Prisma.InvitationWhereUniqueInput | Prisma.InvitationWhereUniqueInput[]
+  update?: Prisma.InvitationUpdateWithWhereUniqueWithoutSubAccountInput | Prisma.InvitationUpdateWithWhereUniqueWithoutSubAccountInput[]
+  updateMany?: Prisma.InvitationUpdateManyWithWhereWithoutSubAccountInput | Prisma.InvitationUpdateManyWithWhereWithoutSubAccountInput[]
+  deleteMany?: Prisma.InvitationScalarWhereInput | Prisma.InvitationScalarWhereInput[]
+}
+
 export type EnumInvitationStatusFieldUpdateOperationsInput = {
   set?: $Enums.InvitationStatus
 }
@@ -375,6 +441,7 @@ export type InvitationCreateWithoutAgencyInput = {
   email: string
   status?: $Enums.InvitationStatus
   role?: $Enums.Role
+  SubAccount?: Prisma.SubAccountCreateNestedOneWithoutInvitationInput
 }
 
 export type InvitationUncheckedCreateWithoutAgencyInput = {
@@ -382,6 +449,7 @@ export type InvitationUncheckedCreateWithoutAgencyInput = {
   email: string
   status?: $Enums.InvitationStatus
   role?: $Enums.Role
+  subAccountId?: string | null
 }
 
 export type InvitationCreateOrConnectWithoutAgencyInput = {
@@ -419,6 +487,49 @@ export type InvitationScalarWhereInput = {
   agencyId?: Prisma.StringFilter<"Invitation"> | string
   status?: Prisma.EnumInvitationStatusFilter<"Invitation"> | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFilter<"Invitation"> | $Enums.Role
+  subAccountId?: Prisma.StringNullableFilter<"Invitation"> | string | null
+}
+
+export type InvitationCreateWithoutSubAccountInput = {
+  id?: string
+  email: string
+  status?: $Enums.InvitationStatus
+  role?: $Enums.Role
+  Agency: Prisma.AgencyCreateNestedOneWithoutInvitationInput
+}
+
+export type InvitationUncheckedCreateWithoutSubAccountInput = {
+  id?: string
+  email: string
+  agencyId: string
+  status?: $Enums.InvitationStatus
+  role?: $Enums.Role
+}
+
+export type InvitationCreateOrConnectWithoutSubAccountInput = {
+  where: Prisma.InvitationWhereUniqueInput
+  create: Prisma.XOR<Prisma.InvitationCreateWithoutSubAccountInput, Prisma.InvitationUncheckedCreateWithoutSubAccountInput>
+}
+
+export type InvitationCreateManySubAccountInputEnvelope = {
+  data: Prisma.InvitationCreateManySubAccountInput | Prisma.InvitationCreateManySubAccountInput[]
+  skipDuplicates?: boolean
+}
+
+export type InvitationUpsertWithWhereUniqueWithoutSubAccountInput = {
+  where: Prisma.InvitationWhereUniqueInput
+  update: Prisma.XOR<Prisma.InvitationUpdateWithoutSubAccountInput, Prisma.InvitationUncheckedUpdateWithoutSubAccountInput>
+  create: Prisma.XOR<Prisma.InvitationCreateWithoutSubAccountInput, Prisma.InvitationUncheckedCreateWithoutSubAccountInput>
+}
+
+export type InvitationUpdateWithWhereUniqueWithoutSubAccountInput = {
+  where: Prisma.InvitationWhereUniqueInput
+  data: Prisma.XOR<Prisma.InvitationUpdateWithoutSubAccountInput, Prisma.InvitationUncheckedUpdateWithoutSubAccountInput>
+}
+
+export type InvitationUpdateManyWithWhereWithoutSubAccountInput = {
+  where: Prisma.InvitationScalarWhereInput
+  data: Prisma.XOR<Prisma.InvitationUpdateManyMutationInput, Prisma.InvitationUncheckedUpdateManyWithoutSubAccountInput>
 }
 
 export type InvitationCreateManyAgencyInput = {
@@ -426,6 +537,7 @@ export type InvitationCreateManyAgencyInput = {
   email: string
   status?: $Enums.InvitationStatus
   role?: $Enums.Role
+  subAccountId?: string | null
 }
 
 export type InvitationUpdateWithoutAgencyInput = {
@@ -433,6 +545,7 @@ export type InvitationUpdateWithoutAgencyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  SubAccount?: Prisma.SubAccountUpdateOneWithoutInvitationNestedInput
 }
 
 export type InvitationUncheckedUpdateWithoutAgencyInput = {
@@ -440,11 +553,45 @@ export type InvitationUncheckedUpdateWithoutAgencyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  subAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type InvitationUncheckedUpdateManyWithoutAgencyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  subAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type InvitationCreateManySubAccountInput = {
+  id?: string
+  email: string
+  agencyId: string
+  status?: $Enums.InvitationStatus
+  role?: $Enums.Role
+}
+
+export type InvitationUpdateWithoutSubAccountInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutInvitationNestedInput
+}
+
+export type InvitationUncheckedUpdateWithoutSubAccountInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+}
+
+export type InvitationUncheckedUpdateManyWithoutSubAccountInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumInvitationStatusFieldUpdateOperationsInput | $Enums.InvitationStatus
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
 }
@@ -457,7 +604,9 @@ export type InvitationSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   agencyId?: boolean
   status?: boolean
   role?: boolean
+  subAccountId?: boolean
   Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
+  SubAccount?: boolean | Prisma.Invitation$SubAccountArgs<ExtArgs>
 }, ExtArgs["result"]["invitation"]>
 
 
@@ -468,17 +617,20 @@ export type InvitationSelectScalar = {
   agencyId?: boolean
   status?: boolean
   role?: boolean
+  subAccountId?: boolean
 }
 
-export type InvitationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "agencyId" | "status" | "role", ExtArgs["result"]["invitation"]>
+export type InvitationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "agencyId" | "status" | "role" | "subAccountId", ExtArgs["result"]["invitation"]>
 export type InvitationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
+  SubAccount?: boolean | Prisma.Invitation$SubAccountArgs<ExtArgs>
 }
 
 export type $InvitationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Invitation"
   objects: {
     Agency: Prisma.$AgencyPayload<ExtArgs>
+    SubAccount: Prisma.$SubAccountPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -486,6 +638,7 @@ export type $InvitationPayload<ExtArgs extends runtime.Types.Extensions.Internal
     agencyId: string
     status: $Enums.InvitationStatus
     role: $Enums.Role
+    subAccountId: string | null
   }, ExtArgs["result"]["invitation"]>
   composites: {}
 }
@@ -827,6 +980,7 @@ readonly fields: InvitationFieldRefs;
 export interface Prisma__InvitationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Agency<T extends Prisma.AgencyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgencyDefaultArgs<ExtArgs>>): Prisma.Prisma__AgencyClient<runtime.Types.Result.GetResult<Prisma.$AgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  SubAccount<T extends Prisma.Invitation$SubAccountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invitation$SubAccountArgs<ExtArgs>>): Prisma.Prisma__SubAccountClient<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -861,6 +1015,7 @@ export interface InvitationFieldRefs {
   readonly agencyId: Prisma.FieldRef<"Invitation", 'String'>
   readonly status: Prisma.FieldRef<"Invitation", 'InvitationStatus'>
   readonly role: Prisma.FieldRef<"Invitation", 'Role'>
+  readonly subAccountId: Prisma.FieldRef<"Invitation", 'String'>
 }
     
 
@@ -1201,6 +1356,25 @@ export type InvitationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Invitations to delete.
    */
   limit?: number
+}
+
+/**
+ * Invitation.SubAccount
+ */
+export type Invitation$SubAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubAccount
+   */
+  select?: Prisma.SubAccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubAccount
+   */
+  omit?: Prisma.SubAccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubAccountInclude<ExtArgs> | null
+  where?: Prisma.SubAccountWhereInput
 }
 
 /**

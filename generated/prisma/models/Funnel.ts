@@ -222,9 +222,9 @@ export type FunnelWhereInput = {
   favicon?: Prisma.StringNullableFilter<"Funnel"> | string | null
   subAccountId?: Prisma.StringFilter<"Funnel"> | string
   liveProducts?: Prisma.StringNullableFilter<"Funnel"> | string | null
+  ClassName?: Prisma.ClassNameListRelationFilter
   SubAccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
   FunnelPages?: Prisma.FunnelPageListRelationFilter
-  ClassName?: Prisma.ClassNameListRelationFilter
 }
 
 export type FunnelOrderByWithRelationInput = {
@@ -238,9 +238,9 @@ export type FunnelOrderByWithRelationInput = {
   favicon?: Prisma.SortOrderInput | Prisma.SortOrder
   subAccountId?: Prisma.SortOrder
   liveProducts?: Prisma.SortOrderInput | Prisma.SortOrder
+  ClassName?: Prisma.ClassNameOrderByRelationAggregateInput
   SubAccount?: Prisma.SubAccountOrderByWithRelationInput
   FunnelPages?: Prisma.FunnelPageOrderByRelationAggregateInput
-  ClassName?: Prisma.ClassNameOrderByRelationAggregateInput
   _relevance?: Prisma.FunnelOrderByRelevanceInput
 }
 
@@ -258,9 +258,9 @@ export type FunnelWhereUniqueInput = Prisma.AtLeast<{
   favicon?: Prisma.StringNullableFilter<"Funnel"> | string | null
   subAccountId?: Prisma.StringFilter<"Funnel"> | string
   liveProducts?: Prisma.StringNullableFilter<"Funnel"> | string | null
+  ClassName?: Prisma.ClassNameListRelationFilter
   SubAccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
   FunnelPages?: Prisma.FunnelPageListRelationFilter
-  ClassName?: Prisma.ClassNameListRelationFilter
 }, "id" | "subDomainName">
 
 export type FunnelOrderByWithAggregationInput = {
@@ -305,9 +305,9 @@ export type FunnelCreateInput = {
   subDomainName?: string | null
   favicon?: string | null
   liveProducts?: string | null
+  ClassName?: Prisma.ClassNameCreateNestedManyWithoutFunnelInput
   SubAccount: Prisma.SubAccountCreateNestedOneWithoutFunnelsInput
   FunnelPages?: Prisma.FunnelPageCreateNestedManyWithoutFunnelInput
-  ClassName?: Prisma.ClassNameCreateNestedManyWithoutFunnelInput
 }
 
 export type FunnelUncheckedCreateInput = {
@@ -321,8 +321,8 @@ export type FunnelUncheckedCreateInput = {
   favicon?: string | null
   subAccountId: string
   liveProducts?: string | null
-  FunnelPages?: Prisma.FunnelPageUncheckedCreateNestedManyWithoutFunnelInput
   ClassName?: Prisma.ClassNameUncheckedCreateNestedManyWithoutFunnelInput
+  FunnelPages?: Prisma.FunnelPageUncheckedCreateNestedManyWithoutFunnelInput
 }
 
 export type FunnelUpdateInput = {
@@ -335,9 +335,9 @@ export type FunnelUpdateInput = {
   subDomainName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ClassName?: Prisma.ClassNameUpdateManyWithoutFunnelNestedInput
   SubAccount?: Prisma.SubAccountUpdateOneRequiredWithoutFunnelsNestedInput
   FunnelPages?: Prisma.FunnelPageUpdateManyWithoutFunnelNestedInput
-  ClassName?: Prisma.ClassNameUpdateManyWithoutFunnelNestedInput
 }
 
 export type FunnelUncheckedUpdateInput = {
@@ -351,8 +351,8 @@ export type FunnelUncheckedUpdateInput = {
   favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subAccountId?: Prisma.StringFieldUpdateOperationsInput | string
   liveProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  FunnelPages?: Prisma.FunnelPageUncheckedUpdateManyWithoutFunnelNestedInput
   ClassName?: Prisma.ClassNameUncheckedUpdateManyWithoutFunnelNestedInput
+  FunnelPages?: Prisma.FunnelPageUncheckedUpdateManyWithoutFunnelNestedInput
 }
 
 export type FunnelCreateManyInput = {
@@ -533,8 +533,8 @@ export type FunnelCreateWithoutSubAccountInput = {
   subDomainName?: string | null
   favicon?: string | null
   liveProducts?: string | null
-  FunnelPages?: Prisma.FunnelPageCreateNestedManyWithoutFunnelInput
   ClassName?: Prisma.ClassNameCreateNestedManyWithoutFunnelInput
+  FunnelPages?: Prisma.FunnelPageCreateNestedManyWithoutFunnelInput
 }
 
 export type FunnelUncheckedCreateWithoutSubAccountInput = {
@@ -547,8 +547,8 @@ export type FunnelUncheckedCreateWithoutSubAccountInput = {
   subDomainName?: string | null
   favicon?: string | null
   liveProducts?: string | null
-  FunnelPages?: Prisma.FunnelPageUncheckedCreateNestedManyWithoutFunnelInput
   ClassName?: Prisma.ClassNameUncheckedCreateNestedManyWithoutFunnelInput
+  FunnelPages?: Prisma.FunnelPageUncheckedCreateNestedManyWithoutFunnelInput
 }
 
 export type FunnelCreateOrConnectWithoutSubAccountInput = {
@@ -675,8 +675,8 @@ export type FunnelCreateWithoutFunnelPagesInput = {
   subDomainName?: string | null
   favicon?: string | null
   liveProducts?: string | null
-  SubAccount: Prisma.SubAccountCreateNestedOneWithoutFunnelsInput
   ClassName?: Prisma.ClassNameCreateNestedManyWithoutFunnelInput
+  SubAccount: Prisma.SubAccountCreateNestedOneWithoutFunnelsInput
 }
 
 export type FunnelUncheckedCreateWithoutFunnelPagesInput = {
@@ -719,8 +719,8 @@ export type FunnelUpdateWithoutFunnelPagesInput = {
   subDomainName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  SubAccount?: Prisma.SubAccountUpdateOneRequiredWithoutFunnelsNestedInput
   ClassName?: Prisma.ClassNameUpdateManyWithoutFunnelNestedInput
+  SubAccount?: Prisma.SubAccountUpdateOneRequiredWithoutFunnelsNestedInput
 }
 
 export type FunnelUncheckedUpdateWithoutFunnelPagesInput = {
@@ -759,8 +759,8 @@ export type FunnelUpdateWithoutSubAccountInput = {
   subDomainName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  FunnelPages?: Prisma.FunnelPageUpdateManyWithoutFunnelNestedInput
   ClassName?: Prisma.ClassNameUpdateManyWithoutFunnelNestedInput
+  FunnelPages?: Prisma.FunnelPageUpdateManyWithoutFunnelNestedInput
 }
 
 export type FunnelUncheckedUpdateWithoutSubAccountInput = {
@@ -773,8 +773,8 @@ export type FunnelUncheckedUpdateWithoutSubAccountInput = {
   subDomainName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liveProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  FunnelPages?: Prisma.FunnelPageUncheckedUpdateManyWithoutFunnelNestedInput
   ClassName?: Prisma.ClassNameUncheckedUpdateManyWithoutFunnelNestedInput
+  FunnelPages?: Prisma.FunnelPageUncheckedUpdateManyWithoutFunnelNestedInput
 }
 
 export type FunnelUncheckedUpdateManyWithoutSubAccountInput = {
@@ -795,13 +795,13 @@ export type FunnelUncheckedUpdateManyWithoutSubAccountInput = {
  */
 
 export type FunnelCountOutputType = {
-  FunnelPages: number
   ClassName: number
+  FunnelPages: number
 }
 
 export type FunnelCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  FunnelPages?: boolean | FunnelCountOutputTypeCountFunnelPagesArgs
   ClassName?: boolean | FunnelCountOutputTypeCountClassNameArgs
+  FunnelPages?: boolean | FunnelCountOutputTypeCountFunnelPagesArgs
 }
 
 /**
@@ -817,15 +817,15 @@ export type FunnelCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * FunnelCountOutputType without action
  */
-export type FunnelCountOutputTypeCountFunnelPagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FunnelPageWhereInput
+export type FunnelCountOutputTypeCountClassNameArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClassNameWhereInput
 }
 
 /**
  * FunnelCountOutputType without action
  */
-export type FunnelCountOutputTypeCountClassNameArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ClassNameWhereInput
+export type FunnelCountOutputTypeCountFunnelPagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FunnelPageWhereInput
 }
 
 
@@ -840,9 +840,9 @@ export type FunnelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   favicon?: boolean
   subAccountId?: boolean
   liveProducts?: boolean
+  ClassName?: boolean | Prisma.Funnel$ClassNameArgs<ExtArgs>
   SubAccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   FunnelPages?: boolean | Prisma.Funnel$FunnelPagesArgs<ExtArgs>
-  ClassName?: boolean | Prisma.Funnel$ClassNameArgs<ExtArgs>
   _count?: boolean | Prisma.FunnelCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["funnel"]>
 
@@ -863,18 +863,18 @@ export type FunnelSelectScalar = {
 
 export type FunnelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "description" | "published" | "subDomainName" | "favicon" | "subAccountId" | "liveProducts", ExtArgs["result"]["funnel"]>
 export type FunnelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ClassName?: boolean | Prisma.Funnel$ClassNameArgs<ExtArgs>
   SubAccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   FunnelPages?: boolean | Prisma.Funnel$FunnelPagesArgs<ExtArgs>
-  ClassName?: boolean | Prisma.Funnel$ClassNameArgs<ExtArgs>
   _count?: boolean | Prisma.FunnelCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $FunnelPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Funnel"
   objects: {
+    ClassName: Prisma.$ClassNamePayload<ExtArgs>[]
     SubAccount: Prisma.$SubAccountPayload<ExtArgs>
     FunnelPages: Prisma.$FunnelPagePayload<ExtArgs>[]
-    ClassName: Prisma.$ClassNamePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1227,9 +1227,9 @@ readonly fields: FunnelFieldRefs;
  */
 export interface Prisma__FunnelClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  ClassName<T extends Prisma.Funnel$ClassNameArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Funnel$ClassNameArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassNamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   SubAccount<T extends Prisma.SubAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__SubAccountClient<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   FunnelPages<T extends Prisma.Funnel$FunnelPagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Funnel$FunnelPagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FunnelPagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ClassName<T extends Prisma.Funnel$ClassNameArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Funnel$ClassNameArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassNamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1612,30 +1612,6 @@ export type FunnelDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Funnel.FunnelPages
- */
-export type Funnel$FunnelPagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FunnelPage
-   */
-  select?: Prisma.FunnelPageSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FunnelPage
-   */
-  omit?: Prisma.FunnelPageOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FunnelPageInclude<ExtArgs> | null
-  where?: Prisma.FunnelPageWhereInput
-  orderBy?: Prisma.FunnelPageOrderByWithRelationInput | Prisma.FunnelPageOrderByWithRelationInput[]
-  cursor?: Prisma.FunnelPageWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FunnelPageScalarFieldEnum | Prisma.FunnelPageScalarFieldEnum[]
-}
-
-/**
  * Funnel.ClassName
  */
 export type Funnel$ClassNameArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1657,6 +1633,30 @@ export type Funnel$ClassNameArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.ClassNameScalarFieldEnum | Prisma.ClassNameScalarFieldEnum[]
+}
+
+/**
+ * Funnel.FunnelPages
+ */
+export type Funnel$FunnelPagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FunnelPage
+   */
+  select?: Prisma.FunnelPageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FunnelPage
+   */
+  omit?: Prisma.FunnelPageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FunnelPageInclude<ExtArgs> | null
+  where?: Prisma.FunnelPageWhereInput
+  orderBy?: Prisma.FunnelPageOrderByWithRelationInput | Prisma.FunnelPageOrderByWithRelationInput[]
+  cursor?: Prisma.FunnelPageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FunnelPageScalarFieldEnum | Prisma.FunnelPageScalarFieldEnum[]
 }
 
 /**

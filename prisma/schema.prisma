@@ -85,6 +85,7 @@ model SubAccount {
   Notification     Notification[]
   Permissions      Permissions[]
   Pipeline         Pipeline[]
+  Invitation       Invitation[]
   Agency           Agency                    @relation(fields: [agencyId], references: [id], onDelete: Cascade)
   SidebarOption    SubAccountSidebarOption[]
   Tags             Tag[]
@@ -307,14 +308,17 @@ model SubAccountSidebarOption {
 }
 
 model Invitation {
-  id       String           @id @default(uuid())
-  email    String           @unique
-  agencyId String
-  status   InvitationStatus @default(PENDING)
-  role     Role             @default(SUBACCOUNT_USER)
-  Agency   Agency           @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  id           String           @id @default(uuid())
+  email        String           @unique
+  agencyId     String
+  status       InvitationStatus @default(PENDING)
+  role         Role             @default(SUBACCOUNT_USER)
+  Agency       Agency           @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  subAccountId String?
+  SubAccount   SubAccount?      @relation(fields: [subAccountId], references: [id], onDelete: Cascade)
 
   @@index([agencyId])
+  @@index([subAccountId])
 }
 
 model Notification {

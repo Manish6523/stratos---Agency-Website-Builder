@@ -260,10 +260,10 @@ export type TicketWhereInput = {
   description?: Prisma.StringNullableFilter<"Ticket"> | string | null
   customerId?: Prisma.StringNullableFilter<"Ticket"> | string | null
   assignedUserId?: Prisma.StringNullableFilter<"Ticket"> | string | null
+  Assigned?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  Customer?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
   Lane?: Prisma.XOR<Prisma.LaneScalarRelationFilter, Prisma.LaneWhereInput>
   Tags?: Prisma.TagListRelationFilter
-  Customer?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
-  Assigned?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type TicketOrderByWithRelationInput = {
@@ -277,10 +277,10 @@ export type TicketOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrderInput | Prisma.SortOrder
   assignedUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  Assigned?: Prisma.UserOrderByWithRelationInput
+  Customer?: Prisma.ContactOrderByWithRelationInput
   Lane?: Prisma.LaneOrderByWithRelationInput
   Tags?: Prisma.TagOrderByRelationAggregateInput
-  Customer?: Prisma.ContactOrderByWithRelationInput
-  Assigned?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.TicketOrderByRelevanceInput
 }
 
@@ -298,10 +298,10 @@ export type TicketWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Ticket"> | string | null
   customerId?: Prisma.StringNullableFilter<"Ticket"> | string | null
   assignedUserId?: Prisma.StringNullableFilter<"Ticket"> | string | null
+  Assigned?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  Customer?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
   Lane?: Prisma.XOR<Prisma.LaneScalarRelationFilter, Prisma.LaneWhereInput>
   Tags?: Prisma.TagListRelationFilter
-  Customer?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
-  Assigned?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type TicketOrderByWithAggregationInput = {
@@ -346,10 +346,10 @@ export type TicketCreateInput = {
   order?: number
   value?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  Assigned?: Prisma.UserCreateNestedOneWithoutTicketInput
+  Customer?: Prisma.ContactCreateNestedOneWithoutTicketInput
   Lane: Prisma.LaneCreateNestedOneWithoutTicketsInput
   Tags?: Prisma.TagCreateNestedManyWithoutTicketInput
-  Customer?: Prisma.ContactCreateNestedOneWithoutTicketInput
-  Assigned?: Prisma.UserCreateNestedOneWithoutTicketInput
 }
 
 export type TicketUncheckedCreateInput = {
@@ -374,10 +374,10 @@ export type TicketUpdateInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Assigned?: Prisma.UserUpdateOneWithoutTicketNestedInput
+  Customer?: Prisma.ContactUpdateOneWithoutTicketNestedInput
   Lane?: Prisma.LaneUpdateOneRequiredWithoutTicketsNestedInput
   Tags?: Prisma.TagUpdateManyWithoutTicketNestedInput
-  Customer?: Prisma.ContactUpdateOneWithoutTicketNestedInput
-  Assigned?: Prisma.UserUpdateOneWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateInput = {
@@ -675,9 +675,9 @@ export type TicketCreateWithoutAssignedInput = {
   order?: number
   value?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  Customer?: Prisma.ContactCreateNestedOneWithoutTicketInput
   Lane: Prisma.LaneCreateNestedOneWithoutTicketsInput
   Tags?: Prisma.TagCreateNestedManyWithoutTicketInput
-  Customer?: Prisma.ContactCreateNestedOneWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutAssignedInput = {
@@ -743,9 +743,9 @@ export type TicketCreateWithoutTagsInput = {
   order?: number
   value?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
-  Lane: Prisma.LaneCreateNestedOneWithoutTicketsInput
-  Customer?: Prisma.ContactCreateNestedOneWithoutTicketInput
   Assigned?: Prisma.UserCreateNestedOneWithoutTicketInput
+  Customer?: Prisma.ContactCreateNestedOneWithoutTicketInput
+  Lane: Prisma.LaneCreateNestedOneWithoutTicketsInput
 }
 
 export type TicketUncheckedCreateWithoutTagsInput = {
@@ -790,9 +790,9 @@ export type TicketCreateWithoutLaneInput = {
   order?: number
   value?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
-  Tags?: Prisma.TagCreateNestedManyWithoutTicketInput
-  Customer?: Prisma.ContactCreateNestedOneWithoutTicketInput
   Assigned?: Prisma.UserCreateNestedOneWithoutTicketInput
+  Customer?: Prisma.ContactCreateNestedOneWithoutTicketInput
+  Tags?: Prisma.TagCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutLaneInput = {
@@ -842,9 +842,9 @@ export type TicketCreateWithoutCustomerInput = {
   order?: number
   value?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  Assigned?: Prisma.UserCreateNestedOneWithoutTicketInput
   Lane: Prisma.LaneCreateNestedOneWithoutTicketsInput
   Tags?: Prisma.TagCreateNestedManyWithoutTicketInput
-  Assigned?: Prisma.UserCreateNestedOneWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutCustomerInput = {
@@ -906,9 +906,9 @@ export type TicketUpdateWithoutAssignedInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Customer?: Prisma.ContactUpdateOneWithoutTicketNestedInput
   Lane?: Prisma.LaneUpdateOneRequiredWithoutTicketsNestedInput
   Tags?: Prisma.TagUpdateManyWithoutTicketNestedInput
-  Customer?: Prisma.ContactUpdateOneWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutAssignedInput = {
@@ -944,9 +944,9 @@ export type TicketUpdateWithoutTagsInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Lane?: Prisma.LaneUpdateOneRequiredWithoutTicketsNestedInput
-  Customer?: Prisma.ContactUpdateOneWithoutTicketNestedInput
   Assigned?: Prisma.UserUpdateOneWithoutTicketNestedInput
+  Customer?: Prisma.ContactUpdateOneWithoutTicketNestedInput
+  Lane?: Prisma.LaneUpdateOneRequiredWithoutTicketsNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutTagsInput = {
@@ -995,9 +995,9 @@ export type TicketUpdateWithoutLaneInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Tags?: Prisma.TagUpdateManyWithoutTicketNestedInput
-  Customer?: Prisma.ContactUpdateOneWithoutTicketNestedInput
   Assigned?: Prisma.UserUpdateOneWithoutTicketNestedInput
+  Customer?: Prisma.ContactUpdateOneWithoutTicketNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutLaneInput = {
@@ -1045,9 +1045,9 @@ export type TicketUpdateWithoutCustomerInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   value?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  Assigned?: Prisma.UserUpdateOneWithoutTicketNestedInput
   Lane?: Prisma.LaneUpdateOneRequiredWithoutTicketsNestedInput
   Tags?: Prisma.TagUpdateManyWithoutTicketNestedInput
-  Assigned?: Prisma.UserUpdateOneWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutCustomerInput = {
@@ -1117,10 +1117,10 @@ export type TicketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   description?: boolean
   customerId?: boolean
   assignedUserId?: boolean
+  Assigned?: boolean | Prisma.Ticket$AssignedArgs<ExtArgs>
+  Customer?: boolean | Prisma.Ticket$CustomerArgs<ExtArgs>
   Lane?: boolean | Prisma.LaneDefaultArgs<ExtArgs>
   Tags?: boolean | Prisma.Ticket$TagsArgs<ExtArgs>
-  Customer?: boolean | Prisma.Ticket$CustomerArgs<ExtArgs>
-  Assigned?: boolean | Prisma.Ticket$AssignedArgs<ExtArgs>
   _count?: boolean | Prisma.TicketCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ticket"]>
 
@@ -1141,20 +1141,20 @@ export type TicketSelectScalar = {
 
 export type TicketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "laneId" | "order" | "value" | "description" | "customerId" | "assignedUserId", ExtArgs["result"]["ticket"]>
 export type TicketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  Assigned?: boolean | Prisma.Ticket$AssignedArgs<ExtArgs>
+  Customer?: boolean | Prisma.Ticket$CustomerArgs<ExtArgs>
   Lane?: boolean | Prisma.LaneDefaultArgs<ExtArgs>
   Tags?: boolean | Prisma.Ticket$TagsArgs<ExtArgs>
-  Customer?: boolean | Prisma.Ticket$CustomerArgs<ExtArgs>
-  Assigned?: boolean | Prisma.Ticket$AssignedArgs<ExtArgs>
   _count?: boolean | Prisma.TicketCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $TicketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ticket"
   objects: {
+    Assigned: Prisma.$UserPayload<ExtArgs> | null
+    Customer: Prisma.$ContactPayload<ExtArgs> | null
     Lane: Prisma.$LanePayload<ExtArgs>
     Tags: Prisma.$TagPayload<ExtArgs>[]
-    Customer: Prisma.$ContactPayload<ExtArgs> | null
-    Assigned: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1507,10 +1507,10 @@ readonly fields: TicketFieldRefs;
  */
 export interface Prisma__TicketClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  Assigned<T extends Prisma.Ticket$AssignedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$AssignedArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  Customer<T extends Prisma.Ticket$CustomerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$CustomerArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   Lane<T extends Prisma.LaneDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LaneDefaultArgs<ExtArgs>>): Prisma.Prisma__LaneClient<runtime.Types.Result.GetResult<Prisma.$LanePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Tags<T extends Prisma.Ticket$TagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$TagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Customer<T extends Prisma.Ticket$CustomerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$CustomerArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  Assigned<T extends Prisma.Ticket$AssignedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$AssignedArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1893,27 +1893,22 @@ export type TicketDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Ticket.Tags
+ * Ticket.Assigned
  */
-export type Ticket$TagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Ticket$AssignedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Tag
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.TagSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Tag
+   * Omit specific fields from the User
    */
-  omit?: Prisma.TagOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.TagInclude<ExtArgs> | null
-  where?: Prisma.TagWhereInput
-  orderBy?: Prisma.TagOrderByWithRelationInput | Prisma.TagOrderByWithRelationInput[]
-  cursor?: Prisma.TagWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TagScalarFieldEnum | Prisma.TagScalarFieldEnum[]
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**
@@ -1936,22 +1931,27 @@ export type Ticket$CustomerArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Ticket.Assigned
+ * Ticket.Tags
  */
-export type Ticket$AssignedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Ticket$TagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the Tag
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.TagSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the Tag
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.TagOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
+  include?: Prisma.TagInclude<ExtArgs> | null
+  where?: Prisma.TagWhereInput
+  orderBy?: Prisma.TagOrderByWithRelationInput | Prisma.TagOrderByWithRelationInput[]
+  cursor?: Prisma.TagWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TagScalarFieldEnum | Prisma.TagScalarFieldEnum[]
 }
 
 /**

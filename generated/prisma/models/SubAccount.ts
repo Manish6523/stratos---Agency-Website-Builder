@@ -296,17 +296,18 @@ export type SubAccountWhereInput = {
   state?: Prisma.StringFilter<"SubAccount"> | string
   country?: Prisma.StringFilter<"SubAccount"> | string
   agencyId?: Prisma.StringFilter<"SubAccount"> | string
-  Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
-  SidebarOption?: Prisma.SubAccountSidebarOptionListRelationFilter
-  Permissions?: Prisma.PermissionsListRelationFilter
+  Automation?: Prisma.AutomationListRelationFilter
+  Contact?: Prisma.ContactListRelationFilter
   Funnels?: Prisma.FunnelListRelationFilter
   Media?: Prisma.MediaListRelationFilter
-  Contact?: Prisma.ContactListRelationFilter
-  Trigger?: Prisma.TriggerListRelationFilter
-  Automation?: Prisma.AutomationListRelationFilter
-  Pipeline?: Prisma.PipelineListRelationFilter
-  Tags?: Prisma.TagListRelationFilter
   Notification?: Prisma.NotificationListRelationFilter
+  Permissions?: Prisma.PermissionsListRelationFilter
+  Pipeline?: Prisma.PipelineListRelationFilter
+  Invitation?: Prisma.InvitationListRelationFilter
+  Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
+  SidebarOption?: Prisma.SubAccountSidebarOptionListRelationFilter
+  Tags?: Prisma.TagListRelationFilter
+  Trigger?: Prisma.TriggerListRelationFilter
 }
 
 export type SubAccountOrderByWithRelationInput = {
@@ -325,17 +326,18 @@ export type SubAccountOrderByWithRelationInput = {
   state?: Prisma.SortOrder
   country?: Prisma.SortOrder
   agencyId?: Prisma.SortOrder
-  Agency?: Prisma.AgencyOrderByWithRelationInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionOrderByRelationAggregateInput
-  Permissions?: Prisma.PermissionsOrderByRelationAggregateInput
+  Automation?: Prisma.AutomationOrderByRelationAggregateInput
+  Contact?: Prisma.ContactOrderByRelationAggregateInput
   Funnels?: Prisma.FunnelOrderByRelationAggregateInput
   Media?: Prisma.MediaOrderByRelationAggregateInput
-  Contact?: Prisma.ContactOrderByRelationAggregateInput
-  Trigger?: Prisma.TriggerOrderByRelationAggregateInput
-  Automation?: Prisma.AutomationOrderByRelationAggregateInput
-  Pipeline?: Prisma.PipelineOrderByRelationAggregateInput
-  Tags?: Prisma.TagOrderByRelationAggregateInput
   Notification?: Prisma.NotificationOrderByRelationAggregateInput
+  Permissions?: Prisma.PermissionsOrderByRelationAggregateInput
+  Pipeline?: Prisma.PipelineOrderByRelationAggregateInput
+  Invitation?: Prisma.InvitationOrderByRelationAggregateInput
+  Agency?: Prisma.AgencyOrderByWithRelationInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionOrderByRelationAggregateInput
+  Tags?: Prisma.TagOrderByRelationAggregateInput
+  Trigger?: Prisma.TriggerOrderByRelationAggregateInput
   _relevance?: Prisma.SubAccountOrderByRelevanceInput
 }
 
@@ -358,17 +360,18 @@ export type SubAccountWhereUniqueInput = Prisma.AtLeast<{
   state?: Prisma.StringFilter<"SubAccount"> | string
   country?: Prisma.StringFilter<"SubAccount"> | string
   agencyId?: Prisma.StringFilter<"SubAccount"> | string
-  Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
-  SidebarOption?: Prisma.SubAccountSidebarOptionListRelationFilter
-  Permissions?: Prisma.PermissionsListRelationFilter
+  Automation?: Prisma.AutomationListRelationFilter
+  Contact?: Prisma.ContactListRelationFilter
   Funnels?: Prisma.FunnelListRelationFilter
   Media?: Prisma.MediaListRelationFilter
-  Contact?: Prisma.ContactListRelationFilter
-  Trigger?: Prisma.TriggerListRelationFilter
-  Automation?: Prisma.AutomationListRelationFilter
-  Pipeline?: Prisma.PipelineListRelationFilter
-  Tags?: Prisma.TagListRelationFilter
   Notification?: Prisma.NotificationListRelationFilter
+  Permissions?: Prisma.PermissionsListRelationFilter
+  Pipeline?: Prisma.PipelineListRelationFilter
+  Invitation?: Prisma.InvitationListRelationFilter
+  Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
+  SidebarOption?: Prisma.SubAccountSidebarOptionListRelationFilter
+  Tags?: Prisma.TagListRelationFilter
+  Trigger?: Prisma.TriggerListRelationFilter
 }, "id">
 
 export type SubAccountOrderByWithAggregationInput = {
@@ -430,17 +433,18 @@ export type SubAccountCreateInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateInput = {
@@ -459,16 +463,17 @@ export type SubAccountUncheckedCreateInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUpdateInput = {
@@ -486,17 +491,18 @@ export type SubAccountUpdateInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateInput = {
@@ -515,16 +521,17 @@ export type SubAccountUncheckedUpdateInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateManyInput = {
@@ -838,6 +845,22 @@ export type SubAccountUpdateOneWithoutSidebarOptionNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SubAccountUpdateToOneWithWhereWithoutSidebarOptionInput, Prisma.SubAccountUpdateWithoutSidebarOptionInput>, Prisma.SubAccountUncheckedUpdateWithoutSidebarOptionInput>
 }
 
+export type SubAccountCreateNestedOneWithoutInvitationInput = {
+  create?: Prisma.XOR<Prisma.SubAccountCreateWithoutInvitationInput, Prisma.SubAccountUncheckedCreateWithoutInvitationInput>
+  connectOrCreate?: Prisma.SubAccountCreateOrConnectWithoutInvitationInput
+  connect?: Prisma.SubAccountWhereUniqueInput
+}
+
+export type SubAccountUpdateOneWithoutInvitationNestedInput = {
+  create?: Prisma.XOR<Prisma.SubAccountCreateWithoutInvitationInput, Prisma.SubAccountUncheckedCreateWithoutInvitationInput>
+  connectOrCreate?: Prisma.SubAccountCreateOrConnectWithoutInvitationInput
+  upsert?: Prisma.SubAccountUpsertWithoutInvitationInput
+  disconnect?: Prisma.SubAccountWhereInput | boolean
+  delete?: Prisma.SubAccountWhereInput | boolean
+  connect?: Prisma.SubAccountWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubAccountUpdateToOneWithWhereWithoutInvitationInput, Prisma.SubAccountUpdateWithoutInvitationInput>, Prisma.SubAccountUncheckedUpdateWithoutInvitationInput>
+}
+
 export type SubAccountCreateNestedOneWithoutNotificationInput = {
   create?: Prisma.XOR<Prisma.SubAccountCreateWithoutNotificationInput, Prisma.SubAccountUncheckedCreateWithoutNotificationInput>
   connectOrCreate?: Prisma.SubAccountCreateOrConnectWithoutNotificationInput
@@ -869,16 +892,17 @@ export type SubAccountCreateWithoutPermissionsInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutPermissionsInput = {
@@ -897,15 +921,16 @@ export type SubAccountUncheckedCreateWithoutPermissionsInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutPermissionsInput = {
@@ -939,16 +964,17 @@ export type SubAccountUpdateWithoutPermissionsInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutPermissionsInput = {
@@ -967,15 +993,16 @@ export type SubAccountUncheckedUpdateWithoutPermissionsInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateWithoutAgencyInput = {
@@ -993,16 +1020,17 @@ export type SubAccountCreateWithoutAgencyInput = {
   zipCode: string
   state: string
   country: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutAgencyInput = {
@@ -1020,16 +1048,17 @@ export type SubAccountUncheckedCreateWithoutAgencyInput = {
   zipCode: string
   state: string
   country: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutAgencyInput = {
@@ -1094,16 +1123,17 @@ export type SubAccountCreateWithoutTagsInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutTagsInput = {
@@ -1122,15 +1152,16 @@ export type SubAccountUncheckedCreateWithoutTagsInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutTagsInput = {
@@ -1164,16 +1195,17 @@ export type SubAccountUpdateWithoutTagsInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutTagsInput = {
@@ -1192,15 +1224,16 @@ export type SubAccountUncheckedUpdateWithoutTagsInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateWithoutPipelineInput = {
@@ -1218,16 +1251,17 @@ export type SubAccountCreateWithoutPipelineInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutPipelineInput = {
@@ -1246,15 +1280,16 @@ export type SubAccountUncheckedCreateWithoutPipelineInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutPipelineInput = {
@@ -1288,16 +1323,17 @@ export type SubAccountUpdateWithoutPipelineInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutPipelineInput = {
@@ -1316,15 +1352,16 @@ export type SubAccountUncheckedUpdateWithoutPipelineInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateWithoutTriggerInput = {
@@ -1342,16 +1379,17 @@ export type SubAccountCreateWithoutTriggerInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutTriggerInput = {
@@ -1370,15 +1408,16 @@ export type SubAccountUncheckedCreateWithoutTriggerInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutTriggerInput = {
@@ -1412,16 +1451,17 @@ export type SubAccountUpdateWithoutTriggerInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutTriggerInput = {
@@ -1440,15 +1480,16 @@ export type SubAccountUncheckedUpdateWithoutTriggerInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
 }
 
 export type SubAccountCreateWithoutAutomationInput = {
@@ -1466,16 +1507,17 @@ export type SubAccountCreateWithoutAutomationInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutAutomationInput = {
@@ -1494,15 +1536,16 @@ export type SubAccountUncheckedCreateWithoutAutomationInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutAutomationInput = {
@@ -1536,16 +1579,17 @@ export type SubAccountUpdateWithoutAutomationInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutAutomationInput = {
@@ -1564,15 +1608,16 @@ export type SubAccountUncheckedUpdateWithoutAutomationInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateWithoutContactInput = {
@@ -1590,16 +1635,17 @@ export type SubAccountCreateWithoutContactInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutContactInput = {
@@ -1618,15 +1664,16 @@ export type SubAccountUncheckedCreateWithoutContactInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutContactInput = {
@@ -1660,16 +1707,17 @@ export type SubAccountUpdateWithoutContactInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutContactInput = {
@@ -1688,15 +1736,16 @@ export type SubAccountUncheckedUpdateWithoutContactInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateWithoutMediaInput = {
@@ -1714,16 +1763,17 @@ export type SubAccountCreateWithoutMediaInput = {
   zipCode: string
   state: string
   country: string
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
   Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
   SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
-  Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
   Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
-  Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutMediaInput = {
@@ -1742,15 +1792,16 @@ export type SubAccountUncheckedCreateWithoutMediaInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
-  Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutMediaInput = {
@@ -1784,16 +1835,17 @@ export type SubAccountUpdateWithoutMediaInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
   Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
   SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
-  Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
   Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
-  Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutMediaInput = {
@@ -1812,15 +1864,16 @@ export type SubAccountUncheckedUpdateWithoutMediaInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
-  Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateWithoutFunnelsInput = {
@@ -1838,16 +1891,17 @@ export type SubAccountCreateWithoutFunnelsInput = {
   zipCode: string
   state: string
   country: string
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
   Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
   SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
-  Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
   Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
-  Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutFunnelsInput = {
@@ -1866,15 +1920,16 @@ export type SubAccountUncheckedCreateWithoutFunnelsInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
-  Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutFunnelsInput = {
@@ -1908,16 +1963,17 @@ export type SubAccountUpdateWithoutFunnelsInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
   Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
   SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
-  Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
   Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
-  Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutFunnelsInput = {
@@ -1936,15 +1992,16 @@ export type SubAccountUncheckedUpdateWithoutFunnelsInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
-  Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateWithoutSidebarOptionInput = {
@@ -1962,16 +2019,17 @@ export type SubAccountCreateWithoutSidebarOptionInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutSidebarOptionInput = {
@@ -1990,15 +2048,16 @@ export type SubAccountUncheckedCreateWithoutSidebarOptionInput = {
   state: string
   country: string
   agencyId: string
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
-  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
-  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutSidebarOptionInput = {
@@ -2032,16 +2091,17 @@ export type SubAccountUpdateWithoutSidebarOptionInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutSidebarOptionInput = {
@@ -2060,15 +2120,144 @@ export type SubAccountUncheckedUpdateWithoutSidebarOptionInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
+}
+
+export type SubAccountCreateWithoutInvitationInput = {
+  id?: string
+  connectAccountId?: string | null
+  name: string
+  subAccountLogo: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  companyEmail: string
+  companyPhone: string
+  goal?: number
+  address: string
+  city: string
+  zipCode: string
+  state: string
+  country: string
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
+  Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
+}
+
+export type SubAccountUncheckedCreateWithoutInvitationInput = {
+  id?: string
+  connectAccountId?: string | null
+  name: string
+  subAccountLogo: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  companyEmail: string
+  companyPhone: string
+  goal?: number
+  address: string
+  city: string
+  zipCode: string
+  state: string
+  country: string
+  agencyId: string
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
+  Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
+  Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
+}
+
+export type SubAccountCreateOrConnectWithoutInvitationInput = {
+  where: Prisma.SubAccountWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubAccountCreateWithoutInvitationInput, Prisma.SubAccountUncheckedCreateWithoutInvitationInput>
+}
+
+export type SubAccountUpsertWithoutInvitationInput = {
+  update: Prisma.XOR<Prisma.SubAccountUpdateWithoutInvitationInput, Prisma.SubAccountUncheckedUpdateWithoutInvitationInput>
+  create: Prisma.XOR<Prisma.SubAccountCreateWithoutInvitationInput, Prisma.SubAccountUncheckedCreateWithoutInvitationInput>
+  where?: Prisma.SubAccountWhereInput
+}
+
+export type SubAccountUpdateToOneWithWhereWithoutInvitationInput = {
+  where?: Prisma.SubAccountWhereInput
+  data: Prisma.XOR<Prisma.SubAccountUpdateWithoutInvitationInput, Prisma.SubAccountUncheckedUpdateWithoutInvitationInput>
+}
+
+export type SubAccountUpdateWithoutInvitationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  connectAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subAccountLogo?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  companyEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  companyPhone?: Prisma.StringFieldUpdateOperationsInput | string
+  goal?: Prisma.IntFieldUpdateOperationsInput | number
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  zipCode?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
+  Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
+}
+
+export type SubAccountUncheckedUpdateWithoutInvitationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  connectAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subAccountLogo?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  companyEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  companyPhone?: Prisma.StringFieldUpdateOperationsInput | string
+  goal?: Prisma.IntFieldUpdateOperationsInput | number
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  zipCode?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.StringFieldUpdateOperationsInput | string
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
+  Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
+  Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateWithoutNotificationInput = {
@@ -2086,16 +2275,17 @@ export type SubAccountCreateWithoutNotificationInput = {
   zipCode: string
   state: string
   country: string
-  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
   Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
   Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountUncheckedCreateWithoutNotificationInput = {
@@ -2114,15 +2304,16 @@ export type SubAccountUncheckedCreateWithoutNotificationInput = {
   state: string
   country: string
   agencyId: string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
-  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
-  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
-  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
-  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
   Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
   Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
 }
 
 export type SubAccountCreateOrConnectWithoutNotificationInput = {
@@ -2156,16 +2347,17 @@ export type SubAccountUpdateWithoutNotificationInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
   Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
   Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutNotificationInput = {
@@ -2184,15 +2376,16 @@ export type SubAccountUncheckedUpdateWithoutNotificationInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
   Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
   Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountCreateManyAgencyInput = {
@@ -2227,16 +2420,17 @@ export type SubAccountUpdateWithoutAgencyInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateWithoutAgencyInput = {
@@ -2254,16 +2448,17 @@ export type SubAccountUncheckedUpdateWithoutAgencyInput = {
   zipCode?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
-  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
-  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
-  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
-  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
-  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
-  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
-  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
 }
 
 export type SubAccountUncheckedUpdateManyWithoutAgencyInput = {
@@ -2289,29 +2484,31 @@ export type SubAccountUncheckedUpdateManyWithoutAgencyInput = {
  */
 
 export type SubAccountCountOutputType = {
-  SidebarOption: number
-  Permissions: number
+  Automation: number
+  Contact: number
   Funnels: number
   Media: number
-  Contact: number
-  Trigger: number
-  Automation: number
-  Pipeline: number
-  Tags: number
   Notification: number
+  Permissions: number
+  Pipeline: number
+  Invitation: number
+  SidebarOption: number
+  Tags: number
+  Trigger: number
 }
 
 export type SubAccountCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  SidebarOption?: boolean | SubAccountCountOutputTypeCountSidebarOptionArgs
-  Permissions?: boolean | SubAccountCountOutputTypeCountPermissionsArgs
+  Automation?: boolean | SubAccountCountOutputTypeCountAutomationArgs
+  Contact?: boolean | SubAccountCountOutputTypeCountContactArgs
   Funnels?: boolean | SubAccountCountOutputTypeCountFunnelsArgs
   Media?: boolean | SubAccountCountOutputTypeCountMediaArgs
-  Contact?: boolean | SubAccountCountOutputTypeCountContactArgs
-  Trigger?: boolean | SubAccountCountOutputTypeCountTriggerArgs
-  Automation?: boolean | SubAccountCountOutputTypeCountAutomationArgs
-  Pipeline?: boolean | SubAccountCountOutputTypeCountPipelineArgs
-  Tags?: boolean | SubAccountCountOutputTypeCountTagsArgs
   Notification?: boolean | SubAccountCountOutputTypeCountNotificationArgs
+  Permissions?: boolean | SubAccountCountOutputTypeCountPermissionsArgs
+  Pipeline?: boolean | SubAccountCountOutputTypeCountPipelineArgs
+  Invitation?: boolean | SubAccountCountOutputTypeCountInvitationArgs
+  SidebarOption?: boolean | SubAccountCountOutputTypeCountSidebarOptionArgs
+  Tags?: boolean | SubAccountCountOutputTypeCountTagsArgs
+  Trigger?: boolean | SubAccountCountOutputTypeCountTriggerArgs
 }
 
 /**
@@ -2327,15 +2524,15 @@ export type SubAccountCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
 /**
  * SubAccountCountOutputType without action
  */
-export type SubAccountCountOutputTypeCountSidebarOptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SubAccountSidebarOptionWhereInput
+export type SubAccountCountOutputTypeCountAutomationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AutomationWhereInput
 }
 
 /**
  * SubAccountCountOutputType without action
  */
-export type SubAccountCountOutputTypeCountPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PermissionsWhereInput
+export type SubAccountCountOutputTypeCountContactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactWhereInput
 }
 
 /**
@@ -2355,22 +2552,15 @@ export type SubAccountCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Type
 /**
  * SubAccountCountOutputType without action
  */
-export type SubAccountCountOutputTypeCountContactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ContactWhereInput
+export type SubAccountCountOutputTypeCountNotificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
 }
 
 /**
  * SubAccountCountOutputType without action
  */
-export type SubAccountCountOutputTypeCountTriggerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TriggerWhereInput
-}
-
-/**
- * SubAccountCountOutputType without action
- */
-export type SubAccountCountOutputTypeCountAutomationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AutomationWhereInput
+export type SubAccountCountOutputTypeCountPermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PermissionsWhereInput
 }
 
 /**
@@ -2383,6 +2573,20 @@ export type SubAccountCountOutputTypeCountPipelineArgs<ExtArgs extends runtime.T
 /**
  * SubAccountCountOutputType without action
  */
+export type SubAccountCountOutputTypeCountInvitationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvitationWhereInput
+}
+
+/**
+ * SubAccountCountOutputType without action
+ */
+export type SubAccountCountOutputTypeCountSidebarOptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubAccountSidebarOptionWhereInput
+}
+
+/**
+ * SubAccountCountOutputType without action
+ */
 export type SubAccountCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TagWhereInput
 }
@@ -2390,8 +2594,8 @@ export type SubAccountCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types
 /**
  * SubAccountCountOutputType without action
  */
-export type SubAccountCountOutputTypeCountNotificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.NotificationWhereInput
+export type SubAccountCountOutputTypeCountTriggerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TriggerWhereInput
 }
 
 
@@ -2411,17 +2615,18 @@ export type SubAccountSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   state?: boolean
   country?: boolean
   agencyId?: boolean
-  Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
-  SidebarOption?: boolean | Prisma.SubAccount$SidebarOptionArgs<ExtArgs>
-  Permissions?: boolean | Prisma.SubAccount$PermissionsArgs<ExtArgs>
+  Automation?: boolean | Prisma.SubAccount$AutomationArgs<ExtArgs>
+  Contact?: boolean | Prisma.SubAccount$ContactArgs<ExtArgs>
   Funnels?: boolean | Prisma.SubAccount$FunnelsArgs<ExtArgs>
   Media?: boolean | Prisma.SubAccount$MediaArgs<ExtArgs>
-  Contact?: boolean | Prisma.SubAccount$ContactArgs<ExtArgs>
-  Trigger?: boolean | Prisma.SubAccount$TriggerArgs<ExtArgs>
-  Automation?: boolean | Prisma.SubAccount$AutomationArgs<ExtArgs>
-  Pipeline?: boolean | Prisma.SubAccount$PipelineArgs<ExtArgs>
-  Tags?: boolean | Prisma.SubAccount$TagsArgs<ExtArgs>
   Notification?: boolean | Prisma.SubAccount$NotificationArgs<ExtArgs>
+  Permissions?: boolean | Prisma.SubAccount$PermissionsArgs<ExtArgs>
+  Pipeline?: boolean | Prisma.SubAccount$PipelineArgs<ExtArgs>
+  Invitation?: boolean | Prisma.SubAccount$InvitationArgs<ExtArgs>
+  Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
+  SidebarOption?: boolean | Prisma.SubAccount$SidebarOptionArgs<ExtArgs>
+  Tags?: boolean | Prisma.SubAccount$TagsArgs<ExtArgs>
+  Trigger?: boolean | Prisma.SubAccount$TriggerArgs<ExtArgs>
   _count?: boolean | Prisma.SubAccountCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subAccount"]>
 
@@ -2447,34 +2652,36 @@ export type SubAccountSelectScalar = {
 
 export type SubAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "connectAccountId" | "name" | "subAccountLogo" | "createdAt" | "updatedAt" | "companyEmail" | "companyPhone" | "goal" | "address" | "city" | "zipCode" | "state" | "country" | "agencyId", ExtArgs["result"]["subAccount"]>
 export type SubAccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
-  SidebarOption?: boolean | Prisma.SubAccount$SidebarOptionArgs<ExtArgs>
-  Permissions?: boolean | Prisma.SubAccount$PermissionsArgs<ExtArgs>
+  Automation?: boolean | Prisma.SubAccount$AutomationArgs<ExtArgs>
+  Contact?: boolean | Prisma.SubAccount$ContactArgs<ExtArgs>
   Funnels?: boolean | Prisma.SubAccount$FunnelsArgs<ExtArgs>
   Media?: boolean | Prisma.SubAccount$MediaArgs<ExtArgs>
-  Contact?: boolean | Prisma.SubAccount$ContactArgs<ExtArgs>
-  Trigger?: boolean | Prisma.SubAccount$TriggerArgs<ExtArgs>
-  Automation?: boolean | Prisma.SubAccount$AutomationArgs<ExtArgs>
-  Pipeline?: boolean | Prisma.SubAccount$PipelineArgs<ExtArgs>
-  Tags?: boolean | Prisma.SubAccount$TagsArgs<ExtArgs>
   Notification?: boolean | Prisma.SubAccount$NotificationArgs<ExtArgs>
+  Permissions?: boolean | Prisma.SubAccount$PermissionsArgs<ExtArgs>
+  Pipeline?: boolean | Prisma.SubAccount$PipelineArgs<ExtArgs>
+  Invitation?: boolean | Prisma.SubAccount$InvitationArgs<ExtArgs>
+  Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
+  SidebarOption?: boolean | Prisma.SubAccount$SidebarOptionArgs<ExtArgs>
+  Tags?: boolean | Prisma.SubAccount$TagsArgs<ExtArgs>
+  Trigger?: boolean | Prisma.SubAccount$TriggerArgs<ExtArgs>
   _count?: boolean | Prisma.SubAccountCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $SubAccountPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SubAccount"
   objects: {
-    Agency: Prisma.$AgencyPayload<ExtArgs>
-    SidebarOption: Prisma.$SubAccountSidebarOptionPayload<ExtArgs>[]
-    Permissions: Prisma.$PermissionsPayload<ExtArgs>[]
+    Automation: Prisma.$AutomationPayload<ExtArgs>[]
+    Contact: Prisma.$ContactPayload<ExtArgs>[]
     Funnels: Prisma.$FunnelPayload<ExtArgs>[]
     Media: Prisma.$MediaPayload<ExtArgs>[]
-    Contact: Prisma.$ContactPayload<ExtArgs>[]
-    Trigger: Prisma.$TriggerPayload<ExtArgs>[]
-    Automation: Prisma.$AutomationPayload<ExtArgs>[]
-    Pipeline: Prisma.$PipelinePayload<ExtArgs>[]
-    Tags: Prisma.$TagPayload<ExtArgs>[]
     Notification: Prisma.$NotificationPayload<ExtArgs>[]
+    Permissions: Prisma.$PermissionsPayload<ExtArgs>[]
+    Pipeline: Prisma.$PipelinePayload<ExtArgs>[]
+    Invitation: Prisma.$InvitationPayload<ExtArgs>[]
+    Agency: Prisma.$AgencyPayload<ExtArgs>
+    SidebarOption: Prisma.$SubAccountSidebarOptionPayload<ExtArgs>[]
+    Tags: Prisma.$TagPayload<ExtArgs>[]
+    Trigger: Prisma.$TriggerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2832,17 +3039,18 @@ readonly fields: SubAccountFieldRefs;
  */
 export interface Prisma__SubAccountClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Agency<T extends Prisma.AgencyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgencyDefaultArgs<ExtArgs>>): Prisma.Prisma__AgencyClient<runtime.Types.Result.GetResult<Prisma.$AgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  SidebarOption<T extends Prisma.SubAccount$SidebarOptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$SidebarOptionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubAccountSidebarOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Permissions<T extends Prisma.SubAccount$PermissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$PermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Automation<T extends Prisma.SubAccount$AutomationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$AutomationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Contact<T extends Prisma.SubAccount$ContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$ContactArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Funnels<T extends Prisma.SubAccount$FunnelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$FunnelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FunnelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Media<T extends Prisma.SubAccount$MediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$MediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Contact<T extends Prisma.SubAccount$ContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$ContactArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Trigger<T extends Prisma.SubAccount$TriggerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$TriggerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TriggerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Automation<T extends Prisma.SubAccount$AutomationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$AutomationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Pipeline<T extends Prisma.SubAccount$PipelineArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$PipelineArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Tags<T extends Prisma.SubAccount$TagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$TagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Notification<T extends Prisma.SubAccount$NotificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$NotificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Permissions<T extends Prisma.SubAccount$PermissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$PermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PermissionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Pipeline<T extends Prisma.SubAccount$PipelineArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$PipelineArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Invitation<T extends Prisma.SubAccount$InvitationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$InvitationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Agency<T extends Prisma.AgencyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgencyDefaultArgs<ExtArgs>>): Prisma.Prisma__AgencyClient<runtime.Types.Result.GetResult<Prisma.$AgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  SidebarOption<T extends Prisma.SubAccount$SidebarOptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$SidebarOptionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubAccountSidebarOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Tags<T extends Prisma.SubAccount$TagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$TagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Trigger<T extends Prisma.SubAccount$TriggerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$TriggerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TriggerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3230,51 +3438,51 @@ export type SubAccountDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * SubAccount.SidebarOption
+ * SubAccount.Automation
  */
-export type SubAccount$SidebarOptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubAccount$AutomationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the SubAccountSidebarOption
+   * Select specific fields to fetch from the Automation
    */
-  select?: Prisma.SubAccountSidebarOptionSelect<ExtArgs> | null
+  select?: Prisma.AutomationSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the SubAccountSidebarOption
+   * Omit specific fields from the Automation
    */
-  omit?: Prisma.SubAccountSidebarOptionOmit<ExtArgs> | null
+  omit?: Prisma.AutomationOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SubAccountSidebarOptionInclude<ExtArgs> | null
-  where?: Prisma.SubAccountSidebarOptionWhereInput
-  orderBy?: Prisma.SubAccountSidebarOptionOrderByWithRelationInput | Prisma.SubAccountSidebarOptionOrderByWithRelationInput[]
-  cursor?: Prisma.SubAccountSidebarOptionWhereUniqueInput
+  include?: Prisma.AutomationInclude<ExtArgs> | null
+  where?: Prisma.AutomationWhereInput
+  orderBy?: Prisma.AutomationOrderByWithRelationInput | Prisma.AutomationOrderByWithRelationInput[]
+  cursor?: Prisma.AutomationWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SubAccountSidebarOptionScalarFieldEnum | Prisma.SubAccountSidebarOptionScalarFieldEnum[]
+  distinct?: Prisma.AutomationScalarFieldEnum | Prisma.AutomationScalarFieldEnum[]
 }
 
 /**
- * SubAccount.Permissions
+ * SubAccount.Contact
  */
-export type SubAccount$PermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubAccount$ContactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Permissions
+   * Select specific fields to fetch from the Contact
    */
-  select?: Prisma.PermissionsSelect<ExtArgs> | null
+  select?: Prisma.ContactSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Permissions
+   * Omit specific fields from the Contact
    */
-  omit?: Prisma.PermissionsOmit<ExtArgs> | null
+  omit?: Prisma.ContactOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PermissionsInclude<ExtArgs> | null
-  where?: Prisma.PermissionsWhereInput
-  orderBy?: Prisma.PermissionsOrderByWithRelationInput | Prisma.PermissionsOrderByWithRelationInput[]
-  cursor?: Prisma.PermissionsWhereUniqueInput
+  include?: Prisma.ContactInclude<ExtArgs> | null
+  where?: Prisma.ContactWhereInput
+  orderBy?: Prisma.ContactOrderByWithRelationInput | Prisma.ContactOrderByWithRelationInput[]
+  cursor?: Prisma.ContactWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PermissionsScalarFieldEnum | Prisma.PermissionsScalarFieldEnum[]
+  distinct?: Prisma.ContactScalarFieldEnum | Prisma.ContactScalarFieldEnum[]
 }
 
 /**
@@ -3326,75 +3534,51 @@ export type SubAccount$MediaArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * SubAccount.Contact
+ * SubAccount.Notification
  */
-export type SubAccount$ContactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubAccount$NotificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Contact
+   * Select specific fields to fetch from the Notification
    */
-  select?: Prisma.ContactSelect<ExtArgs> | null
+  select?: Prisma.NotificationSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Contact
+   * Omit specific fields from the Notification
    */
-  omit?: Prisma.ContactOmit<ExtArgs> | null
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ContactInclude<ExtArgs> | null
-  where?: Prisma.ContactWhereInput
-  orderBy?: Prisma.ContactOrderByWithRelationInput | Prisma.ContactOrderByWithRelationInput[]
-  cursor?: Prisma.ContactWhereUniqueInput
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ContactScalarFieldEnum | Prisma.ContactScalarFieldEnum[]
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**
- * SubAccount.Trigger
+ * SubAccount.Permissions
  */
-export type SubAccount$TriggerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubAccount$PermissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Trigger
+   * Select specific fields to fetch from the Permissions
    */
-  select?: Prisma.TriggerSelect<ExtArgs> | null
+  select?: Prisma.PermissionsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Trigger
+   * Omit specific fields from the Permissions
    */
-  omit?: Prisma.TriggerOmit<ExtArgs> | null
+  omit?: Prisma.PermissionsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.TriggerInclude<ExtArgs> | null
-  where?: Prisma.TriggerWhereInput
-  orderBy?: Prisma.TriggerOrderByWithRelationInput | Prisma.TriggerOrderByWithRelationInput[]
-  cursor?: Prisma.TriggerWhereUniqueInput
+  include?: Prisma.PermissionsInclude<ExtArgs> | null
+  where?: Prisma.PermissionsWhereInput
+  orderBy?: Prisma.PermissionsOrderByWithRelationInput | Prisma.PermissionsOrderByWithRelationInput[]
+  cursor?: Prisma.PermissionsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.TriggerScalarFieldEnum | Prisma.TriggerScalarFieldEnum[]
-}
-
-/**
- * SubAccount.Automation
- */
-export type SubAccount$AutomationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Automation
-   */
-  select?: Prisma.AutomationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Automation
-   */
-  omit?: Prisma.AutomationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AutomationInclude<ExtArgs> | null
-  where?: Prisma.AutomationWhereInput
-  orderBy?: Prisma.AutomationOrderByWithRelationInput | Prisma.AutomationOrderByWithRelationInput[]
-  cursor?: Prisma.AutomationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AutomationScalarFieldEnum | Prisma.AutomationScalarFieldEnum[]
+  distinct?: Prisma.PermissionsScalarFieldEnum | Prisma.PermissionsScalarFieldEnum[]
 }
 
 /**
@@ -3422,6 +3606,54 @@ export type SubAccount$PipelineArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * SubAccount.Invitation
+ */
+export type SubAccount$InvitationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Invitation
+   */
+  select?: Prisma.InvitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Invitation
+   */
+  omit?: Prisma.InvitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvitationInclude<ExtArgs> | null
+  where?: Prisma.InvitationWhereInput
+  orderBy?: Prisma.InvitationOrderByWithRelationInput | Prisma.InvitationOrderByWithRelationInput[]
+  cursor?: Prisma.InvitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvitationScalarFieldEnum | Prisma.InvitationScalarFieldEnum[]
+}
+
+/**
+ * SubAccount.SidebarOption
+ */
+export type SubAccount$SidebarOptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubAccountSidebarOption
+   */
+  select?: Prisma.SubAccountSidebarOptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubAccountSidebarOption
+   */
+  omit?: Prisma.SubAccountSidebarOptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubAccountSidebarOptionInclude<ExtArgs> | null
+  where?: Prisma.SubAccountSidebarOptionWhereInput
+  orderBy?: Prisma.SubAccountSidebarOptionOrderByWithRelationInput | Prisma.SubAccountSidebarOptionOrderByWithRelationInput[]
+  cursor?: Prisma.SubAccountSidebarOptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubAccountSidebarOptionScalarFieldEnum | Prisma.SubAccountSidebarOptionScalarFieldEnum[]
+}
+
+/**
  * SubAccount.Tags
  */
 export type SubAccount$TagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3446,27 +3678,27 @@ export type SubAccount$TagsArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * SubAccount.Notification
+ * SubAccount.Trigger
  */
-export type SubAccount$NotificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type SubAccount$TriggerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Notification
+   * Select specific fields to fetch from the Trigger
    */
-  select?: Prisma.NotificationSelect<ExtArgs> | null
+  select?: Prisma.TriggerSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Notification
+   * Omit specific fields from the Trigger
    */
-  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  omit?: Prisma.TriggerOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NotificationInclude<ExtArgs> | null
-  where?: Prisma.NotificationWhereInput
-  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
-  cursor?: Prisma.NotificationWhereUniqueInput
+  include?: Prisma.TriggerInclude<ExtArgs> | null
+  where?: Prisma.TriggerWhereInput
+  orderBy?: Prisma.TriggerOrderByWithRelationInput | Prisma.TriggerOrderByWithRelationInput[]
+  cursor?: Prisma.TriggerWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+  distinct?: Prisma.TriggerScalarFieldEnum | Prisma.TriggerScalarFieldEnum[]
 }
 
 /**

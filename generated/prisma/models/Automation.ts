@@ -198,9 +198,9 @@ export type AutomationWhereInput = {
   triggerId?: Prisma.StringNullableFilter<"Automation"> | string | null
   published?: Prisma.BoolFilter<"Automation"> | boolean
   subAccountId?: Prisma.StringFilter<"Automation"> | string
-  Trigger?: Prisma.XOR<Prisma.TriggerNullableScalarRelationFilter, Prisma.TriggerWhereInput> | null
-  Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
   Action?: Prisma.ActionListRelationFilter
+  Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
+  Trigger?: Prisma.XOR<Prisma.TriggerNullableScalarRelationFilter, Prisma.TriggerWhereInput> | null
   AutomationInstance?: Prisma.AutomationInstanceListRelationFilter
 }
 
@@ -212,9 +212,9 @@ export type AutomationOrderByWithRelationInput = {
   triggerId?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
   subAccountId?: Prisma.SortOrder
-  Trigger?: Prisma.TriggerOrderByWithRelationInput
-  Subaccount?: Prisma.SubAccountOrderByWithRelationInput
   Action?: Prisma.ActionOrderByRelationAggregateInput
+  Subaccount?: Prisma.SubAccountOrderByWithRelationInput
+  Trigger?: Prisma.TriggerOrderByWithRelationInput
   AutomationInstance?: Prisma.AutomationInstanceOrderByRelationAggregateInput
   _relevance?: Prisma.AutomationOrderByRelevanceInput
 }
@@ -230,9 +230,9 @@ export type AutomationWhereUniqueInput = Prisma.AtLeast<{
   triggerId?: Prisma.StringNullableFilter<"Automation"> | string | null
   published?: Prisma.BoolFilter<"Automation"> | boolean
   subAccountId?: Prisma.StringFilter<"Automation"> | string
-  Trigger?: Prisma.XOR<Prisma.TriggerNullableScalarRelationFilter, Prisma.TriggerWhereInput> | null
-  Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
   Action?: Prisma.ActionListRelationFilter
+  Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
+  Trigger?: Prisma.XOR<Prisma.TriggerNullableScalarRelationFilter, Prisma.TriggerWhereInput> | null
   AutomationInstance?: Prisma.AutomationInstanceListRelationFilter
 }, "id">
 
@@ -268,9 +268,9 @@ export type AutomationCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   published?: boolean
-  Trigger?: Prisma.TriggerCreateNestedOneWithoutAutomationsInput
-  Subaccount: Prisma.SubAccountCreateNestedOneWithoutAutomationInput
   Action?: Prisma.ActionCreateNestedManyWithoutAutomationInput
+  Subaccount: Prisma.SubAccountCreateNestedOneWithoutAutomationInput
+  Trigger?: Prisma.TriggerCreateNestedOneWithoutAutomationsInput
   AutomationInstance?: Prisma.AutomationInstanceCreateNestedManyWithoutAutomationInput
 }
 
@@ -292,9 +292,9 @@ export type AutomationUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Trigger?: Prisma.TriggerUpdateOneWithoutAutomationsNestedInput
-  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutAutomationNestedInput
   Action?: Prisma.ActionUpdateManyWithoutAutomationNestedInput
+  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutAutomationNestedInput
+  Trigger?: Prisma.TriggerUpdateOneWithoutAutomationsNestedInput
   AutomationInstance?: Prisma.AutomationInstanceUpdateManyWithoutAutomationNestedInput
 }
 
@@ -507,8 +507,8 @@ export type AutomationCreateWithoutSubaccountInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   published?: boolean
-  Trigger?: Prisma.TriggerCreateNestedOneWithoutAutomationsInput
   Action?: Prisma.ActionCreateNestedManyWithoutAutomationInput
+  Trigger?: Prisma.TriggerCreateNestedOneWithoutAutomationsInput
   AutomationInstance?: Prisma.AutomationInstanceCreateNestedManyWithoutAutomationInput
 }
 
@@ -568,8 +568,8 @@ export type AutomationCreateWithoutTriggerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   published?: boolean
-  Subaccount: Prisma.SubAccountCreateNestedOneWithoutAutomationInput
   Action?: Prisma.ActionCreateNestedManyWithoutAutomationInput
+  Subaccount: Prisma.SubAccountCreateNestedOneWithoutAutomationInput
   AutomationInstance?: Prisma.AutomationInstanceCreateNestedManyWithoutAutomationInput
 }
 
@@ -616,9 +616,9 @@ export type AutomationCreateWithoutAutomationInstanceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   published?: boolean
-  Trigger?: Prisma.TriggerCreateNestedOneWithoutAutomationsInput
-  Subaccount: Prisma.SubAccountCreateNestedOneWithoutAutomationInput
   Action?: Prisma.ActionCreateNestedManyWithoutAutomationInput
+  Subaccount: Prisma.SubAccountCreateNestedOneWithoutAutomationInput
+  Trigger?: Prisma.TriggerCreateNestedOneWithoutAutomationsInput
 }
 
 export type AutomationUncheckedCreateWithoutAutomationInstanceInput = {
@@ -654,9 +654,9 @@ export type AutomationUpdateWithoutAutomationInstanceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Trigger?: Prisma.TriggerUpdateOneWithoutAutomationsNestedInput
-  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutAutomationNestedInput
   Action?: Prisma.ActionUpdateManyWithoutAutomationNestedInput
+  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutAutomationNestedInput
+  Trigger?: Prisma.TriggerUpdateOneWithoutAutomationsNestedInput
 }
 
 export type AutomationUncheckedUpdateWithoutAutomationInstanceInput = {
@@ -676,8 +676,8 @@ export type AutomationCreateWithoutActionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   published?: boolean
-  Trigger?: Prisma.TriggerCreateNestedOneWithoutAutomationsInput
   Subaccount: Prisma.SubAccountCreateNestedOneWithoutAutomationInput
+  Trigger?: Prisma.TriggerCreateNestedOneWithoutAutomationsInput
   AutomationInstance?: Prisma.AutomationInstanceCreateNestedManyWithoutAutomationInput
 }
 
@@ -714,8 +714,8 @@ export type AutomationUpdateWithoutActionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Trigger?: Prisma.TriggerUpdateOneWithoutAutomationsNestedInput
   Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutAutomationNestedInput
+  Trigger?: Prisma.TriggerUpdateOneWithoutAutomationsNestedInput
   AutomationInstance?: Prisma.AutomationInstanceUpdateManyWithoutAutomationNestedInput
 }
 
@@ -745,8 +745,8 @@ export type AutomationUpdateWithoutSubaccountInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Trigger?: Prisma.TriggerUpdateOneWithoutAutomationsNestedInput
   Action?: Prisma.ActionUpdateManyWithoutAutomationNestedInput
+  Trigger?: Prisma.TriggerUpdateOneWithoutAutomationsNestedInput
   AutomationInstance?: Prisma.AutomationInstanceUpdateManyWithoutAutomationNestedInput
 }
 
@@ -785,8 +785,8 @@ export type AutomationUpdateWithoutTriggerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutAutomationNestedInput
   Action?: Prisma.ActionUpdateManyWithoutAutomationNestedInput
+  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutAutomationNestedInput
   AutomationInstance?: Prisma.AutomationInstanceUpdateManyWithoutAutomationNestedInput
 }
 
@@ -858,9 +858,9 @@ export type AutomationSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   triggerId?: boolean
   published?: boolean
   subAccountId?: boolean
-  Trigger?: boolean | Prisma.Automation$TriggerArgs<ExtArgs>
-  Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   Action?: boolean | Prisma.Automation$ActionArgs<ExtArgs>
+  Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
+  Trigger?: boolean | Prisma.Automation$TriggerArgs<ExtArgs>
   AutomationInstance?: boolean | Prisma.Automation$AutomationInstanceArgs<ExtArgs>
   _count?: boolean | Prisma.AutomationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["automation"]>
@@ -879,9 +879,9 @@ export type AutomationSelectScalar = {
 
 export type AutomationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "triggerId" | "published" | "subAccountId", ExtArgs["result"]["automation"]>
 export type AutomationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Trigger?: boolean | Prisma.Automation$TriggerArgs<ExtArgs>
-  Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   Action?: boolean | Prisma.Automation$ActionArgs<ExtArgs>
+  Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
+  Trigger?: boolean | Prisma.Automation$TriggerArgs<ExtArgs>
   AutomationInstance?: boolean | Prisma.Automation$AutomationInstanceArgs<ExtArgs>
   _count?: boolean | Prisma.AutomationCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -889,9 +889,9 @@ export type AutomationInclude<ExtArgs extends runtime.Types.Extensions.InternalA
 export type $AutomationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Automation"
   objects: {
-    Trigger: Prisma.$TriggerPayload<ExtArgs> | null
-    Subaccount: Prisma.$SubAccountPayload<ExtArgs>
     Action: Prisma.$ActionPayload<ExtArgs>[]
+    Subaccount: Prisma.$SubAccountPayload<ExtArgs>
+    Trigger: Prisma.$TriggerPayload<ExtArgs> | null
     AutomationInstance: Prisma.$AutomationInstancePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1242,9 +1242,9 @@ readonly fields: AutomationFieldRefs;
  */
 export interface Prisma__AutomationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Trigger<T extends Prisma.Automation$TriggerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Automation$TriggerArgs<ExtArgs>>): Prisma.Prisma__TriggerClient<runtime.Types.Result.GetResult<Prisma.$TriggerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  Subaccount<T extends Prisma.SubAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__SubAccountClient<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Action<T extends Prisma.Automation$ActionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Automation$ActionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Subaccount<T extends Prisma.SubAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__SubAccountClient<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  Trigger<T extends Prisma.Automation$TriggerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Automation$TriggerArgs<ExtArgs>>): Prisma.Prisma__TriggerClient<runtime.Types.Result.GetResult<Prisma.$TriggerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   AutomationInstance<T extends Prisma.Automation$AutomationInstanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Automation$AutomationInstanceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1625,25 +1625,6 @@ export type AutomationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * Automation.Trigger
- */
-export type Automation$TriggerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Trigger
-   */
-  select?: Prisma.TriggerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Trigger
-   */
-  omit?: Prisma.TriggerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TriggerInclude<ExtArgs> | null
-  where?: Prisma.TriggerWhereInput
-}
-
-/**
  * Automation.Action
  */
 export type Automation$ActionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1665,6 +1646,25 @@ export type Automation$ActionArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.ActionScalarFieldEnum | Prisma.ActionScalarFieldEnum[]
+}
+
+/**
+ * Automation.Trigger
+ */
+export type Automation$TriggerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Trigger
+   */
+  select?: Prisma.TriggerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Trigger
+   */
+  omit?: Prisma.TriggerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TriggerInclude<ExtArgs> | null
+  where?: Prisma.TriggerWhereInput
 }
 
 /**

@@ -190,8 +190,8 @@ export type TriggerWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Trigger"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trigger"> | Date | string
   subAccountId?: Prisma.StringFilter<"Trigger"> | string
-  Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
   Automations?: Prisma.AutomationListRelationFilter
+  Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
 }
 
 export type TriggerOrderByWithRelationInput = {
@@ -201,8 +201,8 @@ export type TriggerOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   subAccountId?: Prisma.SortOrder
-  Subaccount?: Prisma.SubAccountOrderByWithRelationInput
   Automations?: Prisma.AutomationOrderByRelationAggregateInput
+  Subaccount?: Prisma.SubAccountOrderByWithRelationInput
   _relevance?: Prisma.TriggerOrderByRelevanceInput
 }
 
@@ -216,8 +216,8 @@ export type TriggerWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Trigger"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Trigger"> | Date | string
   subAccountId?: Prisma.StringFilter<"Trigger"> | string
-  Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
   Automations?: Prisma.AutomationListRelationFilter
+  Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
 }, "id">
 
 export type TriggerOrderByWithAggregationInput = {
@@ -250,8 +250,8 @@ export type TriggerCreateInput = {
   type: $Enums.TriggerTypes
   createdAt?: Date | string
   updatedAt?: Date | string
-  Subaccount: Prisma.SubAccountCreateNestedOneWithoutTriggerInput
   Automations?: Prisma.AutomationCreateNestedManyWithoutTriggerInput
+  Subaccount: Prisma.SubAccountCreateNestedOneWithoutTriggerInput
 }
 
 export type TriggerUncheckedCreateInput = {
@@ -270,8 +270,8 @@ export type TriggerUpdateInput = {
   type?: Prisma.EnumTriggerTypesFieldUpdateOperationsInput | $Enums.TriggerTypes
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutTriggerNestedInput
   Automations?: Prisma.AutomationUpdateManyWithoutTriggerNestedInput
+  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutTriggerNestedInput
 }
 
 export type TriggerUncheckedUpdateInput = {
@@ -600,8 +600,8 @@ export type TriggerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   subAccountId?: boolean
-  Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   Automations?: boolean | Prisma.Trigger$AutomationsArgs<ExtArgs>
+  Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TriggerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["trigger"]>
 
@@ -618,16 +618,16 @@ export type TriggerSelectScalar = {
 
 export type TriggerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "type" | "createdAt" | "updatedAt" | "subAccountId", ExtArgs["result"]["trigger"]>
 export type TriggerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   Automations?: boolean | Prisma.Trigger$AutomationsArgs<ExtArgs>
+  Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TriggerCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $TriggerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Trigger"
   objects: {
-    Subaccount: Prisma.$SubAccountPayload<ExtArgs>
     Automations: Prisma.$AutomationPayload<ExtArgs>[]
+    Subaccount: Prisma.$SubAccountPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -976,8 +976,8 @@ readonly fields: TriggerFieldRefs;
  */
 export interface Prisma__TriggerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Subaccount<T extends Prisma.SubAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__SubAccountClient<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Automations<T extends Prisma.Trigger$AutomationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trigger$AutomationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Subaccount<T extends Prisma.SubAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__SubAccountClient<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

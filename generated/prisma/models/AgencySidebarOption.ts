@@ -198,7 +198,7 @@ export type AgencySidebarOptionWhereInput = {
   agencyId?: Prisma.StringFilter<"AgencySidebarOption"> | string
   createdAt?: Prisma.DateTimeFilter<"AgencySidebarOption"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AgencySidebarOption"> | Date | string
-  Agency?: Prisma.XOR<Prisma.AgencyNullableScalarRelationFilter, Prisma.AgencyWhereInput> | null
+  Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
 }
 
 export type AgencySidebarOptionOrderByWithRelationInput = {
@@ -224,7 +224,7 @@ export type AgencySidebarOptionWhereUniqueInput = Prisma.AtLeast<{
   agencyId?: Prisma.StringFilter<"AgencySidebarOption"> | string
   createdAt?: Prisma.DateTimeFilter<"AgencySidebarOption"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AgencySidebarOption"> | Date | string
-  Agency?: Prisma.XOR<Prisma.AgencyNullableScalarRelationFilter, Prisma.AgencyWhereInput> | null
+  Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
 }, "id">
 
 export type AgencySidebarOptionOrderByWithAggregationInput = {
@@ -260,7 +260,7 @@ export type AgencySidebarOptionCreateInput = {
   icon?: $Enums.Icon
   createdAt?: Date | string
   updatedAt?: Date | string
-  Agency?: Prisma.AgencyCreateNestedOneWithoutSidebarOptionInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSidebarOptionInput
 }
 
 export type AgencySidebarOptionUncheckedCreateInput = {
@@ -280,7 +280,7 @@ export type AgencySidebarOptionUpdateInput = {
   icon?: Prisma.EnumIconFieldUpdateOperationsInput | $Enums.Icon
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  Agency?: Prisma.AgencyUpdateOneWithoutSidebarOptionNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSidebarOptionNestedInput
 }
 
 export type AgencySidebarOptionUncheckedUpdateInput = {
@@ -517,7 +517,7 @@ export type AgencySidebarOptionSelect<ExtArgs extends runtime.Types.Extensions.I
   agencyId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  Agency?: boolean | Prisma.AgencySidebarOption$AgencyArgs<ExtArgs>
+  Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["agencySidebarOption"]>
 
 
@@ -534,13 +534,13 @@ export type AgencySidebarOptionSelectScalar = {
 
 export type AgencySidebarOptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "link" | "icon" | "agencyId" | "createdAt" | "updatedAt", ExtArgs["result"]["agencySidebarOption"]>
 export type AgencySidebarOptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  Agency?: boolean | Prisma.AgencySidebarOption$AgencyArgs<ExtArgs>
+  Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
 }
 
 export type $AgencySidebarOptionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AgencySidebarOption"
   objects: {
-    Agency: Prisma.$AgencyPayload<ExtArgs> | null
+    Agency: Prisma.$AgencyPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -890,7 +890,7 @@ readonly fields: AgencySidebarOptionFieldRefs;
  */
 export interface Prisma__AgencySidebarOptionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  Agency<T extends Prisma.AgencySidebarOption$AgencyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgencySidebarOption$AgencyArgs<ExtArgs>>): Prisma.Prisma__AgencyClient<runtime.Types.Result.GetResult<Prisma.$AgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  Agency<T extends Prisma.AgencyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgencyDefaultArgs<ExtArgs>>): Prisma.Prisma__AgencyClient<runtime.Types.Result.GetResult<Prisma.$AgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1267,25 +1267,6 @@ export type AgencySidebarOptionDeleteManyArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many AgencySidebarOptions to delete.
    */
   limit?: number
-}
-
-/**
- * AgencySidebarOption.Agency
- */
-export type AgencySidebarOption$AgencyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Agency
-   */
-  select?: Prisma.AgencySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Agency
-   */
-  omit?: Prisma.AgencyOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AgencyInclude<ExtArgs> | null
-  where?: Prisma.AgencyWhereInput
 }
 
 /**

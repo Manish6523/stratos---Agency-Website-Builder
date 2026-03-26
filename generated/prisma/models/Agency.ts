@@ -304,13 +304,13 @@ export type AgencyWhereInput = {
   goal?: Prisma.IntFilter<"Agency"> | number
   createdAt?: Prisma.DateTimeFilter<"Agency"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agency"> | Date | string
-  users?: Prisma.UserListRelationFilter
-  SubAccount?: Prisma.SubAccountListRelationFilter
+  AddOns?: Prisma.AddOnsListRelationFilter
   SidebarOption?: Prisma.AgencySidebarOptionListRelationFilter
   Invitation?: Prisma.InvitationListRelationFilter
   Notification?: Prisma.NotificationListRelationFilter
+  SubAccount?: Prisma.SubAccountListRelationFilter
   Subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
-  AddOns?: Prisma.AddOnsListRelationFilter
+  users?: Prisma.UserListRelationFilter
 }
 
 export type AgencyOrderByWithRelationInput = {
@@ -330,13 +330,13 @@ export type AgencyOrderByWithRelationInput = {
   goal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  users?: Prisma.UserOrderByRelationAggregateInput
-  SubAccount?: Prisma.SubAccountOrderByRelationAggregateInput
+  AddOns?: Prisma.AddOnsOrderByRelationAggregateInput
   SidebarOption?: Prisma.AgencySidebarOptionOrderByRelationAggregateInput
   Invitation?: Prisma.InvitationOrderByRelationAggregateInput
   Notification?: Prisma.NotificationOrderByRelationAggregateInput
+  SubAccount?: Prisma.SubAccountOrderByRelationAggregateInput
   Subscription?: Prisma.SubscriptionOrderByWithRelationInput
-  AddOns?: Prisma.AddOnsOrderByRelationAggregateInput
+  users?: Prisma.UserOrderByRelationAggregateInput
   _relevance?: Prisma.AgencyOrderByRelevanceInput
 }
 
@@ -360,13 +360,13 @@ export type AgencyWhereUniqueInput = Prisma.AtLeast<{
   goal?: Prisma.IntFilter<"Agency"> | number
   createdAt?: Prisma.DateTimeFilter<"Agency"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agency"> | Date | string
-  users?: Prisma.UserListRelationFilter
-  SubAccount?: Prisma.SubAccountListRelationFilter
+  AddOns?: Prisma.AddOnsListRelationFilter
   SidebarOption?: Prisma.AgencySidebarOptionListRelationFilter
   Invitation?: Prisma.InvitationListRelationFilter
   Notification?: Prisma.NotificationListRelationFilter
+  SubAccount?: Prisma.SubAccountListRelationFilter
   Subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
-  AddOns?: Prisma.AddOnsListRelationFilter
+  users?: Prisma.UserListRelationFilter
 }, "id">
 
 export type AgencyOrderByWithAggregationInput = {
@@ -432,13 +432,13 @@ export type AgencyCreateInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateInput = {
@@ -458,13 +458,13 @@ export type AgencyUncheckedCreateInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUpdateInput = {
@@ -484,13 +484,13 @@ export type AgencyUpdateInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateInput = {
@@ -510,13 +510,13 @@ export type AgencyUncheckedUpdateInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateManyInput = {
@@ -701,12 +701,10 @@ export type AgencyCreateNestedOneWithoutSidebarOptionInput = {
   connect?: Prisma.AgencyWhereUniqueInput
 }
 
-export type AgencyUpdateOneWithoutSidebarOptionNestedInput = {
+export type AgencyUpdateOneRequiredWithoutSidebarOptionNestedInput = {
   create?: Prisma.XOR<Prisma.AgencyCreateWithoutSidebarOptionInput, Prisma.AgencyUncheckedCreateWithoutSidebarOptionInput>
   connectOrCreate?: Prisma.AgencyCreateOrConnectWithoutSidebarOptionInput
   upsert?: Prisma.AgencyUpsertWithoutSidebarOptionInput
-  disconnect?: Prisma.AgencyWhereInput | boolean
-  delete?: Prisma.AgencyWhereInput | boolean
   connect?: Prisma.AgencyWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.AgencyUpdateToOneWithWhereWithoutSidebarOptionInput, Prisma.AgencyUpdateWithoutSidebarOptionInput>, Prisma.AgencyUncheckedUpdateWithoutSidebarOptionInput>
 }
@@ -788,12 +786,12 @@ export type AgencyCreateWithoutUsersInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutUsersInput = {
@@ -813,12 +811,12 @@ export type AgencyUncheckedCreateWithoutUsersInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutUsersInput = {
@@ -854,12 +852,12 @@ export type AgencyUpdateWithoutUsersInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutUsersInput = {
@@ -879,12 +877,12 @@ export type AgencyUncheckedUpdateWithoutUsersInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutSubAccountInput = {
@@ -904,12 +902,12 @@ export type AgencyCreateWithoutSubAccountInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutSubAccountInput = {
@@ -929,12 +927,12 @@ export type AgencyUncheckedCreateWithoutSubAccountInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutSubAccountInput = {
@@ -970,12 +968,12 @@ export type AgencyUpdateWithoutSubAccountInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutSubAccountInput = {
@@ -995,12 +993,12 @@ export type AgencyUncheckedUpdateWithoutSubAccountInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutSidebarOptionInput = {
@@ -1020,12 +1018,12 @@ export type AgencyCreateWithoutSidebarOptionInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutSidebarOptionInput = {
@@ -1045,12 +1043,12 @@ export type AgencyUncheckedCreateWithoutSidebarOptionInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutSidebarOptionInput = {
@@ -1086,12 +1084,12 @@ export type AgencyUpdateWithoutSidebarOptionInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutSidebarOptionInput = {
@@ -1111,12 +1109,12 @@ export type AgencyUncheckedUpdateWithoutSidebarOptionInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutInvitationInput = {
@@ -1136,12 +1134,12 @@ export type AgencyCreateWithoutInvitationInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutInvitationInput = {
@@ -1161,12 +1159,12 @@ export type AgencyUncheckedCreateWithoutInvitationInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutInvitationInput = {
@@ -1202,12 +1200,12 @@ export type AgencyUpdateWithoutInvitationInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutInvitationInput = {
@@ -1227,12 +1225,12 @@ export type AgencyUncheckedUpdateWithoutInvitationInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutNotificationInput = {
@@ -1252,12 +1250,12 @@ export type AgencyCreateWithoutNotificationInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutNotificationInput = {
@@ -1277,12 +1275,12 @@ export type AgencyUncheckedCreateWithoutNotificationInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutAgencyInput
-  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutNotificationInput = {
@@ -1318,12 +1316,12 @@ export type AgencyUpdateWithoutNotificationInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutNotificationInput = {
@@ -1343,12 +1341,12 @@ export type AgencyUncheckedUpdateWithoutNotificationInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutSubscriptionInput = {
@@ -1368,12 +1366,12 @@ export type AgencyCreateWithoutSubscriptionInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutAgencyInput
-  AddOns?: Prisma.AddOnsCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutSubscriptionInput = {
@@ -1393,12 +1391,12 @@ export type AgencyUncheckedCreateWithoutSubscriptionInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
+  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutAgencyInput
-  AddOns?: Prisma.AddOnsUncheckedCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutSubscriptionInput = {
@@ -1434,12 +1432,12 @@ export type AgencyUpdateWithoutSubscriptionInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutSubscriptionInput = {
@@ -1459,12 +1457,12 @@ export type AgencyUncheckedUpdateWithoutSubscriptionInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
+  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutAgencyNestedInput
-  AddOns?: Prisma.AddOnsUncheckedUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyCreateWithoutAddOnsInput = {
@@ -1484,12 +1482,12 @@ export type AgencyCreateWithoutAddOnsInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionCreateNestedOneWithoutAgencyInput
+  users?: Prisma.UserCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyUncheckedCreateWithoutAddOnsInput = {
@@ -1509,12 +1507,12 @@ export type AgencyUncheckedCreateWithoutAddOnsInput = {
   goal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
-  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedCreateNestedManyWithoutAgencyInput
   Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutAgencyInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutAgencyInput
+  SubAccount?: Prisma.SubAccountUncheckedCreateNestedManyWithoutAgencyInput
   Subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutAgencyInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutAgencyInput
 }
 
 export type AgencyCreateOrConnectWithoutAddOnsInput = {
@@ -1550,12 +1548,12 @@ export type AgencyUpdateWithoutAddOnsInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUpdateOneWithoutAgencyNestedInput
+  users?: Prisma.UserUpdateManyWithoutAgencyNestedInput
 }
 
 export type AgencyUncheckedUpdateWithoutAddOnsInput = {
@@ -1575,12 +1573,12 @@ export type AgencyUncheckedUpdateWithoutAddOnsInput = {
   goal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
-  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
   SidebarOption?: Prisma.AgencySidebarOptionUncheckedUpdateManyWithoutAgencyNestedInput
   Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutAgencyNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutAgencyNestedInput
+  SubAccount?: Prisma.SubAccountUncheckedUpdateManyWithoutAgencyNestedInput
   Subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutAgencyNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutAgencyNestedInput
 }
 
 
@@ -1589,21 +1587,21 @@ export type AgencyUncheckedUpdateWithoutAddOnsInput = {
  */
 
 export type AgencyCountOutputType = {
-  users: number
-  SubAccount: number
+  AddOns: number
   SidebarOption: number
   Invitation: number
   Notification: number
-  AddOns: number
+  SubAccount: number
+  users: number
 }
 
 export type AgencyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | AgencyCountOutputTypeCountUsersArgs
-  SubAccount?: boolean | AgencyCountOutputTypeCountSubAccountArgs
+  AddOns?: boolean | AgencyCountOutputTypeCountAddOnsArgs
   SidebarOption?: boolean | AgencyCountOutputTypeCountSidebarOptionArgs
   Invitation?: boolean | AgencyCountOutputTypeCountInvitationArgs
   Notification?: boolean | AgencyCountOutputTypeCountNotificationArgs
-  AddOns?: boolean | AgencyCountOutputTypeCountAddOnsArgs
+  SubAccount?: boolean | AgencyCountOutputTypeCountSubAccountArgs
+  users?: boolean | AgencyCountOutputTypeCountUsersArgs
 }
 
 /**
@@ -1619,15 +1617,8 @@ export type AgencyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
 /**
  * AgencyCountOutputType without action
  */
-export type AgencyCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * AgencyCountOutputType without action
- */
-export type AgencyCountOutputTypeCountSubAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SubAccountWhereInput
+export type AgencyCountOutputTypeCountAddOnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AddOnsWhereInput
 }
 
 /**
@@ -1654,8 +1645,15 @@ export type AgencyCountOutputTypeCountNotificationArgs<ExtArgs extends runtime.T
 /**
  * AgencyCountOutputType without action
  */
-export type AgencyCountOutputTypeCountAddOnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AddOnsWhereInput
+export type AgencyCountOutputTypeCountSubAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubAccountWhereInput
+}
+
+/**
+ * AgencyCountOutputType without action
+ */
+export type AgencyCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
 }
 
 
@@ -1676,13 +1674,13 @@ export type AgencySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   goal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  users?: boolean | Prisma.Agency$usersArgs<ExtArgs>
-  SubAccount?: boolean | Prisma.Agency$SubAccountArgs<ExtArgs>
+  AddOns?: boolean | Prisma.Agency$AddOnsArgs<ExtArgs>
   SidebarOption?: boolean | Prisma.Agency$SidebarOptionArgs<ExtArgs>
   Invitation?: boolean | Prisma.Agency$InvitationArgs<ExtArgs>
   Notification?: boolean | Prisma.Agency$NotificationArgs<ExtArgs>
+  SubAccount?: boolean | Prisma.Agency$SubAccountArgs<ExtArgs>
   Subscription?: boolean | Prisma.Agency$SubscriptionArgs<ExtArgs>
-  AddOns?: boolean | Prisma.Agency$AddOnsArgs<ExtArgs>
+  users?: boolean | Prisma.Agency$usersArgs<ExtArgs>
   _count?: boolean | Prisma.AgencyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["agency"]>
 
@@ -1709,26 +1707,26 @@ export type AgencySelectScalar = {
 
 export type AgencyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "connectAccountId" | "customerId" | "name" | "agencyLogo" | "companyEmail" | "companyPhone" | "whiteLabel" | "address" | "city" | "zipCode" | "state" | "country" | "goal" | "createdAt" | "updatedAt", ExtArgs["result"]["agency"]>
 export type AgencyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | Prisma.Agency$usersArgs<ExtArgs>
-  SubAccount?: boolean | Prisma.Agency$SubAccountArgs<ExtArgs>
+  AddOns?: boolean | Prisma.Agency$AddOnsArgs<ExtArgs>
   SidebarOption?: boolean | Prisma.Agency$SidebarOptionArgs<ExtArgs>
   Invitation?: boolean | Prisma.Agency$InvitationArgs<ExtArgs>
   Notification?: boolean | Prisma.Agency$NotificationArgs<ExtArgs>
+  SubAccount?: boolean | Prisma.Agency$SubAccountArgs<ExtArgs>
   Subscription?: boolean | Prisma.Agency$SubscriptionArgs<ExtArgs>
-  AddOns?: boolean | Prisma.Agency$AddOnsArgs<ExtArgs>
+  users?: boolean | Prisma.Agency$usersArgs<ExtArgs>
   _count?: boolean | Prisma.AgencyCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $AgencyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Agency"
   objects: {
-    users: Prisma.$UserPayload<ExtArgs>[]
-    SubAccount: Prisma.$SubAccountPayload<ExtArgs>[]
+    AddOns: Prisma.$AddOnsPayload<ExtArgs>[]
     SidebarOption: Prisma.$AgencySidebarOptionPayload<ExtArgs>[]
     Invitation: Prisma.$InvitationPayload<ExtArgs>[]
     Notification: Prisma.$NotificationPayload<ExtArgs>[]
+    SubAccount: Prisma.$SubAccountPayload<ExtArgs>[]
     Subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
-    AddOns: Prisma.$AddOnsPayload<ExtArgs>[]
+    users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2087,13 +2085,13 @@ readonly fields: AgencyFieldRefs;
  */
 export interface Prisma__AgencyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  users<T extends Prisma.Agency$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  SubAccount<T extends Prisma.Agency$SubAccountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$SubAccountArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  AddOns<T extends Prisma.Agency$AddOnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$AddOnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AddOnsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   SidebarOption<T extends Prisma.Agency$SidebarOptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$SidebarOptionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgencySidebarOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Invitation<T extends Prisma.Agency$InvitationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$InvitationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Notification<T extends Prisma.Agency$NotificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$NotificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  SubAccount<T extends Prisma.Agency$SubAccountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$SubAccountArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Subscription<T extends Prisma.Agency$SubscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$SubscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  AddOns<T extends Prisma.Agency$AddOnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$AddOnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AddOnsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  users<T extends Prisma.Agency$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agency$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2482,51 +2480,27 @@ export type AgencyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Agency.users
+ * Agency.AddOns
  */
-export type Agency$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Agency$AddOnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the AddOns
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.AddOnsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the AddOns
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.AddOnsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
-  cursor?: Prisma.UserWhereUniqueInput
+  include?: Prisma.AddOnsInclude<ExtArgs> | null
+  where?: Prisma.AddOnsWhereInput
+  orderBy?: Prisma.AddOnsOrderByWithRelationInput | Prisma.AddOnsOrderByWithRelationInput[]
+  cursor?: Prisma.AddOnsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
-}
-
-/**
- * Agency.SubAccount
- */
-export type Agency$SubAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SubAccount
-   */
-  select?: Prisma.SubAccountSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the SubAccount
-   */
-  omit?: Prisma.SubAccountOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SubAccountInclude<ExtArgs> | null
-  where?: Prisma.SubAccountWhereInput
-  orderBy?: Prisma.SubAccountOrderByWithRelationInput | Prisma.SubAccountOrderByWithRelationInput[]
-  cursor?: Prisma.SubAccountWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SubAccountScalarFieldEnum | Prisma.SubAccountScalarFieldEnum[]
+  distinct?: Prisma.AddOnsScalarFieldEnum | Prisma.AddOnsScalarFieldEnum[]
 }
 
 /**
@@ -2602,6 +2576,30 @@ export type Agency$NotificationArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * Agency.SubAccount
+ */
+export type Agency$SubAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubAccount
+   */
+  select?: Prisma.SubAccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubAccount
+   */
+  omit?: Prisma.SubAccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubAccountInclude<ExtArgs> | null
+  where?: Prisma.SubAccountWhereInput
+  orderBy?: Prisma.SubAccountOrderByWithRelationInput | Prisma.SubAccountOrderByWithRelationInput[]
+  cursor?: Prisma.SubAccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubAccountScalarFieldEnum | Prisma.SubAccountScalarFieldEnum[]
+}
+
+/**
  * Agency.Subscription
  */
 export type Agency$SubscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2621,27 +2619,27 @@ export type Agency$SubscriptionArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Agency.AddOns
+ * Agency.users
  */
-export type Agency$AddOnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Agency$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the AddOns
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.AddOnsSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the AddOns
+   * Omit specific fields from the User
    */
-  omit?: Prisma.AddOnsOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AddOnsInclude<ExtArgs> | null
-  where?: Prisma.AddOnsWhereInput
-  orderBy?: Prisma.AddOnsOrderByWithRelationInput | Prisma.AddOnsOrderByWithRelationInput[]
-  cursor?: Prisma.AddOnsWhereUniqueInput
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.AddOnsScalarFieldEnum | Prisma.AddOnsScalarFieldEnum[]
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

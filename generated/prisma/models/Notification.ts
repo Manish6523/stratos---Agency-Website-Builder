@@ -198,9 +198,9 @@ export type NotificationWhereInput = {
   userId?: Prisma.StringFilter<"Notification"> | string
   createdAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
-  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
   SubAccount?: Prisma.XOR<Prisma.SubAccountNullableScalarRelationFilter, Prisma.SubAccountWhereInput> | null
+  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type NotificationOrderByWithRelationInput = {
@@ -211,9 +211,9 @@ export type NotificationOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  User?: Prisma.UserOrderByWithRelationInput
   Agency?: Prisma.AgencyOrderByWithRelationInput
   SubAccount?: Prisma.SubAccountOrderByWithRelationInput
+  User?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.NotificationOrderByRelevanceInput
 }
 
@@ -228,9 +228,9 @@ export type NotificationWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"Notification"> | string
   createdAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Notification"> | Date | string
-  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   Agency?: Prisma.XOR<Prisma.AgencyScalarRelationFilter, Prisma.AgencyWhereInput>
   SubAccount?: Prisma.XOR<Prisma.SubAccountNullableScalarRelationFilter, Prisma.SubAccountWhereInput> | null
+  User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type NotificationOrderByWithAggregationInput = {
@@ -264,9 +264,9 @@ export type NotificationCreateInput = {
   notification: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  User: Prisma.UserCreateNestedOneWithoutNotificationInput
   Agency: Prisma.AgencyCreateNestedOneWithoutNotificationInput
   SubAccount?: Prisma.SubAccountCreateNestedOneWithoutNotificationInput
+  User: Prisma.UserCreateNestedOneWithoutNotificationInput
 }
 
 export type NotificationUncheckedCreateInput = {
@@ -284,9 +284,9 @@ export type NotificationUpdateInput = {
   notification?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  User?: Prisma.UserUpdateOneRequiredWithoutNotificationNestedInput
   Agency?: Prisma.AgencyUpdateOneRequiredWithoutNotificationNestedInput
   SubAccount?: Prisma.SubAccountUpdateOneWithoutNotificationNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutNotificationNestedInput
 }
 
 export type NotificationUncheckedUpdateInput = {
@@ -560,8 +560,8 @@ export type NotificationCreateWithoutAgencyInput = {
   notification: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  User: Prisma.UserCreateNestedOneWithoutNotificationInput
   SubAccount?: Prisma.SubAccountCreateNestedOneWithoutNotificationInput
+  User: Prisma.UserCreateNestedOneWithoutNotificationInput
 }
 
 export type NotificationUncheckedCreateWithoutAgencyInput = {
@@ -604,8 +604,8 @@ export type NotificationCreateWithoutSubAccountInput = {
   notification: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  User: Prisma.UserCreateNestedOneWithoutNotificationInput
   Agency: Prisma.AgencyCreateNestedOneWithoutNotificationInput
+  User: Prisma.UserCreateNestedOneWithoutNotificationInput
 }
 
 export type NotificationUncheckedCreateWithoutSubAccountInput = {
@@ -693,8 +693,8 @@ export type NotificationUpdateWithoutAgencyInput = {
   notification?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  User?: Prisma.UserUpdateOneRequiredWithoutNotificationNestedInput
   SubAccount?: Prisma.SubAccountUpdateOneWithoutNotificationNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutNotificationNestedInput
 }
 
 export type NotificationUncheckedUpdateWithoutAgencyInput = {
@@ -729,8 +729,8 @@ export type NotificationUpdateWithoutSubAccountInput = {
   notification?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  User?: Prisma.UserUpdateOneRequiredWithoutNotificationNestedInput
   Agency?: Prisma.AgencyUpdateOneRequiredWithoutNotificationNestedInput
+  User?: Prisma.UserUpdateOneRequiredWithoutNotificationNestedInput
 }
 
 export type NotificationUncheckedUpdateWithoutSubAccountInput = {
@@ -761,9 +761,9 @@ export type NotificationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
   SubAccount?: boolean | Prisma.Notification$SubAccountArgs<ExtArgs>
+  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["notification"]>
 
 
@@ -780,17 +780,17 @@ export type NotificationSelectScalar = {
 
 export type NotificationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "notification" | "agencyId" | "subAccountId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["notification"]>
 export type NotificationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   Agency?: boolean | Prisma.AgencyDefaultArgs<ExtArgs>
   SubAccount?: boolean | Prisma.Notification$SubAccountArgs<ExtArgs>
+  User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $NotificationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Notification"
   objects: {
-    User: Prisma.$UserPayload<ExtArgs>
     Agency: Prisma.$AgencyPayload<ExtArgs>
     SubAccount: Prisma.$SubAccountPayload<ExtArgs> | null
+    User: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1140,9 +1140,9 @@ readonly fields: NotificationFieldRefs;
  */
 export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Agency<T extends Prisma.AgencyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AgencyDefaultArgs<ExtArgs>>): Prisma.Prisma__AgencyClient<runtime.Types.Result.GetResult<Prisma.$AgencyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   SubAccount<T extends Prisma.Notification$SubAccountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Notification$SubAccountArgs<ExtArgs>>): Prisma.Prisma__SubAccountClient<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  User<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

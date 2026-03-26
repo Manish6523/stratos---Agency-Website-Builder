@@ -361,7 +361,8 @@ export const InvitationScalarFieldEnum = {
   email: 'email',
   agencyId: 'agencyId',
   status: 'status',
-  role: 'role'
+  role: 'role',
+  subAccountId: 'subAccountId'
 } as const
 
 export type InvitationScalarFieldEnum = (typeof InvitationScalarFieldEnum)[keyof typeof InvitationScalarFieldEnum]
@@ -639,7 +640,8 @@ export type SubAccountSidebarOptionOrderByRelevanceFieldEnum = (typeof SubAccoun
 export const InvitationOrderByRelevanceFieldEnum = {
   id: 'id',
   email: 'email',
-  agencyId: 'agencyId'
+  agencyId: 'agencyId',
+  subAccountId: 'subAccountId'
 } as const
 
 export type InvitationOrderByRelevanceFieldEnum = (typeof InvitationOrderByRelevanceFieldEnum)[keyof typeof InvitationOrderByRelevanceFieldEnum]
