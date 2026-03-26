@@ -39,8 +39,7 @@ const page = async ({
     } 
     return <div>Not Authorized</div>;
   }
-  // ... rest of your code
-
+  
   const authUser = await currentUser();
 
   return (
