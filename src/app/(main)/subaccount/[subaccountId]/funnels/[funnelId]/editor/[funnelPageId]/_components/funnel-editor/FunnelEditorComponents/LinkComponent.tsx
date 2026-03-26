@@ -47,7 +47,7 @@ const LinkComponent = (props: Props) => {
       style={styles}
       id={props.element.id}
       draggable={!state.editor.liveMode && !state.editor.previewMode}
-      onDragStart={(e) => handleDragStart(e, "text")}
+      onDragStart={(e) => handleDragStart(e, "link")}
       onClick={handleOnClickBody}
       className={clsx(
         "p-[2px] w-fit my-[5px] relative text-[16px] transition-all",
@@ -68,7 +68,14 @@ const LinkComponent = (props: Props) => {
         )}
       {!Array.isArray(props.element.content) &&
         (state.editor.previewMode || state.editor.liveMode) && (
-          <Link href={props.element.content.href || "#"}>
+          <Link
+            href={props.element.content.href || "#"}
+            draggable={false}
+            onDragStart={(e) => e.preventDefault()}
+            onClick={(e) => {
+              if (!state.editor.liveMode) e.preventDefault();
+            }}
+          >
             {props.element.content.innerText}
           </Link>
         )}

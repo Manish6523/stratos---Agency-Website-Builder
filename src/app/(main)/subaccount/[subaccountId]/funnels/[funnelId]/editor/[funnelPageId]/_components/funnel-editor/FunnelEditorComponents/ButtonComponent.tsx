@@ -51,7 +51,7 @@ const ButtonComponent = (props: Props) => {
         },
       )}
       onClick={handleOnClickBody}
-      draggable
+      draggable={!state.editor.liveMode && !state.editor.previewMode}
       onDragStart={(e) => handleDragStart(e, "button")}
     >
       {state.editor.selectedElement.id === props.element.id &&
@@ -63,6 +63,8 @@ const ButtonComponent = (props: Props) => {
 
       {!Array.isArray(props.element.content) && (
         <a
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
           href={props.element.content.href || "#"}
           className="w-full text-center"
           onClick={(e) => {
