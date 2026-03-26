@@ -25,6 +25,8 @@ import {
 } from "./types";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { sendInvitationEmail } from "./send-email";
+
 
 export const getAuthUserDetails = async () => {
   const user = await currentUser();
@@ -666,8 +668,23 @@ export const sendInvitation = async (
   role: Role,
   email: string,
   agencyId: string,
+  subAccountId?: string,
 ) => {
   try {
+    // Check if the email already belongs to a user in any agency
+    const existingUser = await db.user.findUnique({
+      where: { email },
+      include: { Agency: true },
+    });
+
+    if (existingUser && existingUser.agencyId) {
+      return {
+        error: "This email is already in an agency",
+        success: false as const,
+        status: "ALREADY_IN_AGENCY" as const,
+      };
+    }
+
     const agency = await db.agency.findUnique({
       where: { id: agencyId },
       include: { users: true, Subscription: true },
@@ -701,6 +718,7 @@ export const sendInvitation = async (
       }
     }
 
+
     const existingInvitation = await db.invitation.findUnique({
       where: {
         email,
@@ -718,21 +736,27 @@ export const sendInvitation = async (
       };
     } else {
       const response = await db.invitation.create({
-        data: { email, agencyId, role },
+        data: { email, agencyId, role, subAccountId: subAccountId || null },
       });
 
-      // const client = await clerkClient();
-      // await client.invitations.createInvitation({
-      //   emailAddress: email,
-      //   redirectUrl: `${process.env.NEXT_PUBLIC_URL}/agency/sign-up`,
-      //   ignoreExisting: true, // <--- Add this
-      //   publicMetadata: {
-      //     throughInvitation: true,
-      //     role,
-      //   },
-      // });
+      // Send invitation email via Resend
+      const agencyName = agency?.name || "the agency";
+      const emailResult = await sendInvitationEmail({
+        email,
+        agencyName,
+        invitationToken: response.id,
+        role,
+      });
+
+      if (!emailResult.success) {
+        console.error("Failed to send invitation email:", emailResult.error);
+        // Still return success since the invitation was created in DB
+        // The email can be resent later
+      }
+
       return { ...response, status: "SENT" as const, success: true as const };
     }
+
   } catch (error) {
     console.log(error);
     throw error;

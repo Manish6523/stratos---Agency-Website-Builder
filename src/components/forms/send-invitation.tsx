@@ -17,16 +17,18 @@ import { toast } from "sonner";
 
 interface SendInvitationProps {
   agencyId: string;
+  subAccounts?: { id: string; name: string }[];
 }
 
 const userDataSchema = z.object({
   email: z.string().email("Invalid email address"),
   role: z.enum(["AGENCY_ADMIN", "SUBACCOUNT_USER", "SUBACCOUNT_GUEST"]),
+  subAccountId: z.string().optional(),
 });
 
 type FormData = z.infer<typeof userDataSchema>;
 
-const SendInvitation: React.FC<SendInvitationProps> = ({ agencyId }) => {
+const SendInvitation: React.FC<SendInvitationProps> = ({ agencyId, subAccounts }) => {
   const {
     register,
     handleSubmit,
@@ -36,16 +38,23 @@ const SendInvitation: React.FC<SendInvitationProps> = ({ agencyId }) => {
     defaultValues: {
       email: "",
       role: "SUBACCOUNT_USER",
+      subAccountId: "",
     },
   });
 
   const onSubmit = async (values: FormData) => {
     try {
-      const res = await sendInvitation(values.role, values.email, agencyId);
+      const res = await sendInvitation(values.role, values.email, agencyId, values.subAccountId);
       if (!res.success) {
-        toast.error("Error", {
-          description: res.error || "Invitation already sent to this email",
-        });
+        if (res.status === "ALREADY_IN_AGENCY") {
+          toast.error("Error", {
+            description: "This email is already in an agency",
+          });
+        } else {
+          toast.error("Error", {
+            description: res.error || "Invitation already sent to this email",
+          });
+        }
         return;
       } else if (res.success && res.status === "SENT") {
         toast.success("Success", { description: "Invitation sent" });
@@ -81,7 +90,7 @@ const SendInvitation: React.FC<SendInvitationProps> = ({ agencyId }) => {
               disabled={isSubmitting}
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             />
-            {errors.email && (
+            {errors.email?.message && (
               <p className="text-xs text-red-500">{errors.email.message}</p>
             )}
           </div>
@@ -98,8 +107,28 @@ const SendInvitation: React.FC<SendInvitationProps> = ({ agencyId }) => {
               <option value="SUBACCOUNT_USER">Sub Account User</option>
               <option value="SUBACCOUNT_GUEST">Sub Account Guest</option>
             </select>
-            {errors.role && (
+            {errors.role?.message && (
               <p className="text-xs text-red-500">{errors.role.message}</p>
+            )}
+          </div>
+
+          {/* SubAccount Field */}
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium">Assigned Subaccount (Optional)</label>
+            <select
+              {...register("subAccountId")}
+              disabled={isSubmitting}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <option value="">None / Agency Wide</option>
+              {subAccounts?.map((subAccount) => (
+                <option key={subAccount.id} value={subAccount.id}>
+                  {subAccount.name}
+                </option>
+              ))}
+            </select>
+            {errors.subAccountId?.message && (
+              <p className="text-xs text-red-500">{errors.subAccountId.message}</p>
             )}
           </div>
 
