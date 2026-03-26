@@ -27,7 +27,7 @@ export const sendInvitationEmail = async ({
 
   try {
     const { data, error } = await resend.emails.send({
-      from: "Stratos <onboarding@resend.dev>",
+      from: "Stratos <noreply@mail.stratospro.me>",
       to: [email],
       subject: `You've been invited to join ${agencyName}`,
       html: `
