@@ -29,7 +29,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${font.className} antialiased`}>
+      <body className={`${font.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

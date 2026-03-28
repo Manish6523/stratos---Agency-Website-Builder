@@ -40,4 +40,33 @@ const Page = async ({
   );
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ domain: string; path: string }>;
+}) {
+  const param = await params;
+  const domainData = await getDomainContent(param.domain.slice(0, -1));
+  const pageData = domainData?.FunnelPages.find(
+    (page) => page.pathName === param.path,
+  );
+
+  return {
+    title: pageData?.customName || pageData?.name || "Funnel Page",
+    icons: domainData?.favicon
+      ? {
+          icon: [
+            {
+              url: domainData.favicon,
+              sizes: "any",
+              type: "image/png",
+            },
+          ],
+          shortcut: domainData.favicon,
+          apple: domainData.favicon,
+        }
+      : undefined,
+  };
+}
+
 export default Page;

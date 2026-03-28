@@ -61,3 +61,18 @@ export default async function Page({ params }: Props) {
     </div>
   );
 }
+
+export async function generateMetadata({ params }: Props) {
+  const param = await params;
+  const funnelPageDetails = await db.funnelPage.findFirst({
+    where: {
+      id: param.funnelPageId,
+    },
+  });
+
+  return {
+    title: funnelPageDetails?.customName
+      ? `${funnelPageDetails.customName} | Stratos Editor`
+      : `${funnelPageDetails?.name || "Page"} | Stratos Editor`,
+  };
+}
