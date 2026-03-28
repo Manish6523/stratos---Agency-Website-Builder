@@ -25,10 +25,14 @@ import {
   PanelRightOpen,
   ClipboardCopy,
   ClipboardPaste,
+  Download,
+  Loader2,
+  Code2,
 } from "lucide-react";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import React, { FocusEventHandler, useEffect } from "react";
+import React, { FocusEventHandler, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type Props = {
@@ -44,6 +48,9 @@ export default function FunnelEditorNavigation({
 }: Props) {
   const router = useRouter();
   const { state, dispatch } = useEditor();
+  const [isExporting, setIsExporting] = useState(false);
+  const { user } = useUser();
+  const isAdmin = user?.emailAddresses?.[0]?.emailAddress === "ms5392363@gmail.com";
 
   useEffect(() => {
     dispatch({
@@ -276,6 +283,62 @@ export default function FunnelEditorNavigation({
               Last updated {funnelPageDetails.updatedAt.toLocaleDateString()}
             </span>
           </div>
+          <Button
+            variant="outline"
+            size="icon"
+            className="hover:bg-slate-800"
+            disabled={isExporting}
+            title="Export as HTML"
+            onClick={async () => {
+              setIsExporting(true);
+              try {
+                const response = await fetch("/api/export-html", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    elements: state.editor.elements,
+                    pageTitle: funnelPageDetails.name,
+                  }),
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error);
+                const blob = new Blob([data.html], { type: "text/html" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `${funnelPageDetails.name || "page"}.html`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                toast.success("Page exported as HTML!");
+              } catch (error: any) {
+                toast.error(error.message || "Failed to export");
+              } finally {
+                setIsExporting(false);
+              }
+            }}
+          >
+            {isExporting ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Download className="w-4 h-4" />
+            )}
+          </Button>
+          {isAdmin && (
+            <Link
+              href={`/subaccount/${subaccountId}/funnels/${funnelId}/editor/${funnelPageDetails.id}/code`}
+            >
+              <Button
+                variant="outline"
+                size="icon"
+                className="hover:bg-slate-800"
+                title="Code Editor"
+              >
+                <Code2 className="w-4 h-4" />
+              </Button>
+            </Link>
+          )}
           <Button onClick={handleOnSave}>Save</Button>
         </aside>
       </nav>
