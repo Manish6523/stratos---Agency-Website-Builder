@@ -276,6 +276,7 @@ model FunnelPage {
   order        Int
   previewImage String?  @db.Text
   funnelId     String
+  customName   String?
   Funnel       Funnel   @relation(fields: [funnelId], references: [id], onDelete: Cascade)
 
   @@index([funnelId])

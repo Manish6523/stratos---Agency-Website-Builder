@@ -324,7 +324,8 @@ export const FunnelPageScalarFieldEnum = {
   content: 'content',
   order: 'order',
   previewImage: 'previewImage',
-  funnelId: 'funnelId'
+  funnelId: 'funnelId',
+  customName: 'customName'
 } as const
 
 export type FunnelPageScalarFieldEnum = (typeof FunnelPageScalarFieldEnum)[keyof typeof FunnelPageScalarFieldEnum]
@@ -611,7 +612,8 @@ export const FunnelPageOrderByRelevanceFieldEnum = {
   pathName: 'pathName',
   content: 'content',
   previewImage: 'previewImage',
-  funnelId: 'funnelId'
+  funnelId: 'funnelId',
+  customName: 'customName'
 } as const
 
 export type FunnelPageOrderByRelevanceFieldEnum = (typeof FunnelPageOrderByRelevanceFieldEnum)[keyof typeof FunnelPageOrderByRelevanceFieldEnum]

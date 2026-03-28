@@ -176,7 +176,12 @@ export default function FunnelSteps({
               <CardHeader>
                 <p className="text-sm text-muted-foreground">Page name</p>
                 <CardTitle>{clickedPage?.name}</CardTitle>
-                <CardDescription className="flex flex-col gap-4">
+                {clickedPage?.customName && (
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Custom Title: {clickedPage.customName}
+                  </p>
+                )}
+                <CardDescription className="flex flex-col gap-4 mt-2">
                   <div className=" relative border-2 rounded-lg sm:w-80 w-full  overflow-clip">
                     <Link
                       href={`/subaccount/${subaccountId}/funnels/${funnelId}/editor/${clickedPage?.id}`}

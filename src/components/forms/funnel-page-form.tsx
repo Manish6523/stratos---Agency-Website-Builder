@@ -36,6 +36,7 @@ type Props = {
 export const FunnelPageSchema = z.object({
   name: z.string().min(1),
   pathName: z.string().optional(),
+  customName: z.string().optional(),
 });
 
 export default function FunnelPageForm({
@@ -51,6 +52,7 @@ export default function FunnelPageForm({
     defaultValues: {
       name: "",
       pathName: "",
+      customName: "",
     },
   });
 
@@ -64,7 +66,7 @@ export default function FunnelPageForm({
 
   useEffect(() => {
     if (defaultData) {
-      reset({ name: defaultData.name, pathName: defaultData.pathName });
+      reset({ name: defaultData.name, pathName: defaultData.pathName, customName: defaultData.customName || "" });
     }
   }, [defaultData, reset]);
 
@@ -143,6 +145,14 @@ export default function FunnelPageForm({
               </p>
             )}
           </div>
+          <div className="flex flex-col gap-2">
+            <Label>Custom Title (Optional)</Label>
+            <Input
+              disabled={isSubmitting}
+              placeholder="Custom page title"
+              {...register("customName")}
+            />
+          </div>
           <div className="flex items-center sm:flex-row flex-col gap-2">
             <Button disabled={isSubmitting} type="submit">
               {isSubmitting ? <Loading /> : "Save Page"}
@@ -191,6 +201,7 @@ export default function FunnelPageForm({
                       visits: 0,
                       name: `${defaultData.name} Copy`,
                       pathName: `${defaultData.pathName}copy`,
+                      customName: `${defaultData.customName || ""} Copy`,
                       content: defaultData.content,
                     },
                     funnelId,

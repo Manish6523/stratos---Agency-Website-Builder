@@ -47,6 +47,7 @@ export type FunnelPageMinAggregateOutputType = {
   order: number | null
   previewImage: string | null
   funnelId: string | null
+  customName: string | null
 }
 
 export type FunnelPageMaxAggregateOutputType = {
@@ -60,6 +61,7 @@ export type FunnelPageMaxAggregateOutputType = {
   order: number | null
   previewImage: string | null
   funnelId: string | null
+  customName: string | null
 }
 
 export type FunnelPageCountAggregateOutputType = {
@@ -73,6 +75,7 @@ export type FunnelPageCountAggregateOutputType = {
   order: number
   previewImage: number
   funnelId: number
+  customName: number
   _all: number
 }
 
@@ -98,6 +101,7 @@ export type FunnelPageMinAggregateInputType = {
   order?: true
   previewImage?: true
   funnelId?: true
+  customName?: true
 }
 
 export type FunnelPageMaxAggregateInputType = {
@@ -111,6 +115,7 @@ export type FunnelPageMaxAggregateInputType = {
   order?: true
   previewImage?: true
   funnelId?: true
+  customName?: true
 }
 
 export type FunnelPageCountAggregateInputType = {
@@ -124,6 +129,7 @@ export type FunnelPageCountAggregateInputType = {
   order?: true
   previewImage?: true
   funnelId?: true
+  customName?: true
   _all?: true
 }
 
@@ -224,6 +230,7 @@ export type FunnelPageGroupByOutputType = {
   order: number
   previewImage: string | null
   funnelId: string
+  customName: string | null
   _count: FunnelPageCountAggregateOutputType | null
   _avg: FunnelPageAvgAggregateOutputType | null
   _sum: FunnelPageSumAggregateOutputType | null
@@ -260,6 +267,7 @@ export type FunnelPageWhereInput = {
   order?: Prisma.IntFilter<"FunnelPage"> | number
   previewImage?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
   funnelId?: Prisma.StringFilter<"FunnelPage"> | string
+  customName?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
   Funnel?: Prisma.XOR<Prisma.FunnelScalarRelationFilter, Prisma.FunnelWhereInput>
 }
 
@@ -274,6 +282,7 @@ export type FunnelPageOrderByWithRelationInput = {
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrderInput | Prisma.SortOrder
   funnelId?: Prisma.SortOrder
+  customName?: Prisma.SortOrderInput | Prisma.SortOrder
   Funnel?: Prisma.FunnelOrderByWithRelationInput
   _relevance?: Prisma.FunnelPageOrderByRelevanceInput
 }
@@ -292,6 +301,7 @@ export type FunnelPageWhereUniqueInput = Prisma.AtLeast<{
   order?: Prisma.IntFilter<"FunnelPage"> | number
   previewImage?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
   funnelId?: Prisma.StringFilter<"FunnelPage"> | string
+  customName?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
   Funnel?: Prisma.XOR<Prisma.FunnelScalarRelationFilter, Prisma.FunnelWhereInput>
 }, "id">
 
@@ -306,6 +316,7 @@ export type FunnelPageOrderByWithAggregationInput = {
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrderInput | Prisma.SortOrder
   funnelId?: Prisma.SortOrder
+  customName?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FunnelPageCountOrderByAggregateInput
   _avg?: Prisma.FunnelPageAvgOrderByAggregateInput
   _max?: Prisma.FunnelPageMaxOrderByAggregateInput
@@ -327,6 +338,7 @@ export type FunnelPageScalarWhereWithAggregatesInput = {
   order?: Prisma.IntWithAggregatesFilter<"FunnelPage"> | number
   previewImage?: Prisma.StringNullableWithAggregatesFilter<"FunnelPage"> | string | null
   funnelId?: Prisma.StringWithAggregatesFilter<"FunnelPage"> | string
+  customName?: Prisma.StringNullableWithAggregatesFilter<"FunnelPage"> | string | null
 }
 
 export type FunnelPageCreateInput = {
@@ -339,6 +351,7 @@ export type FunnelPageCreateInput = {
   content?: string | null
   order: number
   previewImage?: string | null
+  customName?: string | null
   Funnel: Prisma.FunnelCreateNestedOneWithoutFunnelPagesInput
 }
 
@@ -353,6 +366,7 @@ export type FunnelPageUncheckedCreateInput = {
   order: number
   previewImage?: string | null
   funnelId: string
+  customName?: string | null
 }
 
 export type FunnelPageUpdateInput = {
@@ -365,6 +379,7 @@ export type FunnelPageUpdateInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Funnel?: Prisma.FunnelUpdateOneRequiredWithoutFunnelPagesNestedInput
 }
 
@@ -379,6 +394,7 @@ export type FunnelPageUncheckedUpdateInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   funnelId?: Prisma.StringFieldUpdateOperationsInput | string
+  customName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FunnelPageCreateManyInput = {
@@ -392,6 +408,7 @@ export type FunnelPageCreateManyInput = {
   order: number
   previewImage?: string | null
   funnelId: string
+  customName?: string | null
 }
 
 export type FunnelPageUpdateManyMutationInput = {
@@ -404,6 +421,7 @@ export type FunnelPageUpdateManyMutationInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FunnelPageUncheckedUpdateManyInput = {
@@ -417,6 +435,7 @@ export type FunnelPageUncheckedUpdateManyInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   funnelId?: Prisma.StringFieldUpdateOperationsInput | string
+  customName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FunnelPageListRelationFilter = {
@@ -446,6 +465,7 @@ export type FunnelPageCountOrderByAggregateInput = {
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrder
   funnelId?: Prisma.SortOrder
+  customName?: Prisma.SortOrder
 }
 
 export type FunnelPageAvgOrderByAggregateInput = {
@@ -464,6 +484,7 @@ export type FunnelPageMaxOrderByAggregateInput = {
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrder
   funnelId?: Prisma.SortOrder
+  customName?: Prisma.SortOrder
 }
 
 export type FunnelPageMinOrderByAggregateInput = {
@@ -477,6 +498,7 @@ export type FunnelPageMinOrderByAggregateInput = {
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrder
   funnelId?: Prisma.SortOrder
+  customName?: Prisma.SortOrder
 }
 
 export type FunnelPageSumOrderByAggregateInput = {
@@ -536,6 +558,7 @@ export type FunnelPageCreateWithoutFunnelInput = {
   content?: string | null
   order: number
   previewImage?: string | null
+  customName?: string | null
 }
 
 export type FunnelPageUncheckedCreateWithoutFunnelInput = {
@@ -548,6 +571,7 @@ export type FunnelPageUncheckedCreateWithoutFunnelInput = {
   content?: string | null
   order: number
   previewImage?: string | null
+  customName?: string | null
 }
 
 export type FunnelPageCreateOrConnectWithoutFunnelInput = {
@@ -590,6 +614,7 @@ export type FunnelPageScalarWhereInput = {
   order?: Prisma.IntFilter<"FunnelPage"> | number
   previewImage?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
   funnelId?: Prisma.StringFilter<"FunnelPage"> | string
+  customName?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
 }
 
 export type FunnelPageCreateManyFunnelInput = {
@@ -602,6 +627,7 @@ export type FunnelPageCreateManyFunnelInput = {
   content?: string | null
   order: number
   previewImage?: string | null
+  customName?: string | null
 }
 
 export type FunnelPageUpdateWithoutFunnelInput = {
@@ -614,6 +640,7 @@ export type FunnelPageUpdateWithoutFunnelInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FunnelPageUncheckedUpdateWithoutFunnelInput = {
@@ -626,6 +653,7 @@ export type FunnelPageUncheckedUpdateWithoutFunnelInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FunnelPageUncheckedUpdateManyWithoutFunnelInput = {
@@ -638,6 +666,7 @@ export type FunnelPageUncheckedUpdateManyWithoutFunnelInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -653,6 +682,7 @@ export type FunnelPageSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   order?: boolean
   previewImage?: boolean
   funnelId?: boolean
+  customName?: boolean
   Funnel?: boolean | Prisma.FunnelDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["funnelPage"]>
 
@@ -669,9 +699,10 @@ export type FunnelPageSelectScalar = {
   order?: boolean
   previewImage?: boolean
   funnelId?: boolean
+  customName?: boolean
 }
 
-export type FunnelPageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "pathName" | "createdAt" | "updatedAt" | "visits" | "content" | "order" | "previewImage" | "funnelId", ExtArgs["result"]["funnelPage"]>
+export type FunnelPageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "pathName" | "createdAt" | "updatedAt" | "visits" | "content" | "order" | "previewImage" | "funnelId" | "customName", ExtArgs["result"]["funnelPage"]>
 export type FunnelPageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Funnel?: boolean | Prisma.FunnelDefaultArgs<ExtArgs>
 }
@@ -692,6 +723,7 @@ export type $FunnelPagePayload<ExtArgs extends runtime.Types.Extensions.Internal
     order: number
     previewImage: string | null
     funnelId: string
+    customName: string | null
   }, ExtArgs["result"]["funnelPage"]>
   composites: {}
 }
@@ -1072,6 +1104,7 @@ export interface FunnelPageFieldRefs {
   readonly order: Prisma.FieldRef<"FunnelPage", 'Int'>
   readonly previewImage: Prisma.FieldRef<"FunnelPage", 'String'>
   readonly funnelId: Prisma.FieldRef<"FunnelPage", 'String'>
+  readonly customName: Prisma.FieldRef<"FunnelPage", 'String'>
 }
     
 
