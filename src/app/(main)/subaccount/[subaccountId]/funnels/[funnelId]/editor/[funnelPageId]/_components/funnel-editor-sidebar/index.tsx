@@ -19,6 +19,7 @@ import AiBuilderTab from "./tabs/ai-builder-tab";
 import PagesTab from "./tabs/pages-tab";
 import TemplatesTab from "./tabs/templates-tab";
 import UpgradeOverlay from "./tabs/upgrade-overlay";
+import LayersTab from "./tabs/layers-tab";
 
 type Props = {
   subaccountId: string;
@@ -93,6 +94,9 @@ export default function FunnelEditorSidebar({
               ) : (
                 <UpgradeOverlay feature="AI Builder" />
               )}
+            </TabsContent>
+            <TabsContent value="Layers" className="h-full">
+              <LayersTab />
             </TabsContent>
             <TabsContent value="Pages" className="h-full">
               <PagesTab />
