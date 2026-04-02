@@ -12,12 +12,16 @@ import type {
 import type {
   _getTicketsWithAllRelations,
   getAuthUserDetails,
+  getFormById,
+  getForms,
+  getFormSubmissions,
   getFunnels,
   getMedia,
   getPipelineDetails,
   getTicketsWithTags,
   getUserPermissions,
 } from "./queries";
+
 
 export type PromiseReturnType<T extends (...args: any) => any> = T extends (
   ...args: any
@@ -147,3 +151,10 @@ export const FunnelPageDetailsValidator = z.object({
 export type FunnelPageDetailsSchema = z.infer<
   typeof FunnelPageDetailsValidator
 >;
+
+// Form Builder Types
+export type FormWithFields = NonNullable<PromiseReturnType<typeof getFormById>>;
+
+export type FormsList = PromiseReturnType<typeof getForms>;
+
+export type FormSubmissionsList = PromiseReturnType<typeof getFormSubmissions>;

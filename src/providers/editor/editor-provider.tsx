@@ -27,6 +27,7 @@ export type EditorElement = {
         progressValue?: number;
         progressColor?: string;
         progressBackground?: string;
+        formId?: string;
       };
 };
 

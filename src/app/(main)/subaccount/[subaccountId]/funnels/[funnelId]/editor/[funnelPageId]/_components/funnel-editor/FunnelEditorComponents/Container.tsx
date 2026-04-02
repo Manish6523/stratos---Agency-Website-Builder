@@ -165,6 +165,22 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+      case "customForm":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {},
+              id: v4(),
+              name: "Custom Form",
+              styles: {},
+              type: "customForm",
+            },
+            insertIndex,
+          },
+        });
+        break;
       case "2Col":
         dispatch({
           type: "ADD_ELEMENT",
@@ -524,6 +540,7 @@ const Container = ({ element }: Props) => {
         "border-solid!":
           state.editor.selectedElement.id === id && !state.editor.liveMode,
         "border-dashed border border-slate-300": !state.editor.liveMode,
+        "p-0!": type === "__body" && (state.editor.liveMode || state.editor.previewMode),
       })}
       onDrop={(e) => handleOnDrop(e, id)}
       onDragOver={handleDragOver}

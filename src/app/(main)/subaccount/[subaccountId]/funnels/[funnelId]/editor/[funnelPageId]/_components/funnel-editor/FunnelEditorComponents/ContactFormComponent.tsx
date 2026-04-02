@@ -4,6 +4,7 @@ import ContactForm from "@/components/forms/contactForm";
 import { Badge } from "@/components/ui/badge";
 import { EditorBtns } from "@/lib/constants";
 import {
+  createFormSubmission,
   getFunnel,
   saveActivityLogsNotification,
   upsertContact,
@@ -77,7 +78,27 @@ const ContactFormComponent = (props: Props) => {
         ...values,
         subAccountId: subaccountId,
       });
-      //WIP Call trigger endpoint
+
+      // Save form submission for the Automations dashboard
+      const funnelData = await getFunnel(funnelId);
+      const sourceName = [
+        funnelData?.name,
+        pageDetails?.name,
+      ]
+        .filter(Boolean)
+        .join(" › ");
+
+      await createFormSubmission({
+        name: values.name,
+        email: values.email,
+        formData: JSON.stringify(values),
+        source: sourceName || undefined,
+        funnelId: funnelId,
+        funnelPageId: pageDetails?.id,
+        subAccountId: subaccountId,
+        contactId: response?.id,
+      });
+
       await saveActivityLogsNotification({
         agencyId: undefined,
         description: `A New contact signed up | ${response?.name}`,

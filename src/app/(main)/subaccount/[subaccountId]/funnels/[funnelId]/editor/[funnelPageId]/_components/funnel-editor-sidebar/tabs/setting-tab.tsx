@@ -35,15 +35,26 @@ import {
 } from "@/components/ui/select";
 import { useEditor } from "@/providers/editor/editor-provider";
 import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
-import { Loader2 } from "lucide-react";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { getForms } from "@/lib/queries";
+import React, { useEffect, useState } from "react";
 
 type Props = {};
 
 export default function SettingsTab({}: Props) {
-  const { state, dispatch } = useEditor();
+  const { state, dispatch, subaccountId } = useEditor();
+  const [forms, setForms] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (state.editor.selectedElement.type === "customForm") {
+      const fetchForms = async () => {
+        const response = await getForms(subaccountId);
+        console.table(response);
+        setForms(response);
+      };
+      fetchForms();
+    }
+  }, [state.editor.selectedElement.type, subaccountId]);
 
   const TABS_TRIGGER_CLASS =
     "cursor-pointer w-8 h-8 p-0 data-[state=active]:bg-background data-[state=active]:shadow-sm text-muted-foreground data-[state=active]:text-foreground rounded-sm transition-all flex items-center justify-center";
@@ -347,6 +358,36 @@ export default function SettingsTab({}: Props) {
                     ) || ""
                   }
                 />
+              </div>
+            )}
+          {state.editor.selectedElement.type === "customForm" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-2 mt-4">
+                <Label className={LABEL_CLASS}>Select Form</Label>
+                <Select
+                  onValueChange={(e) =>
+                    handleChangeCustomValues({
+                      target: {
+                        id: "formId",
+                        value: e,
+                      },
+                    })
+                  }
+                  value={state.editor.selectedElement.content.formId || ""}
+                >
+                  <SelectTrigger className="w-full h-8 text-xs">
+                    <SelectValue placeholder="Select a form" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {forms.map((form) => (
+                        <SelectItem key={form.id} value={form.id}>
+                          {form.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
             )}
         </AccordionContent>

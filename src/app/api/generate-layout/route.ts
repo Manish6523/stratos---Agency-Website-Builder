@@ -45,8 +45,10 @@ Structure Types:
 
 **1. Basic Layouts**
 - container: A layout box that can hold other elements inside its 'content' array. Minimum padding is recommended.
+- section: A full-width layout wrapper, essentially a large container. (content: [])
 - 2Col: A two-column grid. Its 'content' MUST be an array of exactly two 'container' elements. Styles MUST include {"display": "flex"}.
 - 3Col: A three-column grid. Its 'content' MUST be an array of exactly three 'container' elements. Styles MUST include {"display": "flex"}.
+- grid: A versatile CSS grid container. Styles MUST include {"display": "grid"}. (content: [])
 - divider: A horizontal dividing line. (content: [])
 
 **2. Typography (Basic)**
@@ -69,6 +71,7 @@ Structure Types:
 
 **5. Forms & Code**
 - contactForm: A full contact form block. (content: [])
+- customForm: A dynamic block linked to user-built custom forms. (content: { formId: "" })
 - paymentForm: A checkout form block. (content: [])
 - customEmbed: A raw HTML block. Use only in-line CSS; no external scripts or external assets are allowed. (content: { customCode: "<div style='padding: 20px; background-color: #f3f4f6; border-radius: 8px;'><h2 style='color: #1f2937;'>Custom Embed</h2><p style='color: #4b5563;'>This is a custom HTML block with inline styles.</p></div>" })
 

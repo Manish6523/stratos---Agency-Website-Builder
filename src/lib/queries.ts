@@ -1230,3 +1230,177 @@ export const deleteFunnel = async (funnelId: string) => {
   });
   return response;
 };
+
+// ============================================================
+// FORM SUBMISSION QUERIES
+// ============================================================
+
+export const getFormSubmissions = async (subaccountId: string) => {
+  const response = await db.formSubmission.findMany({
+    where: { subAccountId: subaccountId },
+    include: { Contact: true },
+    orderBy: { createdAt: "desc" },
+  });
+  return response;
+};
+
+export const createFormSubmission = async (data: {
+  name: string;
+  email: string;
+  formData?: string;
+  source?: string;
+  funnelId?: string;
+  funnelPageId?: string;
+  subAccountId: string;
+  contactId?: string;
+}) => {
+  const response = await db.formSubmission.create({
+    data: {
+      name: data.name,
+      email: data.email,
+      formData: data.formData,
+      source: data.source,
+      funnelId: data.funnelId,
+      funnelPageId: data.funnelPageId,
+      subAccountId: data.subAccountId,
+      contactId: data.contactId,
+    },
+  });
+  return response;
+};
+
+// ============================================================
+// FORM BUILDER QUERIES
+// ============================================================
+
+export const getForms = async (subaccountId: string) => {
+  const response = await db.form.findMany({
+    where: { subAccountId: subaccountId },
+    include: { FormFields: { orderBy: { order: "asc" } } },
+    orderBy: { createdAt: "desc" },
+  });
+  return response;
+};
+
+export const getFormById = async (formId: string) => {
+  const response = await db.form.findUnique({
+    where: { id: formId },
+    include: { FormFields: { orderBy: { order: "asc" } } },
+  });
+  return response;
+};
+
+export const upsertForm = async (
+  subaccountId: string,
+  form: { id?: string; name: string; description?: string; published?: boolean },
+) => {
+  const updateData: Record<string, unknown> = { name: form.name };
+  if (form.description !== undefined) updateData.description = form.description;
+  if (form.published !== undefined) updateData.published = form.published;
+
+  const response = await db.form.upsert({
+    where: { id: form.id || v4() },
+    update: updateData,
+    create: {
+      name: form.name,
+      description: form.description || null,
+      published: form.published ?? false,
+      subAccountId: subaccountId,
+    },
+  });
+  revalidatePath(`/subaccount/${subaccountId}/automations`);
+  return response;
+};
+
+export const deleteForm = async (formId: string) => {
+  const response = await db.form.delete({ where: { id: formId } });
+  return response;
+};
+
+export const toggleFormPublished = async (
+  formId: string,
+  published: boolean,
+) => {
+  const response = await db.form.update({
+    where: { id: formId },
+    data: { published },
+  });
+  return response;
+};
+
+// ============================================================
+// FORM FIELD QUERIES
+// ============================================================
+
+export const upsertFormField = async (
+  field: {
+    id?: string;
+    label: string;
+    placeholder?: string;
+    type?: "TEXT" | "EMAIL" | "PHONE" | "TEXTAREA" | "SELECT" | "CHECKBOX" | "NUMBER";
+    required?: boolean;
+    order?: number;
+    options?: string;
+    formId: string;
+  },
+) => {
+  const response = await db.formField.upsert({
+    where: { id: field.id || v4() },
+    update: {
+      label: field.label,
+      placeholder: field.placeholder,
+      type: field.type,
+      required: field.required,
+      order: field.order,
+      options: field.options,
+    },
+    create: {
+      label: field.label,
+      placeholder: field.placeholder,
+      type: field.type || "TEXT",
+      required: field.required ?? false,
+      order: field.order ?? 0,
+      options: field.options,
+      formId: field.formId,
+    },
+  });
+  return response;
+};
+
+export const deleteFormField = async (fieldId: string) => {
+  const response = await db.formField.delete({ where: { id: fieldId } });
+  return response;
+};
+
+// ============================================================
+// DASHBOARD HELPERS
+// ============================================================
+
+export const getSubaccountWithCounts = async (subaccountId: string) => {
+  const [contactCount, formSubmissionCount, funnelCount, pipelineCount] =
+    await Promise.all([
+      db.contact.count({ where: { subAccountId: subaccountId } }),
+      db.formSubmission.count({ where: { subAccountId: subaccountId } }),
+      db.funnel.count({ where: { subAccountId: subaccountId } }),
+      db.pipeline.count({ where: { subAccountId: subaccountId } }),
+    ]);
+
+  return { contactCount, formSubmissionCount, funnelCount, pipelineCount };
+};
+
+export const getRecentActivity = async (subaccountId: string) => {
+  const [recentContacts, recentSubmissions] = await Promise.all([
+    db.contact.findMany({
+      where: { subAccountId: subaccountId },
+      orderBy: { createdAt: "desc" },
+      take: 10,
+    }),
+    db.formSubmission.findMany({
+      where: { subAccountId: subaccountId },
+      orderBy: { createdAt: "desc" },
+      take: 10,
+    }),
+  ]);
+
+  return { recentContacts, recentSubmissions };
+};

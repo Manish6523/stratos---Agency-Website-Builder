@@ -9,9 +9,9 @@ const ThreeColumnsPlaceholder = () => {
       }}
       className="h-14 w-14 bg-muted/70 rounded-lg p-2 px-1 flex flex-row gap-[4px]"
     >
-      <div className="border-dashed border h-full rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
-      <div className="border-dashed border h-full rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
-      <div className="border-dashed border h-full rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
+      <div className="border-dashed border-2 h-full rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
+      <div className="border-dashed border-2 h-full rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
+      <div className="border-dashed border-2 h-full rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
     </div>
   );
 };

@@ -10,9 +10,13 @@ const GridPlaceholder = (props: Props) => {
       onDragStart={(e) => {
         e.dataTransfer.setData("componentType", "grid");
       }}
-      className="h-10 w-10 bg-muted/70 rounded-md p-2 flex flex-row gap-[4px] border border-border/50 hover:bg-muted transition-all"
+      className="h-14 w-14 bg-muted/70 rounded-lg p-2 px-1 flex flex-col gap-[2px]"
     >
-      <LayoutGrid size={40} className="text-muted-foreground" />
+      <div className="flex flex-row gap-[2px]">
+        <div className="border-dashed border-2 p-2 rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
+        <div className="border-dashed border-2 p-2 rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
+      </div>
+      <div className="border-dashed border-2 p-2 rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
     </div>
   );
 };

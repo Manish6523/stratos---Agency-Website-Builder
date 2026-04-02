@@ -249,6 +249,7 @@ export type EditorBtns =
   | "container"
   | "section"
   | "contactForm"
+  | "customForm"
   | "paymentForm"
   | "link"
   | "2Col"

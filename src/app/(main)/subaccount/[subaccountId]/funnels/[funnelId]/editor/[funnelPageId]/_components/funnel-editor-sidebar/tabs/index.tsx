@@ -12,7 +12,7 @@ import {
 
 type Props = {};
 
-export default function TabList({}: Props) {
+export default function TabList({ }: Props) {
   return (
     <TabsList className=" flex items-center flex-col justify-evenly w-full bg-transparent h-fit gap-2 ">
       <TabsTrigger
@@ -23,6 +23,13 @@ export default function TabList({}: Props) {
         <SettingsIcon />
       </TabsTrigger>
       <TabsTrigger
+        value="Layers"
+        title="Layers"
+        className="w-10 h-10 cursor-pointer hover:bg-muted p-3 data-[state=active]:bg-muted"
+      >
+        <SquareStackIcon />
+      </TabsTrigger>
+      <TabsTrigger
         value="Components"
         title="Components"
         className="data-[state=active]:bg-muted w-10 h-10 cursor-pointer hover:bg-muted p-3"
@@ -31,26 +38,13 @@ export default function TabList({}: Props) {
       </TabsTrigger>
 
       <TabsTrigger
-        value="Layers"
-        title="Layers"
-        className="w-10 h-10 cursor-pointer hover:bg-muted p-3 data-[state=active]:bg-muted"
-      >
-        <SquareStackIcon />
-      </TabsTrigger>
-      <TabsTrigger
         value="Media"
         title="Media bucket"
         className="w-10 h-10 cursor-pointer hover:bg-muted p-3 data-[state=active]:bg-muted"
       >
         <Database />
       </TabsTrigger>
-      <TabsTrigger
-        value="Pages"
-        title="Pages"
-        className="w-10 h-10 cursor-pointer hover:bg-muted p-3 data-[state=active]:bg-muted"
-      >
-        <LayoutTemplate />
-      </TabsTrigger>
+
       <TabsTrigger
         value="AI"
         title="AI Builder"
@@ -64,6 +58,13 @@ export default function TabList({}: Props) {
         className="w-10 h-10 hover:bg-muted cursor-pointer p-3 data-[state=active]:bg-muted"
       >
         <PanelsTopLeft />
+      </TabsTrigger>
+      <TabsTrigger
+        value="Pages"
+        title="Pages"
+        className="w-10 h-10 cursor-pointer hover:bg-muted p-3 data-[state=active]:bg-muted"
+      >
+        <LayoutTemplate />
       </TabsTrigger>
     </TabsList>
   );

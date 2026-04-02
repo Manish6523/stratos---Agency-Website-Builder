@@ -15,6 +15,7 @@ import TwoColumnsPlaceholder from "./TwoColumnsPlaceholder";
 import GridPlaceholder from "./GridPlaceholder";
 import LinkPlaceholder from "./LinkPlaceholder";
 import ContactFormComponentPlaceholder from "./ContactFormComponentPlaceholder";
+import CustomFormPlaceholder from "./CustomFormPlaceholder";
 import CheckoutPlaceholder from "./CheckoutPlaceholder";
 import DividerPlaceholder from "./DividerPlaceholder";
 import ButtonPlaceholder from "./ButtonPlaceholder";
@@ -78,6 +79,12 @@ export default function ComponentsTab({}: Props) {
       Component: <ContactFormComponentPlaceholder />,
       label: "Contact",
       id: "contactForm",
+      group: "elements",
+    },
+    {
+      Component: <CustomFormPlaceholder />,
+      label: "My Forms",
+      id: "customForm",
       group: "elements",
     },
     // {

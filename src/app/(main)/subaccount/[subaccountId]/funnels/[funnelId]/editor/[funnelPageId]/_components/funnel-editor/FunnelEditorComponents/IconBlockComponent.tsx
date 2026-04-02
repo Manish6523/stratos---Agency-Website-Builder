@@ -58,7 +58,7 @@ const IconBlockComponent = (props: Props) => {
       className={clsx(
         "relative transition-all flex items-center justify-center",
         {
-          "ring-1 ring-dashed ring-slate-300": !state.editor.liveMode,
+          "border-dashed border border-slate-300": !state.editor.liveMode,
           "cursor-pointer": !state.editor.liveMode,
         },
       )}
