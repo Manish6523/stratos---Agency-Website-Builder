@@ -298,6 +298,8 @@ export type SubAccountWhereInput = {
   agencyId?: Prisma.StringFilter<"SubAccount"> | string
   Automation?: Prisma.AutomationListRelationFilter
   Contact?: Prisma.ContactListRelationFilter
+  Form?: Prisma.FormListRelationFilter
+  FormSubmission?: Prisma.FormSubmissionListRelationFilter
   Funnels?: Prisma.FunnelListRelationFilter
   Media?: Prisma.MediaListRelationFilter
   Notification?: Prisma.NotificationListRelationFilter
@@ -328,6 +330,8 @@ export type SubAccountOrderByWithRelationInput = {
   agencyId?: Prisma.SortOrder
   Automation?: Prisma.AutomationOrderByRelationAggregateInput
   Contact?: Prisma.ContactOrderByRelationAggregateInput
+  Form?: Prisma.FormOrderByRelationAggregateInput
+  FormSubmission?: Prisma.FormSubmissionOrderByRelationAggregateInput
   Funnels?: Prisma.FunnelOrderByRelationAggregateInput
   Media?: Prisma.MediaOrderByRelationAggregateInput
   Notification?: Prisma.NotificationOrderByRelationAggregateInput
@@ -362,6 +366,8 @@ export type SubAccountWhereUniqueInput = Prisma.AtLeast<{
   agencyId?: Prisma.StringFilter<"SubAccount"> | string
   Automation?: Prisma.AutomationListRelationFilter
   Contact?: Prisma.ContactListRelationFilter
+  Form?: Prisma.FormListRelationFilter
+  FormSubmission?: Prisma.FormSubmissionListRelationFilter
   Funnels?: Prisma.FunnelListRelationFilter
   Media?: Prisma.MediaListRelationFilter
   Notification?: Prisma.NotificationListRelationFilter
@@ -435,6 +441,8 @@ export type SubAccountCreateInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -465,6 +473,8 @@ export type SubAccountUncheckedCreateInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -493,6 +503,8 @@ export type SubAccountUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -523,6 +535,8 @@ export type SubAccountUncheckedUpdateInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -877,6 +891,34 @@ export type SubAccountUpdateOneWithoutNotificationNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SubAccountUpdateToOneWithWhereWithoutNotificationInput, Prisma.SubAccountUpdateWithoutNotificationInput>, Prisma.SubAccountUncheckedUpdateWithoutNotificationInput>
 }
 
+export type SubAccountCreateNestedOneWithoutFormSubmissionInput = {
+  create?: Prisma.XOR<Prisma.SubAccountCreateWithoutFormSubmissionInput, Prisma.SubAccountUncheckedCreateWithoutFormSubmissionInput>
+  connectOrCreate?: Prisma.SubAccountCreateOrConnectWithoutFormSubmissionInput
+  connect?: Prisma.SubAccountWhereUniqueInput
+}
+
+export type SubAccountUpdateOneRequiredWithoutFormSubmissionNestedInput = {
+  create?: Prisma.XOR<Prisma.SubAccountCreateWithoutFormSubmissionInput, Prisma.SubAccountUncheckedCreateWithoutFormSubmissionInput>
+  connectOrCreate?: Prisma.SubAccountCreateOrConnectWithoutFormSubmissionInput
+  upsert?: Prisma.SubAccountUpsertWithoutFormSubmissionInput
+  connect?: Prisma.SubAccountWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubAccountUpdateToOneWithWhereWithoutFormSubmissionInput, Prisma.SubAccountUpdateWithoutFormSubmissionInput>, Prisma.SubAccountUncheckedUpdateWithoutFormSubmissionInput>
+}
+
+export type SubAccountCreateNestedOneWithoutFormInput = {
+  create?: Prisma.XOR<Prisma.SubAccountCreateWithoutFormInput, Prisma.SubAccountUncheckedCreateWithoutFormInput>
+  connectOrCreate?: Prisma.SubAccountCreateOrConnectWithoutFormInput
+  connect?: Prisma.SubAccountWhereUniqueInput
+}
+
+export type SubAccountUpdateOneRequiredWithoutFormNestedInput = {
+  create?: Prisma.XOR<Prisma.SubAccountCreateWithoutFormInput, Prisma.SubAccountUncheckedCreateWithoutFormInput>
+  connectOrCreate?: Prisma.SubAccountCreateOrConnectWithoutFormInput
+  upsert?: Prisma.SubAccountUpsertWithoutFormInput
+  connect?: Prisma.SubAccountWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubAccountUpdateToOneWithWhereWithoutFormInput, Prisma.SubAccountUpdateWithoutFormInput>, Prisma.SubAccountUncheckedUpdateWithoutFormInput>
+}
+
 export type SubAccountCreateWithoutPermissionsInput = {
   id?: string
   connectAccountId?: string | null
@@ -894,6 +936,8 @@ export type SubAccountCreateWithoutPermissionsInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -923,6 +967,8 @@ export type SubAccountUncheckedCreateWithoutPermissionsInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -966,6 +1012,8 @@ export type SubAccountUpdateWithoutPermissionsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -995,6 +1043,8 @@ export type SubAccountUncheckedUpdateWithoutPermissionsInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -1022,6 +1072,8 @@ export type SubAccountCreateWithoutAgencyInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -1050,6 +1102,8 @@ export type SubAccountUncheckedCreateWithoutAgencyInput = {
   country: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -1125,6 +1179,8 @@ export type SubAccountCreateWithoutTagsInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -1154,6 +1210,8 @@ export type SubAccountUncheckedCreateWithoutTagsInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -1197,6 +1255,8 @@ export type SubAccountUpdateWithoutTagsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -1226,6 +1286,8 @@ export type SubAccountUncheckedUpdateWithoutTagsInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -1253,6 +1315,8 @@ export type SubAccountCreateWithoutPipelineInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -1282,6 +1346,8 @@ export type SubAccountUncheckedCreateWithoutPipelineInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -1325,6 +1391,8 @@ export type SubAccountUpdateWithoutPipelineInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -1354,6 +1422,8 @@ export type SubAccountUncheckedUpdateWithoutPipelineInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -1381,6 +1451,8 @@ export type SubAccountCreateWithoutTriggerInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -1410,6 +1482,8 @@ export type SubAccountUncheckedCreateWithoutTriggerInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -1453,6 +1527,8 @@ export type SubAccountUpdateWithoutTriggerInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -1482,6 +1558,8 @@ export type SubAccountUncheckedUpdateWithoutTriggerInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -1508,6 +1586,8 @@ export type SubAccountCreateWithoutAutomationInput = {
   state: string
   country: string
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -1537,6 +1617,8 @@ export type SubAccountUncheckedCreateWithoutAutomationInput = {
   country: string
   agencyId: string
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -1580,6 +1662,8 @@ export type SubAccountUpdateWithoutAutomationInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -1609,6 +1693,8 @@ export type SubAccountUncheckedUpdateWithoutAutomationInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -1636,6 +1722,8 @@ export type SubAccountCreateWithoutContactInput = {
   state: string
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -1665,6 +1753,8 @@ export type SubAccountUncheckedCreateWithoutContactInput = {
   country: string
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -1708,6 +1798,8 @@ export type SubAccountUpdateWithoutContactInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -1737,6 +1829,8 @@ export type SubAccountUncheckedUpdateWithoutContactInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -1765,6 +1859,8 @@ export type SubAccountCreateWithoutMediaInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
   Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
@@ -1794,6 +1890,8 @@ export type SubAccountUncheckedCreateWithoutMediaInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
   Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
@@ -1837,6 +1935,8 @@ export type SubAccountUpdateWithoutMediaInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
   Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
@@ -1866,6 +1966,8 @@ export type SubAccountUncheckedUpdateWithoutMediaInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
   Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -1893,6 +1995,8 @@ export type SubAccountCreateWithoutFunnelsInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
   Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
@@ -1922,6 +2026,8 @@ export type SubAccountUncheckedCreateWithoutFunnelsInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
   Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
@@ -1965,6 +2071,8 @@ export type SubAccountUpdateWithoutFunnelsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
   Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
@@ -1994,6 +2102,8 @@ export type SubAccountUncheckedUpdateWithoutFunnelsInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
   Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -2021,6 +2131,8 @@ export type SubAccountCreateWithoutSidebarOptionInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -2050,6 +2162,8 @@ export type SubAccountUncheckedCreateWithoutSidebarOptionInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -2093,6 +2207,8 @@ export type SubAccountUpdateWithoutSidebarOptionInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -2122,6 +2238,8 @@ export type SubAccountUncheckedUpdateWithoutSidebarOptionInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -2149,6 +2267,8 @@ export type SubAccountCreateWithoutInvitationInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
@@ -2178,6 +2298,8 @@ export type SubAccountUncheckedCreateWithoutInvitationInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
@@ -2221,6 +2343,8 @@ export type SubAccountUpdateWithoutInvitationInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -2250,6 +2374,8 @@ export type SubAccountUncheckedUpdateWithoutInvitationInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -2277,6 +2403,8 @@ export type SubAccountCreateWithoutNotificationInput = {
   country: string
   Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
   Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
@@ -2306,6 +2434,8 @@ export type SubAccountUncheckedCreateWithoutNotificationInput = {
   agencyId: string
   Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
   Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
   Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
   Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
   Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
@@ -2349,6 +2479,8 @@ export type SubAccountUpdateWithoutNotificationInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
@@ -2378,8 +2510,282 @@ export type SubAccountUncheckedUpdateWithoutNotificationInput = {
   agencyId?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
+}
+
+export type SubAccountCreateWithoutFormSubmissionInput = {
+  id?: string
+  connectAccountId?: string | null
+  name: string
+  subAccountLogo: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  companyEmail: string
+  companyPhone: string
+  goal?: number
+  address: string
+  city: string
+  zipCode: string
+  state: string
+  country: string
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormCreateNestedManyWithoutSubAccountInput
+  Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
+  Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
+}
+
+export type SubAccountUncheckedCreateWithoutFormSubmissionInput = {
+  id?: string
+  connectAccountId?: string | null
+  name: string
+  subAccountLogo: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  companyEmail: string
+  companyPhone: string
+  goal?: number
+  address: string
+  city: string
+  zipCode: string
+  state: string
+  country: string
+  agencyId: string
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  Form?: Prisma.FormUncheckedCreateNestedManyWithoutSubAccountInput
+  Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
+  Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
+  Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
+}
+
+export type SubAccountCreateOrConnectWithoutFormSubmissionInput = {
+  where: Prisma.SubAccountWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubAccountCreateWithoutFormSubmissionInput, Prisma.SubAccountUncheckedCreateWithoutFormSubmissionInput>
+}
+
+export type SubAccountUpsertWithoutFormSubmissionInput = {
+  update: Prisma.XOR<Prisma.SubAccountUpdateWithoutFormSubmissionInput, Prisma.SubAccountUncheckedUpdateWithoutFormSubmissionInput>
+  create: Prisma.XOR<Prisma.SubAccountCreateWithoutFormSubmissionInput, Prisma.SubAccountUncheckedCreateWithoutFormSubmissionInput>
+  where?: Prisma.SubAccountWhereInput
+}
+
+export type SubAccountUpdateToOneWithWhereWithoutFormSubmissionInput = {
+  where?: Prisma.SubAccountWhereInput
+  data: Prisma.XOR<Prisma.SubAccountUpdateWithoutFormSubmissionInput, Prisma.SubAccountUncheckedUpdateWithoutFormSubmissionInput>
+}
+
+export type SubAccountUpdateWithoutFormSubmissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  connectAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subAccountLogo?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  companyEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  companyPhone?: Prisma.StringFieldUpdateOperationsInput | string
+  goal?: Prisma.IntFieldUpdateOperationsInput | number
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  zipCode?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
+  Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
+}
+
+export type SubAccountUncheckedUpdateWithoutFormSubmissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  connectAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subAccountLogo?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  companyEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  companyPhone?: Prisma.StringFieldUpdateOperationsInput | string
+  goal?: Prisma.IntFieldUpdateOperationsInput | number
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  zipCode?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.StringFieldUpdateOperationsInput | string
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
+  Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
+  Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUncheckedUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUncheckedUpdateManyWithoutSubaccountNestedInput
+}
+
+export type SubAccountCreateWithoutFormInput = {
+  id?: string
+  connectAccountId?: string | null
+  name: string
+  subAccountLogo: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  companyEmail: string
+  companyPhone: string
+  goal?: number
+  address: string
+  city: string
+  zipCode: string
+  state: string
+  country: string
+  Automation?: Prisma.AutomationCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactCreateNestedManyWithoutSubaccountInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutSubAccountInput
+  Funnels?: Prisma.FunnelCreateNestedManyWithoutSubAccountInput
+  Media?: Prisma.MediaCreateNestedManyWithoutSubaccountInput
+  Notification?: Prisma.NotificationCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationCreateNestedManyWithoutSubAccountInput
+  Agency: Prisma.AgencyCreateNestedOneWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerCreateNestedManyWithoutSubaccountInput
+}
+
+export type SubAccountUncheckedCreateWithoutFormInput = {
+  id?: string
+  connectAccountId?: string | null
+  name: string
+  subAccountLogo: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  companyEmail: string
+  companyPhone: string
+  goal?: number
+  address: string
+  city: string
+  zipCode: string
+  state: string
+  country: string
+  agencyId: string
+  Automation?: Prisma.AutomationUncheckedCreateNestedManyWithoutSubaccountInput
+  Contact?: Prisma.ContactUncheckedCreateNestedManyWithoutSubaccountInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutSubAccountInput
+  Funnels?: Prisma.FunnelUncheckedCreateNestedManyWithoutSubAccountInput
+  Media?: Prisma.MediaUncheckedCreateNestedManyWithoutSubaccountInput
+  Notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutSubAccountInput
+  Permissions?: Prisma.PermissionsUncheckedCreateNestedManyWithoutSubAccountInput
+  Pipeline?: Prisma.PipelineUncheckedCreateNestedManyWithoutSubAccountInput
+  Invitation?: Prisma.InvitationUncheckedCreateNestedManyWithoutSubAccountInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUncheckedCreateNestedManyWithoutSubAccountInput
+  Tags?: Prisma.TagUncheckedCreateNestedManyWithoutSubAccountInput
+  Trigger?: Prisma.TriggerUncheckedCreateNestedManyWithoutSubaccountInput
+}
+
+export type SubAccountCreateOrConnectWithoutFormInput = {
+  where: Prisma.SubAccountWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubAccountCreateWithoutFormInput, Prisma.SubAccountUncheckedCreateWithoutFormInput>
+}
+
+export type SubAccountUpsertWithoutFormInput = {
+  update: Prisma.XOR<Prisma.SubAccountUpdateWithoutFormInput, Prisma.SubAccountUncheckedUpdateWithoutFormInput>
+  create: Prisma.XOR<Prisma.SubAccountCreateWithoutFormInput, Prisma.SubAccountUncheckedCreateWithoutFormInput>
+  where?: Prisma.SubAccountWhereInput
+}
+
+export type SubAccountUpdateToOneWithWhereWithoutFormInput = {
+  where?: Prisma.SubAccountWhereInput
+  data: Prisma.XOR<Prisma.SubAccountUpdateWithoutFormInput, Prisma.SubAccountUncheckedUpdateWithoutFormInput>
+}
+
+export type SubAccountUpdateWithoutFormInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  connectAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subAccountLogo?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  companyEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  companyPhone?: Prisma.StringFieldUpdateOperationsInput | string
+  goal?: Prisma.IntFieldUpdateOperationsInput | number
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  zipCode?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
+  Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
+  Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
+  Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
+  Permissions?: Prisma.PermissionsUpdateManyWithoutSubAccountNestedInput
+  Pipeline?: Prisma.PipelineUpdateManyWithoutSubAccountNestedInput
+  Invitation?: Prisma.InvitationUpdateManyWithoutSubAccountNestedInput
+  Agency?: Prisma.AgencyUpdateOneRequiredWithoutSubAccountNestedInput
+  SidebarOption?: Prisma.SubAccountSidebarOptionUpdateManyWithoutSubAccountNestedInput
+  Tags?: Prisma.TagUpdateManyWithoutSubAccountNestedInput
+  Trigger?: Prisma.TriggerUpdateManyWithoutSubaccountNestedInput
+}
+
+export type SubAccountUncheckedUpdateWithoutFormInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  connectAccountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subAccountLogo?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  companyEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  companyPhone?: Prisma.StringFieldUpdateOperationsInput | string
+  goal?: Prisma.IntFieldUpdateOperationsInput | number
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  zipCode?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  agencyId?: Prisma.StringFieldUpdateOperationsInput | string
+  Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
+  Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
+  Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
+  Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
+  Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
   Permissions?: Prisma.PermissionsUncheckedUpdateManyWithoutSubAccountNestedInput
   Pipeline?: Prisma.PipelineUncheckedUpdateManyWithoutSubAccountNestedInput
   Invitation?: Prisma.InvitationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -2422,6 +2828,8 @@ export type SubAccountUpdateWithoutAgencyInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUpdateManyWithoutSubAccountNestedInput
@@ -2450,6 +2858,8 @@ export type SubAccountUncheckedUpdateWithoutAgencyInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   Automation?: Prisma.AutomationUncheckedUpdateManyWithoutSubaccountNestedInput
   Contact?: Prisma.ContactUncheckedUpdateManyWithoutSubaccountNestedInput
+  Form?: Prisma.FormUncheckedUpdateManyWithoutSubAccountNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutSubAccountNestedInput
   Funnels?: Prisma.FunnelUncheckedUpdateManyWithoutSubAccountNestedInput
   Media?: Prisma.MediaUncheckedUpdateManyWithoutSubaccountNestedInput
   Notification?: Prisma.NotificationUncheckedUpdateManyWithoutSubAccountNestedInput
@@ -2486,6 +2896,8 @@ export type SubAccountUncheckedUpdateManyWithoutAgencyInput = {
 export type SubAccountCountOutputType = {
   Automation: number
   Contact: number
+  Form: number
+  FormSubmission: number
   Funnels: number
   Media: number
   Notification: number
@@ -2500,6 +2912,8 @@ export type SubAccountCountOutputType = {
 export type SubAccountCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Automation?: boolean | SubAccountCountOutputTypeCountAutomationArgs
   Contact?: boolean | SubAccountCountOutputTypeCountContactArgs
+  Form?: boolean | SubAccountCountOutputTypeCountFormArgs
+  FormSubmission?: boolean | SubAccountCountOutputTypeCountFormSubmissionArgs
   Funnels?: boolean | SubAccountCountOutputTypeCountFunnelsArgs
   Media?: boolean | SubAccountCountOutputTypeCountMediaArgs
   Notification?: boolean | SubAccountCountOutputTypeCountNotificationArgs
@@ -2533,6 +2947,20 @@ export type SubAccountCountOutputTypeCountAutomationArgs<ExtArgs extends runtime
  */
 export type SubAccountCountOutputTypeCountContactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ContactWhereInput
+}
+
+/**
+ * SubAccountCountOutputType without action
+ */
+export type SubAccountCountOutputTypeCountFormArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FormWhereInput
+}
+
+/**
+ * SubAccountCountOutputType without action
+ */
+export type SubAccountCountOutputTypeCountFormSubmissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FormSubmissionWhereInput
 }
 
 /**
@@ -2617,6 +3045,8 @@ export type SubAccountSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   agencyId?: boolean
   Automation?: boolean | Prisma.SubAccount$AutomationArgs<ExtArgs>
   Contact?: boolean | Prisma.SubAccount$ContactArgs<ExtArgs>
+  Form?: boolean | Prisma.SubAccount$FormArgs<ExtArgs>
+  FormSubmission?: boolean | Prisma.SubAccount$FormSubmissionArgs<ExtArgs>
   Funnels?: boolean | Prisma.SubAccount$FunnelsArgs<ExtArgs>
   Media?: boolean | Prisma.SubAccount$MediaArgs<ExtArgs>
   Notification?: boolean | Prisma.SubAccount$NotificationArgs<ExtArgs>
@@ -2654,6 +3084,8 @@ export type SubAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type SubAccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Automation?: boolean | Prisma.SubAccount$AutomationArgs<ExtArgs>
   Contact?: boolean | Prisma.SubAccount$ContactArgs<ExtArgs>
+  Form?: boolean | Prisma.SubAccount$FormArgs<ExtArgs>
+  FormSubmission?: boolean | Prisma.SubAccount$FormSubmissionArgs<ExtArgs>
   Funnels?: boolean | Prisma.SubAccount$FunnelsArgs<ExtArgs>
   Media?: boolean | Prisma.SubAccount$MediaArgs<ExtArgs>
   Notification?: boolean | Prisma.SubAccount$NotificationArgs<ExtArgs>
@@ -2672,6 +3104,8 @@ export type $SubAccountPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     Automation: Prisma.$AutomationPayload<ExtArgs>[]
     Contact: Prisma.$ContactPayload<ExtArgs>[]
+    Form: Prisma.$FormPayload<ExtArgs>[]
+    FormSubmission: Prisma.$FormSubmissionPayload<ExtArgs>[]
     Funnels: Prisma.$FunnelPayload<ExtArgs>[]
     Media: Prisma.$MediaPayload<ExtArgs>[]
     Notification: Prisma.$NotificationPayload<ExtArgs>[]
@@ -3041,6 +3475,8 @@ export interface Prisma__SubAccountClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Automation<T extends Prisma.SubAccount$AutomationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$AutomationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AutomationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Contact<T extends Prisma.SubAccount$ContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$ContactArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Form<T extends Prisma.SubAccount$FormArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$FormArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FormPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  FormSubmission<T extends Prisma.SubAccount$FormSubmissionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$FormSubmissionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Funnels<T extends Prisma.SubAccount$FunnelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$FunnelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FunnelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Media<T extends Prisma.SubAccount$MediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$MediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Notification<T extends Prisma.SubAccount$NotificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccount$NotificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3483,6 +3919,54 @@ export type SubAccount$ContactArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ContactScalarFieldEnum | Prisma.ContactScalarFieldEnum[]
+}
+
+/**
+ * SubAccount.Form
+ */
+export type SubAccount$FormArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Form
+   */
+  select?: Prisma.FormSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Form
+   */
+  omit?: Prisma.FormOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FormInclude<ExtArgs> | null
+  where?: Prisma.FormWhereInput
+  orderBy?: Prisma.FormOrderByWithRelationInput | Prisma.FormOrderByWithRelationInput[]
+  cursor?: Prisma.FormWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FormScalarFieldEnum | Prisma.FormScalarFieldEnum[]
+}
+
+/**
+ * SubAccount.FormSubmission
+ */
+export type SubAccount$FormSubmissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FormSubmission
+   */
+  select?: Prisma.FormSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FormSubmission
+   */
+  omit?: Prisma.FormSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FormSubmissionInclude<ExtArgs> | null
+  where?: Prisma.FormSubmissionWhereInput
+  orderBy?: Prisma.FormSubmissionOrderByWithRelationInput | Prisma.FormSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.FormSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FormSubmissionScalarFieldEnum | Prisma.FormSubmissionScalarFieldEnum[]
 }
 
 /**

@@ -80,6 +80,8 @@ model SubAccount {
   agencyId         String
   Automation       Automation[]
   Contact          Contact[]
+  Form             Form[]
+  FormSubmission   FormSubmission[]
   Funnels          Funnel[]
   Media            Media[]
   Notification     Notification[]
@@ -209,14 +211,15 @@ model Action {
 }
 
 model Contact {
-  id           String     @id @default(uuid())
-  name         String
-  email        String
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  subAccountId String
-  Subaccount   SubAccount @relation(fields: [subAccountId], references: [id], onDelete: Cascade)
-  Ticket       Ticket[]
+  id             String           @id @default(uuid())
+  name           String
+  email          String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  subAccountId   String
+  Subaccount     SubAccount       @relation(fields: [subAccountId], references: [id], onDelete: Cascade)
+  Ticket         Ticket[]
+  FormSubmission FormSubmission[]
 
   @@index([subAccountId])
 }
@@ -426,4 +429,60 @@ enum InvitationStatus {
 enum Plan {
   plan_unlimited_saas
   plan_basic
+}
+
+enum FormFieldType {
+  TEXT
+  EMAIL
+  PHONE
+  TEXTAREA
+  SELECT
+  CHECKBOX
+  NUMBER
+}
+
+model FormSubmission {
+  id           String     @id @default(uuid())
+  createdAt    DateTime   @default(now())
+  name         String
+  email        String
+  formData     String?    @db.Text
+  source       String?
+  funnelId     String?
+  funnelPageId String?
+  subAccountId String
+  contactId    String?
+  SubAccount   SubAccount @relation(fields: [subAccountId], references: [id], onDelete: Cascade)
+  Contact      Contact?   @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  @@index([subAccountId])
+  @@index([contactId])
+}
+
+model Form {
+  id           String      @id @default(uuid())
+  name         String
+  description  String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  published    Boolean     @default(false)
+  subAccountId String
+  SubAccount   SubAccount  @relation(fields: [subAccountId], references: [id], onDelete: Cascade)
+  FormFields   FormField[]
+
+  @@index([subAccountId])
+}
+
+model FormField {
+  id          String        @id @default(uuid())
+  label       String
+  placeholder String?
+  type        FormFieldType @default(TEXT)
+  required    Boolean       @default(false)
+  order       Int           @default(0)
+  options     String?       @db.Text
+  formId      String
+  Form        Form          @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@index([formId])
 }

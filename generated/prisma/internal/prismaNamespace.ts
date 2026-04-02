@@ -406,7 +406,10 @@ export const ModelName = {
   Invitation: 'Invitation',
   Notification: 'Notification',
   Subscription: 'Subscription',
-  AddOns: 'AddOns'
+  AddOns: 'AddOns',
+  FormSubmission: 'FormSubmission',
+  Form: 'Form',
+  FormField: 'FormField'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -422,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "permissions" | "agency" | "subAccount" | "tag" | "pipeline" | "lane" | "ticket" | "trigger" | "automation" | "automationInstance" | "action" | "contact" | "media" | "funnel" | "className" | "funnelPage" | "agencySidebarOption" | "subAccountSidebarOption" | "invitation" | "notification" | "subscription" | "addOns"
+    modelProps: "user" | "permissions" | "agency" | "subAccount" | "tag" | "pipeline" | "lane" | "ticket" | "trigger" | "automation" | "automationInstance" | "action" | "contact" | "media" | "funnel" | "className" | "funnelPage" | "agencySidebarOption" | "subAccountSidebarOption" | "invitation" | "notification" | "subscription" | "addOns" | "formSubmission" | "form" | "formField"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1944,6 +1947,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FormSubmission: {
+      payload: Prisma.$FormSubmissionPayload<ExtArgs>
+      fields: Prisma.FormSubmissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FormSubmissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FormSubmissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+        }
+        findFirst: {
+          args: Prisma.FormSubmissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FormSubmissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+        }
+        findMany: {
+          args: Prisma.FormSubmissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload>[]
+        }
+        create: {
+          args: Prisma.FormSubmissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+        }
+        createMany: {
+          args: Prisma.FormSubmissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FormSubmissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+        }
+        update: {
+          args: Prisma.FormSubmissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.FormSubmissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FormSubmissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FormSubmissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormSubmissionPayload>
+        }
+        aggregate: {
+          args: Prisma.FormSubmissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFormSubmission>
+        }
+        groupBy: {
+          args: Prisma.FormSubmissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FormSubmissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FormSubmissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FormSubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
+    Form: {
+      payload: Prisma.$FormPayload<ExtArgs>
+      fields: Prisma.FormFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FormFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FormFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload>
+        }
+        findFirst: {
+          args: Prisma.FormFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FormFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload>
+        }
+        findMany: {
+          args: Prisma.FormFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload>[]
+        }
+        create: {
+          args: Prisma.FormCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload>
+        }
+        createMany: {
+          args: Prisma.FormCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FormDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload>
+        }
+        update: {
+          args: Prisma.FormUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload>
+        }
+        deleteMany: {
+          args: Prisma.FormDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FormUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FormUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormPayload>
+        }
+        aggregate: {
+          args: Prisma.FormAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateForm>
+        }
+        groupBy: {
+          args: Prisma.FormGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FormGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FormCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FormCountAggregateOutputType> | number
+        }
+      }
+    }
+    FormField: {
+      payload: Prisma.$FormFieldPayload<ExtArgs>
+      fields: Prisma.FormFieldFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FormFieldFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FormFieldFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload>
+        }
+        findFirst: {
+          args: Prisma.FormFieldFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FormFieldFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload>
+        }
+        findMany: {
+          args: Prisma.FormFieldFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload>[]
+        }
+        create: {
+          args: Prisma.FormFieldCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload>
+        }
+        createMany: {
+          args: Prisma.FormFieldCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FormFieldDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload>
+        }
+        update: {
+          args: Prisma.FormFieldUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload>
+        }
+        deleteMany: {
+          args: Prisma.FormFieldDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FormFieldUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FormFieldUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FormFieldPayload>
+        }
+        aggregate: {
+          args: Prisma.FormFieldAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFormField>
+        }
+        groupBy: {
+          args: Prisma.FormFieldGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FormFieldGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FormFieldCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FormFieldCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2303,6 +2504,49 @@ export const AddOnsScalarFieldEnum = {
 export type AddOnsScalarFieldEnum = (typeof AddOnsScalarFieldEnum)[keyof typeof AddOnsScalarFieldEnum]
 
 
+export const FormSubmissionScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  name: 'name',
+  email: 'email',
+  formData: 'formData',
+  source: 'source',
+  funnelId: 'funnelId',
+  funnelPageId: 'funnelPageId',
+  subAccountId: 'subAccountId',
+  contactId: 'contactId'
+} as const
+
+export type FormSubmissionScalarFieldEnum = (typeof FormSubmissionScalarFieldEnum)[keyof typeof FormSubmissionScalarFieldEnum]
+
+
+export const FormScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  published: 'published',
+  subAccountId: 'subAccountId'
+} as const
+
+export type FormScalarFieldEnum = (typeof FormScalarFieldEnum)[keyof typeof FormScalarFieldEnum]
+
+
+export const FormFieldScalarFieldEnum = {
+  id: 'id',
+  label: 'label',
+  placeholder: 'placeholder',
+  type: 'type',
+  required: 'required',
+  order: 'order',
+  options: 'options',
+  formId: 'formId'
+} as const
+
+export type FormFieldScalarFieldEnum = (typeof FormFieldScalarFieldEnum)[keyof typeof FormFieldScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2573,6 +2817,42 @@ export const AddOnsOrderByRelevanceFieldEnum = {
 export type AddOnsOrderByRelevanceFieldEnum = (typeof AddOnsOrderByRelevanceFieldEnum)[keyof typeof AddOnsOrderByRelevanceFieldEnum]
 
 
+export const FormSubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  formData: 'formData',
+  source: 'source',
+  funnelId: 'funnelId',
+  funnelPageId: 'funnelPageId',
+  subAccountId: 'subAccountId',
+  contactId: 'contactId'
+} as const
+
+export type FormSubmissionOrderByRelevanceFieldEnum = (typeof FormSubmissionOrderByRelevanceFieldEnum)[keyof typeof FormSubmissionOrderByRelevanceFieldEnum]
+
+
+export const FormOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  subAccountId: 'subAccountId'
+} as const
+
+export type FormOrderByRelevanceFieldEnum = (typeof FormOrderByRelevanceFieldEnum)[keyof typeof FormOrderByRelevanceFieldEnum]
+
+
+export const FormFieldOrderByRelevanceFieldEnum = {
+  id: 'id',
+  label: 'label',
+  placeholder: 'placeholder',
+  options: 'options',
+  formId: 'formId'
+} as const
+
+export type FormFieldOrderByRelevanceFieldEnum = (typeof FormFieldOrderByRelevanceFieldEnum)[keyof typeof FormFieldOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -2653,6 +2933,13 @@ export type EnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'Plan'
  */
 export type EnumPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Plan'>
+    
+
+
+/**
+ * Reference to a field of type 'FormFieldType'
+ */
+export type EnumFormFieldTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FormFieldType'>
     
 
 
@@ -2780,6 +3067,9 @@ export type GlobalOmitConfig = {
   notification?: Prisma.NotificationOmit
   subscription?: Prisma.SubscriptionOmit
   addOns?: Prisma.AddOnsOmit
+  formSubmission?: Prisma.FormSubmissionOmit
+  form?: Prisma.FormOmit
+  formField?: Prisma.FormFieldOmit
 }
 
 /* Types for Logging */

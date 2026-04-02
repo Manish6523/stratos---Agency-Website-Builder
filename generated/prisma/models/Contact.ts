@@ -192,6 +192,7 @@ export type ContactWhereInput = {
   subAccountId?: Prisma.StringFilter<"Contact"> | string
   Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
   Ticket?: Prisma.TicketListRelationFilter
+  FormSubmission?: Prisma.FormSubmissionListRelationFilter
 }
 
 export type ContactOrderByWithRelationInput = {
@@ -203,6 +204,7 @@ export type ContactOrderByWithRelationInput = {
   subAccountId?: Prisma.SortOrder
   Subaccount?: Prisma.SubAccountOrderByWithRelationInput
   Ticket?: Prisma.TicketOrderByRelationAggregateInput
+  FormSubmission?: Prisma.FormSubmissionOrderByRelationAggregateInput
   _relevance?: Prisma.ContactOrderByRelevanceInput
 }
 
@@ -218,6 +220,7 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   subAccountId?: Prisma.StringFilter<"Contact"> | string
   Subaccount?: Prisma.XOR<Prisma.SubAccountScalarRelationFilter, Prisma.SubAccountWhereInput>
   Ticket?: Prisma.TicketListRelationFilter
+  FormSubmission?: Prisma.FormSubmissionListRelationFilter
 }, "id">
 
 export type ContactOrderByWithAggregationInput = {
@@ -252,6 +255,7 @@ export type ContactCreateInput = {
   updatedAt?: Date | string
   Subaccount: Prisma.SubAccountCreateNestedOneWithoutContactInput
   Ticket?: Prisma.TicketCreateNestedManyWithoutCustomerInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateInput = {
@@ -262,6 +266,7 @@ export type ContactUncheckedCreateInput = {
   updatedAt?: Date | string
   subAccountId: string
   Ticket?: Prisma.TicketUncheckedCreateNestedManyWithoutCustomerInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactUpdateInput = {
@@ -272,6 +277,7 @@ export type ContactUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutContactNestedInput
   Ticket?: Prisma.TicketUpdateManyWithoutCustomerNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateInput = {
@@ -282,6 +288,7 @@ export type ContactUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subAccountId?: Prisma.StringFieldUpdateOperationsInput | string
   Ticket?: Prisma.TicketUncheckedUpdateManyWithoutCustomerNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyInput = {
@@ -416,6 +423,22 @@ export type ContactUpdateOneWithoutTicketNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutTicketInput, Prisma.ContactUpdateWithoutTicketInput>, Prisma.ContactUncheckedUpdateWithoutTicketInput>
 }
 
+export type ContactCreateNestedOneWithoutFormSubmissionInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutFormSubmissionInput, Prisma.ContactUncheckedCreateWithoutFormSubmissionInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutFormSubmissionInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneWithoutFormSubmissionNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutFormSubmissionInput, Prisma.ContactUncheckedCreateWithoutFormSubmissionInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutFormSubmissionInput
+  upsert?: Prisma.ContactUpsertWithoutFormSubmissionInput
+  disconnect?: Prisma.ContactWhereInput | boolean
+  delete?: Prisma.ContactWhereInput | boolean
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutFormSubmissionInput, Prisma.ContactUpdateWithoutFormSubmissionInput>, Prisma.ContactUncheckedUpdateWithoutFormSubmissionInput>
+}
+
 export type ContactCreateWithoutSubaccountInput = {
   id?: string
   name: string
@@ -423,6 +446,7 @@ export type ContactCreateWithoutSubaccountInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   Ticket?: Prisma.TicketCreateNestedManyWithoutCustomerInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutSubaccountInput = {
@@ -432,6 +456,7 @@ export type ContactUncheckedCreateWithoutSubaccountInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   Ticket?: Prisma.TicketUncheckedCreateNestedManyWithoutCustomerInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutSubaccountInput = {
@@ -479,6 +504,7 @@ export type ContactCreateWithoutTicketInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   Subaccount: Prisma.SubAccountCreateNestedOneWithoutContactInput
+  FormSubmission?: Prisma.FormSubmissionCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutTicketInput = {
@@ -488,6 +514,7 @@ export type ContactUncheckedCreateWithoutTicketInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   subAccountId: string
+  FormSubmission?: Prisma.FormSubmissionUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutTicketInput = {
@@ -513,6 +540,7 @@ export type ContactUpdateWithoutTicketInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutContactNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutTicketInput = {
@@ -522,6 +550,63 @@ export type ContactUncheckedUpdateWithoutTicketInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutContactNestedInput
+}
+
+export type ContactCreateWithoutFormSubmissionInput = {
+  id?: string
+  name: string
+  email: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  Subaccount: Prisma.SubAccountCreateNestedOneWithoutContactInput
+  Ticket?: Prisma.TicketCreateNestedManyWithoutCustomerInput
+}
+
+export type ContactUncheckedCreateWithoutFormSubmissionInput = {
+  id?: string
+  name: string
+  email: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subAccountId: string
+  Ticket?: Prisma.TicketUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type ContactCreateOrConnectWithoutFormSubmissionInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutFormSubmissionInput, Prisma.ContactUncheckedCreateWithoutFormSubmissionInput>
+}
+
+export type ContactUpsertWithoutFormSubmissionInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutFormSubmissionInput, Prisma.ContactUncheckedUpdateWithoutFormSubmissionInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutFormSubmissionInput, Prisma.ContactUncheckedCreateWithoutFormSubmissionInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutFormSubmissionInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutFormSubmissionInput, Prisma.ContactUncheckedUpdateWithoutFormSubmissionInput>
+}
+
+export type ContactUpdateWithoutFormSubmissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Subaccount?: Prisma.SubAccountUpdateOneRequiredWithoutContactNestedInput
+  Ticket?: Prisma.TicketUpdateManyWithoutCustomerNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutFormSubmissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  Ticket?: Prisma.TicketUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type ContactCreateManySubaccountInput = {
@@ -539,6 +624,7 @@ export type ContactUpdateWithoutSubaccountInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Ticket?: Prisma.TicketUpdateManyWithoutCustomerNestedInput
+  FormSubmission?: Prisma.FormSubmissionUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutSubaccountInput = {
@@ -548,6 +634,7 @@ export type ContactUncheckedUpdateWithoutSubaccountInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Ticket?: Prisma.TicketUncheckedUpdateManyWithoutCustomerNestedInput
+  FormSubmission?: Prisma.FormSubmissionUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateManyWithoutSubaccountInput = {
@@ -565,10 +652,12 @@ export type ContactUncheckedUpdateManyWithoutSubaccountInput = {
 
 export type ContactCountOutputType = {
   Ticket: number
+  FormSubmission: number
 }
 
 export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Ticket?: boolean | ContactCountOutputTypeCountTicketArgs
+  FormSubmission?: boolean | ContactCountOutputTypeCountFormSubmissionArgs
 }
 
 /**
@@ -588,6 +677,13 @@ export type ContactCountOutputTypeCountTicketArgs<ExtArgs extends runtime.Types.
   where?: Prisma.TicketWhereInput
 }
 
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountFormSubmissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FormSubmissionWhereInput
+}
+
 
 export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -598,6 +694,7 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   subAccountId?: boolean
   Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   Ticket?: boolean | Prisma.Contact$TicketArgs<ExtArgs>
+  FormSubmission?: boolean | Prisma.Contact$FormSubmissionArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contact"]>
 
@@ -616,6 +713,7 @@ export type ContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Subaccount?: boolean | Prisma.SubAccountDefaultArgs<ExtArgs>
   Ticket?: boolean | Prisma.Contact$TicketArgs<ExtArgs>
+  FormSubmission?: boolean | Prisma.Contact$FormSubmissionArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -624,6 +722,7 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     Subaccount: Prisma.$SubAccountPayload<ExtArgs>
     Ticket: Prisma.$TicketPayload<ExtArgs>[]
+    FormSubmission: Prisma.$FormSubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -974,6 +1073,7 @@ export interface Prisma__ContactClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   Subaccount<T extends Prisma.SubAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__SubAccountClient<runtime.Types.Result.GetResult<Prisma.$SubAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   Ticket<T extends Prisma.Contact$TicketArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$TicketArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  FormSubmission<T extends Prisma.Contact$FormSubmissionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$FormSubmissionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FormSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1373,6 +1473,30 @@ export type Contact$TicketArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * Contact.FormSubmission
+ */
+export type Contact$FormSubmissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FormSubmission
+   */
+  select?: Prisma.FormSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FormSubmission
+   */
+  omit?: Prisma.FormSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FormSubmissionInclude<ExtArgs> | null
+  where?: Prisma.FormSubmissionWhereInput
+  orderBy?: Prisma.FormSubmissionOrderByWithRelationInput | Prisma.FormSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.FormSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FormSubmissionScalarFieldEnum | Prisma.FormSubmissionScalarFieldEnum[]
 }
 
 /**

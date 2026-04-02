@@ -73,7 +73,10 @@ export const ModelName = {
   Invitation: 'Invitation',
   Notification: 'Notification',
   Subscription: 'Subscription',
-  AddOns: 'AddOns'
+  AddOns: 'AddOns',
+  FormSubmission: 'FormSubmission',
+  Form: 'Form',
+  FormField: 'FormField'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,6 +415,49 @@ export const AddOnsScalarFieldEnum = {
 export type AddOnsScalarFieldEnum = (typeof AddOnsScalarFieldEnum)[keyof typeof AddOnsScalarFieldEnum]
 
 
+export const FormSubmissionScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  name: 'name',
+  email: 'email',
+  formData: 'formData',
+  source: 'source',
+  funnelId: 'funnelId',
+  funnelPageId: 'funnelPageId',
+  subAccountId: 'subAccountId',
+  contactId: 'contactId'
+} as const
+
+export type FormSubmissionScalarFieldEnum = (typeof FormSubmissionScalarFieldEnum)[keyof typeof FormSubmissionScalarFieldEnum]
+
+
+export const FormScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  published: 'published',
+  subAccountId: 'subAccountId'
+} as const
+
+export type FormScalarFieldEnum = (typeof FormScalarFieldEnum)[keyof typeof FormScalarFieldEnum]
+
+
+export const FormFieldScalarFieldEnum = {
+  id: 'id',
+  label: 'label',
+  placeholder: 'placeholder',
+  type: 'type',
+  required: 'required',
+  order: 'order',
+  options: 'options',
+  formId: 'formId'
+} as const
+
+export type FormFieldScalarFieldEnum = (typeof FormFieldScalarFieldEnum)[keyof typeof FormFieldScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -680,4 +726,40 @@ export const AddOnsOrderByRelevanceFieldEnum = {
 } as const
 
 export type AddOnsOrderByRelevanceFieldEnum = (typeof AddOnsOrderByRelevanceFieldEnum)[keyof typeof AddOnsOrderByRelevanceFieldEnum]
+
+
+export const FormSubmissionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  formData: 'formData',
+  source: 'source',
+  funnelId: 'funnelId',
+  funnelPageId: 'funnelPageId',
+  subAccountId: 'subAccountId',
+  contactId: 'contactId'
+} as const
+
+export type FormSubmissionOrderByRelevanceFieldEnum = (typeof FormSubmissionOrderByRelevanceFieldEnum)[keyof typeof FormSubmissionOrderByRelevanceFieldEnum]
+
+
+export const FormOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  subAccountId: 'subAccountId'
+} as const
+
+export type FormOrderByRelevanceFieldEnum = (typeof FormOrderByRelevanceFieldEnum)[keyof typeof FormOrderByRelevanceFieldEnum]
+
+
+export const FormFieldOrderByRelevanceFieldEnum = {
+  id: 'id',
+  label: 'label',
+  placeholder: 'placeholder',
+  options: 'options',
+  formId: 'formId'
+} as const
+
+export type FormFieldOrderByRelevanceFieldEnum = (typeof FormFieldOrderByRelevanceFieldEnum)[keyof typeof FormFieldOrderByRelevanceFieldEnum]
 

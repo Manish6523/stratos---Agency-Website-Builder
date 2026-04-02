@@ -84,3 +84,16 @@ export const Plan = {
 } as const
 
 export type Plan = (typeof Plan)[keyof typeof Plan]
+
+
+export const FormFieldType = {
+  TEXT: 'TEXT',
+  EMAIL: 'EMAIL',
+  PHONE: 'PHONE',
+  TEXTAREA: 'TEXTAREA',
+  SELECT: 'SELECT',
+  CHECKBOX: 'CHECKBOX',
+  NUMBER: 'NUMBER'
+} as const
+
+export type FormFieldType = (typeof FormFieldType)[keyof typeof FormFieldType]

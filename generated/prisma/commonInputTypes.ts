@@ -279,6 +279,23 @@ export type EnumPlanNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumPlanNullableFilter<$PrismaModel>
 }
 
+export type EnumFormFieldTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.FormFieldType | Prisma.EnumFormFieldTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FormFieldType[]
+  notIn?: $Enums.FormFieldType[]
+  not?: Prisma.NestedEnumFormFieldTypeFilter<$PrismaModel> | $Enums.FormFieldType
+}
+
+export type EnumFormFieldTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FormFieldType | Prisma.EnumFormFieldTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FormFieldType[]
+  notIn?: $Enums.FormFieldType[]
+  not?: Prisma.NestedEnumFormFieldTypeWithAggregatesFilter<$PrismaModel> | $Enums.FormFieldType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFormFieldTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFormFieldTypeFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[]
@@ -559,6 +576,23 @@ export type NestedEnumPlanNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumPlanNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumPlanNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumFormFieldTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.FormFieldType | Prisma.EnumFormFieldTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FormFieldType[]
+  notIn?: $Enums.FormFieldType[]
+  not?: Prisma.NestedEnumFormFieldTypeFilter<$PrismaModel> | $Enums.FormFieldType
+}
+
+export type NestedEnumFormFieldTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FormFieldType | Prisma.EnumFormFieldTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.FormFieldType[]
+  notIn?: $Enums.FormFieldType[]
+  not?: Prisma.NestedEnumFormFieldTypeWithAggregatesFilter<$PrismaModel> | $Enums.FormFieldType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFormFieldTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFormFieldTypeFilter<$PrismaModel>
 }
 
 

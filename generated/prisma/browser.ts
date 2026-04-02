@@ -132,3 +132,18 @@ export type Subscription = Prisma.SubscriptionModel
  * 
  */
 export type AddOns = Prisma.AddOnsModel
+/**
+ * Model FormSubmission
+ * 
+ */
+export type FormSubmission = Prisma.FormSubmissionModel
+/**
+ * Model Form
+ * 
+ */
+export type Form = Prisma.FormModel
+/**
+ * Model FormField
+ * 
+ */
+export type FormField = Prisma.FormFieldModel
