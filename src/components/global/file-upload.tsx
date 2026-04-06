@@ -59,7 +59,7 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
 
   /* Upload State (Shows when value is empty) */
   return (
-    <div className="w-full bg-muted/30 border-2 border-dashed border-muted rounded-xl transition-all hover:bg-muted/50">
+    <div className="w-fit">
       <UploadDropzone 
         endpoint={apiEndpoint}
         onClientUploadComplete={(res) => {
@@ -70,9 +70,9 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
           console.error("Upload Error:", error);
         }}
         appearance={{
-          container: "p-8",
+          container: "p-8 md:max-w-full max-w-[250px] bg-muted/30 border-2 mx-auto border-dashed border-primary/50 transition-all hover:bg-muted",
           label: "text-primary hover:text-primary/80",
-          button: "bg-primary text-primary-foreground ut-ready:bg-primary/90",
+          button: "bg-primary text-primary-foreground ut-ready:bg-primary/90 px-2 cursor-pointer!",
         }}
       />
     </div>
