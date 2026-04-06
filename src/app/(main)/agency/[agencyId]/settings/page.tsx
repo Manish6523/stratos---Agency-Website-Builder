@@ -35,7 +35,7 @@ const SettingsPage = async ({ params }: Props) => {
   const subAccounts = agencyDetails.SubAccount;
 
   return (
-    <div className="flex lg:flex-row flex-col gap-4 p-4">
+    <div className="flex lg:flex-row flex-col gap-4 p-0 md:p-4">
       <AgencyDetails data={agencyDetails} />
       <span className="text-muted-foreground text-xs">
       </span>

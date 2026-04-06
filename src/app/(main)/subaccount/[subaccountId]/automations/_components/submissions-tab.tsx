@@ -127,9 +127,9 @@ export default function SubmissionsTab({
           ) : (
             <div className="border-t">
               <Table>
-                <TableHeader className="bg-muted/50">
+                <TableHeader className="bg-muted/50 whitespace-nowrap">
                   <TableRow>
-                    <TableHead className="font-semibold px-6">Name</TableHead>
+                    <TableHead className="font-semibold px-4 sm:px-6">Name</TableHead>
                     <TableHead className="font-semibold">Email</TableHead>
                     <TableHead className="font-semibold">Source</TableHead>
                     <TableHead className="font-semibold">Date</TableHead>
@@ -152,17 +152,17 @@ export default function SubmissionsTab({
                       <Fragment key={submission.id}>
                         <TableRow
                           className={cn(
-                            "cursor-pointer transition-colors px-6",
+                            "cursor-pointer transition-colors px-4 sm:px-6",
                             isExpanded ? "bg-muted/30" : "hover:bg-muted/50"
                           )}
                           onClick={() => setExpandedRow(isExpanded ? null : submission.id)}
                         >
-                          <TableCell className="px-6 py-4">
+                          <TableCell className="px-4 py-4 sm:px-6">
                             <div className="flex items-center gap-3">
                               <div className="bg-primary/10 text-primary size-8 flex items-center justify-center rounded-full shrink-0">
                                 <User className="size-4" />
                               </div>
-                              <span className="font-semibold text-sm truncate max-w-[150px]">
+                              <span className="font-semibold text-sm truncate max-w-[120px] sm:max-w-[200px]">
                                 {submission.name}
                               </span>
                             </div>
@@ -227,7 +227,7 @@ export default function SubmissionsTab({
 
                                 <div className="md:col-span-2">
                                   <Tabs defaultValue="formatted" className="w-full">
-                                    <div className="flex items-center justify-between mb-2">
+                                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-2">
                                       <div className="flex items-center gap-2">
                                         <Database className="size-3.5 text-muted-foreground" />
                                         <h4 className="text-xs font-bold uppercase text-muted-foreground">Payload Data</h4>

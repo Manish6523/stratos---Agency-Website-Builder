@@ -24,10 +24,12 @@ const FunnelsPageProps: React.FC<FunnelsPageProps> = async ({ params }) => {
     <BlurPage>
       <FunnelsDataTable
         actionButtonText={
-          <>
+          <span className="flex items-center gap-2">
             <PlusCircle className="w-4 h-4" />
-            Create Funnel
-          </>
+            <span className="hidden md:block">
+              Create Funnel
+            </span>
+          </span>
         }
         modalChildren={<FunnelDetails subAccountId={subaccountId} />}
         filterValue="name"

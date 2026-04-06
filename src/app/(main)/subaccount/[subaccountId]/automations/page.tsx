@@ -37,10 +37,10 @@ const AutomationPage = async ({ params }: Props) => {
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold md:hidden p-4">Automations</h1>
         <Tabs defaultValue="submissions" className="w-full">
-          <TabsList className="bg-transparent border-b border-border rounded-none w-full justify-start gap-4 h-auto p-0 mb-6">
+          <TabsList className="bg-transparent border-b border-border rounded-none w-full justify-start gap-4 h-auto p-0 mb-6 overflow-x-auto flex-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             <TabsTrigger
               value="submissions"
-              className="data-[state=active]:bg-transparent data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:shadow-none rounded-none px-4 pb-3 pt-2 text-base font-medium gap-2"
+              className="data-[state=active]:bg-transparent data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:shadow-none rounded-none px-4 pb-3 pt-2 text-base font-medium gap-2 whitespace-nowrap"
             >
               <Inbox className="size-4" />
               Submissions
@@ -52,7 +52,7 @@ const AutomationPage = async ({ params }: Props) => {
             </TabsTrigger>
             <TabsTrigger
               value="forms"
-              className="data-[state=active]:bg-transparent data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:shadow-none rounded-none px-4 pb-3 pt-2 text-base font-medium gap-2"
+              className="data-[state=active]:bg-transparent data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:shadow-none rounded-none px-4 pb-3 pt-2 text-base font-medium gap-2 whitespace-nowrap"
             >
               <FileText className="size-4" />
               Form Builder

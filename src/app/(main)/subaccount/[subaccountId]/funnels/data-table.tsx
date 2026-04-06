@@ -49,10 +49,10 @@ export default function FunnelsDataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         <div className="flex items-center py-4 gap-2">
             <div className="relative">
-            <Search className="w-4 h-4 absolute left-4 top-4 text-muted-foreground" />
+            <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
             <Input
               placeholder="Search funnel name..."
               value={
@@ -61,7 +61,7 @@ export default function FunnelsDataTable<TData, TValue>({
               onChange={(event) =>
                 table.getColumn(filterValue)?.setFilterValue(event.target.value)
               }
-              className="h-12 pl-10"
+              className="h-10 pl-10"
               style={{ paddingLeft: "2.5rem" }}
             />
           </div>

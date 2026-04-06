@@ -36,11 +36,13 @@ const AllSubAccountsPage = async ({ params }: Props) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <CreateSubAccountButton
-        user={user}
-        id={agencyId}
-        className="w-50 self-end m-6"
-      />
+      <div className="flex w-full justify-end px-4 pt-4 sm:px-6 sm:pt-6">
+        <CreateSubAccountButton
+          user={user}
+          id={agencyId}
+          className="w-full sm:w-auto"
+        />
+      </div>
       <Command className="rounded-lg bg-transparent border border-border">
         <CommandInput placeholder="Search Account..." />
         <CommandList className="max-h-full pb-40">
@@ -51,12 +53,12 @@ const AllSubAccountsPage = async ({ params }: Props) => {
           >
             {user.Agency.SubAccount.map((subaccount) => (
               <AlertDialog key={subaccount.id}>
-                <CommandItem className="h-32 bg-transparent! my-2 text-primary border border-border p-4 rounded-lg hover:bg-accent/50! cursor-pointer transition-all flex justify-between items-center group">
+                <CommandItem className="h-auto sm:h-32 bg-transparent! my-2 text-primary border border-border p-4 rounded-lg hover:bg-accent/50! cursor-pointer transition-all flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center group">
                   <Link
                     href={`/subaccount/${subaccount.id}`}
-                    className="flex gap-4 w-full h-full"
+                    className="flex font-sans gap-4 w-full h-full items-center"
                   >
-                    <div className="relative w-32 h-full">
+                    <div className="relative w-16 h-16 sm:w-32 sm:h-full shrink-0">
                       <Image
                         src={subaccount.subAccountLogo}
                         alt="subaccount logo"
@@ -65,14 +67,16 @@ const AllSubAccountsPage = async ({ params }: Props) => {
                       />
                     </div>
                     <div className="flex flex-col justify-center">
-                      <p className="font-bold dark:text-primary text-lg">{subaccount.name}</p>
+                      <p className="font-bold dark:text-primary text-base sm:text-lg">{subaccount.name}</p>
                       <span className="text-muted-foreground text-xs">
                         {subaccount.address}
                       </span>
                     </div>
                   </Link>
 
-                  <DeleteTrigger />
+                  <div className="w-full sm:w-auto flex justify-end">
+                    <DeleteTrigger />
+                  </div>
                 </CommandItem>
 
                 <AlertDialogContent>
