@@ -48,14 +48,18 @@ const Home = () => {
             and automate billing in a single, unified workspace.
           </p>
 
-          <div className="flex gap-4 mb-20">
-            <Button size="lg" className="rounded-full px-8 font-bold group">
-              Get Started Free
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="outline" className="rounded-full px-8">
-              Watch Demo
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 mb-20">
+            <Link href="/agency">
+              <Button size="lg" className="rounded-full px-8 font-bold group">
+                Get Started Free
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+            <Link href="/site/demo">
+              <Button size="lg" variant="outline" className="rounded-full px-8">
+                Try the Builder
+              </Button>
+            </Link>
           </div>
         </div>
 
