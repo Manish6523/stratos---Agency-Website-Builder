@@ -16,7 +16,7 @@ const Page = async ({
     (page) => page.pathName === param.path,
   );
 
-  if (!pageData || !domainData) return notFound();
+  if (!pageData || !domainData || !pageData.published) return notFound();
 
   await db.funnelPage.update({
     where: {

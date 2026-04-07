@@ -7,6 +7,7 @@ import { FunnelsForSubAccount } from "@/lib/types";
 import { useModal } from "@/providers/ModalProvider";
 import { Check, ExternalLink, LucideEdit } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Switch } from "@/components/ui/switch";
 import {
   DragDropContext,
   DragStart,
@@ -177,14 +178,57 @@ export default function FunnelSteps({
         <aside className="flex-[0.7] bg-muted md:p-0 ">
           {!!pages.length ? (
             <Card className="h-full flex justify-between flex-col rounded-none pb-5">
-              <CardHeader>
-                <p className="text-sm text-muted-foreground">Page name</p>
-                <CardTitle>{clickedPage?.name}</CardTitle>
-                {clickedPage?.customName && (
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Custom Title: {clickedPage.customName}
-                  </p>
-                )}
+              <CardHeader className="flex flex-row justify-between items-center">
+                <div>
+                  <p className="text-sm text-muted-foreground">Page name</p>
+                  <CardTitle>{clickedPage?.name}</CardTitle>
+                  {clickedPage?.customName && (
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Custom Title: {clickedPage.customName}
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-medium">Publish</span>
+                    <Switch
+                      checked={!!clickedPage?.published}
+                      onCheckedChange={async (val) => {
+                        try {
+                          if (!clickedPage?.id) return;
+                          
+                          setPagesState((prev) =>
+                            prev.map((p) =>
+                              p.id === clickedPage.id
+                                ? { ...p, published: val }
+                                : p
+                            )
+                          );
+                          setClickedPage((prev) =>
+                            prev ? { ...prev, published: val } : prev
+                          );
+
+                          await upsertFunnelPage(
+                            subaccountId,
+                            {
+                              ...clickedPage,
+                              published: val,
+                            },
+                            funnelId,
+                          );
+                          toast("Success", {
+                            description: "Saved page status",
+                          });
+                          router.refresh();
+                        } catch (error) {
+                          toast("Failed", {
+                            description: "Could not change status",
+                          });
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
               </CardHeader>
                 <CardDescription className="flex flex-col gap-4 md:px-4 px-3 mt-2 overflow-hidden">
                   <div className=" relative border-2 rounded-lg overflow-clip">

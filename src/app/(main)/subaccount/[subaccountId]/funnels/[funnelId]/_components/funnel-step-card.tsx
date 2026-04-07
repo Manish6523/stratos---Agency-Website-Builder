@@ -4,6 +4,7 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { createPortal } from "react-dom";
 import { FunnelPage } from "../../../../../../../../generated/prisma/client";
+import { Badge } from "@/components/ui/badge";
 
 type Props = {
   funnelPage: FunnelPage;
@@ -47,7 +48,14 @@ export default function FunnelStepCard({
                   className="absolute -bottom-2 text-primary"
                 />
               </div>
-              {funnelPage.name}
+              <div className="flex flex-col gap-1 py-1">
+                <span className="text-sm font-medium leading-none">{funnelPage.name}</span>
+                {funnelPage.published ? (
+                  <Badge variant="default" className="text-[10px] w-fit rounded-sm px-1.5 py-0 leading-tight">Live</Badge>
+                ) : (
+                  <Badge variant="secondary" className="text-[10px] w-fit rounded-sm px-1.5 py-0 leading-tight text-muted-foreground font-normal">Draft</Badge>
+                )}
+              </div>
             </CardContent>
             {activePage && (
               <div className="w-2 top-2 right-2 h-2 absolute bg-emerald-500 rounded-full" />

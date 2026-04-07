@@ -5,7 +5,6 @@ import { v4 } from "uuid";
 import { PLAN_LIMITS } from "./constants";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { FunnelFormSchema } from "@/components/forms/funnel-details";
 
 import {
   Agency,
@@ -1053,7 +1052,7 @@ export const getFunnels = async (subaccountId: string) => {
 
 export const upsertFunnel = async (
   subaccountId: string,
-  funnel: z.infer<typeof FunnelFormSchema> & { liveProducts: string },
+  funnel: { name: string; description: string; subDomainName: string; favicon: string; liveProducts: string },
   funnelId: string,
 ) => {
   const { name, description, subDomainName, favicon } = funnel;

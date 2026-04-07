@@ -12,7 +12,7 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
 
   const pageData = domainData.FunnelPages.find((page) => !page.pathName);
 
-  if (!pageData) return notFound();
+  if (!pageData || !pageData.published) return notFound();
 
   await db.funnelPage.update({
     where: {

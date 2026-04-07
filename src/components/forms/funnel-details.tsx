@@ -14,19 +14,10 @@ import { useModal } from "@/providers/ModalProvider";
 import { saveActivityLogsNotification, upsertFunnel } from "@/lib/queries";
 import FileUpload from "../global/file-upload";
 import { Loader2 } from "lucide-react";
-import { z } from "zod";
-
 interface FunnelDetailsProps {
   defaultData?: any;
   subAccountId: string;
 }
-
-export const FunnelFormSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  description: z.string(),
-  subDomainName: z.string().optional(),
-  favicon: z.string().optional(),
-});
 
 const FunnelDetails: React.FC<FunnelDetailsProps> = ({
   defaultData,
@@ -68,6 +59,31 @@ const FunnelDetails: React.FC<FunnelDetailsProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!subAccountId) return;
+
+    if (!formData.name.trim()) {
+      toast.error("Validation Error", { description: "Name is required" });
+      return;
+    }
+    if (!formData.description.trim()) {
+      toast.error("Validation Error", { description: "Description is required" });
+      return;
+    }
+    if (formData.subDomainName.length < 4) {
+      toast.error("Validation Error", { description: "Subdomain must be at least 4 characters" });
+      return;
+    }
+    if (formData.subDomainName.length > 16) {
+      toast.error("Validation Error", { description: "Subdomain must be no more than 16 characters" });
+      return;
+    }
+    if (!/^[a-z0-9-]+$/.test(formData.subDomainName)) {
+      toast.error("Validation Error", { description: "Subdomain can only contain small letters and hyphens (no spaces)" });
+      return;
+    }
+    if (!formData.favicon.trim()) {
+      toast.error("Validation Error", { description: "Favicon is required" });
+      return;
+    }
 
     setIsLoading(true);
     try {
