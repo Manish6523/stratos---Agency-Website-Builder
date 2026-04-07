@@ -33,18 +33,18 @@ const PagesTab = () => {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <div className="p-6 pb-2">
-        <h2 className="text-lg font-semibold flex items-center gap-2">
-          <Navigation size={18} /> Funnel Steps
+      <div className="p-3 pb-1">
+        <h2 className="text-xs font-semibold flex items-center gap-1.5">
+          <Navigation size={13} /> Funnel Steps
         </h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          Navigate between the pages in your funnel sequence.
+        <p className="text-[10px] text-muted-foreground mt-0.5">
+          Navigate between pages
         </p>
       </div>
 
-      <Separator className="my-2" />
+      <Separator className="my-1" />
 
-      <ScrollArea className="flex-1 px-4">
+      <ScrollArea className="flex-1 px-2">
         {loading ? (
           <div className="p-4 text-center text-muted-foreground text-sm">
             Loading pages...
@@ -54,7 +54,7 @@ const PagesTab = () => {
             No pages found.
           </div>
         ) : (
-          <div className="flex flex-col gap-2 p-2">
+          <div className="flex flex-col gap-1.5 p-1">
             {pages.map((page, index) => {
               const isActive = pageDetails?.id === page.id;
 
@@ -63,7 +63,7 @@ const PagesTab = () => {
                   key={page.id}
                   href={`/subaccount/${subaccountId}/funnels/${funnelId}/editor/${page.id}`}
                   className={clsx(
-                    "flex flex-col p-3 rounded-lg border transition-all hover:bg-muted/50 relative group cursor-pointer",
+                    "flex flex-col p-2 rounded-md border transition-all hover:bg-muted/50 relative group cursor-pointer",
                     {
                       "bg-primary/10 border-primary text-primary": isActive,
                       "bg-background border-border": !isActive,
@@ -71,13 +71,12 @@ const PagesTab = () => {
                   )}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">
-                      {index + 1}. {page.name || "Untitled Page"}
+                    <span className="font-medium text-[11px]">
+                      {index + 1}. {page.name || "Untitled"}
                     </span>
                   </div>
-                  <span className="text-xs opacity-60 mt-1 truncate max-w-[200px]">
-                    /subaccount/{subaccountId}/funnels/{funnelId}/editor/
-                    {page.id}
+                  <span className="text-[9px] opacity-50 mt-0.5 truncate max-w-[160px]">
+                    /{page.pathName || page.id.slice(0, 8)}
                   </span>
 
                   {isActive && (
@@ -90,10 +89,11 @@ const PagesTab = () => {
         )}
       </ScrollArea>
 
-      <div className="p-6 pt-4 border-t border-border mt-auto">
+      <div className="p-3 pt-2 border-t border-border mt-auto">
         <Button
-          className="w-full"
+          className="w-full h-7 text-[10px]"
           variant="outline"
+          size="sm"
           onClick={() =>
             window.open(
               `/subaccount/${subaccountId}/funnels/${funnelId}`,
@@ -101,7 +101,7 @@ const PagesTab = () => {
             )
           }
         >
-          <PlusCircle size={16} className="mr-2" />
+          <PlusCircle size={12} className="mr-1" />
           Manage Steps
         </Button>
       </div>

@@ -8,12 +8,14 @@ import UploadMediaForm from '../forms/upload-media'
 
 type Props = {
   subaccountId: string
+  className?: string
 }
 
-const MediaUploadButton = ({subaccountId}: Props) => {
+const MediaUploadButton = ({subaccountId, className}: Props) => {
   const {isOpen, setOpen, setClose} = useModal()
   return (
     <Button
+      className={className}
       onClick={()=>{
         setOpen(<CustomModal 
           title='Upload Media' 

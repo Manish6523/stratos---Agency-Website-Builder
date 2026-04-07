@@ -28,9 +28,10 @@ import { Media } from "../../../generated/prisma/client";
 
 type Props = {
   file: Media;
+  isSidebar?: boolean;
 }
 
-export default function MediaCard({ file }: Props) {
+export default function MediaCard({ file, isSidebar }: Props) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -49,8 +50,8 @@ export default function MediaCard({ file }: Props) {
           {/* Top-right Action Menu Overlay */}
           <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
             <DropdownMenuTrigger asChild>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md hover:bg-black/70 cursor-pointer">
-                <MoreVertical size={18} />
+              <div className={`flex items-center justify-center rounded-full bg-secondary/50 backdrop-blur-md hover:bg-secondary/70 cursor-pointer border border-primary ${isSidebar ? "h-6 w-6" : "h-8 w-8"}`}>
+                <MoreVertical size={isSidebar ? 14 : 18} className="text-primary" />
               </div>
             </DropdownMenuTrigger>
           </div>
@@ -59,13 +60,13 @@ export default function MediaCard({ file }: Props) {
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/80 via-black/20 to-transparent z-10" />
 
           {/* Content Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 z-20 translate-y-2 group-hover:translate-y-0 transition-transform">
-            <p className="text-white font-semibold truncate text-sm">
+          <div className={`absolute bottom-0 left-0 right-0 z-20 translate-y-2 group-hover:translate-y-0 transition-transform ${isSidebar ? "p-2" : "p-4"}`}>
+            <p className={`text-white font-semibold truncate ${isSidebar ? "text-[10px]" : "text-sm"}`}>
               {file.name}
             </p>
-            <div className="flex items-center gap-2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <Calendar size={12} className="text-gray-300" />
-              <p className="text-[10px] text-gray-300">
+            <div className="flex items-center gap-1.5 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <Calendar size={isSidebar ? 10 : 12} className="text-gray-300 shrink-0" />
+              <p className={`text-gray-300 truncate ${isSidebar ? "text-[8px]" : "text-[10px]"}`}>
                 {file.createdAt.toDateString()}
               </p>
             </div>

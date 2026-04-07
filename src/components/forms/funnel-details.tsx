@@ -147,13 +147,15 @@ const FunnelDetails: React.FC<FunnelDetailsProps> = ({
           {/* 4. Using FileUpload exactly as before, but linked to our manual state */}
           <div className="flex flex-col gap-2">
             <Label>Favicon</Label>
-            <FileUpload
-              apiEndpoint="subaccountLogo"
-              value={formData.favicon}
-              onChange={(url) =>
-                setFormData((prev) => ({ ...prev, favicon: url }))
-              }
-            />
+            <div className="mx-auto md:mx-0">
+              <FileUpload
+                apiEndpoint="subaccountLogo"
+                value={formData.favicon}
+                onChange={(url) =>
+                  setFormData((prev) => ({ ...prev, favicon: url }))
+                }
+              />
+            </div>
           </div>
 
           <Button className="w-20 mt-4" disabled={isLoading} type="submit">

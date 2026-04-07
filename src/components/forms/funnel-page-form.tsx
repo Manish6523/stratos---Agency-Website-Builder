@@ -154,7 +154,7 @@ export default function FunnelPageForm({
             />
           </div>
           <div className="flex items-center sm:flex-row flex-col gap-2">
-            <Button disabled={isSubmitting} type="submit">
+            <Button disabled={isSubmitting} type="submit" className="w-full sm:w-fit">
               {isSubmitting ? <Loading /> : "Save Page"}
             </Button>
 
@@ -163,6 +163,7 @@ export default function FunnelPageForm({
                 variant="destructive"
                 disabled={isSubmitting}
                 type="button"
+                className="w-full sm:w-fit"
                 onClick={async () => {
                   const response = await deleteFunnelPage(defaultData.id);
                   await saveActivityLogsNotification({
@@ -181,6 +182,7 @@ export default function FunnelPageForm({
               <Button
                 variant={"outline"}
                 disabled={isSubmitting}
+                className="w-full sm:w-fit"
                 style={{
                   border: "1px solid var(--primary)",
                   color: "var(--primary)"
