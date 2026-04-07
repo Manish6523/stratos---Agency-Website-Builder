@@ -190,9 +190,18 @@ ${pad}</div>`;
 
     case "iconBlock": {
       const icon =
-        !Array.isArray(content) && content?.icon ? content.icon : "⭐";
-      return `${pad}<div class="${className}">
-${pad}  <span style="font-size:inherit;">${icon}</span>
+        !Array.isArray(content) && content?.icon ? content.icon : "info";
+      const strokeWidth =
+        !Array.isArray(content) && content?.strokeWidth ? content.strokeWidth : "2";
+
+      // Convert PascalCase or camelCase to kebab-case
+      const kebabIcon = icon
+        .replace(/([a-z])([A-Z])/g, "$1-$2")
+        .replace(/[\s_]+/g, "-")
+        .toLowerCase();
+
+      return `${pad}<div class="${className}" style="display:flex; align-items:center; justify-content:center;">
+${pad}  <i data-lucide="${kebabIcon}" style="width:1em; height:1em; stroke-width:${strokeWidth};"></i>
 ${pad}</div>`;
     }
 
@@ -275,12 +284,18 @@ a {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <style>
 ${css}
   </style>
 </head>
 <body>
 ${htmlBody}
+  <script>
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
 </body>
 </html>`;
 

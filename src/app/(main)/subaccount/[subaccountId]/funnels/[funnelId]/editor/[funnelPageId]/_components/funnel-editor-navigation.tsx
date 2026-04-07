@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Tooltip,
   TooltipContent,
@@ -14,25 +13,28 @@ import { DeviceTypes, useEditor } from "@/providers/editor/editor-provider";
 import { FunnelPage } from "../../../../../../../../../../generated/prisma/client";
 import clsx from "clsx";
 import {
-  ArrowLeftCircle,
+  ArrowLeft,
   EyeIcon,
   Laptop,
   Redo2,
   Smartphone,
   Tablet,
   Undo2,
-  PanelRightClose,
-  PanelRightOpen,
   ClipboardCopy,
   ClipboardPaste,
   Download,
   Loader2,
   Code2,
+  Cloud,
+  CloudOff,
+  Play,
+  Copy,
+  CopyIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import React, { FocusEventHandler, useEffect, useState } from "react";
+import React, { FocusEventHandler, useEffect, useState, useRef } from "react";
 import { toast } from "sonner";
 
 type Props = {
@@ -49,15 +51,50 @@ export default function FunnelEditorNavigation({
   const router = useRouter();
   const { state, dispatch } = useEditor();
   const [isExporting, setIsExporting] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState(false);
+  const [isPublish, setIsPublish] = useState(false);
   const { user } = useUser();
-  const isAdmin = user?.emailAddresses?.[0]?.emailAddress === "ms5392363@gmail.com";
+  const isAdmin =
+    user?.emailAddresses?.[0]?.emailAddress === "ms5392363@gmail.com";
+  const lastSavedContent = useRef(funnelPageDetails.content);
 
   useEffect(() => {
     dispatch({
       type: "SET_FUNNELPAGE_ID",
       payload: { funnelPageId: funnelPageDetails.id },
     });
+    setIsPublish(funnelPageDetails.published);
   }, [funnelPageDetails, dispatch]);
+
+  // Auto-save
+  useEffect(() => {
+    const content = JSON.stringify(state.editor.elements);
+    if (content === lastSavedContent.current) return;
+    const saveTimer = setTimeout(async () => {
+      setIsSaving(true);
+      setSaveError(false);
+      try {
+        const response = await upsertFunnelPage(
+          subaccountId,
+          { ...funnelPageDetails, content },
+          funnelId,
+        );
+        await saveActivityLogsNotification({
+          agencyId: undefined,
+          description: `Updated a funnel page | ${response?.name}`,
+          subAccountId: subaccountId,
+        });
+        lastSavedContent.current = content;
+      } catch {
+        setSaveError(true);
+        toast("Oops!", { description: "Could not auto-save editor" });
+      } finally {
+        setIsSaving(false);
+      }
+    }, 1500);
+    return () => clearTimeout(saveTimer);
+  }, [state.editor.elements, funnelPageDetails, subaccountId, funnelId]);
 
   const handleOnBlurTitleChange: FocusEventHandler<HTMLInputElement> = async (
     event,
@@ -73,46 +110,21 @@ export default function FunnelEditorNavigation({
         },
         funnelId,
       );
-
-      toast("Success", {
-        description: "Saved Funnel Page title",
-      });
+      toast("Success", { description: "Saved Funnel Page title" });
       router.refresh();
     } else {
-      toast("Oppse!", {
-        description: "You need to have a title!",
-      });
+      toast("Oops!", { description: "You need to have a title!" });
       event.target.value = funnelPageDetails.name;
     }
   };
 
-  const handlePreviewClick = () => {
-    dispatch({ type: "TOGGLE_PREVIEW_MODE" });
-    dispatch({ type: "TOGGLE_LIVE_MODE" });
-  };
-
-  const handleUndo = () => {
-    dispatch({ type: "UNDO" });
-  };
-
-  const handleRedo = () => {
-    dispatch({ type: "REDO" });
-  };
-
-  const handleToggleSidebar = () => {
-    dispatch({ type: "TOGGLE_SIDEBAR" });
-  };
-
-  const handleOnSave = async () => {
-    const content = JSON.stringify(state.editor.elements);
-    console.log(content);
+  const updateStatus = async (checked: boolean) => {
+    setIsPublish(checked);
+    setSaveError(false);
     try {
       const response = await upsertFunnelPage(
         subaccountId,
-        {
-          ...funnelPageDetails,
-          content,
-        },
+        { ...funnelPageDetails, published: checked },
         funnelId,
       );
       await saveActivityLogsNotification({
@@ -121,227 +133,380 @@ export default function FunnelEditorNavigation({
         subAccountId: subaccountId,
       });
       toast("Success", {
-        description: "Saved Editor",
+        description: "Set as " + (checked ? "Published" : "Draft"),
       });
-    } catch (error) {
-      toast("Oppse!", {
-        description: "Could not save editor",
-      });
+    } catch {
+      setIsPublish(!checked);
+      setSaveError(true);
+      toast("Oops!", { description: "Could not save publish status" });
+    } finally {
+      setIsSaving(false);
     }
   };
 
+  const handlePreviewClick = () => {
+    dispatch({ type: "TOGGLE_PREVIEW_MODE" });
+    dispatch({ type: "TOGGLE_LIVE_MODE" });
+  };
+
+  const handleOnSave = async () => {
+    const content = JSON.stringify(state.editor.elements);
+    if (content === lastSavedContent.current) {
+      toast("Success", { description: "Already saved" });
+      return;
+    }
+    setIsSaving(true);
+    setSaveError(false);
+    try {
+      const response = await upsertFunnelPage(
+        subaccountId,
+        { ...funnelPageDetails, content },
+        funnelId,
+      );
+      await saveActivityLogsNotification({
+        agencyId: undefined,
+        description: `Updated a funnel page | ${response?.name}`,
+        subAccountId: subaccountId,
+      });
+      lastSavedContent.current = content;
+      toast("Success", { description: "Saved Editor" });
+    } catch {
+      setSaveError(true);
+      toast("Oops!", { description: "Could not save editor" });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    try {
+      const response = await fetch("/api/export-html", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          elements: state.editor.elements,
+          pageTitle: funnelPageDetails.name,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      const blob = new Blob([data.html], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${funnelPageDetails.name || "page"}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success("Page exported as HTML!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to export");
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  if (state.editor.previewMode) return null;
+
+  const iconBtn =
+    "w-6 h-6 rounded-md hover:bg-muted transition-colors cursor-pointer";
+
   return (
-    <TooltipProvider>
-      <nav
-        className={clsx(
-          "border-b flex items-center justify-between p-6 py-3 gap-2 transition-all",
-          { "h-0! p-0! overflow-hidden! z-300": state.editor.previewMode },
-        )}
-      >
-        <aside className="flex items-center gap-4 max-w-[260px] w-[300px]">
-          <Link href={`/subaccount/${subaccountId}/funnels/${funnelId}`}>
-            <ArrowLeftCircle />
-          </Link>
-          <div className="flex flex-col w-full ">
+    <TooltipProvider delayDuration={200}>
+      <header className="h-8 min-h-8 border-b border-border/50 bg-background flex items-center justify-between px-2 select-none">
+        {/* ─── Left Section: Back + File name ─── */}
+        <div className="flex items-center gap-2 min-w-0">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href={`/subaccount/${subaccountId}/funnels/${funnelId}`}
+                className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-muted transition-colors"
+              >
+                <ArrowLeft className="w-3 h-3" />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Back to Funnel</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <div className="h-3 w-px bg-border" />
+
+          <div className="flex items-center gap-1 min-w-0">
             <Input
               defaultValue={funnelPageDetails.name}
-              className="border-none h-5 m-0 pl-2 text-lg"
+              className="border-none h-6 m-0 p-0 px-1 text-xs font-medium bg-transparent focus-visible:ring-1 focus-visible:ring-primary/30 rounded w-[120px]"
               onBlur={handleOnBlurTitleChange}
             />
-            <span className="text-sm pl-2 text-muted-foreground">
-              Path: /{funnelPageDetails.pathName}
+            <span className="text-[10px] text-muted-foreground whitespace-nowrap">
+              /{funnelPageDetails.pathName}
             </span>
           </div>
-        </aside>
-        <aside>
-          <Tabs
-            defaultValue="Desktop"
-            className="w-fit "
-            value={state.editor.device}
-            onValueChange={(value) => {
-              dispatch({
-                type: "CHANGE_DEVICE",
-                payload: { device: value as DeviceTypes },
-              });
-            }}
-          >
-            <TabsList className="grid w-full grid-cols-3 bg-transparent h-fit">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <TabsTrigger
-                    value="Desktop"
-                    className="data-[state=active]:bg-muted! w-10 h-10 p-0"
-                  >
-                    <Laptop />
-                  </TabsTrigger>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Desktop</p>
-                </TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <TabsTrigger
-                    value="Tablet"
-                    className="w-10 h-10 p-0 data-[state=active]:bg-muted"
-                  >
-                    <Tablet />
-                  </TabsTrigger>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Tablet</p>
-                </TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <TabsTrigger
-                    value="Mobile"
-                    className="w-10 h-10 p-0 data-[state=active]:bg-muted"
-                  >
-                    <Smartphone />
-                  </TabsTrigger>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Mobile</p>
-                </TooltipContent>
-              </Tooltip>
-            </TabsList>
-          </Tabs>
-        </aside>
-        <aside className="flex items-center gap-2">
-          <Button
-            variant={"ghost"}
-            size={"icon"}
-            className="hover:bg-slate-800"
-            onClick={handlePreviewClick}
-          >
-            <EyeIcon />
-          </Button>
-          <Button
-            variant={"ghost"}
-            size={"icon"}
-            className="hover:bg-slate-800"
-            onClick={handleToggleSidebar}
-            title="Toggle Sidebar"
-          >
-            {state.editor.sidebarOpen ? (
-              <PanelRightClose />
-            ) : (
-              <PanelRightOpen />
-            )}
-          </Button>
-          <Button
-            disabled={
-              !state.editor.selectedElement.id ||
-              state.editor.selectedElement.id === "__body"
-            }
-            onClick={() => dispatch({ type: "COPY_ELEMENT" })}
-            variant={"ghost"}
-            size={"icon"}
-            className="hover:bg-slate-800"
-            title="Copy Element"
-          >
-            <ClipboardCopy className="w-4 h-4" />
-          </Button>
-          <Button
-            disabled={!state.editor.clipboard}
-            onClick={() => dispatch({ type: "PASTE_ELEMENT" })}
-            variant={"ghost"}
-            size={"icon"}
-            className="hover:bg-slate-800"
-            title="Paste Element"
-          >
-            <ClipboardPaste className="w-4 h-4" />
-          </Button>
-          <Button
-            disabled={!(state.history.currentIndex > 0)}
-            onClick={handleUndo}
-            variant={"ghost"}
-            size={"icon"}
-            className="hover:bg-slate-800"
-          >
-            <Undo2 />
-          </Button>
-          <Button
-            disabled={
-              !(state.history.currentIndex < state.history.history.length - 1)
-            }
-            onClick={handleRedo}
-            variant={"ghost"}
-            size={"icon"}
-            className="hover:bg-slate-800 mr-4"
-          >
-            <Redo2 />
-          </Button>
-          <div className="flex flex-col item-center mr-4">
-            <div className="flex flex-row items-center gap-4">
-              Draft
-              <Switch disabled defaultChecked={true} />
-              Publish
-            </div>
-            <span className="text-muted-foreground text-sm">
-              Last updated {funnelPageDetails.updatedAt.toLocaleDateString()}
-            </span>
-          </div>
-          <Button
-            variant="outline"
-            size="icon"
-            className="hover:bg-slate-800"
-            disabled={isExporting}
-            title="Export as HTML"
-            onClick={async () => {
-              setIsExporting(true);
-              try {
-                const response = await fetch("/api/export-html", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    elements: state.editor.elements,
-                    pageTitle: funnelPageDetails.name,
-                  }),
-                });
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.error);
-                const blob = new Blob([data.html], { type: "text/html" });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = `${funnelPageDetails.name || "page"}.html`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                toast.success("Page exported as HTML!");
-              } catch (error: any) {
-                toast.error(error.message || "Failed to export");
-              } finally {
-                setIsExporting(false);
-              }
-            }}
-          >
-            {isExporting ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <Download className="w-4 h-4" />
-            )}
-          </Button>
-          {isAdmin && (
-            <Link
-              href={`/subaccount/${subaccountId}/funnels/${funnelId}/editor/${funnelPageDetails.id}/code`}
-            >
+        </div>
+
+        {/* ─── Center Section: Device + Undo/Redo + Copy/Paste ─── */}
+        <div className="flex items-center gap-0.5">
+          {/* Device toggles */}
+          <Tooltip>
+            <TooltipTrigger asChild>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="icon"
-                className="hover:bg-slate-800"
-                title="Code Editor"
+                className={clsx(
+                  iconBtn,
+                  state.editor.device === "Desktop" &&
+                    "bg-muted text-foreground",
+                )}
+                onClick={() =>
+                  dispatch({
+                    type: "CHANGE_DEVICE",
+                    payload: { device: "Desktop" },
+                  })
+                }
               >
-                <Code2 className="w-4 h-4" />
+                <Laptop className="w-3 h-3" />
               </Button>
-            </Link>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Desktop</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={clsx(
+                  iconBtn,
+                  state.editor.device === "Tablet" &&
+                    "bg-muted text-foreground",
+                )}
+                onClick={() =>
+                  dispatch({
+                    type: "CHANGE_DEVICE",
+                    payload: { device: "Tablet" },
+                  })
+                }
+              >
+                <Tablet className="w-3 h-3" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Tablet</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={clsx(
+                  iconBtn,
+                  state.editor.device === "Mobile" &&
+                    "bg-muted text-foreground",
+                )}
+                onClick={() =>
+                  dispatch({
+                    type: "CHANGE_DEVICE",
+                    payload: { device: "Mobile" },
+                  })
+                }
+              >
+                <Smartphone className="w-3 h-3" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Mobile</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <div className="h-3 w-px bg-border mx-0.5" />
+
+          {/* Undo / Redo */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={iconBtn}
+                disabled={!(state.history.currentIndex > 0)}
+                onClick={() => dispatch({ type: "UNDO" })}
+              >
+                <Undo2 className="w-3 h-3" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Undo</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={iconBtn}
+                disabled={
+                  !(
+                    state.history.currentIndex <
+                    state.history.history.length - 1
+                  )
+                }
+                onClick={() => dispatch({ type: "REDO" })}
+              >
+                <Redo2 className="w-3 h-3" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Redo</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <div className="h-4 w-px bg-border mx-1" />
+
+          {/* Copy / Paste */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={iconBtn}
+                disabled={
+                  !state.editor.selectedElement.id ||
+                  state.editor.selectedElement.id === "__body"
+                }
+                onClick={() => dispatch({ type: "COPY_ELEMENT" })}
+              >
+                <CopyIcon className="w-3 h-3" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Copy</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={iconBtn}
+                disabled={!state.editor.clipboard}
+                onClick={() => dispatch({ type: "PASTE_ELEMENT" })}
+              >
+                <ClipboardPaste className="w-3 h-3" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Paste</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+
+        {/* ─── Right Section: Preview + Export + Code + Publish + Save ─── */}
+        <div className="flex items-center gap-1">
+          {/* Preview */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={iconBtn}
+                onClick={handlePreviewClick}
+              >
+                <Play className="w-3 h-3" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Preview</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <div className="h-4 w-px bg-border mx-0.5" />
+
+          {/* Export HTML */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={iconBtn}
+                disabled={isExporting}
+                onClick={handleExport}
+              >
+                {isExporting ? (
+                  <Loader2 className="w-3 h-3 animate-spin" />
+                ) : (
+                  <Download className="w-3 h-3" />
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Export HTML</p>
+            </TooltipContent>
+          </Tooltip>
+
+          {/* Code Editor */}
+          {isAdmin && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={`/subaccount/${subaccountId}/funnels/${funnelId}/editor/${funnelPageDetails.id}/code`}
+                >
+                  <Button variant="ghost" size="icon" className={iconBtn}>
+                    <Code2 className="w-3 h-3" />
+                  </Button>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>Code Editor</p>
+              </TooltipContent>
+            </Tooltip>
           )}
-          <Button onClick={handleOnSave}>Save</Button>
-        </aside>
-      </nav>
+
+          <div className="h-3 w-px bg-border mx-0.5" />
+
+          {/* Publish toggle */}
+          <div className="flex items-center gap-1 px-0.5">
+            <span className="text-[9px] text-muted-foreground font-medium uppercase tracking-wider">
+              {isPublish ? "Live" : "Draft"}
+            </span>
+            <Switch
+              checked={isPublish}
+              onCheckedChange={updateStatus}
+              className="scale-[0.55] origin-center"
+            />
+          </div>
+
+          <div className="h-4 w-px bg-border mx-0.5" />
+
+          {/* Save */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={clsx(iconBtn, saveError && "text-destructive")}
+                onClick={handleOnSave}
+                disabled={isSaving}
+              >
+                {isSaving ? (
+                  <Loader2 className="w-3 h-3 animate-spin" />
+                ) : saveError ? (
+                  <CloudOff className="w-3 h-3" />
+                ) : (
+                  <Cloud className="w-3 h-3" />
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>
+                {isSaving ? "Saving..." : saveError ? "Retry Save" : "Save"}
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </header>
     </TooltipProvider>
   );
 }

@@ -4466,8 +4466,8 @@ export const sneakerStoreDP: {
           type: "container",
         },
       ],
-      id: "__body",
-      name: "Body",
+      id: "c09ef26a-c434-49c6-ac5d-52a7210f97f4",
+      name: "shoes container",
       styles: {
         backgroundColor: "white",
         paddingTop: "0",
@@ -4477,7 +4477,7 @@ export const sneakerStoreDP: {
         fontSize: "",
         overflow: "auto",
       },
-      type: "__body",
+      type: "container",
     },
   ],
 };
