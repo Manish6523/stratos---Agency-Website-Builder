@@ -57,10 +57,10 @@ const MenuOptions = ({
     <Sheet modal={false} {...openState}>
       <SheetTrigger
         asChild
-        className="absolute left-4 top-4 z-40 md:hidden! flex"
+        className="absolute left-4 top-4 z-40 md:hidden! flex size-8"
       >
-        <Button variant={"outline"} size={"icon"}>
-          <Menu />
+        <Button variant={"outline"} size={"icon"} >
+          <Menu className="size-4" />
         </Button>
       </SheetTrigger>
       <SheetContent

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { Check, Moon, Sun, Palette, ChevronDown } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -18,13 +19,14 @@ import {
  * To add a new theme, just push a new entry — no other changes needed.
  */
 const themes = [
+  { name: "Default", value: "default" },
   { name: "Portfolio", value: "portfolio" },
   { name: "notebook", value: "notebook" },
   { name: "Claude", value: "claude" },
   { name: "Kodama Grove", value: "kodama-grove" },
   { name: "Dark Matter", value: "dark-matter" },
   { name: "2077", value: "2077" },
-  { name: "MX-Brutalist", value: "mx-brutalist" },
+  { name: "Neo-Brutalism", value: "neo-brutalism" },
   // Add more themes here:
 ] as const;
 
@@ -32,13 +34,13 @@ const DEFAULT_THEME = themes[0].value;
 
 export function ThemePicker() {
   const { setTheme, resolvedTheme } = useTheme();
-  const [activeTheme, setActiveTheme] = React.useState<string>(DEFAULT_THEME);
-  const [mounted, setMounted] = React.useState(false);
+  const [activeTheme, setActiveTheme] = useState<string>(DEFAULT_THEME);
+  const [mounted, setMounted] = useState(false);
 
   const isDark = resolvedTheme === "dark";
 
   // Restore saved theme on mount
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
     const saved = localStorage.getItem("theme-flavor") || DEFAULT_THEME;
     applyThemeClass(saved);
@@ -54,7 +56,7 @@ export function ThemePicker() {
   };
 
   const activeThemeName =
-    themes.find((t) => t.value === activeTheme)?.name ?? "Portfolio";
+    themes.find((t) => t.value === activeTheme)?.name ?? "Default";
 
   return (
     <div className="flex items-center gap-1">
