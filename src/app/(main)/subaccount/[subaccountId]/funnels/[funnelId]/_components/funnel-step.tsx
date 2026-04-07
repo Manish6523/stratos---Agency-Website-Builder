@@ -27,6 +27,9 @@ import { toast } from "sonner";
 import FunnelStepCard from "./funnel-step-card";
 import CustomModal from "@/components/global/custom-modal";
 import FunnelPageForm from "@/components/forms/funnel-page-form";
+import FunnelEditor from "../editor/[funnelPageId]/_components/funnel-editor";
+import EditorProvider from "@/providers/editor/editor-provider";
+import { useRouter } from "next/navigation";
 
 type Props = {
   funnel: FunnelsForSubAccount;
@@ -46,7 +49,8 @@ export default function FunnelSteps({
   );
   const { setOpen } = useModal();
   const [pagesState, setPagesState] = useState(pages);
-
+  const router = useRouter();
+  console.log(clickedPage?.id)
   useEffect(() => {
     setPagesState(pages);
     setClickedPage((prev) => {
@@ -107,8 +111,8 @@ export default function FunnelSteps({
 
   return (
     <AlertDialog>
-      <div className="flex border lg:flex-row! flex-col ">
-        <aside className="flex-[0.3] bg-background p-6  flex flex-col justify-between ">
+      <div className="flex border lg:flex-row! flex-col bg-background ">
+        <aside className="md:sticky top-0 z-20 h-[calc(100vh-80px)] flex-[0.3] bg-background p-6 flex flex-col justify-between">
           <ScrollArea className="h-full">
             <div className="flex gap-4 items-center">
               <Check />
@@ -170,9 +174,9 @@ export default function FunnelSteps({
             Create New Steps
           </Button>
         </aside>
-        <aside className="flex-[0.7] bg-muted md:p-0 p-4 ">
+        <aside className="flex-[0.7] bg-muted md:p-0 ">
           {!!pages.length ? (
-            <Card className="h-full flex justify-between flex-col md:rounded-none">
+            <Card className="h-full flex justify-between flex-col rounded-none pb-5">
               <CardHeader>
                 <p className="text-sm text-muted-foreground">Page name</p>
                 <CardTitle>{clickedPage?.name}</CardTitle>
@@ -181,20 +185,51 @@ export default function FunnelSteps({
                     Custom Title: {clickedPage.customName}
                   </p>
                 )}
-                <CardDescription className="flex flex-col gap-4 mt-2">
-                  <div className=" relative border-2 rounded-lg sm:w-80 w-full  overflow-clip">
-                    <Link
-                      href={`/subaccount/${subaccountId}/funnels/${funnelId}/editor/${clickedPage?.id}`}
-                      className=" group"
+              </CardHeader>
+                <CardDescription className="flex flex-col gap-4 md:px-4 px-3 mt-2 overflow-hidden">
+                  <div className=" relative border-2 rounded-lg overflow-clip">
+                    <div
+                      onClick={() => {
+                        if (clickedPage?.id) {
+                          router.push(`/subaccount/${subaccountId}/funnels/${funnelId}/editor/${clickedPage.id}`);
+                        }
+                      }}
+                      className="group cursor-pointer"
                     >
-                      <div className="cursor-pointer group-hover:opacity-30 w-full">
-                        <FunnelPagePlaceholder />
+                      <div className="dynamic-zoom max-h-[800px] group-hover:opacity-30 scale aspect-video overflow-hidden pointer-events-none">
+                        {clickedPage?.id && (() => {
+                          // Check if the page content is empty (only body with no children)
+                          let isEmpty = true;
+                          try {
+                            if (clickedPage.content) {
+                              const parsed = JSON.parse(clickedPage.content as string);
+                              if (Array.isArray(parsed)) {
+                                const body = parsed.find((el: any) => el.id === "__body");
+                                isEmpty = !body || !Array.isArray(body.content) || body.content.length === 0;
+                              }
+                            }
+                          } catch { isEmpty = true; }
+
+                          if (isEmpty) {
+                            return <FunnelPagePlaceholder />;
+                          }
+
+                          return (
+                            <EditorProvider
+                              subaccountId={subaccountId}
+                              funnelId={funnelId}
+                              pageDetails={clickedPage}
+                            >
+                              <FunnelEditor funnelPageId={clickedPage.id} liveMode={true} />
+                            </EditorProvider>
+                          );
+                        })()}
                       </div>
                       <LucideEdit
                         size={50}
                         className="text-muted-foreground! absolute top-1/2 left-1/2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all duration-100"
                       />
-                    </Link>
+                    </div>
 
                     <Link
                       target="_blank"
@@ -217,7 +252,6 @@ export default function FunnelSteps({
                     order={clickedPage?.order || 0}
                   />
                 </CardDescription>
-              </CardHeader>
             </Card>
           ) : (
             <div className="h-[600px] flex items-center justify-center text-muted-foreground">

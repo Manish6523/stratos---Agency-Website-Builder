@@ -83,8 +83,8 @@ export default function TemplatesTab({}: Props) {
 
   return (
     <>
-      <div className="flex flex-col gap-4 px-6 pb-6 w-full">
-        <p className="text-sm text-muted-foreground mb-4">
+      <div className="flex flex-col gap-4 px-2 pb-2 w-full">
+        <p className="text-xs text-muted-foreground mb-2">
           Click a template to instantly generate a pre-built UI on your canvas.
         </p>
 

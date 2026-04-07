@@ -16,9 +16,9 @@ const IconBlockPlaceholder = (props: Props) => {
       onDragStart={(e) => {
         handleDragState(e, "iconBlock");
       }}
-      className=" h-14 w-14 bg-muted rounded-lg flex items-center justify-center"
+      className=" h-10 w-10 bg-muted rounded-lg flex items-center justify-center"
     >
-      <Component size={40} className="text-muted-foreground" />
+      <Component size={20} className="text-muted-foreground" />
     </div>
   );
 };

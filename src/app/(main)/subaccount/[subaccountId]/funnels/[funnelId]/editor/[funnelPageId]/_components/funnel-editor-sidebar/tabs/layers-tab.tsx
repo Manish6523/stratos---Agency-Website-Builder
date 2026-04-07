@@ -4,7 +4,7 @@ import {
   EditorElement,
   useEditor,
 } from "@/providers/editor/editor-provider";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
 import {
   ChevronRight,
   ChevronDown,
@@ -27,6 +27,8 @@ import {
   CreditCard,
   Layers,
   Globe,
+  ChevronsUpDown,
+  ChevronsDownUp,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -85,27 +87,10 @@ const TreeNode = ({
       payload: { elementDetails: element },
     });
 
-    // Scroll within the editor canvas only (not the whole page)
     const targetEl = document.getElementById(element.id);
-    const editorContainer = document.querySelector(
-      ".use-automation-zoom-in"
-    ) as HTMLElement | null;
 
-    if (targetEl && editorContainer) {
-      const containerRect = editorContainer.getBoundingClientRect();
-      const targetRect = targetEl.getBoundingClientRect();
-
-      const scrollOffset =
-        targetRect.top -
-        containerRect.top +
-        editorContainer.scrollTop -
-        containerRect.height / 2 +
-        targetRect.height / 2;
-
-      editorContainer.scrollTo({
-        top: scrollOffset,
-        behavior: "smooth",
-      });
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
 
       // Brief flash highlight
       targetEl.style.transition = "outline 0.2s ease";
@@ -127,61 +112,53 @@ const TreeNode = ({
     <div>
       <div
         className={clsx(
-          "flex items-center gap-1.5 py-1 px-2 rounded-md cursor-pointer text-xs transition-all group",
-          "hover:bg-muted/80",
+          "flex items-center gap-1.5 h-6 cursor-pointer text-xs transition-colors group select-none pr-2",
+          "hover:bg-muted/60",
           {
-            "bg-primary/15 text-primary border border-primary/20": isSelected,
+            "bg-primary/10 text-primary": isSelected,
             "text-muted-foreground": !isSelected,
           }
         )}
-        style={{ paddingLeft: `${depth * 16 + 8}px` }}
+        style={{ paddingLeft: `${depth * 12 + 4}px` }}
         onClick={handleClick}
       >
         {/* Expand/Collapse toggle */}
         {isContainer ? (
           <button
             onClick={handleToggle}
-            className="p-0.5 rounded hover:bg-muted shrink-0 transition-colors"
+            className="w-4 h-4 flex items-center justify-center rounded hover:bg-muted shrink-0 transition-colors"
           >
             {isExpanded ? (
-              <ChevronDown size={12} className="text-muted-foreground" />
+              <ChevronDown size={12} className="text-muted-foreground opacity-70 group-hover:opacity-100" />
             ) : (
-              <ChevronRight size={12} className="text-muted-foreground" />
+              <ChevronRight size={12} className="text-muted-foreground opacity-70 group-hover:opacity-100" />
             )}
           </button>
         ) : (
-          <span className="w-[18px] shrink-0" />
+          <span className="w-4 shrink-0" />
         )}
 
         {/* Type icon */}
-        {typeIconMap[element.type || ""] || (
-          <Box size={14} className="text-gray-400 shrink-0" />
-        )}
+        <div className={clsx("opacity-80 transition-opacity", { "opacity-100": isSelected })}>
+          {typeIconMap[element.type || ""] || (
+            <Box size={12} className="text-gray-400 shrink-0" />
+          )}
+        </div>
 
         {/* Element name */}
         <span
-          className={clsx("truncate font-medium", {
-            "text-primary": isSelected,
-            "group-hover:text-foreground": !isSelected,
+          className={clsx("truncate font-medium text-[11px] mt-px", {
+            "text-primary font-semibold": isSelected,
+            "group-hover:text-foreground text-foreground/80": !isSelected,
           })}
         >
           {element.name}
-        </span>
-
-        {/* Type badge */}
-        <span className="ml-auto text-[10px] text-muted-foreground/60 font-mono shrink-0">
-          {element.type}
         </span>
       </div>
 
       {/* Render children if expanded */}
       {isContainer && isExpanded && hasChildren && (
-        <div className="relative">
-          {/* Tree line connector */}
-          <div
-            className="absolute top-0 bottom-0 border-l border-border/40"
-            style={{ left: `${depth * 16 + 17}px` }}
-          />
+        <div className="flex flex-col">
           {(element.content as EditorElement[]).map((child) => (
             <TreeNode
               key={child.id}
@@ -237,40 +214,39 @@ const LayersTab = () => {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <div className="p-6 pb-3">
-        <h2 className="text-lg font-semibold flex items-center gap-2">
-          <Layers size={18} /> Layers
-        </h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          View and navigate the element tree of your page.
-        </p>
+      <div className="px-3 border-b border-border/50 shrink-0">
+        <div className="flex items-center justify-between h-9">
+          <h2 className="text-xs font-semibold flex items-center gap-1.5 uppercase tracking-wider text-muted-foreground">
+            Layers
+          </h2>
+          {/* Toolbar */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={expandAll}
+              title="Expand All"
+              className="p-1 rounded-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            >
+              <ChevronsUpDown size={12} />
+            </button>
+            <button
+              onClick={collapseAll}
+              title="Collapse All"
+              className="p-1 rounded-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            >
+              <ChevronsDownUp size={12} />
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Toolbar */}
-      <div className="flex items-center gap-2 px-6 pb-3">
-        <button
-          onClick={expandAll}
-          className="text-[10px] font-medium text-muted-foreground hover:text-foreground transition-colors uppercase tracking-wider px-2 py-1 rounded hover:bg-muted"
-        >
-          Expand All
-        </button>
-        <span className="text-border">|</span>
-        <button
-          onClick={collapseAll}
-          className="text-[10px] font-medium text-muted-foreground hover:text-foreground transition-colors uppercase tracking-wider px-2 py-1 rounded hover:bg-muted"
-        >
-          Collapse All
-        </button>
-      </div>
-
-      <ScrollArea className="flex-1 px-3 pb-6">
+      <div className="flex-1 overflow-y-auto min-h-0 pt-1 pb-4">
         {!Array.isArray(state.editor.elements) || state.editor.elements.length === 0 ? (
-          <div className="flex flex-col items-center justify-center pt-10 text-center text-muted-foreground">
-            <Layers size={32} className="mb-2 opacity-20" />
-            <p className="text-sm">Nothing to map</p>
+          <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground/50">
+            <Layers size={24} className="mb-2" />
+            <p className="text-[10px] uppercase font-medium tracking-wider">Empty Canvas</p>
           </div>
         ) : (
-          <div className="flex flex-col gap-0.5">
+          <div className="flex flex-col">
             {state.editor.elements.map((element) => (
               <TreeNode
                 key={element.id}
@@ -282,7 +258,7 @@ const LayersTab = () => {
             ))}
           </div>
         )}
-      </ScrollArea>
+      </div>
     </div>
   );
 };

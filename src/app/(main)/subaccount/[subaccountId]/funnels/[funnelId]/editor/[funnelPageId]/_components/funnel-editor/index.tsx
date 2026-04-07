@@ -21,7 +21,6 @@ const FunnelEditor = ({ funnelPageId, liveMode }: Props) => {
     }
   }, [liveMode, dispatch]);
 
-  //CHALLENGE: make this more performant
   useEffect(() => {
     const fetchData = async () => {
       const response = await getFunnelPageDetails(funnelPageId);
@@ -52,7 +51,6 @@ const FunnelEditor = ({ funnelPageId, liveMode }: Props) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Avoid triggering when user is typing inside an input, textarea, or contentEditable element
       const target = e.target as HTMLElement;
       if (
         target.tagName === "INPUT" ||
@@ -80,17 +78,13 @@ const FunnelEditor = ({ funnelPageId, liveMode }: Props) => {
   return (
     <div
       className={clsx(
-        "use-automation-zoom-in h-full mr-[385px] bg-background transition-all rounded-md",
+        "use-automation-zoom-in bg-background transition-all duration-200 rounded-sm shadow-xl min-h-full flex flex-col",
         {
-          "p-0! mr-0!":
+          "p-0! rounded-none! shadow-none! w-full! max-w-none! min-h-screen":
             state.editor.previewMode === true || state.editor.liveMode === true,
-          "mr-0!": !state.editor.sidebarOpen,
-          "w-[850px]!": state.editor.device === "Tablet",
-          "w-[420px]!": state.editor.device === "Mobile",
-          "w-full": state.editor.device === "Desktop",
-          "pb-18":
-            state.editor.previewMode === false ||
-            state.editor.liveMode === false,
+          "w-[850px]": state.editor.device === "Tablet",
+          "w-[420px]": state.editor.device === "Mobile",
+          "w-full max-w-[1440px]": state.editor.device === "Desktop",
         },
       )}
       onClick={handleClick}
@@ -99,7 +93,7 @@ const FunnelEditor = ({ funnelPageId, liveMode }: Props) => {
         <Button
           variant={"ghost"}
           size={"icon"}
-          className="w-6 h-6 bg-slate-600  p-[2px] fixed top-0 left-0 z-10000000"
+          className="w-6 h-6 bg-slate-600 p-[2px] fixed top-0 left-0 z-10000"
           onClick={handleUnpreview}
         >
           <EyeOff />

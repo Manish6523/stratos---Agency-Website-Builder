@@ -8,7 +8,7 @@ const H1Placeholder = () => {
       onDragStart={(e) => {
         e.dataTransfer.setData("componentType", "h1");
       }}
-      className="h-14 w-14 bg-muted rounded-lg flex flex-col items-center justify-center cursor-drag"
+      className="h-10 w-10 bg-muted rounded-lg flex flex-col items-center justify-center cursor-drag"
     >
       <span className="text-muted-foreground font-bold text-2xl">H1</span>
     </div>

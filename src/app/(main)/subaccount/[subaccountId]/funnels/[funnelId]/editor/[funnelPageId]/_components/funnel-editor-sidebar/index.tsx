@@ -1,25 +1,8 @@
 "use client";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useEditor } from "@/providers/editor/editor-provider";
-import clsx from "clsx";
-import React from "react";
-import TabList from "./tabs";
+import React, { useState } from "react";
 import SettingsTab from "./tabs/setting-tab";
-import MediaBucketTab from "./tabs/media-bucket-tab";
-import ComponentsTab from "./tabs/components-tab";
-import AiBuilderTab from "./tabs/ai-builder-tab";
-import PagesTab from "./tabs/pages-tab";
-import TemplatesTab from "./tabs/templates-tab";
-import UpgradeOverlay from "./tabs/upgrade-overlay";
-import LayersTab from "./tabs/layers-tab";
+import { PanelRightClose, PanelRightOpen } from "lucide-react";
 
 type Props = {
   subaccountId: string;
@@ -31,94 +14,61 @@ export default function FunnelEditorSidebar({
   isPaidPlan,
 }: Props) {
   const { state } = useEditor();
-  const style = {
-    marginTop: "70px",
-    zIndex: 80,
-  };
-  return (
-    <Sheet open={true} modal={false}>
-      <Tabs className="w-full " defaultValue="Settings">
-        <SheetContent
-          showCloseButton={false}
-          side="right"
-          style={style}
-          className={clsx(
-            "w-16 shadow-none focus:border-none transition-all overflow-hidden",
-            { hidden: state.editor.previewMode || !state.editor.sidebarOpen },
-          )}
-        >
-          <VisuallyHidden>
-            <SheetTitle>Editor Sidebar</SheetTitle>
-          </VisuallyHidden>
-          <TabList />
-        </SheetContent>
-        <SheetContent
-          showCloseButton={false}
-          side="right"
-          style={{ ...style, zIndex: 40, width: "320px", marginRight: "64px" }}
-          className={clsx(
-            "w-80 shadow-none p-0 bg-background h-full transition-all overflow-hidden ",
-            { hidden: state.editor.previewMode || !state.editor.sidebarOpen },
-          )}
-        >
-          <VisuallyHidden>
-            <SheetTitle>Editor Sidebar Panel</SheetTitle>
-          </VisuallyHidden>
+  const [collapsed, setCollapsed] = useState(false);
 
-          <div className="grid gap-4 h-full pb-26 overflow-auto">
-            <TabsContent value="Settings">
-              <SheetHeader className="text-left p-6">
-                <SheetTitle>Styles</SheetTitle>
-                <SheetDescription>
-                  Show your creativity! You can customize every component as you
-                  like.
-                </SheetDescription>
-              </SheetHeader>
-              <SettingsTab />
-            </TabsContent>
-            <TabsContent value="Media">
-              <MediaBucketTab subaccountId={subaccountId} />
-            </TabsContent>
-            <TabsContent value="Components">
-              <SheetHeader className="text-left p-6 ">
-                <SheetTitle>Components</SheetTitle>
-                <SheetDescription>
-                  You can drag and drop components on the canvas
-                </SheetDescription>
-              </SheetHeader>
-              <ComponentsTab />
-            </TabsContent>
-            <TabsContent value="AI">
-              {isPaidPlan ? (
-                <AiBuilderTab />
-              ) : (
-                <UpgradeOverlay feature="AI Builder" />
-              )}
-            </TabsContent>
-            <TabsContent value="Layers" className="h-full">
-              <LayersTab />
-            </TabsContent>
-            <TabsContent value="Pages" className="h-full">
-              <PagesTab />
-            </TabsContent>
-            <TabsContent value="Templates">
-              {isPaidPlan ? (
-                <>
-                  <SheetHeader className="text-left p-6">
-                    <SheetTitle>Templates</SheetTitle>
-                    <SheetDescription>
-                      Drag and drop pre-built sections onto your canvas.
-                    </SheetDescription>
-                  </SheetHeader>
-                  <TemplatesTab />
-                </>
-              ) : (
-                <UpgradeOverlay feature="Templates" />
-              )}
-            </TabsContent>
+  if (state.editor.previewMode) return null;
+
+  return (
+    <div
+      className="h-full bg-background border-l border-border/50 flex flex-col overflow-hidden transition-all duration-200"
+      style={{ width: collapsed ? "0px" : "240px", minWidth: collapsed ? "0px" : "240px" }}
+    >
+      {/* Toggle button — at the edge */}
+      <button
+        onClick={() => setCollapsed(!collapsed)}
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-50 w-4 h-8 bg-background border border-border/50 rounded-l-md flex items-center justify-center hover:bg-muted transition-colors cursor-pointer"
+        style={{ right: collapsed ? "0px" : "240px" }}
+        title={collapsed ? "Open right panel" : "Close right panel"}
+      >
+        {collapsed ? (
+          <PanelRightOpen className="w-2.5 h-2.5" />
+        ) : (
+          <PanelRightClose className="w-2.5 h-2.5" />
+        )}
+      </button>
+
+      {!collapsed && (
+        <>
+          {/* Header — Design / Inspect tabs */}
+          <div className="border-b border-border/50 px-2 pt-1 pb-1 flex items-center gap-2">
+            <button className="text-[10px] font-semibold text-foreground border-b border-primary pb-0.5 cursor-pointer">
+              Design
+            </button>
+            <button className="text-[10px] font-medium text-muted-foreground pb-0.5 hover:text-foreground transition-colors cursor-pointer">
+              Inspect
+            </button>
           </div>
-        </SheetContent>
-      </Tabs>
-    </Sheet>
+
+          {/* Selected element info */}
+          {state.editor.selectedElement.id &&
+            state.editor.selectedElement.id !== "" && (
+              <div className="px-2 py-1 border-b border-border/30 flex items-center gap-1.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <span className="text-[10px] font-medium truncate">
+                  {state.editor.selectedElement.name || "Element"}
+                </span>
+                <span className="text-[9px] text-muted-foreground ml-auto">
+                  {state.editor.selectedElement.type}
+                </span>
+              </div>
+            )}
+
+          {/* Properties content */}
+          <div className="flex-1 overflow-auto pb-16">
+            <SettingsTab />
+          </div>
+        </>
+      )}
+    </div>
   );
 }

@@ -160,11 +160,11 @@ export default function ComponentsTab({}: Props) {
     >
       {/* LAYOUT SECTION */}
       <AccordionItem value="Layout" className="border-b border-border/50">
-        <AccordionTrigger className="px-6 py-4 hover:no-underline font-semibold text-[11px] uppercase tracking-widest text-muted-foreground/80">
+        <AccordionTrigger className="px-3 py-2 hover:no-underline font-semibold text-[10px] uppercase tracking-widest text-muted-foreground/80">
           Layout Structure
         </AccordionTrigger>
-        <AccordionContent className="px-6 pb-6 mt-2">
-          <div className="grid grid-cols-3 gap-3">
+        <AccordionContent className="px-3 pb-3 mt-1">
+          <div className="grid grid-cols-3 gap-2">
             {elements
               .filter((el) => el.group === "layout")
               .map((element) => (
@@ -175,7 +175,7 @@ export default function ComponentsTab({}: Props) {
                   <div className="opacity-60 group-hover:opacity-100 transition-opacity scale-90">
                     {element.Component}
                   </div>
-                  <span className="text-[10px] font-medium text-muted-foreground group-hover:text-foreground text-center truncate w-full">
+                  <span className="text-[9px] font-medium text-muted-foreground group-hover:text-foreground text-center truncate w-full">
                     {element.label}
                   </span>
                 </div>
@@ -186,11 +186,11 @@ export default function ComponentsTab({}: Props) {
 
       {/* ELEMENTS SECTION */}
       <AccordionItem value="Elements" className="border-none">
-        <AccordionTrigger className="px-6 py-4 hover:no-underline font-semibold text-[11px] uppercase tracking-widest text-muted-foreground/80">
+        <AccordionTrigger className="px-3 py-2 hover:no-underline font-semibold text-[10px] uppercase tracking-widest text-muted-foreground/80">
           Basic Elements
         </AccordionTrigger>
-        <AccordionContent className="px-6 pb-6 mt-2">
-          <div className="grid grid-cols-4 gap-y-5 gap-x-3">
+        <AccordionContent className="px-3 pb-3 mt-1">
+          <div className="grid grid-cols-4 gap-y-3 gap-x-2">
             {elements
               .filter((el) => el.group === "elements")
               .map((element) => (
@@ -201,7 +201,7 @@ export default function ComponentsTab({}: Props) {
                   <div className="opacity-60 group-hover:opacity-100 transition-opacity scale-90">
                     {element.Component}
                   </div>
-                  <span className="text-[10px] font-medium text-muted-foreground group-hover:text-foreground text-center truncate w-full">
+                  <span className="text-[9px] font-medium text-muted-foreground group-hover:text-foreground text-center truncate w-full">
                     {element.label}
                   </span>
                 </div>

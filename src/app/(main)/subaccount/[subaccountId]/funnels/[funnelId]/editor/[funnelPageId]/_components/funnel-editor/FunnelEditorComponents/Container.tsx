@@ -526,8 +526,9 @@ const Container = ({ element }: Props) => {
       className={clsx("relative p-2 transition-all group", {
         "max-w-full w-full": type === "container" || type === "2Col",
         "h-fit": type === "container",
-        "h-full": type === "__body",
+        "h-full flex-1": type === "__body",
         "overflow-auto ": type === "__body",
+        "border-2 border-yellow-500 ": type === "__body",
         "flex flex-col md:flex-row!": type === "2Col",
         "border-blue-500!":
           state.editor.selectedElement.id === id &&
@@ -541,6 +542,8 @@ const Container = ({ element }: Props) => {
           state.editor.selectedElement.id === id && !state.editor.liveMode,
         "border-dashed border border-slate-300": !state.editor.liveMode,
         "p-0!": type === "__body" && (state.editor.liveMode || state.editor.previewMode),
+        "border-0!": type === "__body" && (state.editor.liveMode || state.editor.previewMode),
+
       })}
       onDrop={(e) => handleOnDrop(e, id)}
       onDragOver={handleDragOver}

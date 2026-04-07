@@ -57,12 +57,12 @@ export default function SettingsTab({}: Props) {
   }, [state.editor.selectedElement.type, subaccountId]);
 
   const TABS_TRIGGER_CLASS =
-    "cursor-pointer w-8 h-8 p-0 data-[state=active]:bg-background data-[state=active]:shadow-sm text-muted-foreground data-[state=active]:text-foreground rounded-sm transition-all flex items-center justify-center";
+    "cursor-pointer w-6 h-6 p-0 data-[state=active]:bg-background data-[state=active]:shadow-sm text-muted-foreground data-[state=active]:text-foreground rounded-sm transition-all flex items-center justify-center";
   const ACCORDIAN_TIRGGER_CLASS =
-    "no-underline! cursor-pointer text-sm font-medium";
+    "no-underline! cursor-pointer text-xs font-medium";
   const TABLIST_CLASS =
-    "flex items-center w-full bg-muted/50 rounded-md p-1 gap-1 h-fit";
-  const LABEL_CLASS = "text-muted-foreground text-xs font-medium";
+    "flex items-center w-full bg-muted/50 rounded-md p-0.5 gap-0.5 h-fit";
+  const LABEL_CLASS = "text-muted-foreground text-[10px] font-medium";
 
   const handleOnChanges = (e: any) => {
     const styleSettings = e.target.id;
@@ -112,7 +112,7 @@ export default function SettingsTab({}: Props) {
       className="w-full"
       defaultValue={["Typography", "Dimensions", "Decorations", "Flexbox"]}
     >
-      <AccordionItem value="Custom" className="px-6 py-0  ">
+      <AccordionItem value="Custom" className="px-3 py-0  ">
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
           Custom
         </AccordionTrigger>
@@ -392,7 +392,7 @@ export default function SettingsTab({}: Props) {
             )}
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="Typography" className="px-6 py-0  border-y">
+      <AccordionItem value="Typography" className="px-3 py-0  border-y">
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
           Typography
         </AccordionTrigger>
@@ -412,16 +412,16 @@ export default function SettingsTab({}: Props) {
             >
               <TabsList className={TABLIST_CLASS}>
                 <TabsTrigger value="left" className={TABS_TRIGGER_CLASS}>
-                  <AlignLeft size={18} />
+                  <AlignLeft size={14} />
                 </TabsTrigger>
                 <TabsTrigger value="right" className={TABS_TRIGGER_CLASS}>
-                  <AlignRight size={18} />
+                  <AlignRight size={14} />
                 </TabsTrigger>
                 <TabsTrigger value="center" className={TABS_TRIGGER_CLASS}>
-                  <AlignCenter size={18} />
+                  <AlignCenter size={14} />
                 </TabsTrigger>
                 <TabsTrigger value="justify" className={TABS_TRIGGER_CLASS}>
-                  <AlignJustify size={18} />
+                  <AlignJustify size={14} />
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -595,7 +595,7 @@ export default function SettingsTab({}: Props) {
           </div>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="Dimensions" className=" px-6 py-0 ">
+      <AccordionItem value="Dimensions" className=" px-3 py-0 ">
         <AccordionTrigger className={ACCORDIAN_TIRGGER_CLASS}>
           Dimensions
         </AccordionTrigger>

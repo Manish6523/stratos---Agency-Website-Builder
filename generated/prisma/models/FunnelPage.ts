@@ -43,6 +43,7 @@ export type FunnelPageMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   visits: number | null
+  published: boolean | null
   content: string | null
   order: number | null
   previewImage: string | null
@@ -57,6 +58,7 @@ export type FunnelPageMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   visits: number | null
+  published: boolean | null
   content: string | null
   order: number | null
   previewImage: string | null
@@ -71,6 +73,7 @@ export type FunnelPageCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   visits: number
+  published: number
   content: number
   order: number
   previewImage: number
@@ -97,6 +100,7 @@ export type FunnelPageMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   visits?: true
+  published?: true
   content?: true
   order?: true
   previewImage?: true
@@ -111,6 +115,7 @@ export type FunnelPageMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   visits?: true
+  published?: true
   content?: true
   order?: true
   previewImage?: true
@@ -125,6 +130,7 @@ export type FunnelPageCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   visits?: true
+  published?: true
   content?: true
   order?: true
   previewImage?: true
@@ -226,6 +232,7 @@ export type FunnelPageGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   visits: number
+  published: boolean
   content: string | null
   order: number
   previewImage: string | null
@@ -263,6 +270,7 @@ export type FunnelPageWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"FunnelPage"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FunnelPage"> | Date | string
   visits?: Prisma.IntFilter<"FunnelPage"> | number
+  published?: Prisma.BoolFilter<"FunnelPage"> | boolean
   content?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
   order?: Prisma.IntFilter<"FunnelPage"> | number
   previewImage?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
@@ -278,6 +286,7 @@ export type FunnelPageOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visits?: Prisma.SortOrder
+  published?: Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -297,6 +306,7 @@ export type FunnelPageWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"FunnelPage"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FunnelPage"> | Date | string
   visits?: Prisma.IntFilter<"FunnelPage"> | number
+  published?: Prisma.BoolFilter<"FunnelPage"> | boolean
   content?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
   order?: Prisma.IntFilter<"FunnelPage"> | number
   previewImage?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
@@ -312,6 +322,7 @@ export type FunnelPageOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visits?: Prisma.SortOrder
+  published?: Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -334,6 +345,7 @@ export type FunnelPageScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FunnelPage"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FunnelPage"> | Date | string
   visits?: Prisma.IntWithAggregatesFilter<"FunnelPage"> | number
+  published?: Prisma.BoolWithAggregatesFilter<"FunnelPage"> | boolean
   content?: Prisma.StringNullableWithAggregatesFilter<"FunnelPage"> | string | null
   order?: Prisma.IntWithAggregatesFilter<"FunnelPage"> | number
   previewImage?: Prisma.StringNullableWithAggregatesFilter<"FunnelPage"> | string | null
@@ -348,6 +360,7 @@ export type FunnelPageCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   visits?: number
+  published?: boolean
   content?: string | null
   order: number
   previewImage?: string | null
@@ -362,6 +375,7 @@ export type FunnelPageUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   visits?: number
+  published?: boolean
   content?: string | null
   order: number
   previewImage?: string | null
@@ -376,6 +390,7 @@ export type FunnelPageUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visits?: Prisma.IntFieldUpdateOperationsInput | number
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -390,6 +405,7 @@ export type FunnelPageUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visits?: Prisma.IntFieldUpdateOperationsInput | number
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -404,6 +420,7 @@ export type FunnelPageCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   visits?: number
+  published?: boolean
   content?: string | null
   order: number
   previewImage?: string | null
@@ -418,6 +435,7 @@ export type FunnelPageUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visits?: Prisma.IntFieldUpdateOperationsInput | number
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -431,6 +449,7 @@ export type FunnelPageUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visits?: Prisma.IntFieldUpdateOperationsInput | number
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -461,6 +480,7 @@ export type FunnelPageCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visits?: Prisma.SortOrder
+  published?: Prisma.SortOrder
   content?: Prisma.SortOrder
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrder
@@ -480,6 +500,7 @@ export type FunnelPageMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visits?: Prisma.SortOrder
+  published?: Prisma.SortOrder
   content?: Prisma.SortOrder
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrder
@@ -494,6 +515,7 @@ export type FunnelPageMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   visits?: Prisma.SortOrder
+  published?: Prisma.SortOrder
   content?: Prisma.SortOrder
   order?: Prisma.SortOrder
   previewImage?: Prisma.SortOrder
@@ -555,6 +577,7 @@ export type FunnelPageCreateWithoutFunnelInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   visits?: number
+  published?: boolean
   content?: string | null
   order: number
   previewImage?: string | null
@@ -568,6 +591,7 @@ export type FunnelPageUncheckedCreateWithoutFunnelInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   visits?: number
+  published?: boolean
   content?: string | null
   order: number
   previewImage?: string | null
@@ -610,6 +634,7 @@ export type FunnelPageScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"FunnelPage"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FunnelPage"> | Date | string
   visits?: Prisma.IntFilter<"FunnelPage"> | number
+  published?: Prisma.BoolFilter<"FunnelPage"> | boolean
   content?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
   order?: Prisma.IntFilter<"FunnelPage"> | number
   previewImage?: Prisma.StringNullableFilter<"FunnelPage"> | string | null
@@ -624,6 +649,7 @@ export type FunnelPageCreateManyFunnelInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   visits?: number
+  published?: boolean
   content?: string | null
   order: number
   previewImage?: string | null
@@ -637,6 +663,7 @@ export type FunnelPageUpdateWithoutFunnelInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visits?: Prisma.IntFieldUpdateOperationsInput | number
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -650,6 +677,7 @@ export type FunnelPageUncheckedUpdateWithoutFunnelInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visits?: Prisma.IntFieldUpdateOperationsInput | number
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -663,6 +691,7 @@ export type FunnelPageUncheckedUpdateManyWithoutFunnelInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   visits?: Prisma.IntFieldUpdateOperationsInput | number
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   previewImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -678,6 +707,7 @@ export type FunnelPageSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   createdAt?: boolean
   updatedAt?: boolean
   visits?: boolean
+  published?: boolean
   content?: boolean
   order?: boolean
   previewImage?: boolean
@@ -695,6 +725,7 @@ export type FunnelPageSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   visits?: boolean
+  published?: boolean
   content?: boolean
   order?: boolean
   previewImage?: boolean
@@ -702,7 +733,7 @@ export type FunnelPageSelectScalar = {
   customName?: boolean
 }
 
-export type FunnelPageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "pathName" | "createdAt" | "updatedAt" | "visits" | "content" | "order" | "previewImage" | "funnelId" | "customName", ExtArgs["result"]["funnelPage"]>
+export type FunnelPageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "pathName" | "createdAt" | "updatedAt" | "visits" | "published" | "content" | "order" | "previewImage" | "funnelId" | "customName", ExtArgs["result"]["funnelPage"]>
 export type FunnelPageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Funnel?: boolean | Prisma.FunnelDefaultArgs<ExtArgs>
 }
@@ -719,6 +750,7 @@ export type $FunnelPagePayload<ExtArgs extends runtime.Types.Extensions.Internal
     createdAt: Date
     updatedAt: Date
     visits: number
+    published: boolean
     content: string | null
     order: number
     previewImage: string | null
@@ -1100,6 +1132,7 @@ export interface FunnelPageFieldRefs {
   readonly createdAt: Prisma.FieldRef<"FunnelPage", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"FunnelPage", 'DateTime'>
   readonly visits: Prisma.FieldRef<"FunnelPage", 'Int'>
+  readonly published: Prisma.FieldRef<"FunnelPage", 'Boolean'>
   readonly content: Prisma.FieldRef<"FunnelPage", 'String'>
   readonly order: Prisma.FieldRef<"FunnelPage", 'Int'>
   readonly previewImage: Prisma.FieldRef<"FunnelPage", 'String'>

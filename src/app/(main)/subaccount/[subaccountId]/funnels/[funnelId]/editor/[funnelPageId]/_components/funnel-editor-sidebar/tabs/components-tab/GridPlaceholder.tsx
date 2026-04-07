@@ -10,13 +10,14 @@ const GridPlaceholder = (props: Props) => {
       onDragStart={(e) => {
         e.dataTransfer.setData("componentType", "grid");
       }}
-      className="h-14 w-14 bg-muted/70 rounded-lg p-2 px-1 flex flex-col gap-[2px]"
+      className="h-10 w-10 bg-muted rounded-lg flex items-center justify-center cursor-grab"
     >
-      <div className="flex flex-row gap-[2px]">
-        <div className="border-dashed border-2 p-2 rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
-        <div className="border-dashed border-2 p-2 rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
-      </div>
-      <div className="border-dashed border-2 p-2 rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="2 2" className="text-muted-foreground">
+        <rect x="3" y="3" width="8" height="8" rx="2" />
+        <rect x="13" y="3" width="8" height="8" rx="2" />
+        <rect x="3" y="13" width="8" height="8" rx="2" />
+        <rect x="13" y="13" width="8" height="8" rx="2" />
+      </svg>
     </div>
   );
 };

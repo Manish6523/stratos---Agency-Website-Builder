@@ -12,10 +12,10 @@ export default function ContactFormComponentPlaceholder({}: Props) {
     <div
       draggable
       onDragStart={(e) => handleDragStart(e, 'contactForm')}
-      className=" h-14 w-14 bg-muted rounded-lg flex items-center justify-center"
+      className=" h-10 w-10 bg-muted rounded-lg flex items-center justify-center"
     >
       <Contact2Icon
-        size={40}
+        size={20}
         className="text-muted-foreground"
       />
     </div>

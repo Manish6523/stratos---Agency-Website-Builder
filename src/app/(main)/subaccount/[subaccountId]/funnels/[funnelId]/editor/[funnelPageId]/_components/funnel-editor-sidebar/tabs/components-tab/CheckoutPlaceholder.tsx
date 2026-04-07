@@ -12,7 +12,7 @@ export default function CheckoutPlaceholder({ }: Props) {
     <div
       draggable
       onDragStart={(e) => handleDragStart(e, 'paymentForm')}
-      className=" h-14 w-14 bg-muted rounded-lg flex items-center justify-center"
+      className=" h-10 w-10 bg-muted rounded-lg flex items-center justify-center"
     >
       <Image
         src="/razorpaylogo.png"

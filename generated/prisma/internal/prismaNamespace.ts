@@ -2413,6 +2413,7 @@ export const FunnelPageScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   visits: 'visits',
+  published: 'published',
   content: 'content',
   order: 'order',
   previewImage: 'previewImage',

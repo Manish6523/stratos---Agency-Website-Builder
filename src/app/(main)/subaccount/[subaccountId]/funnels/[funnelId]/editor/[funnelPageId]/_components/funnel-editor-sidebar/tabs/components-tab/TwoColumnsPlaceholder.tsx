@@ -12,10 +12,12 @@ const TwoColumnsPlaceholder = (props: Props) => {
     <div
       draggable
       onDragStart={(e) => handleDragStart(e, '2Col')}
-      className=" h-14 w-14 bg-muted/70 rounded-lg p-2 flex flex-row gap-[4px]"
+      className="h-10 w-10 bg-muted rounded-lg flex items-center justify-center cursor-grab"
     >
-      <div className="border-dashed border-2 h-full rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
-      <div className="border-dashed border-2 h-full rounded-sm bg-muted border-muted-foreground/50 w-full"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="2 3" className="text-muted-foreground">
+        <rect x="2" y="3" width="9" height="18" rx="3" />
+        <rect x="13" y="3" width="9" height="18" rx="3" />
+      </svg>
     </div>
   )
 }

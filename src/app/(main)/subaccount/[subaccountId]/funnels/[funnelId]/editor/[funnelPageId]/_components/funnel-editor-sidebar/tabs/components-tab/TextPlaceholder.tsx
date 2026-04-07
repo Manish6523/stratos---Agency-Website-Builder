@@ -16,10 +16,10 @@ const TextPlaceholder = (props: Props) => {
       onDragStart={(e) => {
         handleDragState(e, 'text')
       }}
-      className=" h-14 w-14 bg-muted rounded-lg flex items-center justify-center"
+      className=" h-10 w-10 bg-muted rounded-lg flex items-center justify-center"
     >
       <TypeIcon
-        size={40}
+        size={20}
         className="text-muted-foreground"
       />
     </div>

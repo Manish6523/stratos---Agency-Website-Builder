@@ -8,9 +8,9 @@ const CustomEmbedPlaceholder = () => {
       onDragStart={(e) => {
         e.dataTransfer.setData("componentType", "customEmbed");
       }}
-      className="h-14 w-14 bg-muted rounded-lg flex items-center justify-center cursor-drag"
+      className="h-10 w-10 bg-muted rounded-lg flex items-center justify-center cursor-drag"
     >
-      <Code size={40} className="text-muted-foreground" />
+      <Code size={20} className="text-muted-foreground" />
     </div>
   );
 };

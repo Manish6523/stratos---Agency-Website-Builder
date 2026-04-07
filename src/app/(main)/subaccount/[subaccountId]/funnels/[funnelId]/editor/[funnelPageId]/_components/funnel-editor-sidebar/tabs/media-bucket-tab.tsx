@@ -20,10 +20,11 @@ export default function MediaBucketTab({ subaccountId }: Props) {
   }, [subaccountId])
 
   return (
-    <div className="h-[900px] overflow-auto p-4">
+    <div className="h-full overflow-auto px-3 pb-4">
       <MediaComponent
         data={data}
         subaccountId={subaccountId}
+        isSidebar={true}
       />
     </div>
   )

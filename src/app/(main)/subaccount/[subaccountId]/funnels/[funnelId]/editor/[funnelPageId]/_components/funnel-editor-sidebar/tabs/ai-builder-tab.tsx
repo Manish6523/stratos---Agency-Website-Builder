@@ -182,15 +182,15 @@ Return ONLY the enhanced prompt text, nothing else. No preamble, no explanation.
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Header with gradient */}
-      <div className="relative overflow-hidden px-6 pt-6 pb-4 shrink-0">
+      <div className="relative overflow-hidden px-3 pt-3 pb-2 shrink-0">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-transparent pointer-events-none" />
-        <div className="relative flex items-center gap-3">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 shadow-lg shadow-primary/20">
-            <Sparkles className="w-5 h-5 text-primary-foreground" />
+        <div className="relative flex items-center gap-2">
+          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary/60 shadow-md shadow-primary/20 shrink-0">
+            <Sparkles className="w-4 h-4 text-primary-foreground" />
           </div>
-          <div>
-            <h3 className="text-base font-bold tracking-tight">AI Builder</h3>
-            <p className="text-[11px] text-muted-foreground leading-tight">
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold tracking-tight truncate">AI Builder</h3>
+            <p className="text-[9px] text-muted-foreground leading-tight truncate">
               Describe it. We&apos;ll build it.
             </p>
           </div>
@@ -198,12 +198,12 @@ Return ONLY the enhanced prompt text, nothing else. No preamble, no explanation.
       </div>
 
       <ScrollArea className="flex-1">
-        <div className="flex flex-col gap-3 px-6 pb-6">
+        <div className="flex flex-col gap-2 px-3 pb-4">
           {/* Context indicator */}
           {isSpecificSelected && (
-            <div className="px-3 py-2 rounded-lg bg-accent border border-border text-xs text-accent-foreground flex items-center gap-2">
-              <Zap size={12} className="shrink-0 text-primary" />
-              <span>
+            <div className="px-2 py-1.5 rounded-md bg-accent border border-border text-[9px] text-accent-foreground flex items-center gap-1.5 overflow-hidden">
+              <Zap size={10} className="shrink-0 text-primary" />
+              <span className="truncate">
                 Editing:{" "}
                 <strong className="font-semibold">
                   {state.editor.selectedElement.name}
@@ -215,9 +215,9 @@ Return ONLY the enhanced prompt text, nothing else. No preamble, no explanation.
           {/* Prompt Textarea */}
           <div className="relative group">
             <textarea
-              className="w-full bg-muted/50 border border-border p-3 rounded-xl h-32 text-sm resize-none
-                focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary
-                placeholder:text-muted-foreground/50 transition-all"
+              className="w-full bg-muted/50 border border-border p-2 rounded-lg h-28 text-[11px] resize-none
+                focus:outline-none focus:ring-1 focus:ring-ring focus:border-primary
+                placeholder:text-muted-foreground/50 transition-all font-sans"
               placeholder={
                 isSpecificSelected
                   ? `Describe changes for "${state.editor.selectedElement.name}"...`
@@ -226,29 +226,29 @@ Return ONLY the enhanced prompt text, nothing else. No preamble, no explanation.
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             />
-            <span className="absolute bottom-2 right-3 text-[10px] text-muted-foreground/40">
+            <span className="absolute bottom-1.5 right-2 text-[9px] text-muted-foreground/40">
               {prompt.length}
             </span>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Button
               variant="outline"
               size="sm"
               onClick={handleEnhancePrompt}
               disabled={isEnhancing || !prompt.trim()}
-              className="flex items-center gap-1.5 text-xs h-8 rounded-lg border-dashed hover:border-primary hover:bg-primary/5 transition-all"
+              className="flex-1 flex items-center justify-center gap-1 h-7 px-0 rounded-md border-dashed hover:border-primary hover:bg-primary/5 transition-all text-[10px]"
             >
               {isEnhancing ? (
                 <>
-                  <Loader2 className="w-3 h-3 animate-spin" />
-                  Enhancing...
+                  <Loader2 className="w-3 h-3 animate-spin shrink-0" />
+                  <span className="truncate">Enhancing</span>
                 </>
               ) : (
                 <>
-                  <Zap size={12} className="text-primary" />
-                  Enhance
+                  <Zap size={10} className="text-primary shrink-0" />
+                  <span className="truncate">Enhance</span>
                 </>
               )}
             </Button>
@@ -257,25 +257,20 @@ Return ONLY the enhanced prompt text, nothing else. No preamble, no explanation.
               variant="outline"
               size="sm"
               onClick={() => setShowExamples(!showExamples)}
-              className={`flex items-center gap-1.5 text-xs h-8 rounded-lg transition-all ${
+              className={`flex-1 flex items-center justify-center gap-1 h-7 px-0 rounded-md transition-all text-[10px] ${
                 showExamples
                   ? "border-primary bg-primary/5 text-primary"
                   : "border-dashed hover:border-primary hover:bg-primary/5"
               }`}
             >
-              <Wand2 size={12} className="text-primary" />
-              Examples
-              {showExamples ? (
-                <ChevronUp size={10} />
-              ) : (
-                <ChevronDown size={10} />
-              )}
+              <Wand2 size={10} className="text-primary shrink-0" />
+              <span className="truncate">Examples</span>
             </Button>
           </div>
 
           {/* Example Prompts */}
           {showExamples && (
-            <div className="flex flex-col gap-1.5 animate-in slide-in-from-top-2 duration-200">
+            <div className="flex flex-col gap-1.5 animate-in slide-in-from-top-2 duration-200 mt-1">
               {EXAMPLE_PROMPTS.map((example) => (
                 <button
                   key={example.label}
@@ -283,18 +278,18 @@ Return ONLY the enhanced prompt text, nothing else. No preamble, no explanation.
                     setPrompt(example.prompt);
                     setShowExamples(false);
                   }}
-                  className="group flex items-start gap-2.5 px-3 py-2.5 rounded-lg border border-border bg-muted/30
+                  className="group flex items-start gap-2 px-2 py-2 rounded-md border border-border bg-muted/30
                     hover:bg-primary/5 hover:border-primary/30 transition-all text-left"
                 >
                   <Sparkles
-                    size={12}
+                    size={10}
                     className="text-muted-foreground group-hover:text-primary shrink-0 mt-0.5 transition-colors"
                   />
-                  <div className="flex flex-col gap-0.5">
-                    <span className="text-xs font-semibold text-foreground group-hover:text-primary transition-colors">
+                  <div className="flex flex-col min-w-0 overflow-hidden">
+                    <span className="text-[10px] font-semibold text-foreground group-hover:text-primary transition-colors truncate">
                       {example.label}
                     </span>
-                    <span className="text-[10px] text-muted-foreground leading-tight line-clamp-2">
+                    <span className="text-[9px] text-muted-foreground mt-0.5 line-clamp-2 leading-tight">
                       {example.prompt}
                     </span>
                   </div>
@@ -307,27 +302,27 @@ Return ONLY the enhanced prompt text, nothing else. No preamble, no explanation.
           <Button
             onClick={handleGenerate}
             disabled={isGenerating || !prompt.trim()}
-            className="w-full flex items-center justify-center gap-2 h-10 rounded-xl
-              shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all font-semibold text-sm"
+            className="w-full flex items-center justify-center gap-1.5 h-8 rounded-lg
+              shadow-sm shadow-primary/20 hover:shadow-primary/30 transition-all font-semibold text-[11px] mt-1"
           >
             {isGenerating ? (
               <>
-                <Loader2 className="animate-spin w-4 h-4" />
-                Building your layout...
+                <Loader2 className="animate-spin w-3 h-3 shrink-0" />
+                <span className="truncate">Building...</span>
               </>
             ) : (
               <>
-                <Sparkles className="w-4 h-4" />
-                Generate Section
+                <Sparkles className="w-3 h-3 shrink-0" />
+                <span className="truncate">Generate Section</span>
               </>
             )}
           </Button>
 
           {/* Context tip */}
-          <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
+          <p className="text-[9px] text-muted-foreground text-center leading-relaxed mt-1">
             {isSpecificSelected
-              ? "AI will modify the selected element. Select Body to generate new sections."
-              : "Tip: Select a container to insert within it, or use Body for full sections."}
+              ? "AI modifies the selected element."
+              : "Select a container to insert within it, or use Body for full sections."}
           </p>
         </div>
       </ScrollArea>

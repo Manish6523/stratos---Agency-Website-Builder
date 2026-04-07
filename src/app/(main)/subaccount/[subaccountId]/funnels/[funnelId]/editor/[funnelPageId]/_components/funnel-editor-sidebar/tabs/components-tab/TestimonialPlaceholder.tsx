@@ -16,9 +16,9 @@ const TestimonialPlaceholder = (props: Props) => {
       onDragStart={(e) => {
         handleDragState(e, "testimonial");
       }}
-      className=" h-14 w-14 bg-muted rounded-lg flex items-center justify-center"
+      className=" h-10 w-10 bg-muted rounded-lg flex items-center justify-center"
     >
-      <MessageSquareQuote size={40} className="text-muted-foreground" />
+      <MessageSquareQuote size={20} className="text-muted-foreground" />
     </div>
   );
 };

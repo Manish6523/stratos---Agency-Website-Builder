@@ -5,6 +5,7 @@ import FunnelEditorNavigation from "./_components/funnel-editor-navigation";
 import FunnelEditorSidebar from "./_components/funnel-editor-sidebar";
 import FunnelEditor from "./_components/funnel-editor";
 import { getSubscriptionPlanBySubaccountId } from "@/lib/queries";
+import FunnelEditorLeftSidebar from "./_components/funnel-editor-left-sidebar";
 
 type Props = {
   params: Promise<{
@@ -33,30 +34,42 @@ export default async function Page({ params }: Props) {
     param.subaccountId,
   );
 
-  console.log("activePlan : ", activePlan);
   const isPaidPlan =
     activePlan === "plan_basic" || activePlan === "plan_unlimited_saas";
 
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 z-20 bg-background overflow-hidden">
+    <div className="fixed inset-0 z-20 bg-background overflow-hidden flex flex-col">
       <EditorProvider
         subaccountId={param.subaccountId}
         funnelId={param.funnelId}
         pageDetails={funnelPageDetails}
       >
+        {/* ─── Top Bar ─── */}
         <FunnelEditorNavigation
           funnelId={param.funnelId}
           funnelPageDetails={funnelPageDetails}
           subaccountId={param.subaccountId}
         />
-        <div className="h-full flex justify-center">
-          <FunnelEditor funnelPageId={param.funnelPageId} />
-        </div>
 
-        <FunnelEditorSidebar
-          subaccountId={param.subaccountId}
-          isPaidPlan={isPaidPlan}
-        />
+        {/* ─── Main Area: Left Sidebar | Canvas | Right Sidebar ─── */}
+        <div className="flex-1 flex overflow-hidden">
+          {/* Left Sidebar — Assets, Components, Layers, etc. */}
+          <FunnelEditorLeftSidebar
+            subaccountId={param.subaccountId}
+            isPaidPlan={isPaidPlan}
+          />
+
+          {/* Canvas */}
+          <div className="flex-1 overflow-auto flex justify-center h-full p-2 bg-muted/50">
+            <FunnelEditor funnelPageId={param.funnelPageId} />
+          </div>
+
+          {/* Right Sidebar — Properties / Styles */}
+          <FunnelEditorSidebar
+            subaccountId={param.subaccountId}
+            isPaidPlan={isPaidPlan}
+          />
+        </div>
       </EditorProvider>
     </div>
   );

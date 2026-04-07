@@ -16,7 +16,7 @@ const ProgressBarPlaceholder = (props: Props) => {
       onDragStart={(e) => {
         handleDragState(e, "progressBar");
       }}
-      className=" h-14 w-14 bg-muted rounded-lg flex items-center justify-center p-2"
+      className=" h-10 w-10 bg-muted rounded-lg flex items-center justify-center p-2"
     >
       <div className="w-full h-4 border border-muted-foreground rounded-full overflow-hidden">
         <div className="w-1/2 h-full bg-muted-foreground"></div>
