@@ -11,7 +11,7 @@
 !.yarn/releases
 !.yarn/versions
 
-
+/docs/
 # testing
 /coverage
 
