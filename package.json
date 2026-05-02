@@ -102,6 +102,7 @@
     "unrs-resolver"
   ],
   "trustedDependencies": [
+    "bun",
     "sharp",
     "unrs-resolver"
   ]
